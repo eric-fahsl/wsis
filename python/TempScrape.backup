@@ -1,0 +1,28 @@
+def searchContentForTag(uniqueText, tagNameOpen, tagNameClose, content, offset) :
+	uniqueTextIndex = content.find(uniqueText, offset)
+	tagNameIndex = content.find(tagNameOpen, uniqueTextIndex) + len(tagNameOpen)
+	tagNameCloseIndex = content.find(tagNameClose, tagNameIndex)
+	tagContent = content[tagNameIndex:tagNameCloseIndex]
+	return tagContent
+
+def scrapePageForSnowfall(filename) :	
+	fr = open(filename)
+
+	htmlContent = ""
+	for line in fr.readlines():
+		line = line.strip()
+		htmlContent += line
+
+	lastUpdate = searchContentForTag("Last Update", "<div align=\"left\">", "</div>", htmlContent, 0)
+	lastFall = searchContentForTag("Last Fall", "<div align=\"left\">", "</div>", htmlContent, 0)
+
+	print lastUpdate
+	print lastFall
+
+	for s in lastFall.split(' ') :
+		print s
+
+
+scrapePageForSnowfall("remarkables-13Aug.html")
+scrapePageForSnowfall("remarkables-19Aug.html")
+
