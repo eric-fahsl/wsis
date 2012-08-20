@@ -1,4 +1,7 @@
+import httplib
+
 remarkablesWierdString = "<span class=\"webkit-html-tag\">&lt;/span&gt;</span><span class=\"webkit-html-tag\">&lt;span&gt;</span>"
+remarkablesWierdString = "<span>"
 
 def searchContentForTag(uniqueText, tagNameOpen, tagNameClose, content, offset) :
 	uniqueTextIndex = content.find(uniqueText, offset)
@@ -7,18 +10,19 @@ def searchContentForTag(uniqueText, tagNameOpen, tagNameClose, content, offset) 
 	tagContent = content[tagNameIndex:tagNameCloseIndex]
 	return tagContent
 
-def scrapePageForSnowfall(filename) :	
-	fr = open(filename)
+def scrapePageForSnowfall(host, path) :	
+	conn = httplib.HTTPConnection(host)
+	conn.request("GET", path)
+	res = conn.getresponse()
 
-	htmlContent = ""
-	for line in fr.readlines():
-		line = line.strip()
-		htmlContent += line
+	htmlContent = res.read()
 
-	lastUpdate = searchContentForTag("", "Report Generated On: ", "<span class=", htmlContent, 0)
-	lastFall = searchContentForTag("Last Snow Fall: ", remarkablesWierdString, "<span", htmlContent, 0)
-	baseUpper = searchContentForTag("Upper Mountain Depth:", remarkablesWierdString, "<span", htmlContent, 0)
-	baseLower = searchContentForTag("Lower Mountain Depth:", remarkablesWierdString, "<span", htmlContent, 0)
+	conn.close()
+
+	lastUpdate = searchContentForTag("", "Report Generated On: ", "</span", htmlContent, 0)
+	lastFall = searchContentForTag("Last Snow Fall: ", remarkablesWierdString, "</span", htmlContent, 0)
+	baseUpper = searchContentForTag("Upper Mountain Depth:", remarkablesWierdString, "</span", htmlContent, 0)
+	baseLower = searchContentForTag("Lower Mountain Depth:", remarkablesWierdString, "</span", htmlContent, 0)
 
 	print "Last Updated: " + lastUpdate
 	print "Last Snowfall on: " + lastFall
@@ -32,10 +36,10 @@ def scrapePageForSnowfall(filename) :
 		print "It did NOT snow today :("
 
 print "Remarkables: "
-scrapePageForSnowfall("remarkables-20Aug.html")
+scrapePageForSnowfall("www.nzski.com", "/reportPrint_theremarkables.jsp")
 print "Coronet Peak:"
-scrapePageForSnowfall("coronet-20Aug.html")
+scrapePageForSnowfall("www.nzski.com", "/reportPrint_coronetpeak.jsp")
 print "Mt Hutt:"
-scrapePageForSnowfall("hutt-20Aug.html")
+scrapePageForSnowfall("www.nzski.com", "/reportPrint_mthutt.jsp")
 #scrapePageForSnowfall("remarkables-19Aug.html")
 
