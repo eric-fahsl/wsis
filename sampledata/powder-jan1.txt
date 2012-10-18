@@ -1,0 +1,33 @@
+{
+    "date": "2013-01-01",
+    "recommendations": [
+        {
+            "id": "White Pass",
+            "rating": 4,
+            "type": "Powder Hound",
+            "location": "Pacific Northwest",
+            "trend": "up"
+        },
+        {
+            "id": "Mt Baker",
+            "rating": 3,
+            "type": "Powder Hound",
+            "location": "Pacific Northwest",
+            "trend": "up"
+        },
+        {
+            "id": "Ski Bluewood",
+            "rating": 3,
+            "type": "Powder Hound",
+            "location": "Pacific Northwest",
+            "trend": "flat"
+        },
+        {
+            "id": "Whistler",
+            "rating": 2,
+            "type": "Powder Hound",
+            "location": "Pacific Northwest",
+            "trend": "down"
+        }
+    ]
+}
