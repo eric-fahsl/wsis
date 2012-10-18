@@ -1,0 +1,518 @@
+/* Template by freewebsitetemplates.com */
+body {
+	background: white url(../images/nz_bg.jpg);
+	background-size: cover; background-position: 50% 100%; background-repeat: no-repeat no-repeat; 
+	color: #552305;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	margin:0;
+	min-height: 600px;
+}
+#page {
+	width:940px;
+	margin:0px auto;
+	padding:0px 10px;
+	/*background-color: #E6E6E6;  
+	background-color: #6FA2CA; 
+	background-color: #363636; */
+	opacity: 0.9; 
+	min-height: 500px;
+}
+#header div a.join, #header ul li a:hover, #header ul li.current, #sidebar input.button {
+	/*background:url(../images/buttons.gif) no-repeat; */
+	text-decoration: underline;
+}
+
+/*------------------------- Header -------------------------*/
+
+#logo {
+	background: url(../images/logo-3.png) left top no-repeat;
+	width: 409px;
+	height: 55px;
+	float: left;
+	padding: 0;
+
+}
+
+#headerWrapper {
+	height: 55px;
+	width:100%;
+	line-height: 60px;
+	margin:0;
+	/*position:absolute; */
+	left:0px;
+	background-color: #B8B8B8; 
+	opacity:0.8; 
+}
+
+#header {
+	height:55px;
+	margin: auto;
+	text-align:right;
+	width: 940px;
+	background: url(../images/logo-3.png) left top no-repeat;
+	
+}
+#header div a.join {
+	background-position:0 -89px;
+	display:inline-block;
+	height:73px;
+	width:187px;
+	margin-bottom:5px;
+	margin-right:13px;
+}
+#header ul {
+	display:inline-block;
+	margin:20px 15px 30px 0px;
+	padding:0px;
+}
+#header ul li {
+	float:left;
+	/*line-height:80px;*/
+	list-style-type:none;
+	text-align:center;
+}
+#header ul li a {
+	color:#552305;
+	display:block;
+	height:80px;
+	width:72px;
+	text-decoration:none;
+}
+#header ul li a:hover, #header ul li.current {
+	font-weight:600;
+	background-position:0 0;
+}
+#header div {
+	color:#ffffff;
+	margin:0;
+	/*padding:75px 30px 0px 0px;*/
+}
+#header div img {
+	margin-right:11px;
+}
+#header div h3 {
+	font-weight:normal;
+	margin:0;
+}
+#header div p {
+	display:inline-block;
+	font-size:1.28em;
+	margin:0px;
+}
+
+/*------------------------- Body -------------------------*/
+#body {
+	display:inline-block;
+	margin:0;
+}
+#body p {
+	font-size: 15px;
+	line-height: 22px;
+	margin:0px;
+	padding:0px 0px 10px;
+	text-align: justify;
+}
+#body a {
+	color:#ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	outline: medium none; 
+}
+
+#main {
+	float:left;
+	width:600px;
+	margin-right:40px;
+}
+#main h2 {
+	color:#ff7800;
+	margin:0px 0px 10px 0px;
+}
+#main .featured {
+	background-color:#4a2105;
+	border:1px solid #5a3721;
+	border-radius:6px;
+	padding:10px 10px 0px;
+}
+#main .featured img {
+	margin:8px;
+}
+#main .featured p {
+	margin:0px;
+	padding-bottom:20px;
+}
+#main .section {
+	display:inline-block;
+	padding-top:18px;
+}
+#main .section h3 {
+	color: #FF7800;
+	margin:0px 0px 8px;
+}
+#main .section ul {
+	list-style-type:none;
+	padding:0px;
+}
+#gallery, #events {
+	float:left;
+	width:300px;
+	overflow:hidden;
+}
+#gallery h3, #events h3 {
+	margin-bottom:8px;
+}
+#gallery a.more, #events a.more {
+	float:right;
+	color:#ffffff;
+	font-size:0.9em;
+	font-weight:normal;
+	text-decoration:none;
+}
+#gallery ul {
+	display:inline-block;
+	margin:0px;
+}
+#gallery li {
+	float:left;
+	margin:10px 20px 6px 0px;
+}
+#gallery li img {
+	border:1px solid #cd8147;
+}
+#gallery a.more {
+	margin-right:24px;
+}
+#events ul {
+	margin:0px 0px 10px;
+}
+#events ul li {
+	font-size:0.95em;
+	border-bottom:1px dashed #ffffff;
+	padding:10px 0px;
+	text-align:justify;
+}
+#events ul li.last {
+	border:0px;
+}
+
+#sidebar {
+	float:right;
+	width:300px;
+}
+#sidebar h3 {
+	font-weight:500;
+	width:260px;
+	margin:0px 0px 10px;
+}
+#sidebar h3 a {
+	color:#FF7800;
+}
+#sidebar h2 a {
+	color: #ff7800;
+	text-decoration: none;
+	outline: medium none; 
+}
+#sidebar ul {
+	margin:0px;
+	padding:0px;
+}
+#sidebar ul li {
+	list-style-type: none;
+	margin-bottom: 20px;
+	background: transparent url('../images/devider.jpg') bottom center;
+	background-repeat: no-repeat;
+}
+#sidebar ul li:last-child {
+	background: none;
+}
+#sidebar ul li p {
+	margin:16px 0px 0px;
+	padding-bottom:20px;
+}
+#sidebar input.button {
+	float: right;
+	background-position:0 -172px;
+	height: 24px;
+	width: 69px;
+	margin: 0;
+	margin-right: 10px;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	/* hand-shaped cursor */ cursor: hand; /* for IE 5.x */
+}
+
+#sidebar input {
+	margin-bottom: 10px;
+	height: 40px;
+	width: 288px;
+	color: #563e08;
+}
+#sidebar textarea {
+	margin-bottom: 10px;
+	height: 95px;
+	width: 288px;
+	color: #563e08;
+}
+#sidebar table {
+	margin-bottom: 20px;
+}
+
+
+/*------------------------- Inner Pages -------------------------*/
+#body .contents {
+	background-color: white;
+	display:inline-block;
+	min-height:870px;
+	border:1px solid #5a3721;
+	border-radius:6px;
+	margin-bottom:20px;
+	padding:10px 19px;
+}
+#body .contents .main {
+	float:left;
+	width:575px;
+	padding-right:15px;
+}
+#body .contents .sidebar {
+	float:right;
+	width:280px;
+	padding-left:10px;
+}
+#body .contents .sidebar h3 {
+	color: #ff7800;
+	font-weight: 500;
+	width: 260px;
+	margin:10px 0px 6px;
+}
+
+#body .contents h1 {
+	/*color: #ff7800; */
+	color: #492402;
+	margin-bottom: 20px;
+}
+#body .contents h2 {
+	color: #BFA58E;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+#body .contents h3 {
+	color: #ff7800;
+	font-weight: 500;
+	margin:10px 0px 6px;
+	padding:0px;
+}
+
+#body .contents ul {
+	display:inline-block;
+	margin: 20px 0;
+	padding:0px;
+}
+
+/*------------------------- About us page -------------------------*/
+#body .contents ul.aboutus li {
+	float: left;
+	list-style-type: none;
+	width: 450px;
+}
+
+/*------------------------- Events page -------------------------*/
+#body .contents ul.articles li {
+	list-style-type: none;
+	height:150px;
+	margin:0px 0px 20px;
+}
+#body .contents ul.articles li h3 {
+	font-size: 1.15em;
+	margin-top:0px;
+}
+#body .contents ul.articles li img {
+	float:left;
+	margin-right:20px;
+}
+
+/*------------------------- Gallery page -------------------------*/
+#body .contents div.gallery {
+	width:900px;
+	margin: 20px 0px;
+	overflow:hidden;
+}
+#body .contents div.gallery ul {
+	width: 925px;
+}
+#body .contents div.gallery ul li {
+	float: left;
+	list-style-type: none;
+	height: 355px;
+	width: 282px;
+	margin: 0px 26px 30px 0px;
+	padding: 0;
+}
+#body .contents div.gallery ul li a img {
+	border: 1px solid #000000;
+}
+#body .contents div.gallery ul li h4 {
+	color: #ff7800;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+#body .contents div.gallery ul li p {
+	font-size: 0.9em;
+	text-align:left;
+}
+
+/*------------------------- Blog Page -------------------------*/
+#body .contents div.blogs {
+	display:inline-block;
+}
+#body .contents div.blogs div {
+	float:left;
+	width:580px;
+	padding-right:20px;
+}
+#body .contents div.blogs div h2 {
+	color: #ff7800;
+}
+#body .contents div.blogs ul {
+	float:left;
+	list-style-type:none;
+	width:300px;
+	margin:20px 0px 0px;
+}
+#body .contents div.blogs ul li h3 {
+	color: #ff7800;
+	font-size: 1em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+#body .contents div.blogs ul li h3 span {
+	font-size:0.92em;
+	font-weight:normal;
+}
+
+/*------------------------- Register page -------------------------*/
+#body .contents div.registration form table {
+	border-collapse:separate;
+	margin-top:20px;
+}
+#body .contents div.registration form table tbody tr td {
+	vertical-align: top;
+	padding:5px;
+}
+#body .contents div.registration form table tbody tr td input.txtfield {
+	height: 26px;
+	width: 298px;
+	line-height:26px;
+	margin: 0px;
+	padding: 2px;
+}
+#body .contents div.registration form table tbody tr td input.checkbox {
+	border: 0px;
+	margin-right: 8px;
+	padding: 0px;
+}
+#body .contents div.registration form table tbody tr td textarea {
+	height: 52px;
+	width: 298px;
+}
+#body .contents div.registration form table tbody tr td input.button {
+	background-color: #785339;
+	color: #ffffff;
+	cursor: pointer;
+	border: 0px;
+	margin: 0px;
+	padding: 4px 10px;
+}
+#body .contents div.registration form table tbody tr td input.button:hover {
+	color: #ff7800;
+}
+
+/*------------------------- Footer -------------------------*/
+
+
+#footer {
+	background-color: #B8B8B8;
+	height: 60px;
+	width:100%;
+	line-height: 60px;
+	margin:0;
+	position:absolute;
+	left:0px;
+	opacity: 0.6;
+}
+#footer div {
+	color: #492402;
+	font-size: 0.8em;
+	width: 940px;
+	margin: 0 auto;
+	padding:0px 10px;
+}
+
+#footer  a {
+	color: #492402;
+	text-decoration: none;
+	outline: medium none; 
+}
+#footer a:hover {
+	color: #ffffff;
+}
+#footer ul {
+	float:left;
+	height:60px;
+	width:210px;
+	margin:0px;
+	padding:0px;
+}
+#footer ul li {
+	float: left;
+	height: 30px;
+	list-style-type: none;
+	margin-right: 20px;
+	padding:15px 0px;
+}
+#footer ul li a.fb, #footer ul li a.twitr{
+	background:url(../images/icons.gif) no-repeat;
+	display:block;
+	height:30px;
+	line-height:30px;
+}
+#footer ul li a.fb {
+	background-position:0 0;
+	width:57px;
+	padding-left:35px;
+}
+#footer ul li a.twitr {
+	background-position:0 -40px;
+	width:37px;
+	padding-left:40px;
+}
+#footer span {
+	float:right;
+	display:block;
+	line-height: 60px;
+	width:335px;
+}
+
+
+/*------------------------------- CSS for IE7 and IE6 --------------------------*/
+img {
+	border:0px;
+}
+
+/*------------------------------- IE7 --------------------------*/
+#header ul {
+	*width:435px;
+}
+
+/*------------------------------- IE6 --------------------------*/
+#header ul {
+	_display:static;
+	_height:80px;
+	_width:435px;
+}
+#header ul li {
+	_width:72px;
+}
+#body .contents{
+	_height:870px;
+}

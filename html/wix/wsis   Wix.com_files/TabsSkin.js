@@ -1,0 +1,1 @@
+W.Skins.newSkin({name:"wysiwyg.editor.skins.TabsSkin",Class:{Extends:"mobile.core.skins.BaseSkin",_html:'<div skinPart="itemsContainer"></div>',_css:[]}});

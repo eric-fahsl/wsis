@@ -1,0 +1,1 @@
+W.Skins.newSkin({name:"wysiwyg.editor.skins.TopTabsSkin",Class:{Extends:"wysiwyg.editor.skins.TabsSkin",itemSkinClassName:"wysiwyg.editor.skins.buttons.TopTabButtonSkin",_html:'<div skinPart="itemsContainer"></div>',_css:["{position:fixed; min-height:223px; width:57px;}"]}});

@@ -1,0 +1,1 @@
+W.Skins.newSkin({name:"wysiwyg.editor.skins.inputs.CheckBoxSkin",Class:{Extends:"mobile.core.skins.BaseSkin",_tags:[],_params:[],_html:'<label><input type="checkbox" skinpart="checkBox" /><span skinpart="label"></span></label>',_css:["{overflow:hidden}","%checkBox% {cursor:pointer; float:left; margin-right:5px}","%label% {cursor:pointer; float:left; line-height:1.7em}"]}});

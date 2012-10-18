@@ -1,0 +1,1 @@
+W.Skins.newSkin({name:"wysiwyg.editor.skins.panels.SiteNavigationEditorSkin",Class:{Extends:"mobile.core.skins.BaseSkin",compParts:{treeEditor:{skin:"wysiwyg.editor.skins.panels.TreeStructureEditorSkin"}},_html:'<div skinPart="treeEditor"></div>',_css:[]}});
