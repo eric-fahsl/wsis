@@ -3,6 +3,7 @@ import simplejson
 import datetime
 import time
 import _mysql
+import nwsWeather
 
 def getWundergroundInfo (query) :
 	url = 'http://api.wunderground.com/api/229c169e5500c157/conditions/q/' + query + '.json'
@@ -56,7 +57,11 @@ for result in results :
 	resorts.append(resort)
 
 #resorts now is a dictionaried list of all resorts in the resort_master DB
-print resorts
+#print resorts
+
+for resort in resorts :
+	nwsResponse = nwsWeather.getWeather(resort["latitude"],resort["longitude"])
+	nwsWeather.writeToDb(nwsResponse,resort['id'], db)
 
 '''
 #locations = ['99354', '55403', '80482', '99501', '78701', '97201', '98101', '92101', '10453', '94111']

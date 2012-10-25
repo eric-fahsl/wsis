@@ -27,7 +27,9 @@ def scrapePageForSnowfall(host, path, resort_name) :
         baseLower = searchContentForTag("Lower Mountain Depth:", "<span>", "</span", htmlContent, 0)
         mountainStatus = searchContentForTag("Mountain Status:", "<h2>","</h2>", htmlContent, 0 )
         snow_conditions = searchContentForTag("Snow Conditions:", "<h2>","</h2>", htmlContent, 0 )
-        weather_conditions = searchContentForTag("Weather Conditions:", "<h2>","</h2>", htmlContent, 0 )        road_conditions = searchContentForTag("Road Conditions:", "<h2>","</h2>", htmlContent, 0 )        temperature = weather_conditions.split(',')[1]
+        weather_conditions = searchContentForTag("Weather Conditions:", "<h2>","</h2>", htmlContent, 0 )        
+    road_conditions = searchContentForTag("Road Conditions:", "<h2>","</h2>", htmlContent, 0 )        
+    temperature = weather_conditions.split(',')[1]
         weather_conditions = weather_conditions.split(' ')[0]
 
         print "Last Updated: " + lastUpdate
@@ -46,29 +48,29 @@ def scrapePageForSnowfall(host, path, resort_name) :
                 print "It did NOT snow today :("
 
         #check to make sure we don't already have this entry
-        db.query("select count(*) from skiweather where report_time='" + lastUpdate + "'")
+        db.query("select count(*) from skiweather where report_time='" + lastUpdate + "' and resort_name='" + resort_name + "'")
         res = db.store_result()
 
-      	resultCount = res.fetch_row(0)[0][0]
+        resultCount = res.fetch_row(0)[0][0]
         
         if (resultCount == '0') :
         
-	        queryString = "INSERT INTO `skiweather` (`report_time`, `resort_name`, `modify_date`, `status`, `snow_conditions`, `weather_condition`, `temperature`, `road_conditions`, `last_snow_fall`, `last_snow_fall_date`, `lower_mountain_depth`, `upper_mountain_depth`) VALUES ("
-	        queryString += "'" + lastUpdate +  "', "
-	        queryString += "'" + resort_name + "',"
-	        queryString += "'" + str(datetime.datetime.now()) + "',"
-	        queryString += "'" + mountainStatus + "',"
-	        queryString += "'" + snow_conditions + "',"
-	        queryString += "'" + weather_conditions + "',"
-	        queryString += "'" + temperature + "',"
-	        queryString += "'" + road_conditions + "',"
-	        queryString += "'" + lastFall.split(' ')[0] + "',"
-	        queryString += "'" + lastFall + "',"
-	        queryString += "'" + baseLower + "',"
-	        queryString += "'" + baseUpper + "')"
+            queryString = "INSERT INTO `skiweather` (`report_time`, `resort_name`, `modify_date`, `status`, `snow_conditions`, `weather_condition`, `temperature`, `road_conditions`, `last_snow_fall`, `last_snow_fall_date`, `lower_mountain_depth`, `upper_mountain_depth`) VALUES ("
+            queryString += "'" + lastUpdate +  "', "
+            queryString += "'" + resort_name + "',"
+            queryString += "'" + str(datetime.datetime.now()) + "',"
+            queryString += "'" + mountainStatus + "',"
+            queryString += "'" + snow_conditions + "',"
+            queryString += "'" + weather_conditions + "',"
+            queryString += "'" + temperature + "',"
+            queryString += "'" + road_conditions + "',"
+            queryString += "'" + lastFall.split(' ')[0] + "',"
+            queryString += "'" + lastFall + "',"
+            queryString += "'" + baseLower + "',"
+            queryString += "'" + baseUpper + "')"
 
-	        print queryString
-	        db.query(queryString)
+            print queryString
+            db.query(queryString)
 
 #Connect to DB
 db = _mysql.connect("localhost","data","data","data")
