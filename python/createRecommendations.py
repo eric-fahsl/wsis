@@ -5,12 +5,19 @@ import time
 import _mysql
 import nwsWeather
 import resortMaster
+import os
 
 PCT_LEVER_NEW_SNOW = 0.5
 PCT_LEVEL_PREV_SNOW = 0.25
 PCT_LEVEL_PROJ_SNOW = 0.25
 UPPER_LIMIT = 16
 POWDER_STAR_RATING_CUTOFF = [ 0, 2.0, 4.0, 6.0, 8.0, 10.0 ]
+COUCH_DB_SERVER = "http://localhost:5984"
+COUCH_DB_NAME = "recommendations"
+COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
+
+def cleanJson(inputString) :
+	return str(inputString).replace("'", '"')
 
 def checkUpperLimit(snowfallAmount) :
 	if snowfallAmount > UPPER_LIMIT :
@@ -34,20 +41,37 @@ db = _mysql.connect("localhost","wsis","wsis","wsis")
 
 resorts = resortMaster.getResorts(db)
 
-for resortRec in resorts :
-	resortRec['createdOn'] = datetime.datetime.now()
-	#data = nwsWeather.getData(resortRec['id'], db)
-	print resortRec
+today = str(datetime.date.today() + datetime.timedelta(days=0))
+todayPlusOne = str(datetime.date.today() + datetime.timedelta(days=1))
+todayPlusTwo = str(datetime.date.today() + datetime.timedelta(days=2))
 
-	today_rec = {}
-	today_rec['new_snow'] = float(11.7)
-	today_rec['projected_snow'] = float(90.3)
-	today_rec['previous_snow'] = float(10.1)
-	rating = calcPowder(today_rec['new_snow'], today_rec['previous_snow'], today_rec['projected_snow'])
+for resort in resorts :
+
+	#get the recommendations for tomorrow
+	newSnowTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(today, todayPlusOne, resort['id'], db)
+	projectedSnowTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(todayPlusOne, todayPlusTwo, resort['id'], db)
+
+	tomorrow_rec = {}
+	tomorrow_rec['Resort'] = resort['name']
+	tomorrow_rec['createdOn'] = str(datetime.date.today())
+	tomorrow_rec['Type'] = "Powder"
+	tomorrow_rec['Date'] = todayPlusOne
+	tomorrow_rec['snow_prev'] = float(20.3)
+	tomorrow_rec['snow_new'] = float(newSnowTomorrow)
+	tomorrow_rec['snow_forecast'] = float(projectedSnowTomorrow)
+	rating = calcPowder(tomorrow_rec['snow_new'], tomorrow_rec['snow_prev'], tomorrow_rec['snow_forecast'])
+	tomorrow_rec['Rating'] = rating
+
+	docId = resort['name'].lower().replace(' ','') + "_" + todayPlusOne + "_" + "powder"
+	#print id
+
+	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + cleanJson(tomorrow_rec) + "'"
+	print curlCommand
+	os.system(curlCommand)
 
 	#resortRec['']
 
 db.close()
 
 
-	
+

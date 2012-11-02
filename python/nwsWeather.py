@@ -7,6 +7,7 @@ nwsWeatherUrl = "http://forecast.weather.gov/MapClick.php?unit=0&lg=english&Fcst
 TABLE_NAME = "weather_data_nws"
 SNOW_ACCUM_STR = "snow accumulation of "
 SNOW_ACCUM_STR_LEN = len(SNOW_ACCUM_STR)
+SNOW_ACCUM_SINGLE_INCH = "inch "
 LATER_TODAY_STRING = "Late"
 NIGHT_STRING = "ight"
 columnFields = {}
@@ -58,12 +59,15 @@ def writeToDb(response, resort, db) :
 			textSummary = rData['text'][i]
 			row['text_summary'] = textSummary
 			row['snow_forecast'] = 0
-			snowAccumIndex = textSummary.find(SNOW_ACCUM_STR)
-			if snowAccumIndex > 0 :
-				tokenized = textSummary[snowAccumIndex + SNOW_ACCUM_STR_LEN:].split(' ')
-				lowSnow = float(tokenized[0])
-				highSnow = float(tokenized[2])
-				row['snow_forecast'] = (lowSnow + highSnow) / 2
+			if textSummary.find(SNOW_ACCUM_SINGLE_INCH) :
+				row['snow_forecast'] = 1
+			else :
+				snowAccumIndex = textSummary.find(SNOW_ACCUM_STR)
+				if snowAccumIndex > 0 :
+					tokenized = textSummary[snowAccumIndex + SNOW_ACCUM_STR_LEN:].split(' ')
+					lowSnow = float(tokenized[0])
+					highSnow = float(tokenized[2])
+					row['snow_forecast'] = (lowSnow + highSnow) / 2
 
 			queryString = "insert into " + TABLE_NAME + " "
 
@@ -119,7 +123,18 @@ def getData(resort, db) :
 	#	data["new_snow"] = new_snow
 
 
-	return data
+	return results
 
 
+def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db) :
+	queryString = "select sum(snow_forecast) from " + TABLE_NAME 
+	queryString += " WHERE date >= '" + startDate
+	queryString += "' AND date < '" + endDate 
+	queryString += "' AND resort = " + str(resort)
+
+	db.query(queryString)
+	r = db.store_result()
+	results = r.fetch_row(0)
+
+	return results[0][0]
 
