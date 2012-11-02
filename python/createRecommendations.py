@@ -6,6 +6,7 @@ import _mysql
 import nwsWeather
 import resortMaster
 import os
+import uuid
 
 PCT_LEVER_NEW_SNOW = 0.5
 PCT_LEVEL_PREV_SNOW = 0.25
@@ -16,8 +17,6 @@ COUCH_DB_SERVER = "http://localhost:5984"
 COUCH_DB_NAME = "recommendations"
 COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
 
-def cleanJson(inputString) :
-	return str(inputString).replace("'", '"')
 
 def checkUpperLimit(snowfallAmount) :
 	if snowfallAmount > UPPER_LIMIT :
@@ -52,20 +51,29 @@ for resort in resorts :
 	projectedSnowTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(todayPlusOne, todayPlusTwo, resort['id'], db)
 
 	tomorrow_rec = {}
+	docId = resort['name'].lower().replace(' ','') + "_" + todayPlusOne + "_" + "powder"
+	docUrl = COUCH_DB_URL + "/" + docId
+
+	try :	
+		currentDocLocationResponse = simplejson.load(urllib2.urlopen(docUrl))
+		tomorrow_rec['_rev'] = str(currentDocLocationResponse['_rev'])
+	except urllib2.HTTPError:
+		print docId + " not found, will create a new record"
 	tomorrow_rec['Resort'] = resort['name']
+	tomorrow_rec['State'] = resort['state']
 	tomorrow_rec['createdOn'] = str(datetime.date.today())
 	tomorrow_rec['Type'] = "Powder"
 	tomorrow_rec['Date'] = todayPlusOne
-	tomorrow_rec['snow_prev'] = float(20.3)
+	tomorrow_rec['snow_prev'] = float(0.3)
 	tomorrow_rec['snow_new'] = float(newSnowTomorrow)
 	tomorrow_rec['snow_forecast'] = float(projectedSnowTomorrow)
 	rating = calcPowder(tomorrow_rec['snow_new'], tomorrow_rec['snow_prev'], tomorrow_rec['snow_forecast'])
 	tomorrow_rec['Rating'] = rating
 
-	docId = resort['name'].lower().replace(' ','') + "_" + todayPlusOne + "_" + "powder"
+	
 	#print id
 
-	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + cleanJson(tomorrow_rec) + "'"
+	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(tomorrow_rec) + "'"
 	print curlCommand
 	os.system(curlCommand)
 

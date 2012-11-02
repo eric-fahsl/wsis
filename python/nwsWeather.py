@@ -59,7 +59,7 @@ def writeToDb(response, resort, db) :
 			textSummary = rData['text'][i]
 			row['text_summary'] = textSummary
 			row['snow_forecast'] = 0
-			if textSummary.find(SNOW_ACCUM_SINGLE_INCH) :
+			if textSummary.find(SNOW_ACCUM_SINGLE_INCH) >= 0:
 				row['snow_forecast'] = 1
 			else :
 				snowAccumIndex = textSummary.find(SNOW_ACCUM_STR)
