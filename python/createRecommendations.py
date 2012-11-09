@@ -16,6 +16,7 @@ POWDER_STAR_RATING_CUTOFF = [ 0, 2.0, 4.0, 6.0, 8.0, 10.0 ]
 COUCH_DB_SERVER = "http://localhost:5984"
 COUCH_DB_NAME = "recommendations"
 COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
+REC_POWDER = "Powder"
 
 
 def checkUpperLimit(snowfallAmount) :
@@ -35,6 +36,22 @@ def calcPowder(new_snow, previous_snow, projected_snow) :
 			break
 	return starRating 
 
+def createRecommendationDocument(resort, recommendationType, recDate, rating, recData ) :
+	rec = {}
+	rec['Resort'] = resort['name']
+	rec['State'] = resort['state']
+	rec['latitude'] = float(resort['latitude'])
+	rec['longitude'] = float(resort['longitude'])
+
+	rec['createdOn'] = str(datetime.date.today())
+	rec['Type'] = recommendationType
+	rec['Rating'] = rating
+	rec['Date'] = recDate
+	rec['data'] = recData
+
+	return rec
+
+
 #Connect to DB
 db = _mysql.connect("localhost","wsis","wsis","wsis")
 
@@ -50,30 +67,38 @@ for resort in resorts :
 	newSnowTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(today, todayPlusOne, resort['id'], db)
 	projectedSnowTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(todayPlusOne, todayPlusTwo, resort['id'], db)
 
-	tomorrow_rec = {}
 	docId = resort['name'].lower().replace(' ','') + "_" + todayPlusOne + "_" + "powder"
 	docUrl = COUCH_DB_URL + "/" + docId
+	
+	#tomorrow_rec['Resort'] = resort['name']
+	#tomorrow_rec['State'] = resort['state']
+	#tomorrow_rec['createdOn'] = str(datetime.date.today())
+	#tomorrow_rec['Type'] = "Powder"
+	#tomorrow_rec['Date'] = todayPlusOne
 
+	#tomorrow_rec['snow_prev'] = float(0)
+	#tomorrow_rec['snow_new'] = float(newSnowTomorrow)
+	#tomorrow_rec['snow_forecast'] = float(projectedSnowTomorrow)
+	recData = {}
+	#replace this with actual amount
+	recData['snow_prev'] = float(0)
+	recData['snow_new'] = float(newSnowTomorrow)
+	recData['snow_forecast'] = float(projectedSnowTomorrow)
+	
+	rating = calcPowder(recData['snow_new'], recData['snow_prev'], recData['snow_forecast'])
+	#tomorrow_rec['Rating'] = rating
+
+	reccomendationDocument = createRecommendationDocument(resort, REC_POWDER, todayPlusOne, rating, recData )
+	
+	#check if we need to override the existing record
 	try :	
 		currentDocLocationResponse = simplejson.load(urllib2.urlopen(docUrl))
-		tomorrow_rec['_rev'] = str(currentDocLocationResponse['_rev'])
+		reccomendationDocument['_rev'] = str(currentDocLocationResponse['_rev'])
 	except urllib2.HTTPError:
 		print docId + " not found, will create a new record"
-	tomorrow_rec['Resort'] = resort['name']
-	tomorrow_rec['State'] = resort['state']
-	tomorrow_rec['createdOn'] = str(datetime.date.today())
-	tomorrow_rec['Type'] = "Powder"
-	tomorrow_rec['Date'] = todayPlusOne
-	tomorrow_rec['snow_prev'] = float(0.3)
-	tomorrow_rec['snow_new'] = float(newSnowTomorrow)
-	tomorrow_rec['snow_forecast'] = float(projectedSnowTomorrow)
-	rating = calcPowder(tomorrow_rec['snow_new'], tomorrow_rec['snow_prev'], tomorrow_rec['snow_forecast'])
-	tomorrow_rec['Rating'] = rating
-
-	
 	#print id
 
-	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(tomorrow_rec) + "'"
+	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
 	print curlCommand
 	os.system(curlCommand)
 

@@ -1,0 +1,22 @@
+{
+    "size": 0,
+    "query": {
+        "match_all": { }
+    },
+    "facets": {
+        "Type": {
+            "terms": {
+                "field": "type"
+            }
+        },
+        "Date" : { 
+            "terms": {
+                "field": "date"
+            }
+        },
+        "Rating" : {
+            "terms" : { "field": "rating" }
+        }
+        
+    }
+}

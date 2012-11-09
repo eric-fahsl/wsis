@@ -44,7 +44,8 @@ def writeToDb(response, resort, db) :
 
 		for i in range(startIndex, len(response['time']['startPeriodName'])) :
 			
-			row['date'] = response['time']['startValidTime'][i]
+			forecastDate = response['time']['startValidTime'][i]
+			row['date'] = forecastDate.split("T")[0]
 			if (response['time']['startPeriodName'][i].find(NIGHT_STRING) >= 0) :
 				row['forecast_time'] = "night"
 			else :
@@ -53,8 +54,10 @@ def writeToDb(response, resort, db) :
 			rData = response['data']
 			row['summary'] = rData['weather'][i]
 			row['pct_precip'] = rData['pop'][i]
-			row['low_temp'] = rData['temperature'][i]
-			row['high_temp'] = rData['temperature'][i]
+			if row['forecast_time'] == 'night' :
+				row['low_temp'] = rData['temperature'][i]
+			else :
+				row['high_temp'] = rData['temperature'][i]
 
 			textSummary = rData['text'][i]
 			row['text_summary'] = textSummary
@@ -62,12 +65,20 @@ def writeToDb(response, resort, db) :
 			if textSummary.find(SNOW_ACCUM_SINGLE_INCH) >= 0:
 				row['snow_forecast'] = 1
 			else :
+				print textSummary
 				snowAccumIndex = textSummary.find(SNOW_ACCUM_STR)
 				if snowAccumIndex > 0 :
 					tokenized = textSummary[snowAccumIndex + SNOW_ACCUM_STR_LEN:].split(' ')
-					lowSnow = float(tokenized[0])
-					highSnow = float(tokenized[2])
-					row['snow_forecast'] = (lowSnow + highSnow) / 2
+					
+					#check special case "around X inches"
+					if (tokenized[0] == 'around') :
+						row['snow_forecast'] = float(tokenized[1])
+					else :
+						lowSnow = float(tokenized[0])
+						highSnow = float(tokenized[2])
+						#Going to try just going with the highest snow total expected
+						#row['snow_forecast'] = (lowSnow + highSnow) / 2
+						row['snow_forecast'] = highSnow
 
 			queryString = "insert into " + TABLE_NAME + " "
 

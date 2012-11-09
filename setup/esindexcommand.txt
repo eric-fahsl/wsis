@@ -1,0 +1,15 @@
+{
+    "type": "couchdb",
+    "couchdb": {
+        "host": "127.0.0.1",
+        "port": 5984,
+        "db": "resort_recommendations",
+        "filter": null
+    },
+    "index": {
+        "index": "resort_recommendations",
+        "type": "resort_recommendations",
+        "bulk_size": "100",
+        "bulk_timeout": "10ms"
+    }
+}

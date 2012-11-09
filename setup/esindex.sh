@@ -1,0 +1,1 @@
+curl -X PUT 'http://localhost:9200/_river/resort_recommendations/_meta' -d @esindexcommand.txt
