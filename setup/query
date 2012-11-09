@@ -1,7 +1,23 @@
- {
-   "query" : {
-        "match_all": { }
+{
+     "query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "Date": "2012-11-10"
+                    }
+                },
+                {
+                    "term": {
+                        "State": "Washington"
+                    }
+                }
+            ]
+        }
     },
-    "sort" : { "Rating" : {"order" : "desc"} }
-
+    "sort": {
+        "Rating": {
+            "order": "desc"
+        }
+    }
 }
