@@ -20,48 +20,67 @@ function buildQuery() {
 		array_push($mustTerms, $term);
 	}
 
-
+/*
 	$query = array(
 		"query" => array(
 			"bool" => array(
 				"must" => $mustTerms
 				)
 			)
-		);
+		); */
+
+	$query = array(
+			"bool" => array(
+				"must" => $mustTerms
+				)
+			);
 	// /print json_encode($query);
 	//$query = array ( "query" => $match_all );
 	return $query;
 }
 
 function createTerm($name, $value) {
+	
 	$term = array(
 			"term" => array(
 				$name => $value
 			)
-		);
+		); 
 	return $term;
 }
 
 function buildSort() {
-	$sort = array ( "sort" => 
-	array(
+	$sort = array(
 		"Rating" => array(
 			"order" => "desc"
+			), 
+		"data.snow_new" => array(
+			"order" => "asc"
+			),
+		"data.snow_forecast" => array(
+			"order" => "desc"
 			)
-		)
 	);
+
 	return $sort;	
 }
 
 
 
 
-
+/*
 $data_string = json_encode(array (
 	buildQuery(), buildSort()
 ));
+*/
+$data_string = json_encode(array (
+		"query" => buildQuery(), 
+		"sort" => buildSort()
+	));
 
-#print json_encode($datatopost);
+//print json_encode(buildQuery());
+
+//print $data_string;
 
 //$url = "http://localhost:9200/recommendations/_search -d '" . json_encode($datatopost) . "'";
 
