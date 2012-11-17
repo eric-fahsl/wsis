@@ -13,6 +13,10 @@ for values in data :
 	#values = line.strip().split(',')
 
 	resort = {}
+	for i in range(0, len(fields)) :
+		resort[fields[i]] = values[i]
+
+	'''
 	resort['id'] = values[0]
 	resort['name'] = values[2]
 	resort['state'] = values[1]
@@ -24,6 +28,7 @@ for values in data :
 
 	if resort['longitude'] != '' :
 		resort['active'] = 'T'
+	'''
 
 	#Only insert if active
 	if resort['active'] == 'T' :

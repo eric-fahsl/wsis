@@ -137,11 +137,13 @@ def getData(resort, db) :
 	return results
 
 
-def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db) :
+def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db, dayFilter=False) :
 	queryString = "select sum(snow_forecast) from " + TABLE_NAME 
 	queryString += " WHERE date >= '" + startDate
 	queryString += "' AND date < '" + endDate 
 	queryString += "' AND resort = " + str(resort)
+	if (dayFilter) :
+		queryString += " AND forecast_time='day'"
 
 	db.query(queryString)
 	r = db.store_result()
