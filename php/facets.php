@@ -6,17 +6,17 @@ function buildQuery() {
 
 	$mustTerms = array();
 	if ($_GET["date"] != null) {
-		$term = createTerm("date", $_GET["date"]);
+		$term = createTerm("Date", $_GET["date"]);
 		array_push($mustTerms, $term);
 	}
 
 	if ($_GET["state"] != null) {
-		$term = createTerm("state", $_GET["state"]);
+		$term = createTerm("State", $_GET["state"]);
 		array_push($mustTerms, $term);
 	}
 
 	if ($_GET["rating"] != null) {
-		$term = createTerm("rating", $_GET["rating"]);
+		$term = createTerm("Rating", $_GET["rating"]);
 		array_push($mustTerms, $term);
 	}
 
