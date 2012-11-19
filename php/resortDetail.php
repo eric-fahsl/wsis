@@ -12,6 +12,12 @@
   	}
   }
 
+  function printSnowFlakes($count) {
+  	for ($i=0; $i<$count; $i++) {
+  		echo "<img src='./images/snowflake-sm.png'/>";
+  	}
+  }
+
   $resort = $_GET['resort'];
   $date = $_GET['date'];
 
@@ -47,14 +53,24 @@
 	  //Page Title
 
 	  echo "<h2>$resortName, $state</h2>";
-?>
+	  echo "<p><a href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
+	?>
 
-	<p></p>
+	<h3>Recommendations for <?=$date ?></h3>
+	Powder Rating: 
+	<?php printSnowFlakes($powderRating); ?>
+	<br/>
+	Based off of a potential of <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
+	<?=$parsedJson->{'powder'}->{'snow_forecast'}?>" of more snow during the day, 
+	and <?=$parsedJson->{'powder'}->{'snow_prev'}?>" the prior three days.
+
+	<h4>Recommendations based on the following sources / data points:</h4>
 	<table>
 	<?php 
-		createTableRow("Website", $resortInfo->{'resort_website'});
-		createTableRow("Base Elevation (approx)", $resortInfo->{'base_elevation'});
-		createTableRow("Summit Elevation (approx)", $resortInfo->{'summit_elevation'});
+		createTableRow("Base Elevation (ft, approx)", $resortInfo->{'base_elevation'});
+		createTableRow("Summit Elevation (ft, approx)", $resortInfo->{'summit_elevation'});
+		createTableRow("Latitude", $resortInfo->{'latitude'});
+		createTableRow("Longitude", $resortInfo->{'longitude'});
 		createTableRow("NOAA Forecast Link", "http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" 
 			. $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'});
 		createTableRow("Snow-Forecast.com Weather Link", "http://www.snow-forecast.com/resorts/" 
@@ -63,6 +79,8 @@
 
 	</table>
 	
+
+
 <?php
 
 } else {
