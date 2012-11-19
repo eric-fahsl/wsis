@@ -1,5 +1,6 @@
 import csv
 import _mysql
+import resortMaster
 
 #f = open("ski_resorts.csv")
 f = open('ski_resorts.csv', 'rU')
@@ -54,6 +55,9 @@ for values in data :
 
 		print insertStatement
 		db.query(insertStatement)
+
+#Update the resorts
+resortMaster.updateCouchDocuments(db)
 	
 f.close()
 db.close()
