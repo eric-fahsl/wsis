@@ -39,7 +39,7 @@ puts "Creating index: #{ind_name}"
 #puts `curl -X PUT #{es_address}/#{ind_name} 2>/dev/null`
 
 puts `curl -X PUT #{es_address}/#{ind_name} -d '{"index" : {"analysis" : {"analyzer" : {"default" : {"type" : "keyword"}}}}}'`
-
+puts `curl -XPUT 'http://localhost:9200/recommendations/recommendations/_mapping?ignore_conflicts=true' -d '{ "date" : { "properties" : {"date" : {"type" : "string"}}}}'`
 
 # Create type and upload mapping
 #puts "Creating type and uploading mapping."
