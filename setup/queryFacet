@@ -1,7 +1,7 @@
 {
     "size": 0,
     "query": {
-        "match_all": { }
+        "match_all" : {}
     },
     "facets": {
         "Type": {
@@ -15,7 +15,10 @@
             }
         },
         "Rating" : {
-            "terms" : { "field": "rating" }
+            "terms" : { "field": "powder.rating" }
+        },
+        "State" : {
+            "terms" : { "field": "state" }
         }
         
     }

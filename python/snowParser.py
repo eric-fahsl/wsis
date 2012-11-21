@@ -8,6 +8,12 @@ snowPage = urllib.urlopen(alyeskaSnowUrl)
 
 soup = BeautifulSoup(snowPage)
 
+soupString = "newSnow = str(soup.findAll(text='Top of Six')[0].parent.next.next.next.next.next.next.next.contents[0])"
+exec soupString 
+
+print "newSnow: " + newSnow
+
+
 def searchContentForTag(uniqueText, tagNameOpen, includeTagOpen, tagNameClose, includeTagClose, content, offset) :
         uniqueTextIndex = content.find(uniqueText, offset)
         tagNameIndex = content.find(tagNameOpen, uniqueTextIndex);

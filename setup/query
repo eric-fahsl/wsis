@@ -18,6 +18,10 @@
     "sort": {
         "Rating": {
             "order": "desc"
-        }
+
+        },
+        "data.snow_forecast": {
+        	"order": "desc"
+        } 
     }
 }
