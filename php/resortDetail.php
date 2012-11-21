@@ -1,4 +1,6 @@
 <?php 
+
+include("esSearchHelper.php");
   
   function createTableRow($label, $value) {
   	if ($value != null && $value != "") {
@@ -14,7 +16,13 @@
 
   function printSnowFlakes($count) {
   	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='./images/snowflake-sm.png'/>";
+  		echo "<img src='../images/snowflake-sm.png'/>";
+  	}
+  }
+
+  function printSuns($count) {
+  	for ($i=0; $i<$count; $i++) {
+  		echo "<img src='../images/sun-sm.png'/>";
   	}
   }
 
@@ -36,34 +44,43 @@
   	  $resortInfo = $parsedResort->{'_source'};
 
 	  $date = $parsedJson->{'date'}; 
+	  $dt = new DateTime($date);
+	  $dateFormatted = $dt->format('F d Y');
+
 	  $state = $parsedJson->{'state'};
 	  $latitude = $parsedJson->{'latitude'};
 	  $longitude = $parsedJson->{'longitude'};
 	  $powderRating = $parsedJson->{'powder'}->{'rating'};
 	  //$snowForecast = $parsedJson->{''};
-	  //$ = $parsedJson->{''};
 
-	  //echo "<h3>$date</h3>\n";
-	  //echo "<h5>" . $parsedResort->{'resort_website'} . "</h5>\n";
-	  //$snowForecast = $parsedJson->{'data'}->{'snow_forecast'};
-	  //$temp_f = $parsedJson->{'current_observation'}->{'temp_f'};
-	  //echo "Current temperature in ${location} is: ${temp_f}\n";
-	  //echo "The powder rating for today is ${powderRating} <br/>\n";
-	  
-	  //Page Title
+	  //Retrieve the additional Forecasted Date Info
+	  $requestAttributes = array (
+	  	  "resort" => $resort, 
+	  	  "dateMin" => $date,
+	  	  "sortDate" => "asc"
+	  );
+	  $results = search($requestAttributes);
+
 
 	  echo "<h2>$resortName, $state</h2>";
 	  echo "<p><a href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
 
-	<h3>Recommendations for <?=$date ?></h3>
-	Powder Rating: 
-	<?php printSnowFlakes($powderRating); ?>
+	<h3>Recommendations for <?=$dateFormatted ?></h3>
+	
+	Powder: <?php printSnowFlakes($powderRating); ?>
 	<br/>
-	Based off of a potential of <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
+	Bluebird: <?php printSuns($parsedJson->{'bluebird'}->{'rating'}); ?><br/>
+	
+
+	NOAA Weather Summary: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
+	Precipitation Potential: <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
 	<?=$parsedJson->{'powder'}->{'snow_forecast'}?>" of more snow during the day, 
 	and <?=$parsedJson->{'powder'}->{'snow_prev'}?>" the prior three days.
 
+	
+	
+	<div style="clear:both;">
 	<h4>Recommendations based on the following sources / data points:</h4>
 	<table>
 	<?php 
@@ -79,8 +96,22 @@
 
 	</table>
 	
+<h4>Additional Dates for <?=$resortName ?></h4>
 
-
+	<?php
+		foreach ($results["hits"]["hits"] as $rec) {
+			$rec = $rec["_source"];
+			$dtime = new DateTime($rec['date']);
+			?>
+		 	<div class="module mod_1 no_title span2" style="float:left; width: 180px;">
+				<h5><?=$dtime->format('F d'); ?> </h5>
+				Powder: <?php printSnowFlakes($rec['powder']['rating']); ?><br/>
+				Bluebird: <?php printSuns($rec['bluebird']['rating']); ?><br/>
+				<a href="resortDetail.php?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>">Full Details</a>
+			</div>
+			<?php
+		}
+	?>
 <?php
 
 } else {
