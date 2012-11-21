@@ -76,9 +76,11 @@ def writeToDb(response, resort, db) :
 					else :
 						lowSnow = float(tokenized[0])
 						highSnow = float(tokenized[2])
+						#Use the midpoint of the forecasted snow
+						row['snow_forecast'] = (lowSnow + highSnow) / 2
+						
 						#Going to try just going with the highest snow total expected
-						#row['snow_forecast'] = (lowSnow + highSnow) / 2
-						row['snow_forecast'] = highSnow
+						#row['snow_forecast'] = highSnow
 
 			queryString = "insert into " + TABLE_NAME + " "
 
@@ -139,8 +141,8 @@ def getData(resort, db) :
 
 def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db, dayFilter=False) :
 	queryString = "select sum(snow_forecast) from " + TABLE_NAME 
-	queryString += " WHERE date >= '" + startDate
-	queryString += "' AND date < '" + endDate 
+	queryString += " WHERE date >= '" + str(startDate)
+	queryString += "' AND date < '" + str(endDate) 
 	queryString += "' AND resort = " + str(resort)
 	if (dayFilter) :
 		queryString += " AND forecast_time='day'"
@@ -150,4 +152,18 @@ def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db, dayFilter=
 	results = r.fetch_row(0)
 
 	return results[0][0]
+
+def getWeatherSummaryForDate(date, resort, db) :
+	datePlusOne = date + datetime.timedelta(days=1)
+	queryString = "select summary, text_summary from " + TABLE_NAME 
+	queryString += " WHERE date >= '" + str(date)
+	queryString += "' AND date < '" + str(datePlusOne) 
+	queryString += "' AND resort = " + str(resort)
+	queryString += " AND forecast_time='day'"
+
+	db.query(queryString)
+	r = db.store_result()
+	results = r.fetch_row(0)
+
+	return results[0]
 
