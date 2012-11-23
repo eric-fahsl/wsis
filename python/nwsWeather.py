@@ -20,7 +20,7 @@ def getWeather(latitude, longitude) :
 	return response
 
 def writeToDb(response, resort, db) :
-	print "Attempting to write to db for resort " + resort
+	print str(datetime.datetime.now()) + ": Attempting to write to db for resort " + resort
 
 	row = {}
 	row['reported_time'] = response['creationDate']
@@ -32,7 +32,7 @@ def writeToDb(response, resort, db) :
 	r = db.store_result()
 	results = r.fetch_row(0)
 	count = int(results[0][0])
-	print count;
+	#print count;
 
 	#only insert if an entry doesnt already exist for this
 	if (count == 0) :
@@ -103,7 +103,7 @@ def writeToDb(response, resort, db) :
 			queryString += columnNames + " values " + columnValues
 			queryString += " ON DUPLICATE KEY UPDATE " + updateString
 
-			print queryString
+			#print queryString
 			db.query(queryString)
 
 def defineColumnFields(db) :
