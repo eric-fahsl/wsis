@@ -124,7 +124,7 @@
 		 	echo "<tr><td>";
 		 	echo $region;
 		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$region' id='regionx$i' checked onclick='search();'";
+		 	echo "<input type='checkbox' value='$region' id='regionx$i' checked onclick='search();' />";
 		 	echo "</td></tr>";
 		 	$i++;
 		 }
@@ -135,12 +135,11 @@
 	<table>
 	<?php
 		$i = 0;
-		 foreach ($facets['PowderRating']['terms'] as $facet) {
-		 	$powder = $facet['term'];
+		for ($rating = 5; $rating > 0; $rating--) {
 		 	echo "<tr><td>";
-		 	echo $powder;
+		 	echo $rating;
 		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$powder' id='powderx$i' checked onclick='search();'";
+		 	echo "<input type='checkbox' value='$rating' id='powderx$i' checked onclick='search();' />";
 		 	echo "</td></tr>";
 		 	$i++;
 		 }
@@ -150,13 +149,12 @@
 	<h4>Bluebird Rating</h4>
 	<table>
 	<?php
-		$i = 0;
-		 foreach ($facets['BluebirdRating']['terms'] as $facet) {
-		 	$bluebird = $facet['term'];
+		 $i = 0;
+		for ($rating = 5; $rating > 0; $rating--) {
 		 	echo "<tr><td>";
-		 	echo $bluebird;
+		 	echo $rating;
 		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$bluebird' id='bluebirdx$i' checked onclick='search();'";
+		 	echo "<input type='checkbox' value='$rating' id='bluebirdx$i' checked onclick='search();' />";
 		 	echo "</td></tr>";
 		 	$i++;
 		 }
@@ -172,7 +170,7 @@
 		 	echo "<tr><td>";
 		 	echo $state;
 		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$state' id='statex$i' checked onclick='search();'";
+		 	echo "<input type='checkbox' value='$state' id='statex$i' checked onclick='search();' >";
 		 	echo "</td></tr>";
 		 	$i++;
 		 }
