@@ -1,27 +1,72 @@
 {
-     "query": {
+    "query": {
         "bool": {
             "must": [
                 {
                     "term": {
-                        "Date": "2012-11-10"
+                        "resort": "mountbaker"
+                    }
+                },
+                {
+                    "range": {
+                        "date": {
+                            "gte": "2012-11-22"
+                        }
+                    }
+                }
+            ],
+            "must_not": [
+                {
+                    "term": {
+                        "powder.rating": 40
                     }
                 },
                 {
                     "term": {
-                        "State": "Washington"
+                        "powder.rating": 20
                     }
                 }
-            ]
+            ],
+            "should": [
+                {
+                    "term": {
+                        "powder.rating": "4"
+                    }
+                },
+                {
+                    "term": {
+                        "powder.rating": "50"
+                    }
+                },
+                {
+                    "term": {
+                        "powder.rating": "2"
+                    }
+                }
+            ],
+            "minimum_number_should_match" : 1
         }
     },
-    "sort": {
-        "Rating": {
-            "order": "desc"
-
+    "sort": [
+        {
+            "powder.rating": {
+                "order": "desc"
+            }
         },
-        "data.snow_forecast": {
-        	"order": "desc"
-        } 
-    }
+        {
+            "bluebird.rating": {
+                "order": "desc"
+            }
+        },
+        {
+            "powder.snow_new": {
+                "order": "desc"
+            }
+        },
+        {
+            "powder.snow_forecast": {
+                "order": "desc"
+            }
+        }
+    ]
 }
