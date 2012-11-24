@@ -73,6 +73,8 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 
 	#TODO - update this to read from actual resorts
 	previousSnowFall = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation - datetime.timedelta(days=1), resort['id'], db)
+	if previousSnowFall == None :
+		previousSnowFall = 0
 
 	docId = resort['name'].lower().replace(' ','') + "_" + str(dateOfRecommendation)
 	docUrl = COUCH_DB_URL + "/" + docId
@@ -83,6 +85,7 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	#Create Powder Forecast first
 	powderData = {}
 	powderData['snow_prev'] = float(previousSnowFall)
+
 	powderData['snow_new'] = float(newSnowForTomorrow)
 	powderData['snow_forecast'] = float(projectedSnowTomorrow)
 	
