@@ -3,15 +3,19 @@ import httplib
 import urllib
 
 
-alyeskaSnowUrl = "http://www.alyeskaresort.com/printable-snow-report.aspx"
+#alyeskaSnowUrl = "http://www.alyeskaresort.com/printable-snow-report.aspx"
+alyeskaSnowUrl = "http://www.snow-forecast.com/resorts/White-Pass/feed.xml"
 snowPage = urllib.urlopen(alyeskaSnowUrl)
-
 soup = BeautifulSoup(snowPage)
+#soup = BeautifulSoup(str(soup).replace("&lt;_", "<").replace("&lt;","<").replace("&gt;_", ">").replace("&gt;",">"))
 
-soupString = "newSnow = str(soup.findAll(text='Top of Six')[0].parent.next.next.next.next.next.next.next.contents[0])"
-exec soupString 
+print soup
 
-print "newSnow: " + newSnow
+
+#soupString = "newSnow = str(soup.findAll(text='Top of Six')[0].parent.next.next.next.next.next.next.next.contents[0])"
+#exec soupString 
+
+#print "newSnow: " + newSnow
 
 
 def searchContentForTag(uniqueText, tagNameOpen, includeTagOpen, tagNameClose, includeTagClose, content, offset) :
@@ -51,4 +55,4 @@ def scrapePageForResult(host, path) :
 #Connect to DB
 
 #print "Remarkables: "
-scrapePageForResult("www.alyeskaresort.com", "/printable-snow-report.aspx")
+#scrapePageForResult("www.alyeskaresort.com", "/printable-snow-report.aspx")
