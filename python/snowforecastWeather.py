@@ -15,9 +15,9 @@ NIGHT_STRING = "ight"
 columnFields = {}
 
 
-def getWeather(resort) :
+def getWeather(resort, db) :
 	print "getting weather for " + resort['snowforecast_id']
-	url = sfWeatherUrl + resort + sfPostUrl
+	url = sfWeatherUrl + resort['snowforecast_id'] + sfPostUrl
 	soup = xmlHelper.createSoup(url)
 
 	row = {}
@@ -64,7 +64,7 @@ def getWeather(resort) :
 		queryString += " ON DUPLICATE KEY UPDATE " + updateString
 
 		print queryString
-		#db.query(queryString)
+		db.query(queryString)
 
 		
 
