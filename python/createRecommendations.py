@@ -23,12 +23,15 @@ REC_POWDER = "Powder"
 #Bluebird summaries
 BLUEBIRD_SUMMARIES = {}
 BLUEBIRD_SUMMARIES[5] = ["Sunny", "Clear"]
-BLUEBIRD_SUMMARIES[4] = ["Mostly Sunny","Mostly Clear"]
+BLUEBIRD_SUMMARIES[4] = ["Mostly Sunny","Mostly Clear", "some clouds"]
 BLUEBIRD_SUMMARIES[3] = ["Partly Cloudy","Partly Sunny"]
-BLUEBIRD_SUMMARIES[2] = ["Mostly Cloudy", "Increasing Clouds"]
+BLUEBIRD_SUMMARIES[2] = ["Mostly Cloudy", "Increasing Clouds", "light snow"]
 
 def convertCmToIn(centimeters) :
 	return float(centimeters) * 0.393701
+
+def calcAverage(value1, value2) :
+	return (float(value1) + float(value2)) / 2
 
 def checkUpperLimit(snowfallAmount) :
 	if snowfallAmount > UPPER_LIMIT :
@@ -78,12 +81,12 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
 	newSnowForTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
 	#Get the average of NWS and SF
-	newSnowForTomorrow = (float(newSnowForTomorrowNws) + convertCmToIn(newSnowForTomorrowSf)) / 2
+	newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, convertCmToIn(newSnowForTomorrowSf))
 	
 	projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
 	projectedSnowTomorrowSf = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
 	#Get the average of NWS and SF
-	projectedSnowTomorrow = (float(projectedSnowTomorrowNws) + convertCmToIn(projectedSnowTomorrowSf)) / 2
+	projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, convertCmToIn(projectedSnowTomorrowSf)) 
 	
 	#TODO - update this to read from actual resortMaster
 	previousSnowFall = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation - datetime.timedelta(days=1), resort['id'], db)
@@ -110,7 +113,11 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	bluebirdData = {}
 	weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
 	bluebirdData['weather_summary'] = weatherRecord[1]
-	bluebirdData['rating'] = calcBluebird(weatherRecord[0])
+	nwsBluebirdRating = calcBluebird(weatherRecord[0])
+	sfBluebirdAM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[0][0])
+	sfBluebirdPM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[1][0])
+
+	bluebirdData['rating'] = int(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)) + 0.49)
 	reccomendationDocument['bluebird'] = bluebirdData
 
 	#check if we need to override the existing record

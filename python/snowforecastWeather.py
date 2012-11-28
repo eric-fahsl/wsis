@@ -84,7 +84,7 @@ def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db, dayFilter=
 
 def getWeatherSummaryForDate(date, resort, db) :
 	datePlusOne = date + datetime.timedelta(days=1)
-	queryString = "select summary, text_summary from " + TABLE_NAME 
+	queryString = "select summary from " + TABLE_NAME 
 	queryString += " WHERE date >= '" + str(date)
 	queryString += "' AND date < '" + str(datePlusOne) 
 	queryString += "' AND resort = " + str(resort)
@@ -94,4 +94,4 @@ def getWeatherSummaryForDate(date, resort, db) :
 	r = db.store_result()
 	results = r.fetch_row(0)
 
-	return results[0]
+	return results
