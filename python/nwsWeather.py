@@ -123,7 +123,7 @@ def defineColumnFields(db) :
 		    
 
 def getData(resort, db) :
-	defineColumnFields(db)
+	#defineColumnFields(db)
 
 	db.query("select * from " + TABLE_NAME + " where resort=" + resort)
 	r = db.store_result()

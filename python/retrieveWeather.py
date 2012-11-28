@@ -19,10 +19,10 @@ resorts = resortMaster.getResorts(db)
 
 for resort in resorts :
 	snowforecastWeather.getWeather(resort, db)
-	'''
+	
 	nwsResponse = nwsWeather.getWeather(resort["latitude"],resort["longitude"])
 	nwsWeather.writeToDb(nwsResponse,resort['id'], db)
 
 createRecommendations.create(db)
-'''
+
 db.close()

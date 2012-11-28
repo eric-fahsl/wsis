@@ -7,6 +7,7 @@ import nwsWeather
 import resortMaster
 import os
 import uuid
+import snowforecastWeather
 
 PCT_LEVER_NEW_SNOW = 0.6
 PCT_LEVEL_PREV_SNOW = 0.2
@@ -25,6 +26,9 @@ BLUEBIRD_SUMMARIES[5] = ["Sunny", "Clear"]
 BLUEBIRD_SUMMARIES[4] = ["Mostly Sunny","Mostly Clear"]
 BLUEBIRD_SUMMARIES[3] = ["Partly Cloudy","Partly Sunny"]
 BLUEBIRD_SUMMARIES[2] = ["Mostly Cloudy", "Increasing Clouds"]
+
+def convertCmToIn(centimeters) :
+	return float(centimeters) * 0.393701
 
 def checkUpperLimit(snowfallAmount) :
 	if snowfallAmount > UPPER_LIMIT :
@@ -68,10 +72,20 @@ def createRecommendationDocument(resort, recDate ) :
 
 
 def calculateRecommendation(dateOfRecommendation, resort, db) :
-	newSnowForTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=1), dateOfRecommendation, resort['id'], db)
-	projectedSnowTomorrow = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, dateOfRecommendation + datetime.timedelta(days=1), resort['id'], db, True)
+	previousDay = dateOfRecommendation - datetime.timedelta(days=1)
+	nextDay = dateOfRecommendation + datetime.timedelta(days=1)
 
-	#TODO - update this to read from actual resorts
+	newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+	newSnowForTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+	#Get the average of NWS and SF
+	newSnowForTomorrow = (float(newSnowForTomorrowNws) + convertCmToIn(newSnowForTomorrowSf)) / 2
+	
+	projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+	projectedSnowTomorrowSf = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+	#Get the average of NWS and SF
+	projectedSnowTomorrow = (float(projectedSnowTomorrowNws) + convertCmToIn(projectedSnowTomorrowSf)) / 2
+	
+	#TODO - update this to read from actual resortMaster
 	previousSnowFall = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation - datetime.timedelta(days=1), resort['id'], db)
 	if previousSnowFall == None :
 		previousSnowFall = 0
