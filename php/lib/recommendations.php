@@ -11,11 +11,13 @@
 	  //print json_encode($facets);
 	  $facets = $facets['facets'];
 	  //print $facets['Date'];
-	  
-	  $dateProvided = "";
-	  echo $_GET['date'];
-	  if (isset($_GET['date'])) {
-	  	$dateProvided=$_GET['date'];
+	  $dateProvided = date("Y-m-d") . ",";
+	  parse_str($_SERVER['QUERY_STRING'], $parameters);
+	  if (isset($parameters['date'])) {
+	  	$dateProvided=$parameters['date'];
+	  	if (strpos($dateProvided, ",") === false) {
+	  		$dateProvided .= ",";
+	  	}
 	  }
 ?>
 
@@ -42,6 +44,10 @@
 
 
 		$('#results').load('/lib/recSearch.php?size=30' + parameters);
+	}
+
+	function init() {
+
 	}
 
 	function clickDateFilter(searchDate, index) {
@@ -108,7 +114,14 @@
 		 	$date = new DateTime($searchDate);
 			$displayDate = $date->format('D m/d/y'); 
 
-		 	echo "<li id='date$i' onclick='clickDateFilter(\"$searchDate\", $i)'><span>$displayDate</span><div class='x' id='date-x-$i'>X</div></li>";
+			$classExtra = "";
+			$xVisibleExtra = "";
+			if (strcmp($searchDate . ",", $dateProvided) == 0) {
+				$classExtra = "class='selected'";
+				$xVisibleExtra = "style='display:block;'";
+			}
+
+		 	echo "<li id='date$i' onclick='clickDateFilter(\"$searchDate\", $i)' $classExtra><span>$displayDate</span><div class='x' id='date-x-$i' $xVisibleExtra>X</div></li>";
 		 	$i++;
 		 }
 		

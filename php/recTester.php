@@ -11,7 +11,9 @@
 <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
 </head>
 <body>
-<?php include("lib/recommendations.php"); ?>
+<?php 
+
+include("lib/recommendations.php"); ?>
 
 	
 </body>
