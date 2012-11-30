@@ -12,6 +12,7 @@ function buildQuery() {
 
 	$mustTerms = array();
 	//addSearchParam($mustTerms, "date");
+	addSearchParam($mustTerms, "region");
 	addSearchParam($mustTerms, "state");
 	addSearchParam($mustTerms, "rating");
 	addSearchParam($mustTerms, "resort");
@@ -174,8 +175,8 @@ function search($_GET) {
 	//);
 
 	if (isset($_GET['size']) && is_numeric($pageSize = $_GET['size'])) {
-		if (intval($pageSize) > 50) {
-			$pageSize = 50;
+		if (intval($pageSize) > 30) {
+			$pageSize = 30;
 		}
 		$queryArray['size'] = $pageSize;
 	}

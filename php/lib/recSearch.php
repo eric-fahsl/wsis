@@ -3,35 +3,30 @@
 include('esSearchHelper.php');
 
 function printSnowFlakes($count) {
-  	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/snowflake-sm.png'/>";
-  	}
+  	echo "<img src='../images/snowflake$count.png'/>";
 }
 
 function printSuns($count) {
-  	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/sun-sm.png'/>";
-  	}
+  	echo "<img src='../images/bluebird$count.png'/>";
 }
 
 function displayRecommendationWidget($rec) {
 	?>
-	<div class="module mod_1 no_title span2" style="min-height: 160px;">
-		<h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
+	<div class="module mod_1 no_title span2"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
 		<?php 
 			$dtime = new DateTime($rec['date']);
 			echo $dtime->format('F d, Y');
-		?> <br/>
+		?><br/>
 		<?php printSnowFlakes($rec['powder']['rating']); ?><br/>
 		<?php printSuns($rec['bluebird']['rating']); ?><br/>
 		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>">Full Details</a>
 	</div>
-
 	<?php
 }
-
 $results = search($_GET);
-
+if ($results["hits"]["total"] == 0) {
+	echo "<h3>No results found, please modify your search and try again</h3>";
+}
 foreach ($results["hits"]["hits"] as $rec) {
  	displayRecommendationWidget($rec['_source']);
 }

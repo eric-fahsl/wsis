@@ -1,5 +1,5 @@
 <?php
-	include("esSearchHelper.php");
+	include("lib/esSearchHelper.php");
 
 
 	//Retrieve the Facets
@@ -31,17 +31,24 @@
 <script type="text/javascript">
 	
 
-	facets = {
-		"date": 5,
-		"regionx": 5,
-		"powderx": 5,
-		"bluebirdx": 5,
-		"statex": 10
+	var facets = {
+		"date": { "value": "", "max": <?= sizeof($facets['Date']['terms']) ?> },
+		"region": { "value": null, "max": <?= sizeof($facets['Region']['terms']) ?> },
+		"state": {"value": null, "max": <?= sizeof($facets['State']['terms']) ?> }
 	}
 
 	function search() {
+		
 		parameters = "";
+		//parameters = "dateMin=2012-11-28";
+		for (var searchParam in facets) {
+			val = facets[searchParam];
+			if (val.value != null) {
+				parameters += "&" + searchParam + "=" + val.value;
+			}
+		}
 
+		/*
 		for (var searchParam in facets) {
 			parameters += "&" + searchParam + "=";
 			needComma = false;
@@ -57,12 +64,13 @@
 					parameters += $("#" + searchParam + i).val();
 					needComma = true;
 				}
-
+	
 
 				// else if (searchParam.indexOf('x'))
 				// 	parameters += $("#" + searchParam + i).val() + ",";
 			}
 		}
+		*/
 		//alert(parameters);
 		/*
 		searchDates = "&date=";
@@ -78,107 +86,154 @@
 			}
 		} */
 
-		$('#results').load('recSearch.php?size=100' + parameters);
+
+		$('#results').load('lib/recSearch.php?size=30&' + parameters);
+	}
+
+	function addDateFilter(searchDate, index) {
+		//if date not included
+		if(facets['date'].value.indexOf(searchDate) < 0) {
+			facets['date'].value += searchDate + ",";
+			$("#date-x-" + index).show();
+			search();
+		}
+	}
+	function removeDateFilter(searchDate, index) {
+		//if date not included
+		val = facets['date'].value
+		if(val.indexOf(searchDate) >= 0) {
+			facets['date'].value = val.replace(searchDate + ",", "");
+			$("#date-x-" + index).hide();
+			search();
+		}
+	}
+
+	function addFilter(type, value) {
+		facets[type].value = value;
+		//parameters += "&" + type + "=" + value;
+		for (var i=0; i<facets[type].max; i++) {
+			element = $("#" + type + i);
+			if (element.text() != (value + "X" )) {
+				element.hide();
+			} else {
+				$("#" + type + "-x-" + i).show();
+			}
+		}
+		search();
+
+	}
+
+	function removeFilter(type, value) {
+		facets[type].value = null;
+		$("#" + type + "-x-" + value).hide();
+		for (var i=0; i<facets[type].max; i++) {
+			$("#" + type + i).show();
+		}
+		search();
 	}
 </script>
+
+ <STYLE type=text/css>
+
+ #facets .header {
+ 	font-size: 13px;
+	padding: 9px;
+	margin: 0;
+	background-color: #F9F9F9;
+	border-top: 3px solid #BCE8F1;
+	height: auto;
+	overflow: auto;
+ }
+
+ #facets ol {
+ 	list-style: none;
+	margin: 0;
+ }
+
+ #facets li {
+
+	display: block;
+	padding: 9px;
+	margin: 0;
+	border-top: 1px solid #D6D6D6;
+	text-decoration: none;
+	color: #0055A4;
+ }
+
+ #facets span {
+ 	cursor: pointer;
+ 	padding-right: 20px;
+ }
+
+ #facets li:hover {
+ 	background-color: lightgrey;
+ }
+
+ #facets .x {
+ 	color: red;
+ 	display: none;
+ 	float: right;
+ 	cursor: pointer;
+ 	padding-left: 20px;
+ 	padding-right: 5px;
+ }
+
+
+    </STYLE>
 
 </head>
 
 
 
-<div id="filterblock" style="width:235px; float:left; min-height: 100%;">
+<div id="facets" style="width:235px; float:left; min-height: 100%;">
 
-	<h4>Date</h4>
-	<table>
+	<div class="header">
+		<h3>Date</h3>
+	</div>
+	<ol>
 	<?php
-
 		$i = 0;
-		foreach ($facets['Date']['terms'] as $facet) {
-		 	echo "<tr><td>";
-
+		 foreach ($facets['Date']['terms'] as $facet) {
 		 	$searchDate = $facet['term'];
 		 	$date = new DateTime($searchDate);
-			echo $date->format('m/d/y (D)'); 
+			$displayDate = $date->format('D m/d/y'); 
 
-			echo "</td><td>";
-
-			echo "<input type='checkbox' value='$searchDate' id='date$i' onclick='search();'";
-			if ($i == 0) {
-				echo "checked";
-			}  
-			echo " />";
-
-			echo "</td></tr>\n";
-		 	//echo date_format($date, 'm/d/y') . "<br/>";
+		 	echo "<li id='date$i'><span onclick='addDateFilter(\"$searchDate\", $i)'>$displayDate</span><div class='x' onclick='removeDateFilter(\"$searchDate\",$i)' id='date-x-$i'>X</div></li>";
 		 	$i++;
 		 }
 		
 	?>
-	</table>
-	<h4>Region</h4>
-	<table>
+	</ol>
+
+	<div class="header">
+		<h3>Region</h3>
+	</div>
+	<ol>
 	<?php
 		$i = 0;
 		 foreach ($facets['Region']['terms'] as $facet) {
 		 	$region = $facet['term'];
-		 	echo "<tr><td>";
-		 	echo $region;
-		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$region' id='regionx$i' checked onclick='search();' />";
-		 	echo "</td></tr>";
+		 	echo "<li id='region$i'><span onclick='addFilter(\"region\", \"$region\")'>$region</span><div class='x' onclick='removeFilter(\"region\",$i)' id='region-x-$i'>X</div></li>";
 		 	$i++;
 		 }
 		
 	?>
-	</table>
-	<h4>Powder Rating</h4>
-	<table>
-	<?php
-		$i = 0;
-		for ($rating = 5; $rating > 0; $rating--) {
-		 	echo "<tr><td>";
-		 	echo $rating;
-		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$rating' id='powderx$i' checked onclick='search();' />";
-		 	echo "</td></tr>";
-		 	$i++;
-		 }
-		
-	?>
-	</table>
-	<h4>Bluebird Rating</h4>
-	<table>
-	<?php
-		 $i = 0;
-		for ($rating = 5; $rating > 0; $rating--) {
-		 	echo "<tr><td>";
-		 	echo $rating;
-		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$rating' id='bluebirdx$i' checked onclick='search();' />";
-		 	echo "</td></tr>";
-		 	$i++;
-		 }
-		
-	?>
-	</table>
-	<h4>State</h4>
-	<table>
+	</ol>
+
+	<div class="header">
+		<h3>State</h3>
+	</div>
+	<ol>
 	<?php
 		$i = 0;
 		 foreach ($facets['State']['terms'] as $facet) {
 		 	$state = $facet['term'];
-		 	echo "<tr><td>";
-		 	echo $state;
-		 	echo "</td><td>";
-		 	echo "<input type='checkbox' value='$state' id='statex$i' checked onclick='search();' >";
-		 	echo "</td></tr>";
+		 	echo "<li id='state$i'><span onclick='addFilter(\"state\", \"$state\")'>$state</span><div class='x' onclick='removeFilter(\"state\",$i)' id='state-x-$i'>X</div></li>";
 		 	$i++;
 		 }
 		
 	?>
-	</table>
-
-	<button onclick="search()">Click me to show recommendation</button>
+	</ol>
 
 
 </div>
@@ -188,6 +243,13 @@
 
 <script type="text/javascript">
 	search();
+	/*
+	$("#facets .x").click(function() { 
+		var splitStr = this.id.split('-');
+		removeFilter(splitStr[0], splitStr[2]);
+		alert("clicked");
+	});*/
+
 	//for (i=0; i<5; i++) {
 	//	$("#date" + i).click(function(){ search(); });
 	//}
