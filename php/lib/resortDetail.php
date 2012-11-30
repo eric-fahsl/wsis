@@ -115,6 +115,8 @@ include("esSearchHelper.php");
 			displayRecommendationWidget($rec);
 		}
 	?>
+<div class="divider"></div>
+
 <h4>Previous Recommendations for <?=$resortName ?></h4>
 <?php
 	//Retrieve the additional Forecasted Date Info
@@ -132,11 +134,9 @@ include("esSearchHelper.php");
 	}
 
 
-} else {
-	echo "Invalid Page";
-}
-
 ?>
+
+<div class="divider"></div>
 
 <h4>Mountain Stats</h4>
 	<table>
@@ -150,4 +150,11 @@ include("esSearchHelper.php");
 	</table>
 
 
+<?php
+}
 
+else {
+	echo "Invalid Page";
+}
+
+?>

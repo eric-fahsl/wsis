@@ -57,3 +57,8 @@ body {
  #results .recResult {
  	height: 165px;
  	margin-left: 10px;
+ }
+ 
+ .divider {
+ 	clear:both;
+ }	
