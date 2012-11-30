@@ -54,6 +54,6 @@ body {
  	overflow:scroll;
  }
 
- .recResult {
+ #results .recResult {
  	height: 165px;
  	margin-left: 5px;

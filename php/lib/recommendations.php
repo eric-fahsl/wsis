@@ -12,6 +12,11 @@
 	  $facets = $facets['facets'];
 	  //print $facets['Date'];
 	  
+	  $dateProvided = "";
+	  //echo $_GET['date'];
+	  if (isset($_GET['date'])) {
+	  	$dateProvided=$_GET['date'];
+	  }
 ?>
 
 
@@ -19,7 +24,7 @@
 	
 
 	var facets = {
-		"date": { "value": "", "max": <?= sizeof($facets['Date']['terms']) ?> },
+		"date": { "value": "<?= $dateProvided ?>", "max": <?= sizeof($facets['Date']['terms']) ?> },
 		"region": { "value": "", "max": <?= sizeof($facets['Region']['terms']) ?> },
 		"state": {"value": "", "max": <?= sizeof($facets['State']['terms']) ?> }
 	}
