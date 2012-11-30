@@ -3,3 +3,41 @@ body {
 	background-size: cover; background-position: 50% 100%; background-repeat: no-repeat no-repeat; background-attachment:fixed;
 }
 
+#facets .header {
+ 	font-size: 13px;
+	padding: 9px;
+	margin: 0;
+	background-image: url('images/greyHeader.png');
+	border-top: 3px solid #BCE8F1;
+	height: auto;
+	overflow: auto;
+ }
+
+ #facets ol {
+ 	list-style: none;
+	margin: 0;
+ }
+
+ #facets li {
+
+	display: block;
+	padding: 9px;
+	margin: 0;
+	border-top: 1px solid #D6D6D6;
+	text-decoration: none;
+	color: #0055A4;
+ 	cursor: pointer;
+ }
+
+ #facets li:hover {
+ 	background-color: lightgrey;
+ }
+
+ #facets .x {
+ 	color: red;
+ 	display: none;
+ 	float: right;
+ 	cursor: pointer;
+ 	padding-left: 20px;
+ 	padding-right: 5px;
+ }
