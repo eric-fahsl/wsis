@@ -3,6 +3,10 @@ body {
 	background-size: cover; background-position: 50% 100%; background-repeat: no-repeat no-repeat; background-attachment:fixed;
 }
 
+#facets {
+	width:235px; float:left; min-height: 100%;
+}
+
 #facets .header {
  	font-size: 13px;
 	padding: 9px;

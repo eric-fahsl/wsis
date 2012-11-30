@@ -90,7 +90,7 @@
 
 
 
-<div id="facets" style="width:235px; float:left; min-height: 100%;">
+<div id="facets" class="hidden-phone">
 
 	<div class="header">
 		<h3>Date</h3>
