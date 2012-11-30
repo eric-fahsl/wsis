@@ -142,7 +142,7 @@
 
 
 </div>
-<div id="results" style="margin-left: 235px;">
+<div id="results">
 
 </div>
 
