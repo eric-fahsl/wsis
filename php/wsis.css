@@ -12,7 +12,7 @@ body {
 	padding: 9px;
 	margin: 0;
 	background-image: url('images/greyHeader.png');
-	border-top: 3px solid #BCE8F1;
+	border-top: 3px solid black;
 	height: auto;
 	overflow: auto;
  }
@@ -31,7 +31,7 @@ body {
 	display: block;
 	padding: 9px;
 	margin: 0;
-	border-top: 1px solid #D6D6D6;
+	border-top: 1px solid #949494;
 	text-decoration: none;
 	color: #0055A4;
  	cursor: pointer;
@@ -51,7 +51,7 @@ body {
  }
 
  #results {
- 	overflow:scroll;
+ 	overflow:hidden;
  }
 
  #results .recResult {

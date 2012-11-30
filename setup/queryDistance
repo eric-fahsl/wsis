@@ -1,0 +1,46 @@
+{
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "date": "2012-12-01"
+                    }
+                }
+            ]
+        }
+    },
+    "sort": [
+        {
+            "_geo_distance": {
+                "location": {
+                    "lat": 46.239579,
+                    "lon": -119.10056499999999
+                },
+                "order": "asc",
+                "unit": "mi"
+            }
+        },
+        {
+            "powder.rating": {
+                "order": "desc"
+            }
+        },
+        {
+            "bluebird.rating": {
+                "order": "desc"
+            }
+        },
+        {
+            "powder.snow_new": {
+                "order": "desc"
+            }
+        },
+        {
+            "powder.snow_forecast": {
+                "order": "desc"
+            }
+        }
+    ],
+    "size":20
+}
