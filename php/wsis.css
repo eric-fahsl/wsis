@@ -53,3 +53,6 @@ body {
  #results {
  	overflow:scroll;
  }
+
+ .recResult {
+ 	height: 160px;

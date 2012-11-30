@@ -12,7 +12,7 @@ function printSuns($count) {
 
 function displayRecommendationWidget($rec) {
 	?>
-	<div class="module mod_1 no_title span2"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
+	<div class="span2 recResult"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
 		<?php 
 			$dtime = new DateTime($rec['date']);
 			echo $dtime->format('F d, Y');
