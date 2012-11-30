@@ -4,7 +4,7 @@
 
 	//Retrieve the Facets
 	  $requestAttributes = array (
-	  	  "dateMin" => date("Y-m-d"),
+	  	  "dateStart" => date("Y-m-d"),
 	  	  "facet" => "t"
 	  );
 	  $facets = search($requestAttributes);

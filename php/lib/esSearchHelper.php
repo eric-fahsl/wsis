@@ -17,12 +17,23 @@ function buildQuery() {
 	addSearchParam($mustTerms, "rating");
 	addSearchParam($mustTerms, "resort");
 
+	if (isset($_GET['dateStart'])) {
+		array_push($mustTerms, 
+			array(
+				"range" => array( 
+					"date" => array(
+						"gte" => $_GET['dateStart']
+					)
+				)
+			) 
+		);
+	}
 	if (isset($_GET['dateMin'])) {
 		array_push($mustTerms, 
 			array(
 				"range" => array( 
 					"date" => array(
-						"gte" => $_GET['dateMin']
+						"gt" => $_GET['dateMin']
 					)
 				)
 			) 
