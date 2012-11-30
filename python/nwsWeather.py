@@ -14,8 +14,8 @@ columnFields = {}
 
 
 def getWeather(latitude, longitude) :
-	print "getting weather for " + latitude + ", " + longitude
 	url = nwsWeatherUrl + "&lat=" + latitude + "&lon=" + longitude
+	print "getting weather for " + url
 	response = simplejson.load(urllib2.urlopen(url) )
 	return response
 

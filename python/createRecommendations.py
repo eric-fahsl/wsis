@@ -65,8 +65,10 @@ def createRecommendationDocument(resort, recDate ) :
 	rec['resort_name'] = resort['name']
 	rec['state'] = resort['state']
 	rec['region'] = resort['region']
-	rec['latitude'] = float(resort['latitude'])
-	rec['longitude'] = float(resort['longitude'])
+	location = {}
+	location['lat'] = float(resort['latitude'])
+	location['lon'] = float(resort['longitude'])
+	rec['location'] = location
 
 	rec['createdOn'] = str(datetime.date.today())
 	rec['date'] = recDate

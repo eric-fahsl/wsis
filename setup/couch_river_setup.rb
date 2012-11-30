@@ -39,6 +39,7 @@ puts "Creating index: #{ind_name}"
 puts `curl -X PUT #{es_address}/#{ind_name} -d '{"index" : {"analysis" : {"analyzer" : {"default" : {"type" : "keyword"}}}}}' 2>/dev/null`
 #puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore_conflicts=true' -d '{ "date" : { "properties" : {"date" : {"type" : "date", "format":"date"}}}}' 2>/dev/null`
 puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore_conflicts=true' -d '{ "date" : { "properties" : {"date" : {"type" : "string"}}}}' 2>/dev/null`
+puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore_conflicts=true' -d '{ "location" : { "properties" : {"location" : {"type" : "geo_point"}}}}' 2>/dev/null`
 
 # Configure river
 puts "Configuring river"
