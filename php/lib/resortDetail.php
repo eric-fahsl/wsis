@@ -106,7 +106,8 @@ include("esSearchHelper.php");
 		$requestAttributes = array (
 			"resort" => $resort, 
 			"dateMin" => $date,
-			"sortDate" => "asc"
+			"sortDate" => "asc",
+			"size" => 5
 		);
 		$results = search($requestAttributes);
 

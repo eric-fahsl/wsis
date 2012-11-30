@@ -22,7 +22,7 @@ function buildQuery() {
 			array(
 				"range" => array( 
 					"date" => array(
-						"gte" => $_GET['dateMin']
+						"gt" => $_GET['dateMin']
 					)
 				)
 			) 
