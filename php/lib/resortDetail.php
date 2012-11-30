@@ -57,7 +57,7 @@ include("esSearchHelper.php");
 
 	  $date = $parsedJson->{'date'}; 
 	  $dt = new DateTime($date);
-	  $dateFormatted = $dt->format('F d Y');
+	  $dateFormatted = $dt->format('D F d Y');
 
 	  $state = $parsedJson->{'state'};
 	  $latitude = $parsedJson->{'latitude'};
