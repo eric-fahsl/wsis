@@ -13,6 +13,10 @@ body {
 	overflow: auto;
  }
 
+ #facets .selected {
+ 	background-image: url('images/greenHeader.png');
+ }
+
  #facets ol {
  	list-style: none;
 	margin: 0;

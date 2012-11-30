@@ -36,7 +36,7 @@
 		}
 
 
-		$('#results').load('/lib/recSearch.php?size=30&' + parameters);
+		$('#results').load('/lib/recSearch.php?size=30' + parameters);
 	}
 
 	function clickDateFilter(searchDate, index) {
@@ -44,18 +44,24 @@
 		if(facets['date'].value.indexOf(searchDate) < 0) {
 			facets['date'].value += searchDate + ",";
 			$("#date-x-" + index).show();			
+			$("#date" + index).addClass("selected");
 		} else {
 			facets['date'].value = facets['date'].value.replace(searchDate + ",", "");
 			$("#date-x-" + index).hide();
+			$("#date" + index).removeClass("selected");
 		}
 		search();
 	}
 
 	function clickFilter(type, value, index) {
-		if (facets[type].value.indexOf(value) < 0) 
+		if (facets[type].value.indexOf(value) < 0) {
 			addFilter(type,value,index);
-		else
+			$("#" + type + index).addClass("selected");
+		}
+		else {
 			removeFilter(type,value,index);
+			$("#" + type + index).removeClass("selected");
+		}
 	}
 
 	function addFilter(type, value, index) {
