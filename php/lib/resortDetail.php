@@ -5,26 +5,38 @@ include("esSearchHelper.php");
   function createTableRow($label, $value) {
   	if ($value != null && $value != "") {
   		echo "<tr><td>$label</td><td>";
-  		if (strstr($value, "http")) {
-  			echo "<a href=\"" . $value . "\">" . $value . "</a>";
-  		} else {
-  			echo $value;
-  		}
+  		
+  		echo $value;
+  		
   		echo "</td></tr>";
   	}
   }
 
   function printSnowFlakes($count) {
   	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/snowflake-sm.png'/>";
+  		echo "<img src='../images/snowflake-med.png'/>";
   	}
   }
 
   function printSuns($count) {
   	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/sun-sm.png'/>";
+  		echo "<img src='../images/sun-med.png'/>";
   	}
   }
+
+  function displayRecommendationWidget($rec) {
+	?>
+	<div class="span2 recResult"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
+		<?php 
+			$dtime = new DateTime($rec['date']);
+			echo $dtime->format('F d, Y');
+		?><br/>
+		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
+		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>
+		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>">Full Details</a>
+	</div>
+	<?php
+}
 
   $resort = $_GET['resort'];
   $date = $_GET['date'];
@@ -53,27 +65,24 @@ include("esSearchHelper.php");
 	  $powderRating = $parsedJson->{'powder'}->{'rating'};
 	  //$snowForecast = $parsedJson->{''};
 
-	  //Retrieve the additional Forecasted Date Info
-	  $requestAttributes = array (
-	  	  "resort" => $resort, 
-	  	  "dateMin" => $date,
-	  	  "sortDate" => "asc"
-	  );
-	  $results = search($requestAttributes);
-
-
 	  echo "<h2>$resortName, $state</h2>";
 	  echo "<p><a href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
-	
-	Powder: <?php printSnowFlakes($powderRating); ?>
-	<br/>
-	Bluebird: <?php printSuns($parsedJson->{'bluebird'}->{'rating'}); ?><br/>
+	<table>
+	<tr>
+		<td><h4>Powder</h4></td>
+		<td><?php printSnowFlakes($powderRating); ?></td>
+	</tr>
+	<tr>
+		<td><h4>Bluebird</h4></td>
+		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}); ?></td>
+	</tr>
+	</table>
 	
 
-	NOAA Weather Summary: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
+	<i>NOAA Weather Summary</i>: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
 	Precipitation Potential: <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
 	<?=$parsedJson->{'powder'}->{'snow_forecast'}?>" of more snow during the day, 
 	and <?=$parsedJson->{'powder'}->{'snow_prev'}?>" the prior three days.
@@ -81,43 +90,64 @@ include("esSearchHelper.php");
 	
 	
 	<div style="clear:both;">
-	<h4>Recommendations based on the following sources / data points:</h4>
-	<table>
+	<h4>Recommendations based on the following sources</h4>
 	<?php 
-		createTableRow("Base Elevation (ft, approx)", $resortInfo->{'base_elevation'});
-		createTableRow("Summit Elevation (ft, approx)", $resortInfo->{'summit_elevation'});
-		createTableRow("Latitude", $resortInfo->{'latitude'});
-		createTableRow("Longitude", $resortInfo->{'longitude'});
-		createTableRow("NOAA Forecast Link", "http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" 
-			. $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'});
-		createTableRow("Snow-Forecast.com Weather Link", "http://www.snow-forecast.com/resorts/" 
-			. $resortInfo->{'snowforecast_id'} . "/6day/mid");
+		echo "<a href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
+			$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>NOAA Forecast</a><br/>\n";
+		echo "<a href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
+			"Snow-Forecast.com Weather</a>";
 	?>
 
-	</table>
-	
-<h4>Additional Dates for <?=$resortName ?></h4>
 
+<h4>Future Recommendations for <?=$resortName ?></h4>
+	
 	<?php
+	 	//Retrieve the additional Forecasted Date Info
+		$requestAttributes = array (
+			"resort" => $resort, 
+			"dateMin" => $date,
+			"sortDate" => "asc"
+		);
+		$results = search($requestAttributes);
+
 		foreach ($results["hits"]["hits"] as $rec) {
 			$rec = $rec["_source"];
-			$dtime = new DateTime($rec['date']);
-			?>
-		 	<div class="module mod_1 no_title span2" style="float:left; width: 180px;">
-				<h5><?=$dtime->format('F d'); ?> </h5>
-				Powder: <?php printSnowFlakes($rec['powder']['rating']); ?><br/>
-				Bluebird: <?php printSuns($rec['bluebird']['rating']); ?><br/>
-				<a href="resortDetail.php?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>">Full Details</a>
-			</div>
-			<?php
+			displayRecommendationWidget($rec);
 		}
 	?>
+<h4>Previous Recommendations for <?=$resortName ?></h4>
 <?php
+	//Retrieve the additional Forecasted Date Info
+	$requestAttributes = array (
+		"resort" => $resort, 
+		"dateMax" => $date,
+		"sortDate" => "desc",
+		"size" => 3
+	);
+	$results = search($requestAttributes);
+
+	foreach ($results["hits"]["hits"] as $rec) {
+		$rec = $rec["_source"];
+		displayRecommendationWidget($rec);
+	}
+
 
 } else {
 	echo "Invalid Page";
 }
 
 ?>
+
+<h4>Mountain Stats</h4>
+	<table>
+	<?php 
+		createTableRow("Base Elevation (ft, approx)", $resortInfo->{'base_elevation'});
+		createTableRow("Summit Elevation (ft, approx)", $resortInfo->{'summit_elevation'});
+		createTableRow("Latitude", $resortInfo->{'latitude'});
+		createTableRow("Longitude", $resortInfo->{'longitude'});
+	?>
+
+	</table>
+
 
 
