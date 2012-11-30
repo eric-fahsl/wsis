@@ -4,7 +4,7 @@ body {
 }
 
 #facets {
-	width:235px; float:left; min-height: 100%;
+	width:200px; float:left; min-height: 100%;
 }
 
 #facets .header {
@@ -56,4 +56,4 @@ body {
 
  #results .recResult {
  	height: 165px;
- 	margin-left: 5px;
+ 	margin-left: 10px;

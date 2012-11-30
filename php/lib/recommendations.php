@@ -13,7 +13,7 @@
 	  //print $facets['Date'];
 	  
 	  $dateProvided = "";
-	  //echo $_GET['date'];
+	  echo $_GET['date'];
 	  if (isset($_GET['date'])) {
 	  	$dateProvided=$_GET['date'];
 	  }
