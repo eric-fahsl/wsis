@@ -131,7 +131,7 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	#print id
 
 	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
-	print curlCommand
+	#print curlCommand
 	os.system(curlCommand)
  
 #Connect to DB
@@ -143,7 +143,7 @@ def create(db) :
 
 	#for each resort, calculate the next several days out
 	for resort in resorts :
-		for i in range(1,5) :
+		for i in range(1,6) :
 			calculateRecommendation(datetime.date.today() + datetime.timedelta(days=i), resort, db)
 	
 

@@ -64,7 +64,7 @@ def getWeather(resort, db) :
 		queryString += columnNames + " values " + columnValues
 		queryString += " ON DUPLICATE KEY UPDATE " + updateString
 
-		print queryString
+		#print queryString
 		db.query(queryString)
 
 
