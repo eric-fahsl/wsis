@@ -118,11 +118,32 @@ function addSortTerm(&$sort, $term, $order) {
 		)));
 }
 
+function addGeoSort(&$sort, $lat, $lon) {
+	array_push($sort, 
+		array("_geo_distance" => 
+			array("location" => 
+				array(
+					"lat" => $lat,
+					"lon" => $lon
+				),
+				"order" => "asc",
+				"unit" => "mi"
+			)
+		)
+	);
+}
+
+
 function buildSort() {
 	$sort = array();
 
 	if (isset($_GET['sortDate'])) {
 		addSortTerm($sort, "date", $_GET['sortDate']);
+	}
+
+	//check if the lat/lon coordinates are provided, if so, this is the primary sort
+	if (isset($_GET['lat']) && isset($_GET['lon'])) {
+		addGeoSort($sort, $_GET['lat'], $_GET['lon']);
 	}
 
 	addSortTerm($sort, "powder.rating", "desc");
