@@ -66,7 +66,7 @@ include("esSearchHelper.php");
 	  //$snowForecast = $parsedJson->{''};
 
 	  echo "<h2>$resortName, $state</h2>";
-	  echo "<p><a href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
+	  echo "<p><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
@@ -92,9 +92,9 @@ include("esSearchHelper.php");
 	<div style="clear:both;">
 	<h4>Recommendations based on the following sources</h4>
 	<?php 
-		echo "<a href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
+		echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
 			$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>NOAA Forecast</a><br/>\n";
-		echo "<a href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
+		echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
 			"Snow-Forecast.com Weather</a>";
 	?>
 

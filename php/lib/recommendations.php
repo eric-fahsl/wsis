@@ -24,11 +24,12 @@
 
 <script type="text/javascript">
 	
-
+	var mobileFacetsShown = false;
 	var facets = {
 		"date": { "value": "<?= $dateProvided ?>", "max": <?= sizeof($facets['Date']['terms']) ?> },
 		"region": { "value": "", "max": <?= sizeof($facets['Region']['terms']) ?> },
-		"state": {"value": "", "max": <?= sizeof($facets['State']['terms']) ?> }
+		"state": {"value": "", "max": <?= sizeof($facets['State']['terms']) ?> },
+		"sort": ""
 	}
 
 	function search() {
@@ -41,9 +42,12 @@
 				parameters += "&" + searchParam + "=" + val.value;
 			}
 		}
+		if (facets.sort != "") {
+			parameters += "&" + facets.sort + "=t";
+		}
 
 
-		$('#results').load('/lib/recSearch.php?size=30' + parameters);
+		$('#searchResults').load('/lib/recSearch.php?size=30' + parameters);
 	}
 
 	function init() {
@@ -100,8 +104,8 @@
 </script>
 
 
-
-<div id="facets" class="hidden-phone">
+<button class="button visible-phone" id="toggleFilters">Filter</button>
+<div id="facets" class="hidden-phone span2">
 
 	<div class="header">
 		<h3>Date</h3>
@@ -161,11 +165,50 @@
 
 </div>
 <div id="results">
+	 <div id="resultsHeader">
+        <p id="number_results"></p>
+        <div id="sort">
+          <label for="sort">Sort By: </label>
+          <select id="search_sort" name="sort">
+            <option value="powder" selected="selected">Powder Rating</option>
+            <option value="distance">Distance</option>
+            <option value="bluebird">Bluebird Rating</option>
+          </select>
+      </div>
+     </div>
+     <div id="searchResults">
 
+     </div>
 </div>
 
 <script type="text/javascript">
 	search();
+	$("#search_sort").change(function() {
+		var str = "";
+          $("#search_sort option:selected").each(function () {
+            //    str += $(this).text() + " " + $(this).val();
+                if ($(this).val() == "bluebird") {
+                	facets.sort = "sortBluebird";
+                } else {
+                	facets.sort = "";
+                }           
+              });
+         search();
+          //alert(str);
+	});
+
+	$("#toggleFilters").click(function() {
+		if (mobileFacetsShown) {
+			$("#facets").addClass("hidden-phone");
+			//$("#facets").width(200);
+			mobileFacetsShown = false;
+
+		} else {
+			$("#facets").removeClass("hidden-phone");
+			//$("#facets").width("100%");
+			mobileFacetsShown = true;
+		}
+	});
 	/*
 	$("#facets .x").click(function() { 
 		var splitStr = this.id.split('-');

@@ -4,12 +4,14 @@ body {
 }
 
 #facets {
-	width:200px; float:left; min-height: 100%;
+	#max-width: 200px;
+	margin-left: 0px;
+	min-width:150px;
 }
 
 #facets .header {
  	font-size: 13px;
-	padding: 9px;
+	padding-left: 9px;
 	margin: 0;
 	background-image: url('images/greyHeader.png');
 	border-top: 3px solid black;
@@ -41,6 +43,10 @@ body {
  	background-color: lightgrey;
  }
 
+ .fullWidth {
+ 	width: 100%;
+ }
+
  #facets .x {
  	color: red;
  	display: none;
@@ -54,6 +60,12 @@ body {
  	overflow:hidden;
  }
 
+@media (max-width: 767px)
+#results {
+	background-color: red;
+	float:left;
+}
+
  #results .recResult {
  	height: 165px;
  	margin-left: 10px;
@@ -62,3 +74,55 @@ body {
  .divider {
  	clear:both;
  }	
+
+ #resultsHeader {
+ 	font-size: 13px;
+	border-top: 3px solid #D6D6D6;
+	height: auto;
+	overflow: auto;
+	line-height: 14px;
+	margin-left: 12px;
+ }
+
+ #number_results {
+ 	display: inline;
+	float: left;
+	padding: 9px;
+	margin: 0;
+ }
+
+ #resultsHeader #sort {
+ 	padding-top: 3px;
+	float: right;
+	width: 260px;
+	text-align: right;
+	margin-right: 12px;
+ }
+
+ #search_sort {
+ 	width: 180px;
+ }
+
+ .button {
+		padding: 5px 15px;
+		display: inline;
+		background: #777 url('images/button.png') repeat-x bottom;
+		border: none;
+		color: #fff;
+		cursor: pointer;
+		font-weight: bold;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		text-shadow: 1px 1px #666;
+		margin-top: 8px;
+		}
+	.button:hover {
+		background-position: 0 center;
+		}
+	.button:active {
+		background-position: 0 top;
+		position: relative;
+		top: 1px;
+		padding: 6px 10px 4px;
+		}
