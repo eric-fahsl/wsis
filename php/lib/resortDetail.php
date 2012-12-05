@@ -35,9 +35,10 @@ include("esSearchHelper.php");
 		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>
 		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>">Full Details</a>
 	</div>
-	<?php
+	<?php 
 }
 
+if (isset($_GET['resort'])) {
   $resort = $_GET['resort'];
   $date = $_GET['date'];
 
@@ -152,10 +153,14 @@ include("esSearchHelper.php");
 
 
 <?php
-}
+	}
 
-else {
-	echo "Invalid Page";
+	else {
+		echo "Invalid Page";
+	}
+
+} else {
+	echo "All Resorts Listing";
 }
 
 ?>
