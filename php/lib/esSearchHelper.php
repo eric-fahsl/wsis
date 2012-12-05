@@ -146,6 +146,10 @@ function buildSort() {
 		addGeoSort($sort, $_GET['lat'], $_GET['lon']);
 	}
 
+	if (isset($_GET['sortBluebird'])) {
+		addSortTerm($sort, "bluebird.rating", "desc");
+	}
+
 	addSortTerm($sort, "powder.rating", "desc");
 	addSortTerm($sort, "bluebird.rating", "desc");
 	addSortTerm($sort, "powder.snow_new", "desc");
