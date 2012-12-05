@@ -38,6 +38,9 @@ def checkUpperLimit(snowfallAmount) :
 		return UPPER_LIMIT
 	return snowfallAmount
 
+def formatFloat(inputNum) :
+	return "%.1f" % float(inputNum) 
+
 def calcPowder(new_snow, previous_snow, projected_snow) :
 	previous_snow = checkUpperLimit(previous_snow)
 	projected_snow = checkUpperLimit(projected_snow)
@@ -103,12 +106,12 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	
 	#Create Powder Forecast first
 	powderData = {}
-	powderData['snow_prev'] = float(previousSnowFall)
+	powderData['snow_prev'] = formatFloat(previousSnowFall)
 
-	powderData['snow_new'] = float(newSnowForTomorrow)
-	powderData['snow_forecast'] = float(projectedSnowTomorrow)
+	powderData['snow_new'] = formatFloat(newSnowForTomorrow)
+	powderData['snow_forecast'] = formatFloat(projectedSnowTomorrow)
 	
-	powderData['rating'] = calcPowder(powderData['snow_new'], powderData['snow_prev'], powderData['snow_forecast'])
+	powderData['rating'] = calcPowder(newSnowForTomorrow, previousSnowFall, projectedSnowTomorrow)
 	reccomendationDocument['powder'] = powderData
 
 	#Now create the bluebird recommendation
