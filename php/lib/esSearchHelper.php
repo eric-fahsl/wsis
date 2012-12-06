@@ -206,6 +206,7 @@ function search($_GET) {
 			"sort" => buildSort()
 		);
 	}
+
 		//"sort" => buildSort()
 		//, "facets" => buildFacets()
 	//);
@@ -220,7 +221,11 @@ function search($_GET) {
 	$queryObject = json_encode($queryArray);
 	//print $queryObject;
 
-	$ch = curl_init("http://localhost:9200/recommendations/_search");                                                                      
+	return queryES("http://localhost:9200/recommendations/_search", $queryObject);
+}
+
+function queryES($searchUrl, $queryObject) {
+	$ch = curl_init($searchUrl);                                                                      
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "XGET");                                                                     
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $queryObject);                                                                  
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -233,6 +238,63 @@ function search($_GET) {
 	$results = json_decode($esResult, true);
 
 	return $results;
+}
+
+function getStates() {
+	$queryArray = array (
+		"query" => array(
+			"match_all" => json_decode ("{}")
+		), 
+		"facets" => array(
+			"State" => array(
+				"terms" => array(
+					"field" => "state_full",
+					"order" => "term"
+				)
+			)
+		),
+		"size" => 0
+	
+	);
+		//"sort" => buildSort()
+
+	$queryObject = json_encode($queryArray);
+	//print $queryObject;
+
+	return queryES("http://localhost:9200/resorts/_search", $queryObject);
+}
+
+function getResortsForState($state) {
+	$sort = array();
+	addSortTerm($sort, "name", "asc");
+
+	$queryArray = array (
+		"query" => array(
+			"bool" => array(
+			
+				"must" => array(
+					array(
+						
+							"term" => array(
+								"state_full" => $state
+							)
+							
+						
+					)
+				)
+		
+			)
+		),
+		"size" => 100,
+		"sort" => $sort,
+		"fields" => "name"
+	);
+
+	$queryObject = json_encode($queryArray);
+	//print $queryObject;
+
+	return queryES("http://localhost:9200/resorts/_search", $queryObject);
+
 }
 
 ?>

@@ -58,7 +58,7 @@ if (isset($_GET['resort'])) {
 
 	  $date = $parsedJson->{'date'}; 
 	  $dt = new DateTime($date);
-	  $dateFormatted = $dt->format('D F d Y');
+	  $dateFormatted = $dt->format('l F d Y');
 
 	  $state = $parsedJson->{'state'};
 	  $latitude = $parsedJson->{'latitude'};

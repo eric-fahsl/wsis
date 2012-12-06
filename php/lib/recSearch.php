@@ -12,10 +12,10 @@ function printSuns($count) {
 
 function displayRecommendationWidget($rec) {
 	?>
-	<div class="span2 recResult"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
+	<div class="recresult"><h6><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h6>
 		<?php 
 			$dtime = new DateTime($rec['date']);
-			echo $dtime->format('F d, Y');
+			echo $dtime->format('l, M d');
 		?><br/>
 		<?php printSnowFlakes($rec['powder']['rating']); ?><br/>
 		<?php printSuns($rec['bluebird']['rating']); ?><br/>

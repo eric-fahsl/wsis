@@ -65,15 +65,17 @@ body {
  	overflow:hidden;
  }
 
-@media (max-width: 767px)
-#results {
-	background-color: red;
-	float:left;
-}
 
- #results .recResult {
+
+.recresult {
  	height: 165px;
  	margin-left: 10px;
+ 	width: 165px;
+ 	float: left;
+ }
+
+ #results .recresult h6 {
+ 	height: 25px;
  }
  
  .divider {
