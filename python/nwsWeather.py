@@ -107,7 +107,7 @@ def getWeather(resort, db) :
 
 	except simplejson.decoder.JSONDecodeError :
 		print "*****************************************"
-		print "NWS FORECAST FAILED " + datetime.datetime.now()
+		print "NWS FORECAST FAILED " + str(datetime.datetime.now())
 		print url
 		print "*****************************************"
 
