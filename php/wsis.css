@@ -1,8 +1,13 @@
 body {
 	background: white url(/images/nz_bg3.jpg);
-	background-size: cover; background-position: 50% 100%; background-repeat: no-repeat no-repeat; background-attachment:fixed;
+	background-size: cover; background-position: 50% 100%; 
+	background-repeat: no-repeat no-repeat; 
+	#background-attachment:fixed;
 }
 
+#header {
+	margin-bottom: 10px;
+}
 #facets {
 	#max-width: 200px;
 	margin-left: 0px;
