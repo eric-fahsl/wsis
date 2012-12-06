@@ -21,10 +21,9 @@
 <body>
 <?php 
 
-include("lib/recommendations.php"); 
-//include ("lib/esSearchHelper.php");
-
-//print json_encode(getResortsForState("Utah"));
+//include("lib/recommendations.php"); 
+include ("lib/esSearchHelper.php");
+print json_encode(getResortsForState("Utah"));
 ?>
 
 	

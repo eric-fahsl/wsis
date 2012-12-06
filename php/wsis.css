@@ -65,7 +65,9 @@ body {
  	overflow:hidden;
  }
 
-
+.container-fluid {
+	padding: 0px;
+}
 
 .recresult {
  	height: 165px;

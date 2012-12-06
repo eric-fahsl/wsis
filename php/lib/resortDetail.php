@@ -160,7 +160,22 @@ if (isset($_GET['resort'])) {
 	}
 
 } else {
-	echo "All Resorts Listing";
+	//echo "All Resorts Listing<br/>";
+	$states = getStates();
+	//echo json_encode(getStates());
+	foreach ($states["facets"]["State"]["terms"] as $state) {
+		 $stateName = $state["term"];
+		 echo "<h3>". $stateName . "</h3>";
+		 $resorts = getResortsForState($stateName);
+		 $today = date("Y-m-d");
+		 foreach($resorts["hits"]["hits"] as $resort) {
+		 	$resortid = $resort["_id"];
+		 	echo "<a href='resort-detail?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
+		 }
+
+ 	}
 }
+
+//}
 
 ?>
