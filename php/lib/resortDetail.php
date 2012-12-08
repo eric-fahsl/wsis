@@ -14,7 +14,7 @@ include("esSearchHelper.php");
 
   function printSnowFlakes($count) {
   	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/snowflake-med.png'/>";
+  		echo "<img src='../images/snowflake-med.png' />";
   	}
   }
 
@@ -26,14 +26,15 @@ include("esSearchHelper.php");
 
   function displayRecommendationWidget($rec) {
 	?>
-	<div class="span2 recResult"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
+	<div class="span2 recResultDetail">
 		<?php 
 			$dtime = new DateTime($rec['date']);
-			echo $dtime->format('l, M d');
-		?><br/>
+			$displayDate = $dtime->format('l, M j');
+		?>
+		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
+		<br/>
 		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
 		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>
-		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>">Full Details</a>
 	</div>
 	<?php 
 }
@@ -58,7 +59,7 @@ if (isset($_GET['resort'])) {
 
 	  $date = $parsedJson->{'date'}; 
 	  $dt = new DateTime($date);
-	  $dateFormatted = $dt->format('l F d Y');
+	  $dateFormatted = $dt->format('l, F j, Y');
 
 	  $state = $parsedJson->{'state'};
 	  $latitude = $parsedJson->{'latitude'};
@@ -71,6 +72,10 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
+	Precipitation Potential: <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
+	<?=$parsedJson->{'powder'}->{'snow_forecast'}?>" of more snow during the day, 
+	and <?=$parsedJson->{'powder'}->{'snow_prev'}?>" the prior three days.
+	<br/><br/>
 	<table>
 	<tr>
 		<td><h4>Powder</h4></td>
@@ -84,12 +89,7 @@ if (isset($_GET['resort'])) {
 	
 
 	<i>NOAA Weather Summary</i>: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
-	Precipitation Potential: <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
-	<?=$parsedJson->{'powder'}->{'snow_forecast'}?>" of more snow during the day, 
-	and <?=$parsedJson->{'powder'}->{'snow_prev'}?>" the prior three days.
-
-	
-	
+		
 	<div style="clear:both;">
 	<h4>Recommendations based on the following sources</h4>
 	<?php 
@@ -99,6 +99,24 @@ if (isset($_GET['resort'])) {
 			"Snow-Forecast.com Weather</a>";
 	?>
 
+<h4>Previous Day's Rating for <?=$resortName ?></h4>
+<?php
+	//Retrieve the additional Forecasted Date Info
+	$requestAttributes = array (
+		"resort" => $resort, 
+		"dateMax" => $date,
+		"sortDate" => "desc",
+		"size" => 1
+	);
+	$results = search($requestAttributes);
+
+	foreach ($results["hits"]["hits"] as $rec) {
+		$rec = $rec["_source"];
+		displayRecommendationWidget($rec);
+	}
+
+?>
+<div class="divider"></div>
 
 <h4>Future Recommendations for <?=$resortName ?></h4>
 	
@@ -117,26 +135,8 @@ if (isset($_GET['resort'])) {
 			displayRecommendationWidget($rec);
 		}
 	?>
-<div class="divider"></div>
-
-<h4>Previous Recommendations for <?=$resortName ?></h4>
-<?php
-	//Retrieve the additional Forecasted Date Info
-	$requestAttributes = array (
-		"resort" => $resort, 
-		"dateMax" => $date,
-		"sortDate" => "desc",
-		"size" => 3
-	);
-	$results = search($requestAttributes);
-
-	foreach ($results["hits"]["hits"] as $rec) {
-		$rec = $rec["_source"];
-		displayRecommendationWidget($rec);
-	}
 
 
-?>
 
 <div class="divider"></div>
 
