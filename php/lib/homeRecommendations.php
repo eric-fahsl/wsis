@@ -51,7 +51,7 @@ function selectBluebird() {
 </ul>
 		
 
-
+<div class="row-fluid">
 <div class="module mod_1 first no_title span4" >
 	<h5><?= $todayDisplay ?></h5>
 	<div id="searchResults1"></div>
@@ -66,6 +66,7 @@ function selectBluebird() {
 <h5><?= $todayPlus2Display ?></h5>
 	<div id="searchResults3"></div>
 	<a href="recommendations">See all recommendations</a>
+</div>
 </div>
 
 <script type="text/javascript">
