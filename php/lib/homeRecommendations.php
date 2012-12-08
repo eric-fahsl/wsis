@@ -46,7 +46,8 @@ function selectBluebird() {
 					
 <ul class="nav menu nav-tabs" id="forecastHomeWidget">
 	<li class="item-178 current active" id="powderRecTab"><a href="javascript:selectPowder();"><img src="../images/snowflake-sm.png" style="height:30px;"/> Powder</a></li>
-	<li class="item-171" id="bluebirdRecTab"><a href="javascript:selectBluebird();" ><img src="../images/sun-sm.png"/> Bluebird</a></li>
+	<li class="item-178" id="bluebirdRecTab"><a href="javascript:selectBluebird();" ><img src="../images/sun-sm.png"/> Bluebird</a></li>
+	<li class="item-178"><a href="recommendations"><img src="../images/alg-sm.png"/>See All</a></li>
 </ul>
 		
 
@@ -55,17 +56,17 @@ function selectBluebird() {
 <div class="module mod_1 first no_title span4" >
 	<h5><?= $todayDisplay ?></h5>
 	<div id="searchResults1"></div>
-
+	<a href="recommendations">See all recommendations</a>
 </div>
 <div class="module mod_2 no_title span4" >
 	<h5><?= $todayPlus1Display ?></h5>
 	<div id="searchResults2"></div>
-
+	<a href="recommendations">See all recommendations</a>
 </div>
 <div class="module mod_3 last no_title span4" >
 <h5><?= $todayPlus2Display ?></h5>
 	<div id="searchResults3"></div>
-
+	<a href="recommendations">See all recommendations</a>
 </div>
 </div>
 
