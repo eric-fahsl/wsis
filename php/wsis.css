@@ -13,6 +13,12 @@ body .row-fluid {
 #header {
 	margin-bottom: 10px;
 }
+#homeIntro {
+	color: black;
+	font-family: TisaWebPro,"Times New Roman",Times,serif;
+	font-size: 1.2em;
+	padding: 20px 10%;
+}
 #facets {
 	#max-width: 200px;
 	margin-left: 0px;
