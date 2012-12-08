@@ -91,31 +91,27 @@ if (isset($_GET['resort'])) {
 	<i>NOAA Weather Summary</i>: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
 		
 	<div style="clear:both;">
-	<h4>Recommendations based on the following sources</h4>
+	<h5>Recommendations based on the following</h5>
 	<?php 
 		echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
-			$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>NOAA Forecast</a><br/>\n";
+			$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
 		echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
-			"Snow-Forecast.com Weather</a>";
+			"$resortName Snow-Forecast.com Weather</a>";
 	?>
 
-<h4>Previous Day's Rating for <?=$resortName ?></h4>
-<?php
-	//Retrieve the additional Forecasted Date Info
-	$requestAttributes = array (
-		"resort" => $resort, 
-		"dateMax" => $date,
-		"sortDate" => "desc",
-		"size" => 1
-	);
-	$results = search($requestAttributes);
+<div class="divider"></div>
 
-	foreach ($results["hits"]["hits"] as $rec) {
-		$rec = $rec["_source"];
-		displayRecommendationWidget($rec);
-	}
+<h4>Mountain Stats</h4>
+	<table>
+	<?php 
+		createTableRow("Base Elevation (ft, approx)", $resortInfo->{'base_elevation'});
+		createTableRow("Summit Elevation (ft, approx)", $resortInfo->{'summit_elevation'});
+		createTableRow("Latitude", $resortInfo->{'latitude'});
+		createTableRow("Longitude", $resortInfo->{'longitude'});
+	?>
 
-?>
+	</table>
+
 <div class="divider"></div>
 
 <h4>Future Recommendations for <?=$resortName ?></h4>
@@ -136,20 +132,26 @@ if (isset($_GET['resort'])) {
 		}
 	?>
 
+<div class="divider"> </div>
+<h4>Previous Recommendations for <?=$resortName ?></h4>
+<?php
+	//Retrieve the additional Forecasted Date Info
+	$requestAttributes = array (
+		"resort" => $resort, 
+		"dateMax" => $date,
+		"sortDate" => "desc",
+		"size" => 3
+	);
+	$results = search($requestAttributes);
+
+	foreach ($results["hits"]["hits"] as $rec) {
+		$rec = $rec["_source"];
+		displayRecommendationWidget($rec);
+	}
+
+?>
 
 
-<div class="divider"></div>
-
-<h4>Mountain Stats</h4>
-	<table>
-	<?php 
-		createTableRow("Base Elevation (ft, approx)", $resortInfo->{'base_elevation'});
-		createTableRow("Summit Elevation (ft, approx)", $resortInfo->{'summit_elevation'});
-		createTableRow("Latitude", $resortInfo->{'latitude'});
-		createTableRow("Longitude", $resortInfo->{'longitude'});
-	?>
-
-	</table>
 
 
 <?php

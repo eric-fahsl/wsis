@@ -150,7 +150,9 @@ body .row-fluid {
  	font-style: italic;
  	padding-bottom: 7px;
  }
-
+.recResultDetail {
+	
+}
  .button {
 		padding: 5px 15px;
 		display: inline;
