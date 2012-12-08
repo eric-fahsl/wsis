@@ -29,7 +29,7 @@ include("esSearchHelper.php");
 	<div class="span2 recResult"><h5><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></h5>
 		<?php 
 			$dtime = new DateTime($rec['date']);
-			echo $dtime->format('F d, Y');
+			echo $dtime->format('l, M d');
 		?><br/>
 		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
 		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>

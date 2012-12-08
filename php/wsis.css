@@ -65,16 +65,16 @@ body {
  	overflow:hidden;
  }
 
-.container-fluid {
-	padding: 0px;
-}
-
 .recresult {
- 	height: 165px;
+ 	height: 135px;
  	margin-left: 10px;
  	width: 165px;
  	float: left;
  }
+
+.recheader {
+	font-size: 1.1em;
+}
 
  #results .recresult h6 {
  	height: 25px;
@@ -83,6 +83,11 @@ body {
  .divider {
  	clear:both;
  }	
+
+ .recresulthome {
+ 	padding-bottom: 10px;
+ }
+
 
  #resultsHeader {
  	font-size: 13px;
@@ -110,6 +115,26 @@ body {
 
  #search_sort {
  	width: 180px;
+ }
+
+ #forecastHomeWidget {
+ 	font-size: 1.2em;
+ 	font-style: italic;
+ 	border-bottom: 1px solid rgb(95, 95, 95);
+ }
+
+ #forecastHomeWidget .active a {
+ 	background: none;
+ 	border: 1px solid rgb(95, 95, 95);
+ 	border-bottom: none;
+ }
+ #forecastHomeWidget a {
+ 	padding-left: 20px;
+ 	padding-right: 20px;
+ }
+
+ #powderRecTab {
+ 	margin-left: 15px;
  }
 
  .button {
