@@ -12,6 +12,11 @@ include("esSearchHelper.php");
   	}
   }
 
+  function convertInToCm($inches) {
+  	$cm = $inches * 2.54;
+  	return number_format($cm, 1, '.', '');
+  }
+
   function printSnowFlakes($count) {
   	for ($i=0; $i<$count; $i++) {
   		echo "<img src='../images/snowflake-med.png' />";
@@ -65,6 +70,11 @@ if (isset($_GET['resort'])) {
 	  $latitude = $parsedJson->{'latitude'};
 	  $longitude = $parsedJson->{'longitude'};
 	  $powderRating = $parsedJson->{'powder'}->{'rating'};
+
+	  $isDomestic = True;
+	  if (strcmp("F", $resortInfo->{'domestic'}) == 0) {
+	  	$isDomestic = False;
+	  }
 	  //$snowForecast = $parsedJson->{''};
 
 	  echo "<h2>$resortName, $state</h2>";
@@ -72,9 +82,18 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
-	Precipitation Potential: <?=$parsedJson->{'powder'}->{'snow_new'} ?>" of fresh snow, 
-	<?=$parsedJson->{'powder'}->{'snow_forecast'}?>" of more snow during the day, 
-	and <?=$parsedJson->{'powder'}->{'snow_prev'}?>" the prior three days.
+	Precipitation Potential: 
+	<?php 
+		if ($isDomestic) {
+			echo $parsedJson->{'powder'}->{'snow_new'} . "\" of fresh snow (last 24 hours), "
+			 . $parsedJson->{'powder'}->{'snow_forecast'} . "\" of more snow during the day, and "
+			 . $parsedJson->{'powder'}->{'snow_prev'} . "\" the last 72 hours. ";
+		} else {
+			echo convertInToCm($parsedJson->{'powder'}->{'snow_new'}) . " cm of fresh snow (last 24 hours), "
+			 . convertInToCm($parsedJson->{'powder'}->{'snow_forecast'}) . " cm of more snow during the day, and "
+			 . convertInToCm($parsedJson->{'powder'}->{'snow_prev'}) . " cm the last 72 hours. ";
+		}
+	?>
 	<br/><br/>
 	<table>
 	<tr>
@@ -104,8 +123,12 @@ if (isset($_GET['resort'])) {
 <h4>Mountain Stats</h4>
 	<table>
 	<?php 
-		createTableRow("Base Elevation (ft, approx)", $resortInfo->{'base_elevation'});
-		createTableRow("Summit Elevation (ft, approx)", $resortInfo->{'summit_elevation'});
+		$unitStr = " (m, approx)";
+		if ($isDomestic) {
+			$unitStr = " (ft, approx)";
+		}
+		createTableRow("Base Elevation" . $unitStr, $resortInfo->{'base_elevation'});
+		createTableRow("Summit Elevation" . $unitStr, $resortInfo->{'summit_elevation'});
 		createTableRow("Latitude", $resortInfo->{'latitude'});
 		createTableRow("Longitude", $resortInfo->{'longitude'});
 	?>
@@ -162,11 +185,19 @@ if (isset($_GET['resort'])) {
 	}
 
 } else {
-	//echo "All Resorts Listing<br/>";
+	?>
+		<h2>Resorts Listing</h2>
+		See below for our complete list of all supported ski resorts. We are always adding more resorts and we 
+		apologize if your resort of choice is not yet available. If there is something that we have missed, please 
+		feel free to give us some <a href="feedback">feedback</a>.
+
+		<div style="clear:both"></div>
+	<?php
 	$states = getStates();
 	//echo json_encode(getStates());
 	foreach ($states["facets"]["State"]["terms"] as $state) {
 		 $stateName = $state["term"];
+		 echo "<div class='stateSummary'>";
 		 echo "<h3>". $stateName . "</h3>";
 		 $resorts = getResortsForState($stateName);
 		 $today = date("Y-m-d");
@@ -174,7 +205,7 @@ if (isset($_GET['resort'])) {
 		 	$resortid = $resort["_id"];
 		 	echo "<a href='resort-detail?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
 		 }
-
+		 echo "</div>";
  	}
 }
 

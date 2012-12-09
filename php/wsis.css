@@ -15,7 +15,6 @@ body .row-fluid {
 }
 #homeIntro {
 	color: black;
-	font-family: TisaWebPro,"Times New Roman",Times,serif;
 	font-size: 1.2em;
 	margin: 10px 5%;
 	padding: 25px;
@@ -174,4 +173,11 @@ body .row-fluid {
 #socialPlugins {
 	text-align:center;
 	padding-top:20px;
+}
+
+.stateSummary {
+	float: left;
+	height: 420px;
+	width: 150px;
+	padding: 15px;
 }

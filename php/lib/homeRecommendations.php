@@ -42,7 +42,7 @@ function selectBluebird() {
 }
 
 </script>
-<h3>Our Top Picks: </h3>
+<h3>Upcoming Top Recommendations: </h3>
 <span id="seeAllHome" class="visible-phone"><a href="recommendations">See all recommendations</a></span>
 <ul class="nav menu nav-tabs" id="forecastHomeWidget">
 	<li class="item-178 current active" id="powderRecTab"><a href="javascript:selectPowder();"><img src="../images/snowflake-sm.png" style="height:30px;"/> Powder</a></li>
