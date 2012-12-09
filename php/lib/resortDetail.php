@@ -91,7 +91,7 @@ if (isset($_GET['resort'])) {
 	<i>NOAA Weather Summary</i>: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
 		
 	<div style="clear:both;">
-	<h5>Recommendations based on the following</h5>
+	<h4>Recommendations based on the following</h4>
 	<?php 
 		echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
 			$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";

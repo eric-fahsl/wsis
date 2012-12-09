@@ -17,7 +17,7 @@ body .row-fluid {
 	color: black;
 	font-family: TisaWebPro,"Times New Roman",Times,serif;
 	font-size: 1.2em;
-	margin: 10px 15%;
+	margin: 10px 5%;
 	padding: 25px;
 	border: 2px dashed maroon;
 }
@@ -129,6 +129,9 @@ body .row-fluid {
  #search_sort {
  	width: 180px;
  }
+ #searchResults {
+ 	padding-left: 5px;
+ }
 
  #forecastHomeWidget {
  	font-size: 1.2em;
@@ -166,13 +169,4 @@ body .row-fluid {
 		-webkit-border-radius: 5px;
 		text-shadow: 1px 1px #666;
 		margin-top: 8px;
-		}
-	.button:hover {
-		background-position: 0 center;
-		}
-	.button:active {
-		background-position: 0 top;
-		position: relative;
-		top: 1px;
-		padding: 6px 10px 4px;
 		}
