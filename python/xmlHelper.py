@@ -1,14 +1,18 @@
 from bs4 import BeautifulSoup
 import urllib
 
-def searchContentForTag(uniqueText, tagNameOpen, includeTagOpen, tagNameClose, includeTagClose, content, offset) :
+def searchContentForTag(uniqueText, uniqueText2, tagNameOpen, tagNameClose, content, offset) :
         uniqueTextIndex = content.find(uniqueText, offset)
+
+        if (len(uniqueText2) > 0) :
+            uniqueTextIndex = content.find(uniqueText2, uniqueTextIndex)
+
         tagNameIndex = content.find(tagNameOpen, uniqueTextIndex);
-        if (includeTagOpen != True) :
-            tagNameIndex += len(tagNameOpen)
+        #if (includeTagOpen != True) :
+        tagNameIndex += len(tagNameOpen)
         tagNameCloseIndex = content.find(tagNameClose, tagNameIndex)
-        if (includeTagClose) :
-            tagNameCloseIndex += len(tagNameClose)
+        #if (includeTagClose) :
+        #tagNameCloseIndex += len(tagNameClose)
 
         tagContent = content[tagNameIndex:tagNameCloseIndex]
 
