@@ -1,5 +1,4 @@
 
-
 <head>
 
   <style type="text/css">
@@ -19,12 +18,10 @@
 
 </head>
 <body>
-<?php 
-
-include("lib/recommendations.php"); 
-//include ("lib/esSearchHelper.php");
-//print json_encode(getResortsForState("Utah"));
-?>
-
 	
-</body>
+
+
+<?php
+
+include("lib/homeRecommendations.php");
+?>
