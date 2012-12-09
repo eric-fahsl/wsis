@@ -170,3 +170,8 @@ body .row-fluid {
 		text-shadow: 1px 1px #666;
 		margin-top: 8px;
 		}
+
+#socialPlugins {
+	text-align:center;
+	padding-top:20px;
+}
