@@ -12,7 +12,7 @@ import snowforecastWeather
 PCT_LEVER_NEW_SNOW = 0.6
 PCT_LEVEL_PREV_SNOW = 0.2
 PCT_LEVEL_PROJ_SNOW = 0.2
-PCT_FACTOR_PREV_SNOW = 0.5
+PCT_FACTOR_PREV_SNOW = 0.4
 UPPER_LIMIT = 16
 POWDER_STAR_RATING_CUTOFF = [ 0, 2.0, 4.0, 6.0, 8.0, 10.0 ]
 COUCH_DB_SERVER = "http://localhost:5984"
@@ -83,20 +83,36 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	previousDay = dateOfRecommendation - datetime.timedelta(days=1)
 	nextDay = dateOfRecommendation + datetime.timedelta(days=1)
 
-	newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+	###Get the amount of fresh snow for tomorrow
 	newSnowForTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+	#check if domestic, if not, just use the totals from SnowForecast
+	newSnowForTomorrowNws = newSnowForTomorrowSf
+	if (resort['domestic'] == 'T') :
+		newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
 	#Get the average of NWS and SF
 	newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, convertCmToIn(newSnowForTomorrowSf))
 	
-	projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-	projectedSnowTomorrowSf = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+	###Get the projected snow for tomorrow
+	projectedSnowTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+	#check if domestic, if not, just use the totals from SnowForecast
+	projectedSnowTomorrowNws = projectedSnowTomorrowSf
+	if (resort['domestic'] == 'T') :
+		projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
 	#Get the average of NWS and SF
 	projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, convertCmToIn(projectedSnowTomorrowSf)) 
 	
 	#TODO - update this to read from actual resortMaster
-	previousSnowFall = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation - datetime.timedelta(days=1), resort['id'], db)
-	if previousSnowFall == None :
-		previousSnowFall = 0
+	previousSnowFallSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
+	if (previousSnowFallSf == None) :
+		previousSnowFallSf = 0
+	previousSnowFallNws = previousSnowFallSf	
+	#check if domestic, if not just use the totals from SnowForecast
+	if (resort['domestic'] == 'T') :
+		previousSnowFallNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
+		if previousSnowFallNws == None :
+			previousSnowFallNws = 0
+
+	previousSnowFall = calcAverage(previousSnowFallSf, previousSnowFallNws)
 
 	docId = resort['name'].lower().replace(' ','') + "_" + str(dateOfRecommendation)
 	docUrl = COUCH_DB_URL + "/" + docId
@@ -116,12 +132,16 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 
 	#Now create the bluebird recommendation
 	bluebirdData = {}
-	weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
-	bluebirdData['weather_summary'] = weatherRecord[1]
-	nwsBluebirdRating = calcBluebird(weatherRecord[0])
 	sfBluebirdAM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[0][0])
 	sfBluebirdPM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[1][0])
 
+	#Check if domestic, if not, do not pull from NWS
+	nwsBluebirdRating = calcAverage(sfBluebirdAM, sfBluebirdPM)
+	if (resort['domestic'] == 'T') :
+		weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
+		bluebirdData['weather_summary'] = weatherRecord[1]
+		nwsBluebirdRating = calcBluebird(weatherRecord[0])
+	
 	bluebirdData['rating'] = int(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)) + 0.49)
 	reccomendationDocument['bluebird'] = bluebirdData
 

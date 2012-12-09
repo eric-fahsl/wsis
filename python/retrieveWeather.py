@@ -10,7 +10,7 @@ import snowforecastWeather
 
 QUERY_DATA_SOURCES = True;
 #Only use this linefor debugging
-#QUERY_DATA_SOURCES = False;
+QUERY_DATA_SOURCES = False;
 
 #Connect to DB
 db = _mysql.connect("localhost","wsis","wsis","wsis")
@@ -22,7 +22,8 @@ resorts = resortMaster.getResorts(db)
 if QUERY_DATA_SOURCES :
 	for resort in resorts :
 		snowforecastWeather.getWeather(resort, db)
-		nwsResponse = nwsWeather.getWeather(resort, db)
+		if (resort['domestic'] == 'T') :
+			nwsWeather.getWeather(resort, db)
 
 createRecommendations.create(db)
 
