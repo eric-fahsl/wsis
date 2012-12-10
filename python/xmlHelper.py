@@ -20,7 +20,7 @@ def searchContentForTag(uniqueText, uniqueText2, tagNameOpen, tagNameClose, cont
 
 def getSnowForecastTag(forecastLocation, tagName, content) :
 	content = str(content)
-	results = searchContentForTag(forecastLocation, tagName + "&gt;", False, "<", False, content, 0)
+	results = searchContentForTag(forecastLocation, "", tagName + "&gt;", "<", content, 0)
 	return results[0]
 
 def createSoup(url) :

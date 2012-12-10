@@ -1,58 +1,11 @@
-from bs4 import BeautifulSoup
-import httplib
-import urllib
+import xmlHelper
 
 
-#alyeskaSnowUrl = "http://www.alyeskaresort.com/printable-snow-report.aspx"
-alyeskaSnowUrl = "http://www.snow-forecast.com/resorts/White-Pass/feed.xml"
-snowPage = urllib.urlopen(alyeskaSnowUrl)
-soup = BeautifulSoup(snowPage)
-#soup = BeautifulSoup(str(soup).replace("&lt;_", "<").replace("&lt;","<").replace("&gt;_", ">").replace("&gt;",">"))
+def getNewSnowFallForResort(resort, db) :
 
-print soup
+    weatherReportPage = resort['resort_website_weather_url']
+    soup = xmlHelper.createSoup(weatherReportPage)
 
-
-#soupString = "newSnow = str(soup.findAll(text='Top of Six')[0].parent.next.next.next.next.next.next.next.contents[0])"
-#exec soupString 
-
-#print "newSnow: " + newSnow
-
-
-def searchContentForTag(uniqueText, tagNameOpen, includeTagOpen, tagNameClose, includeTagClose, content, offset) :
-        uniqueTextIndex = content.find(uniqueText, offset)
-        tagNameIndex = content.find(tagNameOpen, uniqueTextIndex);
-        if (includeTagOpen != True) :
-            tagNameIndex += len(tagNameOpen)
-        tagNameCloseIndex = content.find(tagNameClose, tagNameIndex)
-        if (includeTagClose) :
-            tagNameCloseIndex += len(tagNameClose)
-
-        tagContent = content[tagNameIndex:tagNameCloseIndex]
-
-        return [ tagContent, tagNameCloseIndex ]
-
-def scrapePageForResult(host, path) :
-        #conn = httplib.HTTPConnection(host)
-        #conn.request("GET", path)
-        #res = conn.getresponse()
-
-        #htmlContent = res.read()
-        htmlContent = str(soup)
-
-        #conn.close()
-
-        offset = 0
-
-        result = searchContentForTag("Midway", "<td class=\"cells\">", False, "</td>", False, htmlContent, offset)
-        print "result: " + result[0] + ", offset: " + str(result[1])
-        result2 = result
-
-        for i in range(1,5) :
-        	result2 = searchContentForTag("", "<td class=\"cells\">", False, "</td>", False, htmlContent, result2[1])
-        	print "result: " + result2[0] + ", offset: " + str(result2[1])
-
-        
-#Connect to DB
-
-#print "Remarkables: "
-#scrapePageForResult("www.alyeskaresort.com", "/printable-snow-report.aspx")
+    newSnow = 0
+    sampleCommand = 'xmlHelper.searchContentForTag("Summit","Last 24 hrs:","lh26\">", "</span", str(soup), 0)'
+    exec "newSnow = " + sampleCommand
