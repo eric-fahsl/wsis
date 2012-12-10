@@ -106,14 +106,18 @@ if (isset($_GET['resort'])) {
 	</tr>
 	</table>
 	
-
-	<i>NOAA Weather Summary</i>: <?=$parsedJson->{'bluebird'}->{'weather_summary'} ?><br/>
-		
+	<?php 
+		if ($isDomestic) {
+			echo "<i>NOAA Weather Summary</i>:" . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
+		}
+	?>
 	<div style="clear:both;">
 	<h4>Recommendations based on the following</h4>
 	<?php 
-		echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
-			$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
+		if ($isDomestic) {
+			echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
+				$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
+		}
 		echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
 			"$resortName Snow-Forecast.com Weather</a>";
 	?>
