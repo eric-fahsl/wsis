@@ -171,7 +171,7 @@
           <label for="sort">Sort By: </label>
           <select id="search_sort" name="sort">
             <option value="powder" selected="selected">Powder Rating</option>
-            <option value="distance">Distance</option>
+            <!--<option value="distance">Distance</option>-->
             <option value="bluebird">Bluebird Rating</option>
           </select>
       </div>

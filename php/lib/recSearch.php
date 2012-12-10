@@ -29,7 +29,7 @@ function displayRecommendationWidget($rec, $resultClass, $showDate) {
 $results = search($_GET);
 $homeWidget = false;
 $showDate = true;
-$resultClass = "recresult";
+$resultClass = "span2 recresult";
 if (isset($_GET['hw'])) {
 	$resultClass = "recresulthome";
 	$showDate = false;

@@ -77,10 +77,10 @@ body .row-fluid {
  	overflow:hidden;
  }
 
-.recresult {
+#searchResults .recresult {
  	height: 135px;
  	margin-left: 10px;
- 	width: 165px;
+ 	//width: 165px;
  	float: left;
  }
 
