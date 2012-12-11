@@ -35,7 +35,7 @@
 	function search() {
 		
 		//parameters = "";
-		parameters = "&dateMin=2012-11-28";
+		parameters = "&dateMin=<?= $dateProvided ?>";
 		for (var searchParam in facets) {
 			val = facets[searchParam];
 			if (val.value != null && val.value != "") {
