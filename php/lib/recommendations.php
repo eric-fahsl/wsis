@@ -26,7 +26,7 @@
 	
 	var mobileFacetsShown = false;
 	var facets = {
-		"date": { "value": "<?= $dateProvided ?>", "max": <?= sizeof($facets['Date']['terms']) ?> },
+		"date": { "value": "", "max": <?= sizeof($facets['Date']['terms']) ?> },
 		"region": { "value": "", "max": <?= sizeof($facets['Region']['terms']) ?> },
 		"state": {"value": "", "max": <?= sizeof($facets['State']['terms']) ?> },
 		"sort": ""
@@ -34,8 +34,8 @@
 
 	function search() {
 		
-		parameters = "";
-		//parameters = "dateMin=2012-11-28";
+		//parameters = "";
+		parameters = "&dateMin=2012-11-28";
 		for (var searchParam in facets) {
 			val = facets[searchParam];
 			if (val.value != null && val.value != "") {
@@ -118,6 +118,7 @@
 		 	$date = new DateTime($searchDate);
 			$displayDate = $date->format('D m/d/y'); 
 
+			/*
 			$classExtra = "";
 			$xVisibleExtra = "";
 			if (strcmp($searchDate . ",", $dateProvided) == 0) {
@@ -126,6 +127,8 @@
 			}
 
 		 	echo "<li id='date$i' onclick='clickDateFilter(\"$searchDate\", $i)' $classExtra><span>$displayDate</span><div class='x' id='date-x-$i' $xVisibleExtra>X</div></li>";
+		 	*/
+		 	echo "<li id='date$i' onclick='clickFilter(\"date\", \"$searchDate\", $i)'><span>$displayDate</span><div class='x' id='date-x-$i'>X</div></li>";
 		 	$i++;
 		 }
 		
