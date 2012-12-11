@@ -15,6 +15,8 @@ NIGHT_STRING = "ight"
 columnFields = {}
 FORECAST_LOCATION = "mid"
 
+def convertCmToIn(centimeters) :
+	return float(centimeters) * 0.393701
 
 def getWeather(resort, db) :
 	print "getting weather for " + resort['snowforecast_id']
@@ -80,7 +82,9 @@ def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db, dayFilter=
 	r = db.store_result()
 	results = r.fetch_row(0)
 
-	return results[0][0]
+	snowCm = results[0][0]
+	return convertCmToIn(snowCm)
+
 
 def getWeatherSummaryForDate(date, resort, db) :
 	datePlusOne = date + datetime.timedelta(days=1)

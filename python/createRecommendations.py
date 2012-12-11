@@ -27,9 +27,6 @@ BLUEBIRD_SUMMARIES[4] = ["Mostly Sunny","Mostly Clear", "some clouds"]
 BLUEBIRD_SUMMARIES[3] = ["Partly Cloudy","Partly Sunny"]
 BLUEBIRD_SUMMARIES[2] = ["Mostly Cloudy", "Increasing Clouds", "light snow"]
 
-def convertCmToIn(centimeters) :
-	return float(centimeters) * 0.393701
-
 def calcAverage(value1, value2) :
 	return (float(value1) + float(value2)) / 2
 
@@ -90,7 +87,7 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	if (resort['domestic'] == 'T') :
 		newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
 	#Get the average of NWS and SF
-	newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, convertCmToIn(newSnowForTomorrowSf))
+	newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, newSnowForTomorrowSf)
 	
 	###Get the projected snow for tomorrow
 	projectedSnowTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
@@ -99,7 +96,7 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	if (resort['domestic'] == 'T') :
 		projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
 	#Get the average of NWS and SF
-	projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, convertCmToIn(projectedSnowTomorrowSf)) 
+	projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, projectedSnowTomorrowSf) 
 	
 	#TODO - update this to read from actual resortMaster
 	previousSnowFallSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
