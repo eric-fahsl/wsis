@@ -11,7 +11,7 @@
 	  //print json_encode($facets);
 	  $facets = $facets['facets'];
 	  //print $facets['Date'];
-	  $dateProvided = date("Y-m-d") . ",";
+	  $dateProvided = date("Y-m-d");
 	  parse_str($_SERVER['QUERY_STRING'], $parameters);
 	  if (isset($parameters['date'])) {
 	  	$dateProvided=$parameters['date'];
@@ -35,7 +35,7 @@
 	function search() {
 		
 		//parameters = "";
-		parameters = "&dateMin=<?= $dateProvided ?>";
+		parameters = "&dateStart=<?= $dateProvided ?>&landing=t";
 		for (var searchParam in facets) {
 			val = facets[searchParam];
 			if (val.value != null && val.value != "") {
@@ -169,7 +169,7 @@
 </div>
 <div id="results">
 	 <div id="resultsHeader">
-        <p id="number_results"></p>
+        <p id="number_results">Hint: use filters on the left to narrow your results</p>
         <div id="sort">
           <label for="sort">Sort By: </label>
           <select id="search_sort" name="sort">
