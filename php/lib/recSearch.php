@@ -45,7 +45,10 @@ if (isset($_GET['date'])) {
 	} else {
 		$date = new DateTime($_GET['date']);
 		$dateForRecDisplay = $date->format($dateFormat); 
-		echo "<h4>Recommendations For $dateForRecDisplay</h4>";
+		//don't show this on the home page
+		if (!isset($_GET['date'])) {
+			echo "<h4>Recommendations For $dateForRecDisplay</h4>";
+		}
 	}
 	foreach ($results["hits"]["hits"] as $rec) {
 	 	displayRecommendationWidget($rec['_source'], $resultClass, $showDate);
