@@ -141,7 +141,7 @@ if (isset($_GET['resort'])) {
 
 <div class="divider"></div>
 
-<h4>Future Recommendations for <?=$resortName ?></h4>
+<h4>Upcoming Recommendations for <?=$resortName ?></h4>
 	
 	<?php
 	 	//Retrieve the additional Forecasted Date Info
@@ -160,7 +160,7 @@ if (isset($_GET['resort'])) {
 	?>
 
 <div class="divider"> </div>
-<h4>Previous Recommendations for <?=$resortName ?></h4>
+<h4>Prior Recommendations for <?=$resortName ?></h4>
 <?php
 	//Retrieve the additional Forecasted Date Info
 	$requestAttributes = array (

@@ -169,7 +169,7 @@
 </div>
 <div id="results">
 	 <div id="resultsHeader">
-        <p id="number_results">Hint: use filters on the left to narrow your results</p>
+        <p id="number_results">Hint: use filters <span class="hidden-phone">on the left </span>to narrow your results</p>
         <div id="sort">
           <label for="sort">Sort By: </label>
           <select id="search_sort" name="sort">
