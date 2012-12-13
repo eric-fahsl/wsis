@@ -6,7 +6,7 @@
   <?php 
   	if(isset($_GET['resort'])) {
   		$resortName = $_GET['resort'];
-  		echo "_gaq.push(['_setCustomVar',1,'resort','$resortName']);";
+  		echo "_gaq.push(['_setCustomVar',1,'resort','$resortName',3]);";
   	} ?>
 
   (function() {
