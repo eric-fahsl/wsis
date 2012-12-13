@@ -6,8 +6,8 @@
   <?php 
   	if(isset($_GET['resort'])) {
   		$resortName = $_GET['resort'];
-  		echo "_gaq.push(['_setCustomVar',1,'resort','resortName']);"
-  	}
+  		echo "_gaq.push(['_setCustomVar',1,'resort','$resortName']);";
+  	} ?>
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
