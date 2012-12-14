@@ -14,7 +14,7 @@ PCT_LEVEL_PREV_SNOW = 0.2
 PCT_LEVEL_PROJ_SNOW = 0.2
 PCT_FACTOR_PREV_SNOW = 0.4
 UPPER_LIMIT = 16
-POWDER_STAR_RATING_CUTOFF = [ 0, 2.0, 4.0, 6.0, 8.0, 10.0 ]
+POWDER_STAR_RATING_CUTOFF = [ 2.0, 5.0, 7.5, 10.0 ]
 COUCH_DB_SERVER = "http://localhost:5984"
 COUCH_DB_NAME = "recommendations"
 COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
@@ -39,15 +39,15 @@ def formatFloat(inputNum) :
 	return "%.1f" % float(inputNum) 
 
 def calcPowder(new_snow, previous_snow, projected_snow) :
-	previous_snow = checkUpperLimit(previous_snow)
+	previous_snow = checkUpperLimit(previous_snow - new_snow)
 	projected_snow = checkUpperLimit(projected_snow)
 	
 	adjustedSnow = new_snow * PCT_LEVER_NEW_SNOW + previous_snow * PCT_LEVEL_PREV_SNOW * PCT_FACTOR_PREV_SNOW + projected_snow * PCT_LEVEL_PROJ_SNOW
-	starRating = -1
+	starRating = 1
 	for cutoff in POWDER_STAR_RATING_CUTOFF : 
-		starRating += 1
 		if adjustedSnow < cutoff :
 			break
+		starRating += 1
 	return starRating 
 
 def calcBluebird(weatherSummary) :
