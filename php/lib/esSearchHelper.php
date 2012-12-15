@@ -174,6 +174,7 @@ function buildFacets() {
 		"State" => array(
 			"terms" => array(
 				"field" => "state",
+				"order" => "term",
 				"size" => 20
 			)
 		)
