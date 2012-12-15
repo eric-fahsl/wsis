@@ -224,14 +224,14 @@ if (isset($_GET['resort'])) {
 		feel free to give us some <a href="feedback">feedback</a>.
 
 		<div class='divider'></div>
-		<div class="row-fluid">
+		<div class="row-fluid" id="stateListing">
 	<?php
 	$states = getStates();
 	//echo json_encode(getStates());
 	$i = 1;
 	foreach ($states["facets"]["State"]["terms"] as $state) {
 		 $stateName = $state["term"];
-		 echo "<div class='span2'>";
+		 echo "<div class='span2 stateDisplay'>";
 		 echo "<h3>". $stateName . "</h3>";
 		 $resorts = getResortsForState($stateName);
 		 $today = date("Y-m-d");

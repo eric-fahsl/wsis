@@ -93,6 +93,10 @@ body .row-fluid {
 	font-size: 1.1em;
 }
 
+#stateListing .stateDisplay {
+	margin-left: 10px;
+}
+
  #results .recresult h6 {
  	height: 25px;
  }
