@@ -29,15 +29,21 @@ include("esSearchHelper.php");
   	}
   }
 
-  function displayRecommendationWidget($rec) {
+  function displayRecommendationWidget($rec, $displayResortName) {
 	?>
 	<div class="span2 recResultDetail">
 		<?php 
-			$dtime = new DateTime($rec['date']);
-			$displayDate = $dtime->format('l, M j');
-		?>
+			if ($displayResortName) {
+				?>
+				<div class="recheader"><a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></a></div>
+				<?php
+			} else {
+				$dtime = new DateTime($rec['date']);
+				$displayDate = $dtime->format('l, M j');
+			?>
 		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
 		<br/>
+			<?php } ?>
 		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
 		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>
 	</div>
@@ -141,6 +147,28 @@ if (isset($_GET['resort'])) {
 
 <div class="divider"></div>
 
+<h4>Nearby Resort Ratings for <?=$dateFormatted ?></h4>
+<?php
+	 	//Retrieve the additional Forecasted Date Info
+		$requestAttributes = array ( 
+			"date" => $date,
+			"lat" => $resortInfo->{'latitude'},
+			"lon" => $resortInfo->{'longitude'},
+			"size" => 6
+		);
+		$results = search($requestAttributes);
+
+		$firstTime = True;
+		foreach ($results["hits"]["hits"] as $rec) {
+			$rec = $rec["_source"];
+			if (!$firstTime) {
+				displayRecommendationWidget($rec, True);
+			}
+			$firstTime = False;
+		}
+	?>
+<div class="divider"></div>
+
 <h4>Upcoming Recommendations for <?=$resortName ?></h4>
 	
 	<?php
@@ -155,7 +183,7 @@ if (isset($_GET['resort'])) {
 
 		foreach ($results["hits"]["hits"] as $rec) {
 			$rec = $rec["_source"];
-			displayRecommendationWidget($rec);
+			displayRecommendationWidget($rec, False);
 		}
 	?>
 
@@ -173,7 +201,7 @@ if (isset($_GET['resort'])) {
 
 	foreach ($results["hits"]["hits"] as $rec) {
 		$rec = $rec["_source"];
-		displayRecommendationWidget($rec);
+		displayRecommendationWidget($rec, False);
 	}
 
 ?>
