@@ -64,6 +64,7 @@ def createRecommendationDocument(resort, recDate ) :
 	rec['resort'] = resort['name'].lower().replace(' ','')
 	rec['resort_name'] = resort['name']
 	rec['state'] = resort['state']
+	rec['state_full'] = resort['state_full']
 	rec['region'] = resort['region']
 	location = {}
 	location['lat'] = float(resort['latitude'])
