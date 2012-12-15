@@ -57,7 +57,7 @@ if (isset($_GET['date'])) {
 
 } else {
 
-	$displayedNoResults = false;
+	$displayedNoResults = 0;
 	$resultClass = "span2 recresultLanding";
 	$requestParams = $_GET;
 	$requestParams['size'] = 6;
@@ -68,9 +68,12 @@ if (isset($_GET['date'])) {
 		
 		$requestParams['date'] = $dateForRec;
 		$results = search($requestParams);
-		if ($results["hits"]["total"] == 0 && $displayedNoResults == false) {
-			echo "<h3>No results found, please modify your search and try again</h3>";
-			$displayedNoResults = true;
+		if ($results["hits"]["total"] == 0 ) {
+			if ($displayedNoResults > 1) {
+				echo "<h3>No results found, please modify your search and try again</h3>";
+				$displayedNoResults = -10;
+			}
+			$displayedNoResults++;
 		} 
 		$landingRecClass = $resultClass;
 		$j=0;

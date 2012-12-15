@@ -171,21 +171,10 @@ function buildFacets() {
 				"field" => "region"
 			)
 		),
-		"PowderRating" => array(
-			"terms" => array(
-				"field" => "powder.rating", 
-				"order" => "reverse_term"
-			)
-		),
-		"BluebirdRating" => array(
-			"terms" => array(
-				"field" => "bluebird.rating",
-				"order" => "reverse_term"
-			)
-		),
 		"State" => array(
 			"terms" => array(
-				"field" => "state"
+				"field" => "state",
+				"size" => 20
 			)
 		)
 	);
