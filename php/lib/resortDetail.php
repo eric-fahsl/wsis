@@ -145,7 +145,7 @@ if (isset($_GET['resort'])) {
 
 	</table>
 
-<div class="divider"></div>
+<div class='divider'></div>
 
 <h4>Nearby Resort Ratings for <?=$dateFormatted ?></h4>
 <?php
@@ -167,7 +167,7 @@ if (isset($_GET['resort'])) {
 			$firstTime = False;
 		}
 	?>
-<div class="divider"></div>
+<div class='divider'></div>
 
 <h4>Upcoming Recommendations for <?=$resortName ?></h4>
 	
@@ -223,12 +223,12 @@ if (isset($_GET['resort'])) {
 		apologize if your resort of choice is not yet available. If there is something that we have missed, please 
 		feel free to give us some <a href="feedback">feedback</a>.
 
-		<div style="clear:both"></div>
+		<div class='divider'></div>
 		<div class="row-fluid">
 	<?php
 	$states = getStates();
 	//echo json_encode(getStates());
-
+	$i = 1;
 	foreach ($states["facets"]["State"]["terms"] as $state) {
 		 $stateName = $state["term"];
 		 echo "<div class='span2'>";
@@ -240,6 +240,10 @@ if (isset($_GET['resort'])) {
 		 	echo "<a href='resort-detail?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
 		 }
 		 echo "</div>";
+		 if ($i % 6 == 0) {
+		 	echo "<div class='divider'></div>\n";
+		 }
+		 $i++;
  	}
  	echo "</div>";
 }
