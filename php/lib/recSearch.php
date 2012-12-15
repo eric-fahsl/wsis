@@ -14,7 +14,7 @@ function printSuns($count) {
 function displayRecommendationWidget($rec, $resultClass, $showDate) {
 	?>
 	<div class="<?= $resultClass ?>">
-		<div class="recheader"><a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></a></div>
+		<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></a></div>
 		<?php 
 			if ($showDate) {
 				$dtime = new DateTime($rec['date']);

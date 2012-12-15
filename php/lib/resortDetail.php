@@ -35,13 +35,13 @@ include("esSearchHelper.php");
 		<?php 
 			if ($displayResortName) {
 				?>
-				<div class="recheader"><a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></a></div>
+				<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></a></div>
 				<?php
 			} else {
 				$dtime = new DateTime($rec['date']);
 				$displayDate = $dtime->format('l, M j');
 			?>
-		<a href="resort-detail?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
+		<a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
 		<br/>
 			<?php } ?>
 		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
@@ -237,7 +237,7 @@ if (isset($_GET['resort'])) {
 		 $today = date("Y-m-d");
 		 foreach($resorts["hits"]["hits"] as $resort) {
 		 	$resortid = $resort["_id"];
-		 	echo "<a href='resort-detail?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
+		 	echo "<a href='resorts?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
 		 }
 		 echo "</div>";
 		 if ($i % 6 == 0) {
