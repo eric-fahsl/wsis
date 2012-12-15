@@ -238,7 +238,8 @@ function getStates() {
 			"State" => array(
 				"terms" => array(
 					"field" => "state_full",
-					"order" => "term"
+					"order" => "term",
+					"size" => 50
 				)
 			)
 		),
