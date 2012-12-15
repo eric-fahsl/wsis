@@ -78,9 +78,8 @@ body .row-fluid {
  }
 
 #searchResults .recresult {
- 	height: 90px;
+	min-height: 90px;
  	margin-left: 10px;
- 	//width: 165px;
  	float: left;
  }
 
@@ -146,6 +145,8 @@ body .row-fluid {
  }
  #searchResults h5 {
  	margin: 5px;
+ 	cursor: pointer;
+ 	color: #01527A;
  }
 
  #forecastHomeWidget {

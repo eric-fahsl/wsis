@@ -80,7 +80,7 @@ if (isset($_GET['date'])) {
 		$j=0;
 		foreach ($results["hits"]["hits"] as $rec) {
 			if ($j == 0) {
-				echo "<h5>$dateForRecDisplay</h5>";
+				echo "<h5 onclick='clickFilter(\"date\", \"$dateForRec\", $i)'>$dateForRecDisplay</h5>";
 			}
 			if ($j >= 3) {
 				$landingRecClass = $resultClass . " hidden-phone";
