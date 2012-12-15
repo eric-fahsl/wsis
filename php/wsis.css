@@ -90,7 +90,10 @@ body .row-fluid {
  	float: left;
  }
 .recheader {
-	font-size: 1.1em;
+	font-weight: bold;
+}
+#searchResults .span2 span {
+	font-size:0.85em;
 }
 
 #stateListing .stateDisplay {
