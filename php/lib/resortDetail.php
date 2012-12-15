@@ -169,8 +169,6 @@ if (isset($_GET['resort'])) {
 	?>
 <div class='divider'></div>
 
-<h4>Upcoming Recommendations for <?=$resortName ?></h4>
-	
 	<?php
 	 	//Retrieve the additional Forecasted Date Info
 		$requestAttributes = array (
@@ -180,15 +178,18 @@ if (isset($_GET['resort'])) {
 			"size" => 5
 		);
 		$results = search($requestAttributes);
-
+		$i = 0;
 		foreach ($results["hits"]["hits"] as $rec) {
+			if ($i == 0) {
+				echo "<h4>Upcoming Recommendations for $resortName</h4>";
+			}
 			$rec = $rec["_source"];
 			displayRecommendationWidget($rec, False);
+			$i++;
 		}
 	?>
 
 <div class="divider"> </div>
-<h4>Prior Recommendations for <?=$resortName ?></h4>
 <?php
 	//Retrieve the additional Forecasted Date Info
 	$requestAttributes = array (
@@ -199,9 +200,14 @@ if (isset($_GET['resort'])) {
 	);
 	$results = search($requestAttributes);
 
+	$i = 0;
 	foreach ($results["hits"]["hits"] as $rec) {
+		if ($i == 0) {
+			echo "<h4>Prior Recommendations for $resortName</h4>";
+		}
 		$rec = $rec["_source"];
 		displayRecommendationWidget($rec, False);
+		$i++;
 	}
 
 ?>
