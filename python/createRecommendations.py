@@ -87,6 +87,9 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	newSnowForTomorrowNws = newSnowForTomorrowSf
 	if (resort['domestic'] == 'T') :
 		newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+	if (str(newSnowForTomorrowNws) == 'None') :
+		newSnowForTomorrowNws = 0
+
 	#Get the average of NWS and SF
 	newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, newSnowForTomorrowSf)
 	
