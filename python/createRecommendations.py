@@ -164,7 +164,7 @@ def create(db) :
 
 	#for each resort, calculate the next several days out
 	for resort in resorts :
-		for i in range(0,6) :
+		for i in range(1,6) :
 			calculateRecommendation(datetime.date.today() + datetime.timedelta(days=i), resort, db)
 	
 
