@@ -125,7 +125,7 @@ if (isset($_GET['resort'])) {
 				$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
 		}
 		echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
-			"$resortName Snow-Forecast.com Weather</a>";
+			"$resortName Snow-Forecast.com Weather <img src='../images/snowforecast-logo.jpg'/></a>";
 	?>
 
 <div class="divider"></div>
