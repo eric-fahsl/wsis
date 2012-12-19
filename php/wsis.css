@@ -95,6 +95,10 @@ body .row-fluid {
 	font-size:0.85em;
 }
 
+.span2 .slightSmall {
+	font-size:0.85em;
+}
+
 #stateListing .stateDisplay {
 	margin-left: 10px;
 }
@@ -169,9 +173,7 @@ body .row-fluid {
  	font-style: italic;
  	padding-bottom: 7px;
  }
-.recResultDetail {
-	
-}
+
  .button {
 		padding: 5px 15px;
 		display: inline;

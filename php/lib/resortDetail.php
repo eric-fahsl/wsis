@@ -31,11 +31,12 @@ include("esSearchHelper.php");
 
   function displayRecommendationWidget($rec, $displayResortName) {
 	?>
-	<div class="span2 recResultDetail">
+	<div class="span2 recresultDetail">
 		<?php 
 			if ($displayResortName) {
 				?>
-				<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?>, <?=$rec['state'] ?></a></div>
+				<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
+				<span class="slightSmall"><?=$rec['state_full'] ?></span><br/>
 				<?php
 			} else {
 				$dtime = new DateTime($rec['date']);
@@ -114,7 +115,7 @@ if (isset($_GET['resort'])) {
 	
 	<?php 
 		if ($isDomestic) {
-			echo "<i>NOAA Weather Summary</i>:" . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
+			echo "<i>NOAA Weather Summary</i>: " . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
 		}
 	?>
 	<div style="clear:both;">
