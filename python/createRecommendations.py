@@ -19,6 +19,7 @@ COUCH_DB_SERVER = "http://localhost:5984"
 COUCH_DB_NAME = "recommendations"
 COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
 REC_POWDER = "Powder"
+RATING_DELTA_THRESHOLD = 0.25
 
 #Bluebird summaries
 BLUEBIRD_SUMMARIES = {}
@@ -71,11 +72,18 @@ def createRecommendationDocument(resort, recDate ) :
 	location['lon'] = float(resort['longitude'])
 	rec['location'] = location
 
-	rec['createdOn'] = str(datetime.date.today())
+	rec['createdOn'] = str(datetime.datetime.now())
 	rec['date'] = recDate
 
 	return rec
 
+def calculateTrend(newValue, initialValue) :
+	if abs(newValue - initialValue) < RATING_DELTA_THRESHOLD :
+		return 0
+	elif newValue > initialValue :
+		return 1
+	else :
+		return -1
 
 def calculateRecommendation(dateOfRecommendation, resort, db) :
 	previousDay = dateOfRecommendation - datetime.timedelta(days=1)
@@ -115,8 +123,13 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 
 	previousSnowFall = calcAverage(previousSnowFallSf, previousSnowFallNws)
 
-	docId = resort['name'].lower().replace(' ','') + "_" + str(dateOfRecommendation)
+	resortDocName = resort['name'].lower().replace(' ','') + "_"
+	docId =  resortDocName + str(dateOfRecommendation)
 	docUrl = COUCH_DB_URL + "/" + docId
+	
+	#acquire previous day's recommendation so we can make a trending evaluation
+	previousDayDocId = resortDocName + str(dateOfRecommendation - datetime.timedelta(days=1))
+	previousDocUrl = COUCH_DB_URL + "/" + previousDayDocId
 	
 	#Create the base recommendation document
 	reccomendationDocument = createRecommendationDocument(resort, str(dateOfRecommendation) )
@@ -145,6 +158,16 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	
 	bluebirdData['rating'] = int(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)) + 0.49)
 	reccomendationDocument['bluebird'] = bluebirdData
+
+	try :
+		previousDocLocationResponse = simplejson.load(urllib2.urlopen(previousDocUrl))
+		powderTrend = calculateTrend(reccomendationDocument['powder']['rating'], previousDocLocationResponse['powder']['rating'])
+		bluebirdTrend = calculateTrend(reccomendationDocument['bluebird']['rating'], previousDocLocationResponse['bluebird']['rating'])
+		reccomendationDocument['powder']['trend'] = powderTrend
+		reccomendationDocument['bluebird']['trend'] = bluebirdTrend
+	except urllib2.HTTPError :
+		reccomendationDocument['powder']['trend'] = 0
+		reccomendationDocument['bluebird']['trend'] = 0
 
 	#check if we need to override the existing record
 	try :	
