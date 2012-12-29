@@ -295,7 +295,7 @@ function printSnowFlakes($count, $large = False) {
 		$class = "flakes-large";
 		$width = $count * 60;
 	}
-  	echo "<div class='$class' style='width:$width px' title='Rating: $count / 5'></div>";
+  	echo "<div class='$class' style='width: <?= $width ?>px' title='Rating: $count / 5'></div>";
 }
 
 function printSuns($count, $large = False) {
@@ -305,7 +305,7 @@ function printSuns($count, $large = False) {
 		$class = "suns-large";
 		$width = $count * 60;
 	}
-  	echo "<div class='$class' style='width:$width px' title='Rating: $count / 5'></div>";
+  	echo "<div class='$class' style='width: <?= $width ?>px' title='Rating: $count / 5'></div>";
 }
 
 function displayRecommendationWidget($rec, $resultClass, $showDate) {
