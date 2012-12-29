@@ -101,6 +101,12 @@ body .row-fluid {
 	font-size:0.85em;
 }
 
+#generatedOn {
+	font-size:0.9em;
+	font-style:italic;
+	margin-top: -5px;
+}
+
 #stateListing .stateDisplay {
 	margin-left: 10px;
 }

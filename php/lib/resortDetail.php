@@ -17,29 +17,6 @@ include("esSearchHelper.php");
   	return number_format($cm, 1, '.', '');
   }
 
-/*
-  function displayRecommendationWidget($rec, $displayResortName) {
-	?>
-	<div class="span2 recresultDetail">
-		<?php 
-			if ($displayResortName) {
-				?>
-				<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
-				<span class="slightSmall"><?=$rec['state_full'] ?></span><br/>
-				<?php
-			} else {
-				$dtime = new DateTime($rec['date']);
-				$displayDate = $dtime->format('l, M j');
-			?>
-		<a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
-		<br/>
-			<?php } ?>
-		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
-		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>
-	</div>
-	<?php 
-}*/
-
 if (isset($_GET['resort'])) {
   $resort = $_GET['resort'];
   $date = $_GET['date'];
@@ -67,6 +44,10 @@ if (isset($_GET['resort'])) {
 	  $longitude = $parsedJson->{'longitude'};
 	  $powderRating = $parsedJson->{'powder'}->{'rating'};
 
+	  $recommendationCreateDate = $parsedJson->{'createdOn'};
+	  $dt = new DateTime($recommendationCreateDate);
+	  $recommendationCreateDate = $dt->format('D, M d H:i:s');
+
 	  $isDomestic = True;
 	  if (strcmp("F", $resortInfo->{'domestic'}) == 0) {
 	  	$isDomestic = False;
@@ -78,6 +59,7 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
+	<div id="generatedOn">Generated on <?= $recommendationCreateDate ?></div>
 	Precipitation Potential: 
 	<?php 
 		if ($isDomestic) {
