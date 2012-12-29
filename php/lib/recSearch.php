@@ -35,7 +35,7 @@ if (isset($_GET['date'])) {
 	$displayedNoResults = 0;
 	$resultClass = "span2 recresultLanding";
 	$requestParams = $_GET;
-	$requestParams['size'] = 6;
+	$requestParams['size'] = 5;
 	for ($i=0; $i<6; $i++) {
 		$dateForRec = date("Y-m-d",strtotime("+$i day"));
 		$date = new DateTime($dateForRec);

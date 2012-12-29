@@ -81,6 +81,7 @@ body .row-fluid {
 	height: 105px;
  	margin-left: 10px;
  	float: left;
+ 	min-width: 150px;
  }
 
 #searchResults .recresultLanding {
