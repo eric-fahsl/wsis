@@ -19,7 +19,8 @@ COUCH_DB_SERVER = "http://localhost:5984"
 COUCH_DB_NAME = "recommendations"
 COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
 REC_POWDER = "Powder"
-RATING_DELTA_THRESHOLD = 0.25
+RATING_DELTA_THRESHOLD = .81
+POWDER_FACTOR = 2.5
 
 #Bluebird summaries
 BLUEBIRD_SUMMARIES = {}
@@ -37,19 +38,19 @@ def checkUpperLimit(snowfallAmount) :
 	return snowfallAmount
 
 def formatFloat(inputNum) :
-	return "%.1f" % float(inputNum) 
+	return "%.1f" % float(inputNum)
+
+def oneDecimalPt(inputNum) :
+	return float(formatFloat(inputNum))
 
 def calcPowder(new_snow, previous_snow, projected_snow) :
 	previous_snow = checkUpperLimit(previous_snow - new_snow)
 	projected_snow = checkUpperLimit(projected_snow)
 	
 	adjustedSnow = new_snow * PCT_LEVER_NEW_SNOW + previous_snow * PCT_LEVEL_PREV_SNOW * PCT_FACTOR_PREV_SNOW + projected_snow * PCT_LEVEL_PROJ_SNOW
-	starRating = 1
-	for cutoff in POWDER_STAR_RATING_CUTOFF : 
-		if adjustedSnow < cutoff :
-			break
-		starRating += 1
-	return starRating 
+	
+	rating = adjustedSnow / POWDER_FACTOR + 1
+	return oneDecimalPt(rating)
 
 def calcBluebird(weatherSummary) :
 	for rating,summaries in BLUEBIRD_SUMMARIES.iteritems() :
@@ -156,7 +157,7 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 		bluebirdData['weather_summary'] = weatherRecord[1]
 		nwsBluebirdRating = calcBluebird(weatherRecord[0])
 	
-	bluebirdData['rating'] = int(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)) + 0.49)
+	bluebirdData['rating'] = oneDecimalPt(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)))
 	reccomendationDocument['bluebird'] = bluebirdData
 
 	try :
