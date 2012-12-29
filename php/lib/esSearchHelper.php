@@ -288,4 +288,48 @@ function getResortsForState($state) {
 
 }
 
+function printSnowFlakes($count, $large = False) {
+	$width = $count * 30;
+	$class = "flakes";
+	if ($large) {
+		$class = "flakes-large";
+		$width = $count * 60;
+	}
+  	echo "<div class='$class' style='width:$width px' title='Rating: $count / 5'></div>";
+}
+
+function printSuns($count, $large = False) {
+	$width = $count * 30;
+	$class = "suns";
+	if ($large) {
+		$class = "suns-large";
+		$width = $count * 60;
+	}
+  	echo "<div class='$class' style='width:$width px' title='Rating: $count / 5'></div>";
+}
+
+function displayRecommendationWidget($rec, $resultClass, $showDate) {
+	?>
+	<div class="<?= $resultClass ?>">
+		<?php 
+			if ($showDate) {
+				$dtime = new DateTime($rec['date']);
+				$displayDate = $dtime->format('l, M j');
+				//echo $dtime->format('l, M j') . "<br/>";
+				?>
+				<a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
+				<?php
+			} else {
+				?>
+				<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
+				<span><?=$rec['state_full'] ?></span><br/>
+				<?php
+			}
+		?>
+		<?php printSnowFlakes($rec['powder']['rating']); ?>
+		<?php printSuns($rec['bluebird']['rating']); ?>
+	</div>
+	<?php
+}
+
 ?>
