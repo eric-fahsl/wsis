@@ -1,1 +1,1 @@
-{"couchdb":{"host":"127.0.0.1","filter":null,"port":5984,"db":"recommendations"},"type":"couchdb"}
+{"couchdb":{"port":5984,"filter":null,"db":"recommendations","host":"127.0.0.1"},"type":"couchdb"}
