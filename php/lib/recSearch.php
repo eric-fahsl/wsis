@@ -2,32 +2,6 @@
 
 include('esSearchHelper.php');
 
-function printSnowFlakes($count) {
-  	echo "<img src='../images/snowflake$count.png'/>";
-}
-
-function printSuns($count) {
-  	echo "<img src='../images/bluebird$count.png'/>";
-}
-
-
-function displayRecommendationWidget($rec, $resultClass, $showDate) {
-	?>
-	<div class="<?= $resultClass ?>">
-		<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
-		<span><?=$rec['state_full'] ?></span><br/>
-		<?php 
-			if ($showDate) {
-				$dtime = new DateTime($rec['date']);
-				echo $dtime->format('l, M j') . "<br/>";
-			}
-		?>
-		<?php printSnowFlakes($rec['powder']['rating']); ?><br/>
-		<?php printSuns($rec['bluebird']['rating']); ?><br/>
-	</div>
-	<?php
-}
-
 $resultClass = "span2 recresult";
 $dateFormat = "l, F j";
 
