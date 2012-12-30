@@ -2,6 +2,7 @@ import urllib2
 import simplejson
 import _mysql
 import datetime
+import dbHelper
 
 nwsWeatherUrl = "http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=json"
 TABLE_NAME = "weather_data_nws"
@@ -81,27 +82,7 @@ def getWeather(resort, db) :
 							#Going to try just going with the highest snow total expected
 							#row['snow_forecast'] = highSnow
 
-				queryString = "insert into " + TABLE_NAME + " "
-
-				updateString = ""
-				firstTime = True;
-				columnNames = "("
-				columnValues = "("
-				for key, val in row.iteritems(): 
-					if (firstTime != True):
-						columnNames += ", "
-						columnValues += ", "
-						updateString += ", "
-					columnNames += key
-					columnValues += "'" + str(val) + "'"
-					updateString += key + "='" + str(val) + "'"
-					firstTime = False
-				columnNames += ")"
-				columnValues += ")"
-
-				queryString += columnNames + " values " + columnValues
-				queryString += " ON DUPLICATE KEY UPDATE " + updateString
-
+				queryString = dbHelper.createInsertStatement(row, TABLE_NAME)
 				#print queryString
 				db.query(queryString)
 
