@@ -3,6 +3,7 @@ import simplejson
 #import _mysql
 import datetime
 import xmlHelper
+import dbHelper
 
 sfWeatherUrl = "http://www.snow-forecast.com/resorts/"
 sfPostUrl = "/feed.xml"
@@ -44,27 +45,7 @@ def getWeather(resort, db) :
 			snow_forecast = 0
 		row['snow_forecast'] = snow_forecast
 
-
-		queryString = "insert into " + TABLE_NAME + " "
-
-		updateString = ""
-		firstTime = True;
-		columnNames = "("
-		columnValues = "("
-		for key, val in row.iteritems(): 
-			if (firstTime != True):
-				columnNames += ", "
-				columnValues += ", "
-				updateString += ", "
-			columnNames += key
-			columnValues += "'" + str(val) + "'"
-			updateString += key + "='" + str(val) + "'"
-			firstTime = False
-		columnNames += ")"
-		columnValues += ")"
-
-		queryString += columnNames + " values " + columnValues
-		queryString += " ON DUPLICATE KEY UPDATE " + updateString
+		queryString = dbHelper.createInsertStatement(row, TABLE_NAME)
 
 		#print queryString
 		db.query(queryString)

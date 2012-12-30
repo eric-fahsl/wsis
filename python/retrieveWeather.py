@@ -7,6 +7,7 @@ import nwsWeather
 import resortMaster
 import createRecommendations
 import snowforecastWeather
+import snowParser
 
 QUERY_DATA_SOURCES = True;
 #Only use this linefor debugging
@@ -26,5 +27,7 @@ if QUERY_DATA_SOURCES :
 			nwsWeather.getWeather(resort, db)
 
 createRecommendations.create(db)
+
+snowParser.retrieveNewSnow("ski_resorts_snowfall.txt", db)
 
 db.close()
