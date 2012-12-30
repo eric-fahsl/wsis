@@ -69,10 +69,10 @@ def retrieveNewSnow(filename, db) :
 		db.query(queryStatement)
 
 
-'''
-resortWeatherInfos = readDataFromFile("ski_resorts_snowfall.txt")
-for resortWeatherInfo in resortWeatherInfos :
-	snowfallTotal = getNewSnowFallForResort(resortWeatherInfo)
-	queryStatement = dbHelper.createInsertStatement(snowfallTotal, TABLE_NAME)
-	print queryStatement
-'''
+def testRetrieveNewSnow() :
+	resortWeatherInfos = readDataFromFile("ski_resorts_snowfall.txt")
+	for resortWeatherInfo in resortWeatherInfos :
+		snowfallTotal = getNewSnowFallForResort(resortWeatherInfo)
+		print snowfallTotal
+		#queryStatement = dbHelper.createInsertStatement(snowfallTotal, TABLE_NAME)
+		#print queryStatement
