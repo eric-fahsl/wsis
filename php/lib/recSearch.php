@@ -2,32 +2,6 @@
 
 include('esSearchHelper.php');
 
-function printSnowFlakes($count) {
-  	echo "<img src='../images/snowflake$count.png'/>";
-}
-
-function printSuns($count) {
-  	echo "<img src='../images/bluebird$count.png'/>";
-}
-
-
-function displayRecommendationWidget($rec, $resultClass, $showDate) {
-	?>
-	<div class="<?= $resultClass ?>">
-		<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
-		<span><?=$rec['state_full'] ?></span><br/>
-		<?php 
-			if ($showDate) {
-				$dtime = new DateTime($rec['date']);
-				echo $dtime->format('l, M j') . "<br/>";
-			}
-		?>
-		<?php printSnowFlakes($rec['powder']['rating']); ?><br/>
-		<?php printSuns($rec['bluebird']['rating']); ?><br/>
-	</div>
-	<?php
-}
-
 $resultClass = "span2 recresult";
 $dateFormat = "l, F j";
 
@@ -61,7 +35,7 @@ if (isset($_GET['date'])) {
 	$displayedNoResults = 0;
 	$resultClass = "span2 recresultLanding";
 	$requestParams = $_GET;
-	$requestParams['size'] = 6;
+	$requestParams['size'] = 5;
 	for ($i=0; $i<6; $i++) {
 		$dateForRec = date("Y-m-d",strtotime("+$i day"));
 		$date = new DateTime($dateForRec);

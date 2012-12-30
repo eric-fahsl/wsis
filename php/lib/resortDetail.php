@@ -17,40 +17,6 @@ include("esSearchHelper.php");
   	return number_format($cm, 1, '.', '');
   }
 
-  function printSnowFlakes($count) {
-  	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/snowflake-med.png' />";
-  	}
-  }
-
-  function printSuns($count) {
-  	for ($i=0; $i<$count; $i++) {
-  		echo "<img src='../images/sun-med.png'/>";
-  	}
-  }
-
-  function displayRecommendationWidget($rec, $displayResortName) {
-	?>
-	<div class="span2 recresultDetail">
-		<?php 
-			if ($displayResortName) {
-				?>
-				<div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
-				<span class="slightSmall"><?=$rec['state_full'] ?></span><br/>
-				<?php
-			} else {
-				$dtime = new DateTime($rec['date']);
-				$displayDate = $dtime->format('l, M j');
-			?>
-		<a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
-		<br/>
-			<?php } ?>
-		<img src="../images/snowflake<?= $rec['powder']['rating'] ?>.png"/><br/>
-		<img src="../images/bluebird<?= $rec['bluebird']['rating'] ?>.png"/><br/>
-	</div>
-	<?php 
-}
-
 if (isset($_GET['resort'])) {
   $resort = $_GET['resort'];
   $date = $_GET['date'];
@@ -78,6 +44,10 @@ if (isset($_GET['resort'])) {
 	  $longitude = $parsedJson->{'longitude'};
 	  $powderRating = $parsedJson->{'powder'}->{'rating'};
 
+	  $recommendationCreateDate = $parsedJson->{'createdOn'};
+	  $dt = new DateTime($recommendationCreateDate);
+	  $recommendationCreateDate = $dt->format('D, M d H:i:s');
+
 	  $isDomestic = True;
 	  if (strcmp("F", $resortInfo->{'domestic'}) == 0) {
 	  	$isDomestic = False;
@@ -89,6 +59,7 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
+	<div id="generatedOn">Generated on <?= $recommendationCreateDate ?></div>
 	Precipitation Potential: 
 	<?php 
 		if ($isDomestic) {
@@ -105,11 +76,11 @@ if (isset($_GET['resort'])) {
 	<table>
 	<tr>
 		<td><h4>Powder</h4></td>
-		<td><?php printSnowFlakes($powderRating); ?></td>
+		<td><?php printSnowFlakes($powderRating, True); ?></td>
 	</tr>
 	<tr>
 		<td><h4>Bluebird</h4></td>
-		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}); ?></td>
+		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
 	</tr>
 	</table>
 	
@@ -163,7 +134,7 @@ if (isset($_GET['resort'])) {
 		foreach ($results["hits"]["hits"] as $rec) {
 			$rec = $rec["_source"];
 			if (!$firstTime) {
-				displayRecommendationWidget($rec, True);
+				displayRecommendationWidget($rec, "span2 recresultDetail", False);
 			}
 			$firstTime = False;
 		}
@@ -185,7 +156,7 @@ if (isset($_GET['resort'])) {
 				echo "<h4>Upcoming Recommendations for $resortName</h4>";
 			}
 			$rec = $rec["_source"];
-			displayRecommendationWidget($rec, False);
+			displayRecommendationWidget($rec, "span2 recresultDetail", True);
 			$i++;
 		}
 	?>
@@ -207,7 +178,7 @@ if (isset($_GET['resort'])) {
 			echo "<h4>Prior Recommendations for $resortName</h4>";
 		}
 		$rec = $rec["_source"];
-		displayRecommendationWidget($rec, False);
+		displayRecommendationWidget($rec, "span2 recresultDetail", True);
 		$i++;
 	}
 

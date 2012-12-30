@@ -81,12 +81,14 @@ body .row-fluid {
 	height: 105px;
  	margin-left: 10px;
  	float: left;
+ 	min-width: 150px;
  }
 
 #searchResults .recresultLanding {
  	//height: 90px;
  	margin-left: 10px;
  	float: left;
+ 	min-width:150px;
  }
 .recheader {
 	font-weight: bold;
@@ -97,6 +99,12 @@ body .row-fluid {
 
 .span2 .slightSmall {
 	font-size:0.85em;
+}
+
+#generatedOn {
+	font-size:0.9em;
+	font-style:italic;
+	margin-top: -5px;
 }
 
 #stateListing .stateDisplay {
@@ -139,6 +147,23 @@ body .row-fluid {
 	width: 260px;
 	text-align: right;
 	margin-right: 12px;
+ }
+
+ .flakes {
+ 	height:27px;
+ 	background: url("../images/snowflake5.png");
+ }
+ .suns {
+ 	height:30px;
+ 	background: url("../images/bluebird5.png");
+ }
+ .flakes-large {
+ 	height:54px;
+ 	background: url("../images/snowflake-med-5.png");
+ }
+ .suns-large {
+ 	height:60px;
+ 	background: url("../images/sun-med-5.png");
  }
 
  #search_sort {
