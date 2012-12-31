@@ -8,7 +8,6 @@ function addSearchParam(&$mustTerms, $parameter) {
 }
 
 function buildQuery() {
-	$match_all = array ( "match_all" => array() );
 
 	$mustTerms = array();
 	//addSearchParam($mustTerms, "date");
@@ -89,7 +88,27 @@ function buildQuery() {
 			);
 	// /print json_encode($query);
 	//$query = array ( "query" => $match_all );
-	return $query;
+
+	
+	$filter = array();
+	if (isset($_GET['distance'])) {
+		$filter = array(
+			"geo_distance" => array(
+				"distance" => $_GET['distance'] . "mi",
+				"location" => $_GET['coords']
+			)
+		);
+	}
+	$filteredArray = array (
+		"query" => $query,
+		"filter" => $filter	
+	);
+
+	$outerQuery = array(
+		"filtered" => $filteredArray
+	);
+
+	return $outerQuery;
 }
 
 function createExcludeTerm(&$excludeArray, $parameter, $termName) {
@@ -118,14 +137,11 @@ function addSortTerm(&$sort, $term, $order) {
 		)));
 }
 
-function addGeoSort(&$sort, $lat, $lon) {
+function addGeoSort(&$sort, $coords) {
 	array_push($sort, 
 		array("_geo_distance" => 
-			array("location" => 
-				array(
-					"lat" => $lat,
-					"lon" => $lon
-				),
+			array(
+				"location" => $coords,
 				"order" => "asc",
 				"unit" => "mi"
 			)
@@ -142,8 +158,8 @@ function buildSort() {
 	}
 
 	//check if the lat/lon coordinates are provided, if so, this is the primary sort
-	if (isset($_GET['lat']) && isset($_GET['lon'])) {
-		addGeoSort($sort, $_GET['lat'], $_GET['lon']);
+	if (isset($_GET['coords']) && isset($_GET['sortDistance']) ) {
+		addGeoSort($sort, $_GET['coords']);
 	}
 
 	if (isset($_GET['sortBluebird'])) {
@@ -196,10 +212,6 @@ function search($_GET) {
 			"sort" => buildSort()
 		);
 	}
-
-		//"sort" => buildSort()
-		//, "facets" => buildFacets()
-	//);
 
 	if (isset($_GET['size']) && is_numeric($pageSize = $_GET['size'])) {
 		if (intval($pageSize) > 30) {

@@ -199,6 +199,13 @@ body .row-fluid {
  	padding-bottom: 7px;
  }
 
+ #distanceSection {
+ 	display: none;
+ }
+ #distanceSort {
+ 	display:none;
+ }
+
  .button {
 		padding: 5px 15px;
 		display: inline;

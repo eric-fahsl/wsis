@@ -1,53 +1,60 @@
 {
     "query": {
-        "bool": {
-            "must": [
-                {
-                    "term": {
-                        "resort": "mountbaker"
-                    }
-                },
-                {
-                    "range": {
-                        "date": {
-                            "gte": "2012-11-22"
+        "filtered": {
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "region": "PacificNW"
+                            }
+                        },
+                        {
+                            "term": {
+                                "state": "WA"
+                            }
+                        },
+                        {
+                            "range": {
+                                "date": {
+                                    "gte": "2012-12-30"
+                                }
+                            }
                         }
+                    ],
+                    "must_not": [],
+                    "should": [
+                        {
+                            "term": {
+                                "date": "2013-01-02"
+                            }
+                        }
+                    ],
+                    "minimum_number_should_match": 1
+                }
+            },
+            "filter": {
+                "geo_distance" : {
+                    "distance" : "200mi",
+                    "location": {
+                        "lat": "46.3096612",
+                        "lon": "-119.27552319999998"
                     }
                 }
-            ],
-            "must_not": [
-                {
-                    "term": {
-                        "powder.rating": 40
-                    }
-                },
-                {
-                    "term": {
-                        "powder.rating": 20
-                    }
-                }
-            ],
-            "should": [
-                {
-                    "term": {
-                        "powder.rating": "4"
-                    }
-                },
-                {
-                    "term": {
-                        "powder.rating": "50"
-                    }
-                },
-                {
-                    "term": {
-                        "powder.rating": "2"
-                    }
-                }
-            ],
-            "minimum_number_should_match" : 1
+            }
         }
     },
     "sort": [
+        {
+            "_geo_distance": {
+                "location": {
+                    "lat": "46.3096612",
+                    "lon": "-119.27552319999998"
+                },
+                "order": "asc",
+                "unit": "mi"
+            }
+        },
         {
             "powder.rating": {
                 "order": "desc"
@@ -68,5 +75,6 @@
                 "order": "desc"
             }
         }
-    ]
+    ],
+    "size": "20"
 }
