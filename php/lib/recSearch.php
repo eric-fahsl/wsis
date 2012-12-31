@@ -23,6 +23,8 @@ if (isset($_GET['date'])) {
 		//don't show this on the home page
 		if (!isset($_GET['date'])) {
 			echo "<h4>Recommendations For $dateForRecDisplay</h4>";
+		} else {
+			echo "<h5 onclick='clickFilter(\"date\", \"$dateForRec\", $i)'>$dateForRecDisplay</h5>";
 		}
 	}
 	foreach ($results["hits"]["hits"] as $rec) {

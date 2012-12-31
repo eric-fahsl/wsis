@@ -69,7 +69,7 @@ function clickDateFilter(searchDate, index) {
 			}
 		}
 		search();
-
+		hideFilters();
 	}
 
 	function removeFilter(type, value, index) {
@@ -79,4 +79,14 @@ function clickDateFilter(searchDate, index) {
 			$("#" + type + i).show();
 		}
 		search();
+	}
+
+	function hideFilters() {
+		$("#facets").addClass("hidden-phone");
+		mobileFacetsShown = false;
+	}
+
+	function showFilters() {
+		$("#facets").removeClass("hidden-phone");
+		mobileFacetsShown = true;
 	}

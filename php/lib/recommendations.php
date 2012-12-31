@@ -177,14 +177,9 @@
 
 	$("#toggleFilters").click(function() {
 		if (mobileFacetsShown) {
-			$("#facets").addClass("hidden-phone");
-			//$("#facets").width(200);
-			mobileFacetsShown = false;
-
+			hideFilters();
 		} else {
-			$("#facets").removeClass("hidden-phone");
-			//$("#facets").width("100%");
-			mobileFacetsShown = true;
+			showFilters();
 		}
 	});
 
