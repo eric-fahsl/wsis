@@ -1,0 +1,20 @@
+{
+    "query": {
+        "term": {
+            "resort": "mounthoodmeadows"
+        }
+    },
+    "facets" : {
+        "stat1" : {
+            "statistical" : {
+                "field" : "powder.rating"
+            }
+        }, 
+        "Resort" : { 
+            "terms": {
+                "field": "resort"
+            }
+        }
+    },
+    "size": 0
+}

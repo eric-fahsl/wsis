@@ -11,8 +11,8 @@ es_address = "http://localhost:9200"
 ###########################
 # RECOMMENDATIONS INDEX   #
 ###########################
-ind_name = "recommendations"
-type_name = "recommendations"
+ind_name = "recc-backup2"
+type_name = "recc-backup2"
 
 # This is describes the CouchDB river you are setting up. It's posted to
 # elasticsearch to start indexing CouchDB.
@@ -21,7 +21,7 @@ river_json = JSON.generate({
   "couchdb" => {                    # <= Description of the CouchDB server
     "host" => "127.0.0.1",          #    and the DB you want to index.
     "port" => 5984,
-    "db" => "recommendations",
+    "db" => "recc-backup2",
     "filter" => nil
   }
 })
