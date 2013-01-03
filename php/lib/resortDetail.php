@@ -124,9 +124,9 @@ if (isset($_GET['resort'])) {
 	 	//Retrieve the additional Forecasted Date Info
 		$requestAttributes = array ( 
 			"date" => $date,
-			"lat" => $resortInfo->{'latitude'},
-			"lon" => $resortInfo->{'longitude'},
-			"size" => 6
+			"coords" => $resortInfo->{'latitude'} . "," . $resortInfo->{'longitude'},
+			"size" => 6,
+			"sortDistance" => "t"
 		);
 		$results = search($requestAttributes);
 
