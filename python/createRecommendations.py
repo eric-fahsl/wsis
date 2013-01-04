@@ -21,6 +21,7 @@ COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME
 REC_POWDER = "Powder"
 RATING_DELTA_THRESHOLD = .81
 POWDER_FACTOR = 2.5
+M_TO_FEET_FACTOR = 3.28084
 
 #Bluebird summaries
 BLUEBIRD_SUMMARIES = {}
@@ -60,7 +61,16 @@ def calcBluebird(weatherSummary) :
 
 	return 1
 
-def calcFreezingLevel(freezingLevel, bottomElevation, topElevation) :
+def calcFreezingLevelAverage(yesterday, last3, today, convertToFeet=True) :
+	#calc average in meters
+	average = PCT_LEVER_NEW_SNOW * yesterday + last3 * PCT_FACTOR_PREV_SNOW + today * PCT_LEVEL_PROJ_SNOW
+	if convertToFeet :
+		average = average * M_TO_FEET_FACTOR
+	return average
+
+def calcFreezingRating(freezingLevel, bottomElevation, topElevation) :
+	bottomElevation = int(bottomElevation)
+	topElevation = int(topElevation)
 	rating = 0
 	if freezingLevel >= topElevation :
 		rating = 1
@@ -68,6 +78,7 @@ def calcFreezingLevel(freezingLevel, bottomElevation, topElevation) :
 		rating = 5
 	else :
 		percentage = (freezingLevel - bottomElevation) / (topElevation - bottomElevation)
+		print percentage
 		rating = 5 - percentage * 4.0
 	return formatRating(rating)
 
@@ -170,15 +181,33 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	bluebirdData['rating'] = formatRating(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)))
 	reccomendationDocument['bluebird'] = bluebirdData
 
+	#Create the Freezing Level Rating
+	freezingLevelData = {}
+	freezingLevelData['bottom'] = resort['base_elevation']
+	freezingLevelData['top'] = resort['summit_elevation']
+
+	priorDaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(previousDay, dateOfRecommendation, resort['id'], db)
+	actualDaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+	prior3DaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
+	
+	freezingLevelData['freezing_level_avg'] = calcFreezingLevelAverage(priorDaysFreezingLevel, prior3DaysFreezingLevel, actualDaysFreezingLevel)
+	freezingLevelData['rating'] = calcFreezingRating(freezingLevelData['freezing_level_avg'], freezingLevelData['bottom'], freezingLevelData['top'])
+	#print freezingLevelData
+	reccomendationDocument['freezing_level'] = freezingLevelData
+
 	try :
 		previousDocLocationResponse = simplejson.load(urllib2.urlopen(previousDocUrl))
 		powderTrend = calculateTrend(reccomendationDocument['powder']['rating'], previousDocLocationResponse['powder']['rating'])
 		bluebirdTrend = calculateTrend(reccomendationDocument['bluebird']['rating'], previousDocLocationResponse['bluebird']['rating'])
+		flTrend = calculateTrend(reccomendationDocument['freezing_level']['rating'], previousDocLocationResponse['freezing_level']['rating'])
 		reccomendationDocument['powder']['trend'] = powderTrend
 		reccomendationDocument['bluebird']['trend'] = bluebirdTrend
-	except urllib2.HTTPError :
+		reccomendationDocument['freezing_level']['trend'] = flTrend
+	#except urllib2.HTTPError :
+	except :
 		reccomendationDocument['powder']['trend'] = 0
 		reccomendationDocument['bluebird']['trend'] = 0
+		reccomendationDocument['freezing_level']['trend'] = 0
 
 	#check if we need to override the existing record
 	try :	

@@ -66,7 +66,6 @@ def getTotalSnowfallForRangeForResort(startDate, endDate, resort, db, dayFilter=
 	snowCm = results[0][0]
 	return convertCmToIn(snowCm)
 
-
 def getWeatherSummaryForDate(date, resort, db) :
 	datePlusOne = date + datetime.timedelta(days=1)
 	queryString = "select summary from " + TABLE_NAME 
@@ -80,3 +79,18 @@ def getWeatherSummaryForDate(date, resort, db) :
 	results = r.fetch_row(0)
 
 	return results
+
+def getAverageFreezingLevelForResort(startDate, endDate, resort, db, dayFilter=False) :
+	queryString = "select avg(freezing_level) from " + TABLE_NAME 
+	queryString += " WHERE date >= '" + str(startDate)
+	queryString += "' AND date < '" + str(endDate) 
+	queryString += "' AND resort = " + str(resort)
+	if (dayFilter) :
+		queryString += " AND forecast_time <> 'night'"
+	
+	db.query(queryString)
+	r = db.store_result()
+	results = r.fetch_row(0)
+
+	avg_level = results[0][0]
+	return float(avg_level)
