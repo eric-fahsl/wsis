@@ -40,8 +40,8 @@ def checkUpperLimit(snowfallAmount) :
 def formatFloat(inputNum) :
 	return "%.1f" % float(inputNum)
 
-def oneDecimalPt(inputNum) :
-	return float(formatFloat(inputNum))
+def formatRating(inputNum) :
+	return round(inputNum * 4) / 4
 
 def calcPowder(new_snow, previous_snow, projected_snow) :
 	previous_snow = checkUpperLimit(previous_snow - new_snow)
@@ -50,7 +50,7 @@ def calcPowder(new_snow, previous_snow, projected_snow) :
 	adjustedSnow = new_snow * PCT_LEVER_NEW_SNOW + previous_snow * PCT_LEVEL_PREV_SNOW * PCT_FACTOR_PREV_SNOW + projected_snow * PCT_LEVEL_PROJ_SNOW
 	
 	rating = adjustedSnow / POWDER_FACTOR + 1
-	return oneDecimalPt(rating)
+	return formatRating(rating)
 
 def calcBluebird(weatherSummary) :
 	for rating,summaries in BLUEBIRD_SUMMARIES.iteritems() :
@@ -60,6 +60,16 @@ def calcBluebird(weatherSummary) :
 
 	return 1
 
+def calcFreezingLevel(freezingLevel, bottomElevation, topElevation) :
+	rating = 0
+	if freezingLevel >= topElevation :
+		rating = 1
+	elif freezingLevel <= bottomElevation :
+		rating = 5
+	else :
+		percentage = (freezingLevel - bottomElevation) / (topElevation - bottomElevation)
+		rating = 5 - percentage * 4.0
+	return formatRating(rating)
 
 def createRecommendationDocument(resort, recDate ) :
 	rec = {}
@@ -157,7 +167,7 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 		bluebirdData['weather_summary'] = weatherRecord[1]
 		nwsBluebirdRating = calcBluebird(weatherRecord[0])
 	
-	bluebirdData['rating'] = oneDecimalPt(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)))
+	bluebirdData['rating'] = formatRating(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)))
 	reccomendationDocument['bluebird'] = bluebirdData
 
 	try :
