@@ -158,12 +158,15 @@ function buildSort() {
 	}
 
 	//check if the lat/lon coordinates are provided, if so, this is the primary sort
-	if (isset($_GET['coords']) && isset($_GET['sortDistance']) ) {
-		addGeoSort($sort, $_GET['coords']);
-	}
 
-	if (isset($_GET['sortBluebird'])) {
-		addSortTerm($sort, "bluebird.rating", "desc");
+	if (isset($_GET['sort'])) {
+		if (isset($_GET['coords']) && strcasecmp($_GET['sort'], 'distance') == 0) {
+			addGeoSort($sort, $_GET['coords']);
+		} elseif (strcasecmp($_GET['sort'], 'bluebird') == 0) {
+			addSortTerm($sort, "bluebird.rating", "desc");
+		} elseif (strcasecmp($_GET['sort'], 'fl') == 0) {
+			addSortTerm($sort, "freezing_level.rating", "desc");
+		}	
 	}
 
 	addSortTerm($sort, "powder.rating", "desc");
@@ -320,6 +323,16 @@ function printSuns($count, $large = False) {
   	echo "<div class='$class' style='width: ". $width . "px' title='Rating: $count / 5'></div>";
 }
 
+function printFreezingLevel($rating, $freezing_level, $large = False) {
+	$offset = -24 + (24/5) * $rating;
+	$largeClass = "";
+	if ($large) {
+		$largeClass = "-large";
+		$offset = -30 + 6 * $rating;
+	}
+	echo "<div class='mtnContainer$largeClass'><div class='mtnShading$largeClass' style='background-position-y: " . $offset . "px;' title='Freezing Level: $freezing_level'></div></div>";
+}
+
 function displayRecommendationWidget($rec, $resultClass, $showDate) {
 	?>
 	<div class="<?= $resultClass ?>">
@@ -338,10 +351,12 @@ function displayRecommendationWidget($rec, $resultClass, $showDate) {
 				<?php
 			}
 		?>
-		<?php printSnowFlakes($rec['powder']['rating']); ?>
-		<?php printSuns($rec['bluebird']['rating']); ?>
-	</div>
-	<?php
+		<?php 
+			printSnowFlakes($rec['powder']['rating']); 
+			printSuns($rec['bluebird']['rating']); 
+			printFreezingLevel($rec['freezing_level']['rating'], $rec['freezing_level']['freezing_level_avg']);
+		
+		echo "</div>";
 }
 
 ?>

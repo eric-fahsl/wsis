@@ -1,1 +1,0 @@
-W.Skins.newSkin({name:"wysiwyg.editor.skins.panels.TreeStructureEditorSkin",Class:{Extends:"mobile.core.skins.BaseSkin",_html:'<div skinPart="container"></div>',_css:["%container%{background-color:#DDDDDD}"]}});

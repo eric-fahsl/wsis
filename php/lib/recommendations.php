@@ -1,6 +1,24 @@
 <?php
 	include("esSearchHelper.php");
 
+	function addSortMenuOption(&$sortMenu, $label, $value, &$jsSortValue) {
+		$selectedFlag = "";
+		//echo "SORT VALUE: " . $_GET['sort'];
+		if (isset($_GET['sort']) && strcasecmp($_GET['sort'], $value) == 0) {
+			$selectedFlag = "selected";
+			$jsSortValue = $value;
+		}
+		array_push($sortMenu, array($label, $value, $selectedFlag));
+	}
+	//check Sorting
+	$jsSortValue = "";
+	$sortingOptions = array('distance', 'bluebird');
+	$sortMenu = array();
+	//array_push($sortMenu, array('Powder Rating', 'powder', false));
+	addSortMenuOption($sortMenu, 'Powder Rating', 'powder', $jsSortValue);
+	addSortMenuOption($sortMenu, 'Distance (Direct)', 'distance', $jsSortValue);
+	addSortMenuOption($sortMenu, 'Bluebird', 'bluebird', $jsSortValue);
+	addSortMenuOption($sortMenu, 'Freezing Level', 'fl', $jsSortValue);
 
 	//Retrieve the Facets
 	  $requestAttributes = array (
@@ -19,6 +37,7 @@
 	  		$dateProvided .= ",";
 	  	}
 	  }
+
 ?>
 <script src="js/jquery.cookie.min.js" type="text/javascript" ></script>
 <script src="js/wsis.js" type="text/javascript" ></script>
@@ -34,7 +53,7 @@
 		"region": { "value": "", "max": <?= sizeof($facets['Region']['terms']) ?> },
 		"distance": { "value": "", "max": 3 },
 		"state": {"value": "", "max": <?= sizeof($facets['State']['terms']) ?> },
-		"sort": "",
+		"sort": "<?= $jsSortValue ?>",
 		"coords": ""
 	}
 
@@ -49,7 +68,7 @@
 			}
 		}
 		if (facets.sort != "") {
-			parameters += "&" + facets.sort + "=t";
+			parameters += "&sort=" + facets.sort;
 		}
 		if (facets.coords != "") {
 			parameters += "&coords=" + facets.coords;
@@ -143,9 +162,24 @@
         <div id="sort">
           <label for="sort">Sort By: </label>
           <select id="search_sort" name="sort">
-            <option value="powder" selected="selected">Powder Rating</option>
-             <option value="distance" id="distanceSort">Distance (Direct)</option>
+
+          	<?php
+          		foreach($sortMenu as $menuOption) {
+          			//check if this is the distance menu option, need to identify the element so it can be hidden if location services not enabled
+          			if (strcasecmp($menuOption[1], 'distance') == 0) {
+          				$menuOption[2] .= " id='distanceSort'";
+          			}
+          			echo "<option value='$menuOption[1]' $menuOption[2]>$menuOption[0]</option>\n";
+          		}
+          		//array_push($sortMenu, array('Powder Rating', 'powder', false));
+	
+
+          	?>
+          	<!--
+            <option value="powder">Powder Rating</option>
+            <option value="distance">Distance (Direct)</option>
             <option value="bluebird">Bluebird Rating</option>
+        	-->
           </select>
       </div>
      </div>
@@ -155,18 +189,20 @@
 </div>
 
 <script type="text/javascript">
+	checkLocation();
 	search();
 
-	checkLocation();
-
+	
 	$("#search_sort").change(function() {
 		var str = "";
           $("#search_sort option:selected").each(function () {
             //    str += $(this).text() + " " + $(this).val();
                 if ($(this).val() == "bluebird") {
-                	facets.sort = "sortBluebird";
+                	facets.sort = "bluebird";
                 } else if ($(this).val() == "distance"){
-                	facets.sort = "sortDistance";
+                	facets.sort = "distance";
+                } else if ($(this).val() == "fl"){
+                	facets.sort = "fl";
                 } else {
                 	facets.sort="";
                 }          

@@ -22,6 +22,6 @@
 
 
 <?php
-
-include("lib/homeRecommendations.php");
+include("lib/homeReccDescriptions.php");
+//include("lib/homeRecommendations.php");
 ?>

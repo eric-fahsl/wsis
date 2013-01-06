@@ -1,1 +1,0 @@
-W.Skins.newSkin({name:"wysiwyg.viewer.skins.ClipArtSkin",Class:{Extends:"mobile.core.skins.BaseSkin",_params:[],_html:'<div skinPart="outerFrame"><a skinPart="link"><div skinPart="wrp"><div skinPart="img" skin="mobile.core.skins.ImageSkin"></div></div></a></div>',_css:["%wrp% { position:absolute; top:0;bottom:0;left:0;right:0;}","%img% {height:100%;}"]}});

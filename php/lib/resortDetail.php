@@ -73,14 +73,28 @@ if (isset($_GET['resort'])) {
 		}
 	?>
 	<br/><br/>
-	<table>
+	<table cellpadding="3">
 	<tr>
 		<td><h4>Powder</h4></td>
+		<td><h6><?= $powderRating ?></h6></td>
 		<td><?php printSnowFlakes($powderRating, True); ?></td>
 	</tr>
 	<tr>
 		<td><h4>Bluebird</h4></td>
+		<td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>
 		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
+	</tr>
+	<tr>
+		<td><h4>Freezing Level</h4></td>
+		<td><h6><?php 
+			echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'}; 
+			if ($isDomestic) {
+				echo " ft";
+			} else {
+				echo " m";
+			}
+		?></h6></td>
+		<td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>
 	</tr>
 	</table>
 	
