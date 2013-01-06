@@ -51,6 +51,8 @@ def calcPowder(new_snow, previous_snow, projected_snow) :
 	adjustedSnow = new_snow * PCT_LEVER_NEW_SNOW + previous_snow * PCT_LEVEL_PREV_SNOW * PCT_FACTOR_PREV_SNOW + projected_snow * PCT_LEVEL_PROJ_SNOW
 	
 	rating = adjustedSnow / POWDER_FACTOR + 1
+	if (rating > 5) :
+		rating = 5
 	return formatRating(rating)
 
 def calcBluebird(weatherSummary) :
@@ -186,11 +188,12 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	freezingLevelData['bottom'] = resort['base_elevation']
 	freezingLevelData['top'] = resort['summit_elevation']
 
-	priorDaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(previousDay, dateOfRecommendation, resort['id'], db)
 	actualDaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-	prior3DaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
-	
-	freezingLevelData['freezing_level_avg'] = calcFreezingLevelAverage(priorDaysFreezingLevel, prior3DaysFreezingLevel, actualDaysFreezingLevel)
+	#if domestic, convert to feet
+	if (resort['domestic'] == 'T') :
+		actualDaysFreezingLevel *= M_TO_FEET_FACTOR
+
+	freezingLevelData['freezing_level_avg'] = float(int(actualDaysFreezingLevel))
 	freezingLevelData['rating'] = calcFreezingRating(freezingLevelData['freezing_level_avg'], freezingLevelData['bottom'], freezingLevelData['top'])
 	#print freezingLevelData
 	reccomendationDocument['freezing_level'] = freezingLevelData
