@@ -275,3 +275,7 @@ body .row-fluid {
 	font-weight:bold;
 	font-size:0.85em;
 }
+#resortDetailRatings td {
+	text-align: center;
+	padding-left: 8px;
+}
