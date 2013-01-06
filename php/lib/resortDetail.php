@@ -73,7 +73,7 @@ if (isset($_GET['resort'])) {
 		}
 	?>
 	<br/><br/>
-	<table cellpadding="3">
+	<table cellpadding="3" id="resortDetailRatings">
 	<tr>
 		<td><h4>Powder</h4></td>
 		<td><h6><?= $powderRating ?></h6></td>
@@ -85,7 +85,7 @@ if (isset($_GET['resort'])) {
 		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
 	</tr>
 	<tr>
-		<td><h4>Freezing Level</h4></td>
+		<td><h5>Freezing <br/> Level</h5></td>
 		<td><h6><?php 
 			echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'}; 
 			if ($isDomestic) {
@@ -140,7 +140,7 @@ if (isset($_GET['resort'])) {
 			"date" => $date,
 			"coords" => $resortInfo->{'latitude'} . "," . $resortInfo->{'longitude'},
 			"size" => 6,
-			"sortDistance" => "t"
+			"sort" => "distance"
 		);
 		$results = search($requestAttributes);
 
