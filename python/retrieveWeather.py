@@ -28,6 +28,7 @@ if QUERY_DATA_SOURCES :
 
 createRecommendations.create(db)
 
-snowParser.retrieveNewSnow("ski_resorts_snowfall.txt", db)
+if QUERY_DATA_SOURCES :
+	snowParser.retrieveNewSnow("ski_resorts_snowfall.txt", db)
 
 db.close()
