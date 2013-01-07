@@ -42,7 +42,7 @@
 			</a>
 			<p>What areas are directly closest to me?
 			<span class="footnote">
-			Note: you will need to allow WhereShouldISki to know your location at the prompt to enable this feature)
+			Note: you will need to approve sharing your location at the prompt to enable this feature
 			</span>
 			</p>
 			<div class="bottomValueProp">
