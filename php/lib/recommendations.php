@@ -82,7 +82,7 @@
 		}
 
 
-		$('#searchResults').load('/lib/recSearch.php?' + parameters);
+		$('#searchResults').load('/lib/recSearch.php?size=30&' + parameters);
 	}
 
 	function init() {
