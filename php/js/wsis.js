@@ -1,15 +1,12 @@
-
-
 var userLocation = new Object();
-
-function errorHandler( err ) {
-  //alert(err);
-}
 
 function showDistanceFilters(coords) {
 	facets['coords'] = coords;
 	$("#distanceSection").show();
 	$("#distanceSort").show();
+}
+function errorHandler() {
+
 }
 
 
@@ -17,8 +14,6 @@ function success_handler(position) {
 	var coords = position.coords.latitude + "," + position.coords.longitude;
     showDistanceFilters(coords);
     $.cookie("coords", coords, { expires: 3 });
-    
-
 }
 
 function checkLocation() {
@@ -47,7 +42,9 @@ function clickDateFilter(searchDate, index) {
 		search();
 	}
 
-	function clickFilter(type, value, index) {
+	function clickFilter(type, value, index, searchAfter) {
+		if (!searchAfter) 
+			searchAfter = true;
 		if (facets[type].value.indexOf(value) < 0) {
 			addFilter(type,value,index);
 			$("#" + type + index).addClass("selected");
@@ -56,6 +53,8 @@ function clickDateFilter(searchDate, index) {
 			removeFilter(type,value,index);
 			$("#" + type + index).removeClass("selected");
 		}
+		if (searchAfter) 
+			search();
 	}
 
 	function addFilter(type, value, index) {
@@ -68,7 +67,7 @@ function clickDateFilter(searchDate, index) {
 				$("#" + type + "-x-" + i).show();
 			}
 		}
-		search();
+		//search();
 		hideFilters();
 	}
 
@@ -78,7 +77,7 @@ function clickDateFilter(searchDate, index) {
 		for (var i=0; i<facets[type].max; i++) {
 			$("#" + type + i).show();
 		}
-		search();
+		//search();
 	}
 
 	function hideFilters() {

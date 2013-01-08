@@ -20,6 +20,13 @@
 	addSortMenuOption($sortMenu, 'Bluebird', 'bluebird', $jsSortValue);
 	addSortMenuOption($sortMenu, 'Freezing Level', 'fl', $jsSortValue);
 
+	//check if state selected
+	$jsStateValue = "";
+	$jsStateIndex = -1;
+	if (isset($_GET['state'])) {
+		$jsStateValue = $_GET['state'];
+	}
+
 	//Retrieve the Facets
 	  $requestAttributes = array (
 	  	  "dateStart" => date("Y-m-d"),
@@ -59,8 +66,8 @@
 
 	function search() {
 		
-		//parameters = "";
-		parameters = "&dateStart=<?= $dateProvided ?>&landing=t";
+		parameters = "";
+		//parameters = "?dateStart=<?= $dateProvided ?>";
 		for (var searchParam in facets) {
 			val = facets[searchParam];
 			if (val.value != null && val.value != "") {
@@ -75,7 +82,7 @@
 		}
 
 
-		$('#searchResults').load('/lib/recSearch.php?size=30' + parameters);
+		$('#searchResults').load('/lib/recSearch.php?' + parameters);
 	}
 
 	function init() {
@@ -146,6 +153,9 @@
 		$i = 0;
 		 foreach ($facets['State']['terms'] as $facet) {
 		 	$state = $facet['term'];
+		 	if (strcmp($jsStateValue, $state) == 0) {
+		 		$jsStateIndex = $i;
+		 	}
 		 	echo "<li id='state$i' onclick='clickFilter(\"state\", \"$state\", $i)'><span>$state</span><div class='x' id='state-x-$i'>X</div></li>";
 		 	$i++;
 		 }
@@ -172,27 +182,30 @@
           			echo "<option value='$menuOption[1]' $menuOption[2]>$menuOption[0]</option>\n";
           		}
           		//array_push($sortMenu, array('Powder Rating', 'powder', false));
-	
 
           	?>
-          	<!--
-            <option value="powder">Powder Rating</option>
-            <option value="distance">Distance (Direct)</option>
-            <option value="bluebird">Bluebird Rating</option>
-        	-->
           </select>
       </div>
      </div>
      <div id="searchResults">
 
      </div>
+     <div class="divider"></div>
+     <div id="legend"><div class="title">LEGEND</div>
+      	<div class="border">
+       	Powder: <img src="images/snowflake-sm.png"> Bluebird: <img src="images/sun-sm.png"> Freezing Level: <img src="images/fl-sm.png"></div>
+     </div>
 </div>
 
 <script type="text/javascript">
 	checkLocation();
-	search();
 
-	
+<?php
+	if (strcmp($jsStateValue, "") != 0) {
+		echo "clickFilter('state', '$jsStateValue', $jsStateIndex);";	
+	} 
+?>
+	search();
 	$("#search_sort").change(function() {
 		var str = "";
           $("#search_sort option:selected").each(function () {
