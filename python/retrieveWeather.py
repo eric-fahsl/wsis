@@ -11,7 +11,7 @@ import snowParser
 
 QUERY_DATA_SOURCES = True;
 #Only use this linefor debugging
-#QUERY_DATA_SOURCES = False;
+QUERY_DATA_SOURCES = False;
 
 #Connect to DB
 db = _mysql.connect("localhost","wsis","wsis","wsis")
