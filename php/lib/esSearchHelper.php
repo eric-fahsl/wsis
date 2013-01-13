@@ -324,11 +324,11 @@ function printSuns($count, $large = False) {
 }
 
 function printFreezingLevel($rating, $freezing_level, $large = False) {
-	$offset = -24 + (24/5) * $rating;
+	$offset = -24 + (24/4) * ($rating-1);
 	$largeClass = "";
 	if ($large) {
 		$largeClass = "-large";
-		$offset = -30 + 6 * $rating;
+		$offset = -30 + (30/4) * ($rating-1);
 	}
 	echo "<div class='mtnContainer$largeClass'><div class='mtnShading$largeClass' style='background-position-y: " . $offset . "px;' title='Freezing Level: $freezing_level'></div></div>";
 }
