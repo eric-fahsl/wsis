@@ -63,10 +63,21 @@ def retrieveNewSnow(filename, db) :
 	resortWeatherInfos = readDataFromFile(filename)
 	for resortWeatherInfo in resortWeatherInfos :
 		snowfallTotal = getNewSnowFallForResort(resortWeatherInfo)
-		queryStatement = dbHelper.createInsertStatement(snowfallTotal, TABLE_NAME, False)
-		
-		print queryStatement
-		db.query(queryStatement)
+
+		#first check if this entry already exists
+		entryAlreadyExistQuery = dbHelper.checkForSnowfallEntryQuery(snowfallTotal, TABLE_NAME)
+		#print entryAlreadyExistQuery
+		db.query(entryAlreadyExistQuery)
+		r = db.store_result()
+		results = r.fetch_row(0)
+		count = int(results[0][0])
+
+		#if entry doesn't exist, go ahead and insert
+		if (count == 0) :
+			queryStatement = dbHelper.createInsertStatement(snowfallTotal, TABLE_NAME, False)
+			
+			print queryStatement
+			db.query(queryStatement)
 
 
 def testRetrieveNewSnow() :

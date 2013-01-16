@@ -29,3 +29,10 @@ def createInsertStatement(row, tableName, update=True) :
 		queryString += " ON DUPLICATE KEY UPDATE " + updateString
 
 	return queryString
+
+
+def checkForSnowfallEntryQuery(snowfallEntry, tableName) :
+	queryString = "SELECT count(*) from " + tableName 
+	queryString += " WHERE resort=" + snowfallEntry['resort']
+	queryString += " and updated_time='" + snowfallEntry['updated_time'] + "'"
+	return queryString
