@@ -6,7 +6,7 @@ import dbHelper
 
 TABLE_NAME = 'snowfall_totals'
 
-cleanUpCharacters = [ '"', "'", 'in', '\xe2', '\x80', '\x9d', '\xc2', '\xa2','\xc3','\xa0', '\x82']
+cleanUpCharacters = [ '"', "'", 'in', '\xe2', '\x80', '\x9d', '\xc2', '\xa2','\xc3','\xa0', '\x82', '<strong>']
 replaceCharacters = { "Trace":"0.2", "  ":" " }
 
 def readDataFromFile(filename) :
