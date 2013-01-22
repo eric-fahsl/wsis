@@ -48,9 +48,6 @@
 ?>
 <script src="js/jquery.cookie.min.js" type="text/javascript" ></script>
 <script src="js/wsis.js" type="text/javascript" ></script>
-
-
-
 <script type="text/javascript">
 
 	
@@ -81,15 +78,8 @@
 			parameters += "&coords=" + facets.coords;
 		}
 
-
 		$('#searchResults').load('/lib/recSearch.php?size=30&' + parameters);
 	}
-
-	function init() {
-
-	}
-
-	
 </script>
 
 

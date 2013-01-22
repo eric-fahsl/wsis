@@ -9,11 +9,10 @@ function errorHandler() {
 
 }
 
-
 function success_handler(position) {
 	var coords = position.coords.latitude + "," + position.coords.longitude;
     showDistanceFilters(coords);
-    $.cookie("coords", coords, { expires: 3 });
+    $.cookie("coords", coords, { expires: 1 });
 }
 
 function checkLocation() {
