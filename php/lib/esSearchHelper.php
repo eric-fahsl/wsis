@@ -292,8 +292,7 @@ function getResortsForState($state) {
 			)
 		),
 		"size" => 100,
-		"sort" => $sort,
-		"fields" => "name"
+		"sort" => $sort
 	);
 
 	$queryObject = json_encode($queryArray);

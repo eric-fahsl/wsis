@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="http://beta.whereshouldiski.com/templates/js_wright/css/style-theme1.css" type="text/css" />
   <script src="http://beta.whereshouldiski.com/media/system/js/core.js" type="text/javascript"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+  <script src="js/jquery.ui.map.full.min.js" type="text/javascript"></script>
   <script src="http://beta.whereshouldiski.com/templates/js_wright/wright/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
   <link rel="stylesheet" href="/wsis.css" type="text/css" />

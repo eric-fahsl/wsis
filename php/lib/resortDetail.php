@@ -209,6 +209,7 @@ if (isset($_GET['resort'])) {
 	}
 
 } else {
+	//If defaulting to the resort listing page
 	?>
 		<h2>Resorts Listing</h2>
 		See below for our complete list of all supported ski resorts. We are always adding more resorts and we 
@@ -217,7 +218,46 @@ if (isset($_GET['resort'])) {
 
 		<div class='divider'></div>
 		<div class="row-fluid" id="stateListing">
+	
+	
+	<div id="map_canvas" class="span12">
+
+	</div>
+
+
+
+	<script type="text/javascript"> 
+		$('#map_canvas').gmap({ 'center': '41.8282,-100.5795' });
+		<?php
+		$states = getStates();
+		//echo json_encode(getStates());
+		
+		$today = date("Y-m-d");
+		foreach ($states["facets"]["State"]["terms"] as $state) {
+			 $stateName = $state["term"];
+			 $resorts = getResortsForState($stateName);			 
+			 foreach($resorts["hits"]["hits"] as $resort) {
+			 	$resortid = $resort["_id"];
+			 	//echo json_encode($resort);
+			 	$resort = $resort["_source"];
+
+			 	$resortInfo = "<h6>" . $resort["name"] . ", " . $resort["state"] . "</h6>"; 
+			 	$resortInfo .= "<a href=\"resorts?resort=$resortid&date=$today\">Current Ratings</a>";
+			 	
+			 	echo "$('#map_canvas').gmap('addMarker', {'position': '" . $resort["latitude"] . "," . $resort["longitude"] . "'})";
+			 	echo ".click(function() { ";
+			 	echo "$('#map_canvas').gmap('openInfoWindow', { 'content': '$resortInfo' }, this) ";
+       			echo "});\n";
+			 }
+			 
+	 	}
+
+		?>
+		$('#map_canvas').gmap('option', 'zoom', 4);
+		
+	</script>
 	<?php
+	/*
 	$states = getStates();
 	//echo json_encode(getStates());
 	$i = 1;
@@ -237,7 +277,9 @@ if (isset($_GET['resort'])) {
 		 }
 		 $i++;
  	}
+ 	
  	echo "</div>";
+ 	*/
 }
 
 //}
