@@ -59,7 +59,7 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h3>Recommendations for <?=$dateFormatted ?></h3>
-	<div id="generatedOn">Generated on <?= $recommendationCreateDate ?></div>
+	<div id="generatedOn">Generated on <?= $recommendationCreateDate ?> PST</div>
 	Precipitation Potential: 
 	<?php 
 		if ($isDomestic) {
