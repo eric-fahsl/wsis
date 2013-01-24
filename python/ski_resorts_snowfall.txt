@@ -13,5 +13,5 @@
 16|Mt Hood Meadows|http://www.skihood.com/The-Mountain/Conditions|xmlHelper.searchContentForTag("Past 24","","strong>","<",str(soup),0)|xmlHelper.searchContentForTag("conditions snow","date-header",">","<",str(soup),0)
 77|Alpine Meadows|http://www.skialpine.com/mountain/snow-report|xmlHelper.searchContentForTag("24-hr","top","top\">","<",str(soup),0)|xmlHelper.searchContentForTag("Last Updated","",":","<",str(soup),0)
 107|Steamboat|http://app.steamboat.com/data/snowtotals|xmlHelper.searchContentForTag("TwentyFour","",":",",",str(soup),0)|xmlHelper.searchContentForTag("YearTotal","",":","}",str(soup),0)
-54|Alta|http://alta.com/pages/report.php|xmlHelper.searchContentForTag("Past 24","tablerowwhite",">","<",str(soup),0)|xmlHelper.searchContentForTag("Updated","</span",":","<",str(soup),0
+54|Alta|http://alta.com/pages/report.php|xmlHelper.searchContentForTag("Past 24","tablerowwhite",">","<",str(soup),0)|xmlHelper.searchContentForTag("Updated","</span",":","<",str(soup),0)
 32|Big Sky|http://www.bigskyresort.com/Activities/Winter/Conditions.asp|xmlHelper.searchContentForTag("title\">24 Hour","","strong>","<",str(soup),0)|str(datetime.datetime.now())
