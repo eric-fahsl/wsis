@@ -2,6 +2,7 @@ import xmlHelper
 import datetime
 import sys
 import dbHelper
+import _mysql
 
 
 TABLE_NAME = 'snowfall_totals'
@@ -45,15 +46,15 @@ def getNewSnowFallForResort(resort) :
 	    #sampleCommand = 'xmlHelper.searchContentForTag("Summit","Last 24 hrs:","lh26\">", "</span", str(soup), 0)'
 	    exec "newSnow = " + resort['newSnowCommand']
 	    exec "lastUpdated = " + resort['lastUpdatedCommand']
-
+	    
 	    snowFallDate = datetime.date.today() - datetime.timedelta(days=1)
-
+	    
 	    snowfallEntry = {}
 	    snowfallEntry['resort'] = resort['id']
-	    snowfallEntry['snowfall'] = cleanInput(newSnow)
+	    snowfallEntry['snowfall'] = filter(lambda x: x.isdigit(), newSnow[0])
 	    snowfallEntry['updated_time'] = cleanInput(lastUpdated)
 	    snowfallEntry['date'] = str(snowFallDate)
-
+	    
 	    return snowfallEntry
 	except :
 		print "ERROR on resort: " + resort['name'] + ":  " + str(sys.exc_info()[0])
@@ -63,7 +64,7 @@ def retrieveNewSnow(filename, db) :
 	resortWeatherInfos = readDataFromFile(filename)
 	for resortWeatherInfo in resortWeatherInfos :
 		snowfallTotal = getNewSnowFallForResort(resortWeatherInfo)
-
+		
 		#first check if this entry already exists
 		entryAlreadyExistQuery = dbHelper.checkForSnowfallEntryQuery(snowfallTotal, TABLE_NAME)
 		#print entryAlreadyExistQuery
@@ -87,3 +88,10 @@ def testRetrieveNewSnow() :
 		print snowfallTotal
 		#queryStatement = dbHelper.createInsertStatement(snowfallTotal, TABLE_NAME)
 		#print queryStatement
+
+
+QUERY_SOURCES = True
+if QUERY_SOURCES :
+	db = _mysql.connect("localhost","wsis","wsis","wsis")
+	retrieveNewSnow("ski_resorts_snowfall.txt", db)
+	db.close()

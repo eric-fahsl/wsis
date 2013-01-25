@@ -20,6 +20,7 @@ resorts = resortMaster.getResorts(db)
 
 #resorts now is a dictionaried list of all resorts in the resort_master DB
 #print resorts
+
 if QUERY_DATA_SOURCES :
 	for resort in resorts :
 		snowforecastWeather.getWeather(resort, db)
@@ -28,7 +29,9 @@ if QUERY_DATA_SOURCES :
 
 createRecommendations.create(db)
 
-if QUERY_DATA_SOURCES :
-	snowParser.retrieveNewSnow("ski_resorts_snowfall.txt", db)
+
+#moved this to the snowParser file
+#if QUERY_DATA_SOURCES :
+#	snowParser.retrieveNewSnow("ski_resorts_snowfall.txt", db)
 
 db.close()
