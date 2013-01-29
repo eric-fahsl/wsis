@@ -1,3 +1,5 @@
 python/*.pyc
 *.pyc
 viz/*
+
+.DS_Store
