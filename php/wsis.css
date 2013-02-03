@@ -305,3 +305,27 @@ body .row-fluid {
 #stateListing {
 	padding-top: 10px;
 }
+.precipitationPotential {
+	margin: 0 0 10px 5px;
+}
+.precipitationPotential li {
+	float:left;
+	list-style:none;
+	width: 80px;
+	border: solid #AEAEAE 1px;
+	border-radius: 4px;
+	box-shadow: 0 0 4px 1px #CACACA;
+	margin-right: 10px;
+	text-align: center;
+}
+.precipitationPotential .measure {
+	font-weight:bold;
+	font-size: 1.2em;
+	margin: 5px 0 2px;
+}
+.precipitationPotential .measureLabel {
+	font-size: 0.8em;
+}
+.midPhoneWidth {
+	min-width: 450px;
+}

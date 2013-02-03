@@ -58,21 +58,9 @@ if (isset($_GET['resort'])) {
 	  echo "<p><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
 
-	<h3>Recommendations for <?=$dateFormatted ?></h3>
+	<h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
 	<div id="generatedOn">Generated on <?= $recommendationCreateDate ?> PST</div>
-	Precipitation Potential: 
-	<?php 
-		if ($isDomestic) {
-			echo $parsedJson->{'powder'}->{'snow_new'} . "\" of fresh snow (last 24 hours), "
-			 . $parsedJson->{'powder'}->{'snow_forecast'} . "\" of more snow during the day, and "
-			 . $parsedJson->{'powder'}->{'snow_prev'} . "\" the last 72 hours. ";
-		} else {
-			echo convertInToCm($parsedJson->{'powder'}->{'snow_new'}) . " cm of fresh snow (last 24 hours), "
-			 . convertInToCm($parsedJson->{'powder'}->{'snow_forecast'}) . " cm of more snow during the day, and "
-			 . convertInToCm($parsedJson->{'powder'}->{'snow_prev'}) . " cm the last 72 hours. ";
-		}
-	?>
-	<br/><br/>
+
 	<table cellpadding="3" id="resortDetailRatings">
 	<tr>
 		<td><h4>Powder</h4></td>
@@ -99,8 +87,37 @@ if (isset($_GET['resort'])) {
 	</table>
 	
 	<?php 
+		$last24 = ""; $newSnow = ""; $last72 = "";
 		if ($isDomestic) {
-			echo "<i>NOAA Weather Summary</i>: " . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
+			$last24 = $parsedJson->{'powder'}->{'snow_new'} . "&rdquo;";
+			$newSnow = $parsedJson->{'powder'}->{'snow_forecast'} . "&rdquo;";
+			$last72 = $parsedJson->{'powder'}->{'snow_prev'} . "&rdquo;";
+		} else {
+			$last24 = convertInToCm($parsedJson->{'powder'}->{'snow_new'}) . "cm";
+			 $newSnow = convertInToCm($parsedJson->{'powder'}->{'snow_forecast'}) . "cm";
+			 $last72 = convertInToCm($parsedJson->{'powder'}->{'snow_prev'}) . "cm";
+		}
+	?>
+
+	<h4>Snowfall Projections</h4>
+    <ul class="precipitationPotential">
+      <li>
+        <p class="measure"><?= $last24 ?></p>
+        <p class="measureLabel">Last 24hrs</p>
+      </li>
+      <li>
+        <p class="measure"><?= $last72 ?></p>
+        <p class="measureLabel">Last 72 hrs</p>
+      </li>
+      <li>
+        <p class="measure"><?= $newSnow ?></p>
+        <p class="measureLabel">New Daytime</p>
+      </li>
+    </ul>
+
+	<?php 
+		if ($isDomestic) {
+			echo "<div style='clear:both;'></div><i>NOAA Weather Summary</i>: " . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
 		}
 	?>
 	<div style="clear:both;">
