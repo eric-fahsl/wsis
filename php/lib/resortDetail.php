@@ -114,7 +114,7 @@ if (isset($_GET['resort'])) {
         <p class="measureLabel">New Daytime</p>
       </li>
     </ul>
-    <div class="smallItalic">Projections for mid-mountain elevation</div>
+    <div class="smallItalic divider">Projections for mid-mountain elevation</div>
 
 	<?php 
 		if ($isDomestic) {
