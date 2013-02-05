@@ -100,8 +100,6 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h4>Snowfall Projections</h4>
-	<div class="smallItalic">All projections for mid-mountain of resort</div>
-
     <ul class="precipitationPotential">
       <li>
         <p class="measure"><?= $last24 ?></p>
@@ -116,6 +114,7 @@ if (isset($_GET['resort'])) {
         <p class="measureLabel">New Daytime</p>
       </li>
     </ul>
+    <div class="smallItalic">Projections for mid-mountain elevation</div>
 
 	<?php 
 		if ($isDomestic) {
