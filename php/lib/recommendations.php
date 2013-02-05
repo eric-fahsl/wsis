@@ -152,7 +152,7 @@
 		
 	?>
 	</ol>
-
+	<div style="clear:both"></div>
 
 </div>
 <div id="results">
