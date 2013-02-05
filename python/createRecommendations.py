@@ -113,116 +113,120 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	previousDay = dateOfRecommendation - datetime.timedelta(days=1)
 	nextDay = dateOfRecommendation + datetime.timedelta(days=1)
 
-	###Get the amount of fresh snow for tomorrow
-	newSnowForTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
-	#check if domestic, if not, just use the totals from SnowForecast
-	newSnowForTomorrowNws = newSnowForTomorrowSf
-	if (resort['domestic'] == 'T') :
-		newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
-	if (str(newSnowForTomorrowNws) == 'None') :
-		newSnowForTomorrowNws = 0
-
-	#Get the average of NWS and SF
-	newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, newSnowForTomorrowSf)
-	
-	###Get the projected snow for tomorrow
-	projectedSnowTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-	#check if domestic, if not, just use the totals from SnowForecast
-	projectedSnowTomorrowNws = projectedSnowTomorrowSf
-	if (resort['domestic'] == 'T') :
-		projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-	#Get the average of NWS and SF
-	projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, projectedSnowTomorrowSf) 
-	
-	#TODO - update this to read from actual resortMaster
-	previousSnowFallSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
-	if (previousSnowFallSf == None) :
-		previousSnowFallSf = 0
-	previousSnowFallNws = previousSnowFallSf	
-	#check if domestic, if not just use the totals from SnowForecast
-	if (resort['domestic'] == 'T') :
-		previousSnowFallNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
-		if previousSnowFallNws == None :
-			previousSnowFallNws = 0
-
-	previousSnowFall = calcAverage(previousSnowFallSf, previousSnowFallNws)
-
-	resortDocName = resort['name'].lower().replace(' ','') + "_"
-	docId =  resortDocName + str(dateOfRecommendation)
-	docUrl = COUCH_DB_URL + "/" + docId
-	
-	#acquire previous day's recommendation so we can make a trending evaluation
-	previousDayDocId = resortDocName + str(dateOfRecommendation - datetime.timedelta(days=1))
-	previousDocUrl = COUCH_DB_URL + "/" + previousDayDocId
-	
-	#Create the base recommendation document
-	reccomendationDocument = createRecommendationDocument(resort, str(dateOfRecommendation) )
-	
-	#Create Powder Forecast first
-	powderData = {}
-	powderData['snow_prev'] = formatFloat(previousSnowFall)
-
-	powderData['snow_new'] = formatFloat(newSnowForTomorrow)
-	powderData['snow_forecast'] = formatFloat(projectedSnowTomorrow)
-	
-	powderData['rating'] = calcPowder(newSnowForTomorrow, previousSnowFall, projectedSnowTomorrow)
-	reccomendationDocument['powder'] = powderData
-
-	#Now create the bluebird recommendation
-	bluebirdData = {}
-	sfBluebirdAM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[0][0])
-	sfBluebirdPM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[1][0])
-
-	#Check if domestic, if not, do not pull from NWS
-	nwsBluebirdRating = calcAverage(sfBluebirdAM, sfBluebirdPM)
-	if (resort['domestic'] == 'T') :
-		weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
-		bluebirdData['weather_summary'] = weatherRecord[1]
-		nwsBluebirdRating = calcBluebird(weatherRecord[0])
-	
-	bluebirdData['rating'] = formatRating(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)))
-	reccomendationDocument['bluebird'] = bluebirdData
-
-	#Create the Freezing Level Rating
-	freezingLevelData = {}
-	freezingLevelData['bottom'] = resort['base_elevation']
-	freezingLevelData['top'] = resort['summit_elevation']
-
-	actualDaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-	#if domestic, convert to feet
-	if (resort['domestic'] == 'T') :
-		actualDaysFreezingLevel *= M_TO_FEET_FACTOR
-
-	freezingLevelData['freezing_level_avg'] = float(int(actualDaysFreezingLevel))
-	freezingLevelData['rating'] = calcFreezingRating(freezingLevelData['freezing_level_avg'], freezingLevelData['bottom'], freezingLevelData['top'])
-	#print freezingLevelData
-	reccomendationDocument['freezing_level'] = freezingLevelData
-
 	try :
-		previousDocLocationResponse = simplejson.load(urllib2.urlopen(previousDocUrl))
-		powderTrend = calculateTrend(reccomendationDocument['powder']['rating'], previousDocLocationResponse['powder']['rating'])
-		bluebirdTrend = calculateTrend(reccomendationDocument['bluebird']['rating'], previousDocLocationResponse['bluebird']['rating'])
-		flTrend = calculateTrend(reccomendationDocument['freezing_level']['rating'], previousDocLocationResponse['freezing_level']['rating'])
-		reccomendationDocument['powder']['trend'] = powderTrend
-		reccomendationDocument['bluebird']['trend'] = bluebirdTrend
-		reccomendationDocument['freezing_level']['trend'] = flTrend
-	#except urllib2.HTTPError :
-	except :
-		reccomendationDocument['powder']['trend'] = 0
-		reccomendationDocument['bluebird']['trend'] = 0
-		reccomendationDocument['freezing_level']['trend'] = 0
+		###Get the amount of fresh snow for tomorrow
+		newSnowForTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+		#check if domestic, if not, just use the totals from SnowForecast
+		newSnowForTomorrowNws = newSnowForTomorrowSf
+		if (resort['domestic'] == 'T') :
+			newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
+		if (str(newSnowForTomorrowNws) == 'None') :
+			newSnowForTomorrowNws = 0
 
-	#check if we need to override the existing record
-	try :	
-		currentDocLocationResponse = simplejson.load(urllib2.urlopen(docUrl))
-		reccomendationDocument['_rev'] = str(currentDocLocationResponse['_rev'])
-	except urllib2.HTTPError:
-		print docId + " not found, will create a new record"
-	#print id
+		#Get the average of NWS and SF
+		newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, newSnowForTomorrowSf)
+		
+		###Get the projected snow for tomorrow
+		projectedSnowTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+		#check if domestic, if not, just use the totals from SnowForecast
+		projectedSnowTomorrowNws = projectedSnowTomorrowSf
+		if (resort['domestic'] == 'T') :
+			projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+		#Get the average of NWS and SF
+		projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, projectedSnowTomorrowSf) 
+		
+		#TODO - update this to read from actual resortMaster
+		previousSnowFallSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
+		if (previousSnowFallSf == None) :
+			previousSnowFallSf = 0
+		previousSnowFallNws = previousSnowFallSf	
+		#check if domestic, if not just use the totals from SnowForecast
+		if (resort['domestic'] == 'T') :
+			previousSnowFallNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
+			if previousSnowFallNws == None :
+				previousSnowFallNws = 0
 
-	curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
-	#print curlCommand
-	os.system(curlCommand)
+		previousSnowFall = calcAverage(previousSnowFallSf, previousSnowFallNws)
+
+		resortDocName = resort['name'].lower().replace(' ','') + "_"
+		docId =  resortDocName + str(dateOfRecommendation)
+		docUrl = COUCH_DB_URL + "/" + docId
+		
+		#acquire previous day's recommendation so we can make a trending evaluation
+		previousDayDocId = resortDocName + str(dateOfRecommendation - datetime.timedelta(days=1))
+		previousDocUrl = COUCH_DB_URL + "/" + previousDayDocId
+		
+		#Create the base recommendation document
+		reccomendationDocument = createRecommendationDocument(resort, str(dateOfRecommendation) )
+		
+		#Create Powder Forecast first
+		powderData = {}
+		powderData['snow_prev'] = formatFloat(previousSnowFall)
+
+		powderData['snow_new'] = formatFloat(newSnowForTomorrow)
+		powderData['snow_forecast'] = formatFloat(projectedSnowTomorrow)
+		
+		powderData['rating'] = calcPowder(newSnowForTomorrow, previousSnowFall, projectedSnowTomorrow)
+		reccomendationDocument['powder'] = powderData
+
+		#Now create the bluebird recommendation
+		bluebirdData = {}
+		sfBluebirdAM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[0][0])
+		sfBluebirdPM = calcBluebird(snowforecastWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)[1][0])
+
+		#Check if domestic, if not, do not pull from NWS
+		nwsBluebirdRating = calcAverage(sfBluebirdAM, sfBluebirdPM)
+		if (resort['domestic'] == 'T') :
+			weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
+			bluebirdData['weather_summary'] = weatherRecord[1]
+			nwsBluebirdRating = calcBluebird(weatherRecord[0])
+		
+		bluebirdData['rating'] = formatRating(calcAverage(nwsBluebirdRating, calcAverage(sfBluebirdAM, sfBluebirdPM)))
+		reccomendationDocument['bluebird'] = bluebirdData
+
+		#Create the Freezing Level Rating
+		freezingLevelData = {}
+		freezingLevelData['bottom'] = resort['base_elevation']
+		freezingLevelData['top'] = resort['summit_elevation']
+
+		actualDaysFreezingLevel = snowforecastWeather.getAverageFreezingLevelForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
+		#if domestic, convert to feet
+		if (resort['domestic'] == 'T') :
+			actualDaysFreezingLevel *= M_TO_FEET_FACTOR
+
+		freezingLevelData['freezing_level_avg'] = float(int(actualDaysFreezingLevel))
+		freezingLevelData['rating'] = calcFreezingRating(freezingLevelData['freezing_level_avg'], freezingLevelData['bottom'], freezingLevelData['top'])
+		#print freezingLevelData
+		reccomendationDocument['freezing_level'] = freezingLevelData
+
+		try :
+			previousDocLocationResponse = simplejson.load(urllib2.urlopen(previousDocUrl))
+			powderTrend = calculateTrend(reccomendationDocument['powder']['rating'], previousDocLocationResponse['powder']['rating'])
+			bluebirdTrend = calculateTrend(reccomendationDocument['bluebird']['rating'], previousDocLocationResponse['bluebird']['rating'])
+			flTrend = calculateTrend(reccomendationDocument['freezing_level']['rating'], previousDocLocationResponse['freezing_level']['rating'])
+			reccomendationDocument['powder']['trend'] = powderTrend
+			reccomendationDocument['bluebird']['trend'] = bluebirdTrend
+			reccomendationDocument['freezing_level']['trend'] = flTrend
+		#except urllib2.HTTPError :
+		except :
+			reccomendationDocument['powder']['trend'] = 0
+			reccomendationDocument['bluebird']['trend'] = 0
+			reccomendationDocument['freezing_level']['trend'] = 0
+
+		#check if we need to override the existing record
+		try :	
+			currentDocLocationResponse = simplejson.load(urllib2.urlopen(docUrl))
+			reccomendationDocument['_rev'] = str(currentDocLocationResponse['_rev'])
+		except urllib2.HTTPError:
+			print docId + " not found, will create a new record"
+		#print id
+
+		curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
+		#print curlCommand
+		os.system(curlCommand)
+	except TypeError :
+		#if the database entry doesn't exist, skip record and move on
+		print "ERR: Cannot calculate recommendation for " + resort['name'] + ": " + str(dateOfRecommendation)
  
 #Connect to DB
 #db = _mysql.connect("localhost","wsis","wsis","wsis")
