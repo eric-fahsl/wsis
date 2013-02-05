@@ -106,7 +106,7 @@ body .row-fluid {
 	font-size:0.85em;
 }
 
-#generatedOn {
+.smallItalic {
 	font-size:0.9em;
 	font-style:italic;
 	margin-top: -5px;

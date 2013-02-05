@@ -59,7 +59,7 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
-	<div id="generatedOn">Generated on <?= $recommendationCreateDate ?> PST</div>
+	<div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
 
 	<table cellpadding="3" id="resortDetailRatings">
 	<tr>
@@ -100,6 +100,8 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h4>Snowfall Projections</h4>
+	<div class="smallItalic">All projections for mid-mountain of resort</div>
+
     <ul class="precipitationPotential">
       <li>
         <p class="measure"><?= $last24 ?></p>
