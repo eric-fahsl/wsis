@@ -72,10 +72,10 @@ body .row-fluid {
  	padding-right: 5px;
  }
 #stateFacet li {
-	width: 41%;
+	width: 50%;
 	float: left;
-	margin: 0px;
-	padding: 9 0 9 0;
+	padding-left: 0px;
+	padding-right: 0px;
 	text-align: center;
 }
  #results {
