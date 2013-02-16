@@ -278,15 +278,12 @@ if (isset($_GET['resort'])) {
 
 ?>
 
-	<script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>
-    <script type="text/javascript" src="/js/examples/syntaxhighlighter/scripts/shCore.min.js"></script>
-    <script type="text/javascript" src="/js/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
-    <script type="text/javascript" src="/js/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>  
 <!-- End Don't touch this! -->
 
 <!-- Additional plugins go here -->
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.cursor.min.js"></script>
-    <script class="include" type="text/javascript" src="/js//plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script class="include" type="text/javascript" src="/js/plugins/jqplot.dateAxisRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
     <script type="text/javascript" src="/js/plugins/jqplot.highlighter.min.js"></script>
