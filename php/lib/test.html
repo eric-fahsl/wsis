@@ -1,0 +1,63 @@
+
+<html>
+<head>
+	
+	<title>Temperature Over Time Plot</title>
+
+    <link class="include" rel="stylesheet" type="text/css" href="http://ericfahsl.com/js/jquery.jqplot.min.css" />
+	<script class="include" type="text/javascript" src="http://ericfahsl.com/js/jquery.min.js"></script>
+    <script class="include" type="text/javascript" src="http://ericfahsl.com/js/jquery.jqplot.min.js"></script>
+    
+    
+   
+</head>
+
+<body>
+    <div id="chart1" style="height:300px; width:600px;"></div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+	   
+	var ajaxDataRenderer = function(url, plot, options) {
+	    var ret = null;
+	    $.ajax({
+	      // have to use synchronous here, else the function 
+	      // will return before the data is fetched
+	      async: false,
+	      url: url,
+	      dataType:"json",
+	      success: function(data) {
+	        ret = data;
+	      }
+	    });
+	    return ret;
+	  };
+
+	    var plot1 = $.jqplot('chart1', "/lib/resortDataSearch.php?resort=<?= $resort ?>&dateStart=2013-02-02", { 
+	        title: 'Temperature Over Time (GMT)', 
+	        dataRenderer: ajaxDataRenderer,
+	        series: [{ 
+	            label: 'Powder'
+	        }, 
+	        {
+	            label: 'Bluebird'
+	        }], 
+	        axes: { 
+	            xaxis: { 
+	                renderer:$.jqplot.DateAxisRenderer,
+	                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+	                tickOptions: {
+	                  angle: -40
+	                } 
+	            }
+	        }, 
+	        cursor:{
+	            show: true, 
+	            zoom: true
+	        },
+	        legend: { show: true } 
+	    });
+	});
+	</script>
+</body>
+</html>

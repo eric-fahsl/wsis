@@ -57,7 +57,8 @@ if (isset($_GET['resort'])) {
 	  echo "<h2>$resortName, $state</h2>";
 	  echo "<p><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
-
+	<link class="include" rel="stylesheet" type="text/css" href="/js/jquery.jqplot.min.css" />
+	
 	<h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
 	<div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
 
@@ -122,6 +123,67 @@ if (isset($_GET['resort'])) {
 		}
 	?>
 	<div style="clear:both;">
+
+	<?php
+		//calculate start/ending date of chart
+		$chartStart = date('Y-m-d', strtotime($date . ' - 7 days'));
+		$chartEnd = date('Y-m-d', strtotime($date . ' + 7 days'));
+	?>
+
+	<div id="ratingsChart" class="span10"></div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+	   
+	var ajaxDataRenderer = function(url, plot, options) {
+	    var ret = null;
+	    $.ajax({
+	      async: false,
+	      url: url,
+	      dataType:"json",
+	      success: function(data) {
+	        ret = data;
+	      }
+	    });
+	    return ret;
+	  };
+
+	    var plot1 = $.jqplot('ratingsChart', "/lib/resortDataSearch.php?resort=<?= $resort ?>&dateStart=<?= $chartStart ?>&dateMax=<?= $chartEnd ?>&size=30", { 
+	        title: 'Ratings for <?= $resortName ?>', 
+	        dataRenderer: ajaxDataRenderer,
+		    series: [
+		    	{ 
+		            label: 'Powder',
+		            markerOptions:{style:'square'}
+		        }, 
+		        {
+		            label: 'Bluebird'
+		        }
+	        ], 
+	        axes: { 
+	            xaxis: { 
+	                renderer:$.jqplot.DateAxisRenderer,
+	                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+	                tickOptions: {
+	                  angle: -40,
+	                  formatString:'%a, %b %#d'
+
+	                },
+	            yaxis: {
+	            	label: "Rating"
+	            	}	              
+	            }
+	        }, 
+	        highlighter: {
+		        show: true,
+		        sizeAdjust: 7.5
+		    },
+	        legend: { show: true } 
+	    });
+	});
+	</script>
+	<div class="divider"></div>
+
 	<h4>Recommendations based on the following</h4>
 	<?php 
 		if ($isDomestic) {
@@ -216,8 +278,19 @@ if (isset($_GET['resort'])) {
 
 ?>
 
+	<script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="/js/examples/syntaxhighlighter/scripts/shCore.min.js"></script>
+    <script type="text/javascript" src="/js/examples/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+    <script type="text/javascript" src="/js/examples/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<!-- End Don't touch this! -->
 
-
+<!-- Additional plugins go here -->
+    <script class="include" type="text/javascript" src="/js/plugins/jqplot.cursor.min.js"></script>
+    <script class="include" type="text/javascript" src="/js//plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqplot.highlighter.min.js"></script>
+  
 
 <?php
 	}

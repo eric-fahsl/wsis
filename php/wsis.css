@@ -335,3 +335,14 @@ body .row-fluid {
 .midPhoneWidth {
 	min-width: 450px;
 }
+#ratingsChart {
+	height: 300px;
+	padding-left: 10px;
+	margin-left:30px;
+	margin-top:10px;
+}
+.page-header {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
