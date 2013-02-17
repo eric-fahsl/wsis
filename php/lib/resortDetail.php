@@ -168,11 +168,11 @@ if (isset($_GET['resort'])) {
 	                  angle: -40,
 	                  formatString:'%a, %b %#d'
 
-	                },
+	                }
+	            },
 	            yaxis: {
-	            	label: "Rating"
-	            	}	              
-	            }
+	            	min: 0, max: 5
+	           	}        
 	        }, 
 	        highlighter: {
 		        show: true,
