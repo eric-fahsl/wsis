@@ -180,6 +180,21 @@ if (isset($_GET['resort'])) {
 		    },
 	        legend: { show: true } 
 	    });
+
+	    /*
+	    $('#ratingsChart').bind('jqplotDataClick', 
+            function (ev, seriesIndex, pointIndex, data) {
+                //$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+                var d = new Date(data[0]);
+                var month = d.getMonth() + 1;
+                if (month < 10) month = "0" + month;
+                var day = d.getDate();
+                if (day < 10) day = "0" + day;
+                var ratingDate = d.getFullYear() + "-" + month + "-" + day;
+                var url = "resorts?resort=<?= $resort ?>&date=" + ratingDate;
+                alert("date clicked: " + url);
+            }
+        );*/
 	});
 	</script>
 	<div class="divider"></div>
@@ -277,7 +292,7 @@ if (isset($_GET['resort'])) {
 	}
 
 ?>
-
+	<!--[if IE]><script language="javascript" type="text/javascript" src="/js/excanvas.min.js"></script><![endif]-->
 	<script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>  
 <!-- End Don't touch this! -->
 
