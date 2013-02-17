@@ -1,7 +1,7 @@
 body {
 	background: white url(/images/nz_bg3.jpg);
 	background-size: cover; background-position: 50% 100%; 
-	background-repeat: no-repeat no-repeat; 
+	background-repeat: no-repeat; 
 	#background-attachment:fixed;
 }
 
