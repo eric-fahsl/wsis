@@ -131,7 +131,7 @@ if (isset($_GET['resort'])) {
 	?>
 
 	<h4>Additional Dates</h4>
-	<div class="ital">Click any rating to center on that date.</div>
+	<div class="ital">Click any rating point to load recommendation details for that date.</div>
 	
 	<div id="ratingsChart" class="span12"></div>
 
@@ -286,48 +286,6 @@ if (isset($_GET['resort'])) {
 			$firstTime = False;
 		}
 	?>
-<div class='divider'></div>
-
-	<?php
-	 	//Retrieve the additional Forecasted Date Info
-		$requestAttributes = array (
-			"resort" => $resort, 
-			"dateMin" => $date,
-			"sortDate" => "asc",
-			"size" => 5
-		);
-		$results = search($requestAttributes);
-		$i = 0;
-		foreach ($results["hits"]["hits"] as $rec) {
-			if ($i == 0) {
-				echo "<h4>Upcoming Recommendations for $resortName</h4>";
-			}
-			$rec = $rec["_source"];
-			displayRecommendationWidget($rec, "span2 recresultDetail", True);
-			$i++;
-		}
-	?>
-
-<div class="divider"> </div>
-<?php
-	//Retrieve the additional Forecasted Date Info
-	$requestAttributes = array (
-		"resort" => $resort, 
-		"dateMax" => $date,
-		"sortDate" => "desc",
-		"size" => 3
-	);
-	$results = search($requestAttributes);
-
-	$i = 0;
-	foreach ($results["hits"]["hits"] as $rec) {
-		if ($i == 0) {
-			echo "<h4>Prior Recommendations for $resortName</h4>";
-		}
-		$rec = $rec["_source"];
-		displayRecommendationWidget($rec, "span2 recresultDetail", True);
-		$i++;
-	}
 
 ?>
 	<!--[if IE]><script language="javascript" type="text/javascript" src="/js/excanvas.min.js"></script><![endif]-->
