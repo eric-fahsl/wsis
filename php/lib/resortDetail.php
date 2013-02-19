@@ -297,7 +297,7 @@ if (isset($_GET['resort'])) {
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.dateAxisRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-    <script class="include" type="text/javascript" src="/js/plugins/jqplot.CanvasAxisLabelRenderer.min.js"></script>
+    <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
     <script type="text/javascript" src="/js/plugins/jqplot.highlighter.min.js"></script>
   
 
