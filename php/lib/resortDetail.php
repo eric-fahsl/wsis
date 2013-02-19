@@ -130,7 +130,10 @@ if (isset($_GET['resort'])) {
 		$chartEnd = date('Y-m-d', strtotime($date . ' + 7 days'));
 	?>
 
-	<div id="ratingsChart" class="span10"></div>
+	<h4>Additional Dates</h4>
+	<div class="ital">Click any rating to center on that date.</div>
+	
+	<div id="ratingsChart" class="span12"></div>
 
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -149,16 +152,43 @@ if (isset($_GET['resort'])) {
 	  };
 
 	    var plot1 = $.jqplot('ratingsChart', "/lib/resortDataSearch.php?resort=<?= $resort ?>&dateStart=<?= $chartStart ?>&dateMax=<?= $chartEnd ?>&size=30", { 
-	        title: 'Ratings for <?= $resortName ?>', 
+	        //title: 'Ratings for <?= $resortName ?>', 
 	        dataRenderer: ajaxDataRenderer,
-		    series: [
-		    	{ 
-		            label: 'Powder',
-		            markerOptions:{style:'square'}
-		        }, 
+		    series: [		        		        
 		        {
-		            label: 'Bluebird'
-		        }
+		        	yaxis: 'y2axis',
+		        	color: '#a9a9a9',
+		        	shadow: false,
+		        	label: 'Top Elevation',
+		        	showMarker: false
+		        },
+		        {
+		        	yaxis: 'y2axis',
+		        	color: '#a9a9a9',
+		        	shadow: false,
+		        	label: 'Bottom Elevation',
+		        	showMarker: false
+		        },
+		        {
+		        	label: 'Freezing Level',
+		        	color: '#d092db',
+		        	yaxis: 'y2axis',		        	
+		        	markerOptions: { style: 'x'}
+		        },
+		        {
+		            label: 'Bluebird',
+		            color: '#dbb346',
+		            lineWidth: 4,
+		            markerOptions: { size: 12 }
+		        },
+		        { 
+		            label: 'Powder',
+		            markerOptions:{ size: 12, style:'diamond'},
+		            lineWidth: 4,
+		            color: '#18c2e1'
+		            
+		        },	      
+		        
 	        ], 
 	        axes: { 
 	            xaxis: { 
@@ -171,8 +201,16 @@ if (isset($_GET['resort'])) {
 	                }
 	            },
 	            yaxis: {
-	            	min: 0, max: 5
-	           	}        
+	            	min: 0, max: 5,
+	            	label: 'Rating',
+	            	labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+
+	           	},
+	           	y2axis: {
+	           		label: 'Freezing Level',
+	           		labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+	           		labelOptions: { angle: 90 }
+	           	}
 	        }, 
 	        highlighter: {
 		        show: true,
@@ -181,7 +219,7 @@ if (isset($_GET['resort'])) {
 	        legend: { show: true } 
 	    });
 
-	    /*
+	    
 	    $('#ratingsChart').bind('jqplotDataClick', 
             function (ev, seriesIndex, pointIndex, data) {
                 //$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
@@ -192,9 +230,9 @@ if (isset($_GET['resort'])) {
                 if (day < 10) day = "0" + day;
                 var ratingDate = d.getFullYear() + "-" + month + "-" + day;
                 var url = "resorts?resort=<?= $resort ?>&date=" + ratingDate;
-                alert("date clicked: " + url);
+                window.location.href = url;
             }
-        );*/
+        );
 	});
 	</script>
 	<div class="divider"></div>
@@ -301,6 +339,7 @@ if (isset($_GET['resort'])) {
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.dateAxisRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script class="include" type="text/javascript" src="/js/plugins/jqplot.CanvasAxisLabelRenderer.min.js"></script>
     <script type="text/javascript" src="/js/plugins/jqplot.highlighter.min.js"></script>
   
 

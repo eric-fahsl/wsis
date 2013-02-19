@@ -275,6 +275,9 @@ body .row-fluid {
 	font-style: italic;
 	font-size: 0.8em;
 }
+.ital {
+	font-style: italic;
+}
 .bottomValueProp {
 	padding:6px;
 	text-align: right;
@@ -338,8 +341,6 @@ body .row-fluid {
 }
 #ratingsChart {
 	height: 330px;
-	padding-left: 10px;
-	margin-left:32px;
 	margin-top:10px;
 }
 .page-header {
