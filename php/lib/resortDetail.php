@@ -133,7 +133,7 @@ if (isset($_GET['resort'])) {
 	<h4>Additional Dates</h4>
 	<div class="ital">Click any rating point to load recommendation details for that date.</div>
 	
-	<div id="ratingsChart" class="span12"></div>
+	<div id="ratingsChart" class="span11"></div>
 
 	<script type="text/javascript">
 	$(document).ready(function(){
