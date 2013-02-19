@@ -57,6 +57,11 @@ if (isset($_GET['resort'])) {
 	  echo "<h2>$resortName, $state</h2>";
 	  echo "<p><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
+	<style>
+		body {
+			min-width:500px;
+		}
+	</style>
 	<link class="include" rel="stylesheet" type="text/css" href="/js/jquery.jqplot.min.css" />
 	
 	<h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
