@@ -22,10 +22,10 @@ include('esSearchHelper.php');
 	 	$dataPoint = array($rec['_source']['date'] . $timestampAppendStr, $rec['_source']['freezing_level']['freezing_level_avg']);
 	 	array_push($freezingLevelResults, $dataPoint);
 
-	 	$dataPoint = array($rec['_source']['date'] . $timestampAppendStr, $rec['_source']['freezing_level']['top']);
+	 	$dataPoint = array($rec['_source']['date'] . $timestampAppendStr, intval($rec['_source']['freezing_level']['top']));
 	 	array_push($freezingLevelTop, $dataPoint);
 
-	 	$dataPoint = array($rec['_source']['date'] . $timestampAppendStr, $rec['_source']['freezing_level']['bottom']);
+	 	$dataPoint = array($rec['_source']['date'] . $timestampAppendStr, intval($rec['_source']['freezing_level']['bottom']));
 	 	array_push($freezingLevelBottom, $dataPoint);
 	}
 
