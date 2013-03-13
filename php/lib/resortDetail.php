@@ -59,7 +59,7 @@ if (isset($_GET['resort'])) {
 	?>
 	<style>
 		body {
-			min-width:500px;
+			min-width:400px;
 		}
 	</style>
 	<link class="include" rel="stylesheet" type="text/css" href="/js/jquery.jqplot.min.css" />
@@ -356,8 +356,7 @@ if (isset($_GET['resort'])) {
 			 }
 			 
 	 	}
-
-		?>
+		
 		$('#map_canvas').gmap('option', 'zoom', 4);
 		
 	</script>
