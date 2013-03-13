@@ -356,36 +356,11 @@ if (isset($_GET['resort'])) {
 			 }
 			 
 	 	}
-		
+
+		?>
 		$('#map_canvas').gmap('option', 'zoom', 4);
 		
 	</script>
 	<?php
-	/*
-	$states = getStates();
-	//echo json_encode(getStates());
-	$i = 1;
-	foreach ($states["facets"]["State"]["terms"] as $state) {
-		 $stateName = $state["term"];
-		 echo "<div class='span2 stateDisplay'>";
-		 echo "<h3>". $stateName . "</h3>";
-		 $resorts = getResortsForState($stateName);
-		 $today = date("Y-m-d");
-		 foreach($resorts["hits"]["hits"] as $resort) {
-		 	$resortid = $resort["_id"];
-		 	echo "<a href='resorts?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
-		 }
-		 echo "</div>";
-		 if ($i % 6 == 0) {
-		 	echo "<div class='divider'></div>\n";
-		 }
-		 $i++;
- 	}
- 	
- 	echo "</div>";
- 	*/
+	
 }
-
-//}
-
-?>
