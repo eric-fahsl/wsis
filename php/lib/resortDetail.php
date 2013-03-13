@@ -289,9 +289,7 @@ if (isset($_GET['resort'])) {
 				displayRecommendationWidget($rec, "span2 recresultDetail", False);
 			}
 			$firstTime = False;
-		}
-	?>
-
+		}	
 ?>
 	<!--[if IE]><script language="javascript" type="text/javascript" src="/js/excanvas.min.js"></script><![endif]-->
 	<script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>  
@@ -362,5 +360,31 @@ if (isset($_GET['resort'])) {
 		
 	</script>
 	<?php
-	
+	/*
+	$states = getStates();
+	//echo json_encode(getStates());
+	$i = 1;
+	foreach ($states["facets"]["State"]["terms"] as $state) {
+		 $stateName = $state["term"];
+		 echo "<div class='span2 stateDisplay'>";
+		 echo "<h3>". $stateName . "</h3>";
+		 $resorts = getResortsForState($stateName);
+		 $today = date("Y-m-d");
+		 foreach($resorts["hits"]["hits"] as $resort) {
+		 	$resortid = $resort["_id"];
+		 	echo "<a href='resorts?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
+		 }
+		 echo "</div>";
+		 if ($i % 6 == 0) {
+		 	echo "<div class='divider'></div>\n";
+		 }
+		 $i++;
+ 	}
+ 	
+ 	echo "</div>";
+ 	*/
 }
+
+//}
+
+?>
