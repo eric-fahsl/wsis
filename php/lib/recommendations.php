@@ -27,16 +27,21 @@
 		$jsStateValue = $_GET['state'];
 	}
 
+	$dateStart = date("Y-m-d");
+	if (isset($_GET['date'])) {
+		$dateStart = $_GET['date'];
+	}
+
 	//Retrieve the Facets
 	  $requestAttributes = array (
-	  	  "dateStart" => date("Y-m-d"),
+	  	  "dateStart" => $dateStart,
 	  	  "facet" => "t"
 	  );
 	  $facets = search($requestAttributes);
 	  //print json_encode($facets);
 	  $facets = $facets['facets'];
 	  //print $facets['Date'];
-	  $dateProvided = date("Y-m-d");
+	  $dateProvided = $dateStart;
 	  parse_str($_SERVER['QUERY_STRING'], $parameters);
 	  if (isset($parameters['date'])) {
 	  	$dateProvided=$parameters['date'];
@@ -63,8 +68,7 @@
 
 	function search() {
 		
-		parameters = "";
-		//parameters = "?dateStart=<?= $dateProvided ?>";
+		parameters = "startDate=<?= $dateStart ?>";
 		for (var searchParam in facets) {
 			val = facets[searchParam];
 			if (val.value != null && val.value != "") {

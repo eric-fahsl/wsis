@@ -38,8 +38,18 @@ if (isset($_GET['date'])) {
 	$resultClass = "span2 recresultLanding";
 	$requestParams = $_GET;
 	$requestParams['size'] = 5;
+	$startDate = date("Y-m-d");
+	if (isset($_GET['startDate'])) {
+		$startDate = strtotime($_GET['startDate']);
+	}
+	
 	for ($i=0; $i<6; $i++) {
-		$dateForRec = date("Y-m-d",strtotime("+$i day"));
+
+		//$dateForRec = strtotime(strtotime($startDate), "+$i day");
+		//$dateForRec = date("Y m d",strtotime("+$i day",$startDate));
+		//echo "<br/>" . $dateForRec
+		$dateForRec = date("Y-m-d",strtotime("+$i day", $startDate));
+
 		$date = new DateTime($dateForRec);
 		$dateForRecDisplay = $date->format($dateFormat); 
 		
