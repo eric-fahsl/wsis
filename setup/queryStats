@@ -1,18 +1,23 @@
 {
     "query": {
         "term": {
-            "resort": "mounthoodmeadows"
+            "state": "BC"
         }
     },
     "facets" : {
-        "stat1" : {
+        "Powder" : {
             "statistical" : {
                 "field" : "powder.rating"
             }
         }, 
-        "Resort" : { 
-            "terms": {
-                "field": "resort"
+        "Bluebird" : {
+            "statistical" : {
+                "field" : "bluebird.rating"
+            }
+        }, 
+        "Freezing Level" : {
+            "statistical" : {
+                "field" : "freezing_level.rating"
             }
         }
     },
