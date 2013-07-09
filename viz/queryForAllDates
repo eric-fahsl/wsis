@@ -1,0 +1,16 @@
+{
+    "size": 0,
+    "query": {
+        "match_all": { }
+    },
+    "facets": {
+        "Dates": {
+            "terms": {
+                "field": "date",
+                "size": 1000,
+                "order": "term"
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,2159 @@
+{
+  "took" : 15,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 143,
+    "max_score" : 6.1223598,
+    "hits" : [ {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "blacktailmountain_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Blacktail Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -114.36,
+          "lat" : 48.02
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "hoodoo_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Hoodoo",
+        "powder.rating" : 3,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.89,
+          "lat" : 44.42
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "losttrailpowdermountain_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Lost Trail Powder Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -113.94,
+          "lat" : 45.7
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "alpinevalley_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Alpine Valley",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -88.4273,
+          "lat" : 42.7352
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "crestedbutte_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Crested Butte",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.94,
+          "lat" : 38.9
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "eaglepoint_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Eagle Point",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -112.39,
+          "lat" : 38.32
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "grandtarghee_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Grand Targhee",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -110.95,
+          "lat" : 43.79
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "granitepeak_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Granite Peak",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -89.682,
+          "lat" : 44.9286
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "homewoodmountain_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Homewood Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.22,
+          "lat" : 39.17
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "hyland_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Hyland",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -93.3637,
+          "lat" : 44.844
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "kimberleyalpine_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Kimberley Alpine",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -116.014,
+          "lat" : 49.6853
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "missionridge_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Mission Ridge",
+        "powder.rating" : 3,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -120.39,
+          "lat" : 47.28
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mountainhigh_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Mountain High",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -117.71,
+          "lat" : 34.38
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "pebblecreek_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Pebble Creek",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -112.15,
+          "lat" : 42.77
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "powderhorn_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Powderhorn",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -108.16,
+          "lat" : 39.05
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "redlodge_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Red Lodge",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -109.38,
+          "lat" : 45.19
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "schweitzer_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Schweitzer",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -116.65,
+          "lat" : 48.34
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "silvermountain_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Silver Mountain",
+        "powder.rating" : 3,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -116.13,
+          "lat" : 47.48
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "solitude_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Solitude",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.59,
+          "lat" : 40.63
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sugarbowl_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Sugar Bowl",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -120.31,
+          "lat" : 39.32
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "winterpark_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Winter Park",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.78,
+          "lat" : 39.88
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "lutsen_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Lutsen",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -90.7143,
+          "lat" : 47.6641
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "silverstarmountain_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Silver Star Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -119.064,
+          "lat" : 50.3694
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sugarbush_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Sugarbush",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -72.9067,
+          "lat" : 44.1372
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "whitecapmountain_2012-12-20",
+      "_score" : 6.1223598,
+      "fields" : {
+        "resort_name" : "Whitecap Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -90.3965,
+          "lat" : 46.4078
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "49degreesnorth_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "49 Degrees North",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -117.56,
+          "lat" : 48.28
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "lookoutpass_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Lookout Pass",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -115.71,
+          "lat" : 47.44
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "louploupskibowl_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Loup Loup Ski Bowl",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -119.91,
+          "lat" : 48.39
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "aftonalps_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Afton Alps",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -92.7892,
+          "lat" : 44.8556
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "antelopebutte_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Antelope Butte",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -107.51,
+          "lat" : 44.62
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "bearmountain_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Bear Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -116.9,
+          "lat" : 34.22
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "bearvalleymountain_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Bear Valley Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.06,
+          "lat" : 38.5
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "beavermountain_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Beaver Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -111.54,
+          "lat" : 41.97
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "brianhead_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Brian Head",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -112.83,
+          "lat" : 37.67
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "cascademountain_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Cascade Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -89.518,
+          "lat" : 43.5039
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "deervalley_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Deer Valley",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.09,
+          "lat" : 39.32
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "kickinghorsemountain_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Kicking Horse Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -117.059,
+          "lat" : 51.2892
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "killington_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Killington",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -72.8363,
+          "lat" : 43.7924
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "montanasnowbowl_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Montana Snow Bowl",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -113.99,
+          "lat" : 47.02
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "moonlightbasin_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Moonlight Basin",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -111.44,
+          "lat" : 45.29
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mounthoodmeadows_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Mount Hood Meadows",
+        "powder.rating" : 5,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.69,
+          "lat" : 45.34
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "powdermountain_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Powder Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -111.77,
+          "lat" : 41.38
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "redriver_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Red River",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.41,
+          "lat" : 36.7
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sierra-at-tahoe_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Sierra-at-Tahoe",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.07,
+          "lat" : 38.79
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "skiapache_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Ski Apache",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.78,
+          "lat" : 33.4
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "skibluewood_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Ski Bluewood",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -117.85,
+          "lat" : 46.07
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sleepinggiant_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Sleeping Giant",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -109.95,
+          "lat" : 44.5
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snoqualmie-alpental_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Snoqualmie - Alpental",
+        "powder.rating" : 5,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.45,
+          "lat" : 47.44
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "stevenspass_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Stevens Pass",
+        "powder.rating" : 5,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.09,
+          "lat" : 47.73
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sunlight_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Sunlight",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -107.34,
+          "lat" : 39.38
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "whitepass_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "White Pass",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.4,
+          "lat" : 46.63
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "willamettepass_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Willamette Pass",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -122.03,
+          "lat" : 43.61
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "powderridge_2012-12-20",
+      "_score" : 6.0060267,
+      "fields" : {
+        "resort_name" : "Powder Ridge",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -94.311,
+          "lat" : 45.3444
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "anthonylakes_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Anthony Lakes",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -118.26,
+          "lat" : 44.97
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "kellycanyon_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Kelly Canyon",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -111.62,
+          "lat" : 43.65
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "alpenglow_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Alpenglow",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -149.5,
+          "lat" : 61.24
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "alpinemeadows_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Alpine Meadows",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.25,
+          "lat" : 39.17
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "angelfire_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Angel Fire",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.27,
+          "lat" : 36.39
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "bigwhite_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Big White",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -118.929,
+          "lat" : 49.7219
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "brighton_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Brighton",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.58,
+          "lat" : 40.58
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "canyons_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Canyons",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.09,
+          "lat" : 39.32
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "coppermountain_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Copper Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.17,
+          "lat" : 39.48
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "jacksonhole_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Jackson Hole",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -110.86,
+          "lat" : 43.61
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "loveland_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Loveland",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -105.9,
+          "lat" : 39.67
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "magicmountain_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Magic Mountain ",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -114.28,
+          "lat" : 42.19
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mammothmountain_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Mammoth Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -119.02,
+          "lat" : 37.63
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mounthoodskibowl_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Mount Hood Skibowl",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.76,
+          "lat" : 45.29
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mountspokane_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Mount Spokane",
+        "powder.rating" : 3,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -117.12,
+          "lat" : 47.93
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "northstar-at-tahoe_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Northstar-at-Tahoe",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.15,
+          "lat" : 39.25
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "pajaritomountain_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Pajarito Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.41,
+          "lat" : 35.89
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "parkcity_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Park City",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.5,
+          "lat" : 40.63
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "showdown_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Showdown",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -110.73,
+          "lat" : 46.84
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snowbird_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Snowbird",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.67,
+          "lat" : 40.57
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snowyrange_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Snowy Range",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -106.17,
+          "lat" : 41.35
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sundance_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Sundance",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -111.58,
+          "lat" : 40.41
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "whitepine_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "White Pine",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -109.75,
+          "lat" : 42.98
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "madriverglen_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Mad River Glen",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -72.9244,
+          "lat" : 44.2
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mountwashingtonalpine_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Mount Washington Alpine",
+        "powder.rating" : 3,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -125.299,
+          "lat" : 49.7383
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "panoramamountain_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Panorama Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -115.59,
+          "lat" : 49.4
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "redmountain_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Red Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -117.817,
+          "lat" : 49.1047
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "whistlerblackcomb_2012-12-20",
+      "_score" : 5.999772,
+      "fields" : {
+        "resort_name" : "Whistler Blackcomb",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -122.949,
+          "lat" : 50.1159
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "alyeska_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Alyeska",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -148.95,
+          "lat" : 60.94
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "arapahoebasin_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Arapahoe Basin",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -105.88,
+          "lat" : 39.68
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "aspenheights_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Aspen Heights",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -106.91,
+          "lat" : 39.14
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "devilshead_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Devils Head",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -89.6277,
+          "lat" : 43.4216
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "heavenly_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Heavenly",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -119.93,
+          "lat" : 38.92
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "jaypeak_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Jay Peak",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -72.5383,
+          "lat" : 44.9162
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "keystone_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Keystone",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.95,
+          "lat" : 39.58
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mountashland_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Mount Ashland",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -122.72,
+          "lat" : 42.09
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mountbachelor_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Mount Bachelor",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.68,
+          "lat" : 43.99
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mt.baldy_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Mt. Baldy",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -117.63,
+          "lat" : 34.28
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "purgatory_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Purgatory",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -107.84,
+          "lat" : 37.65
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sandiapeak_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Sandia Peak",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.42,
+          "lat" : 35.19
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "silverton_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Silverton",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -107.64,
+          "lat" : 37.89
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "skicooper_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Ski Cooper",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.21,
+          "lat" : 39.3
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "skisantafe_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Ski Santa Fe",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.79,
+          "lat" : 35.8
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snowbasin_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Snowbasin",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -111.89,
+          "lat" : 41.22
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "soldiermountain_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Soldier Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -114.86,
+          "lat" : 43.48
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "squawvalleyusa_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Squaw Valley USA",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.25,
+          "lat" : 39.19
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "steamboat_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Steamboat",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -106.77,
+          "lat" : 40.46
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "tamarack_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Tamarack",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -116.15,
+          "lat" : 44.69
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "taos_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Taos",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.48,
+          "lat" : 36.58
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "telluride_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Telluride",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -107.82,
+          "lat" : 37.94
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "timberline_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Timberline",
+        "powder.rating" : 4,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.72,
+          "lat" : 45.34
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "turnermountain_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Turner Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -115.64,
+          "lat" : 48.61
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "smugglersnotch_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Smugglers Notch",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -72.7682,
+          "lat" : 44.5051
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sunpeaksresort_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Sun Peaks Resort",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -119.893,
+          "lat" : 50.8939
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "whitefacemountain_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Whiteface Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -73.8868,
+          "lat" : 44.3671
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "brundage_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Brundage",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -116.12,
+          "lat" : 45.0
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "crystalmountain_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Crystal Mountain",
+        "powder.rating" : 5,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.49,
+          "lat" : 46.92
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "hurricaneridge_2012-12-20",
+      "_score" : 5.934706,
+      "fields" : {
+        "resort_name" : "Hurricane Ridge",
+        "powder.rating" : 3,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -123.51,
+          "lat" : 47.97
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "bigsky_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Big Sky",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -111.43,
+          "lat" : 45.27
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "bogusbasin_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Bogus Basin",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -116.12,
+          "lat" : 43.74
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "bridgerbowl_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Bridger Bowl",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -110.92,
+          "lat" : 45.82
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "discoverybasin_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Discovery Basin",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -113.25,
+          "lat" : 46.26
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "greatdivide_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Great Divide",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -112.32,
+          "lat" : 46.75
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "alta_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Alta",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -111.61,
+          "lat" : 40.58
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "aspenmountain_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Aspen Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.8,
+          "lat" : 39.17
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "buttermilk_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Buttermilk",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.88,
+          "lat" : 39.17
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "cannonmountain_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Cannon Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -71.698,
+          "lat" : 44.163
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "chinapeak_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "China Peak",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -119.19,
+          "lat" : 37.22
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "dodgeridge_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Dodge Ridge",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -119.92,
+          "lat" : 38.18
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "eaglecrestskiarea_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Eaglecrest Ski Area",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -134.52,
+          "lat" : 58.27
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "eldora_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Eldora",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -105.59,
+          "lat" : 39.94
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "ferniealpine_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Fernie Alpine",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -115.087,
+          "lat" : 49.4625
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "kirkwood_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Kirkwood",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -120.0,
+          "lat" : 38.68
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "maverickmountain_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Maverick Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -113.16,
+          "lat" : 45.45
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "monarch_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Monarch",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -106.35,
+          "lat" : 38.51
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mountbaker_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Mount Baker",
+        "powder.rating" : 5,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -121.68,
+          "lat" : 48.86
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "mt.shasta_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Mt. Shasta",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -122.21,
+          "lat" : 41.32
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "pomerelle_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Pomerelle",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -113.62,
+          "lat" : 42.32
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sipapu_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Sipapu",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -105.55,
+          "lat" : 36.15
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snowking_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Snow King",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -110.75,
+          "lat" : 43.46
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snowmass_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Snowmass",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -106.91,
+          "lat" : 39.16
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "snowsummitmountain_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Snow Summit Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -116.9,
+          "lat" : 34.22
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sunvalley_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Sun Valley",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -114.39,
+          "lat" : 43.67
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "tetonpass_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Teton Pass",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 2,
+        "location" : {
+          "lon" : -112.8,
+          "lat" : 47.94
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "whitefishmountain_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Whitefish Mountain",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 1,
+        "location" : {
+          "lon" : -114.34,
+          "lat" : 48.51
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "wolfcreek_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Wolf Creek",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 5,
+        "location" : {
+          "lon" : -106.6,
+          "lat" : 37.4
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "stowe_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Stowe",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -72.7923,
+          "lat" : 44.4887
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sugarloaf_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Sugarloaf",
+        "powder.rating" : 2,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -70.5182,
+          "lat" : 44.7594
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "sundayriver_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Sunday River",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 3,
+        "location" : {
+          "lon" : -70.7557,
+          "lat" : 44.447
+        }
+      }
+    }, {
+      "_index" : "recommendations",
+      "_type" : "recommendations",
+      "_id" : "wildcatmountain_2012-12-20",
+      "_score" : 5.8738084,
+      "fields" : {
+        "resort_name" : "Wildcat Mountain",
+        "powder.rating" : 1,
+        "date" : "2012-12-20",
+        "bluebird.rating" : 4,
+        "location" : {
+          "lon" : -71.2034,
+          "lat" : 44.2604
+        }
+      }
+    } ]
+  }
+}
