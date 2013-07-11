@@ -9,7 +9,7 @@ json_file=open(filename)
 response_data = json.load(json_file)
 json_file.close()
 dates = []
-allData = {}
+allData = []
 error = ""
 
 for term in response_data['facets']['Dates']['terms'] :
@@ -34,11 +34,11 @@ for date in dates :
 			
 			features.append(feature)
 
-		data = {"type": "FeatureCollection", "features": features}
-		allData[date] = json.dumps(data);
+		data = {"date":date, "type": "FeatureCollection", "features": features}
+		allData.append(data)
 	except :
 		error = ""
 
 #json.dumps(allData)
-print allData
+print json.dumps(allData)
 
