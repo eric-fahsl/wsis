@@ -45,14 +45,14 @@
 }
 
 .clickable {
-  color: yellow;
-  padding:10px;
-  border: 1px solid white;
   cursor: pointer;
   cursor: hand;
 }
 
 .titleface {
+color: yellow;
+  padding:10px;
+  border: 1px solid white;
   font-style:oblique;
   font-family:Tahoma;
   padding-right:10px;
@@ -65,13 +65,19 @@
   position: absolute;
   right: 10px;
   bottom: 20px;
-  opacity:0.5;
+  opacity:0.7;
+}
+
+.selected {
+  background: yellow;
+  color: black;
 }
 
 .calendar {
     float: left;
     padding-right: 10px;
     font-size: 0.9em;
+    text-align: center;
   }
 
   .smaller {
@@ -81,7 +87,41 @@
     </style>
   </head>
   <body id="map">
-    <script type="text/javascript">
+    
+    <div id="start" onclick="startAnimation();" class="clickable titleface">
+      START
+    </div>
+    <div id="stop" onclick="stopTimer();" class="clickable titleface">
+      STOP
+    </div>
+    
+    <span id="title" class="titleface">
+      
+    </span>
+
+    <div id="calendarDiv">
+      <table class="calendar" cellspacing=0><tr><th>December</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td id='date0'>1</td></tr><tr><td id='date1'>2</td><td id='date2'>3</td><td id='date3'>4</td><td id='date4'>5</td><td id='date5'>6</td><td id='date6'>7</td><td id='date7'>8</td></tr><tr><td id='date8'>9</td><td id='date9'>10</td><td id='date10'>11</td><td id='date11'>12</td><td id='date12'>13</td><td id='date13'>14</td><td id='date14'>15</td></tr><tr><td id='date15'>16</td><td id='date16'>17</td><td id='date17'>18</td><td id='date18'>19</td><td id='date19'>20</td><td id='date20'>21</td><td id='date21'>22</td></tr><tr><td id='date22'>23</td><td id='date23'>24</td><td id='date24'>25</td><td id='date25'>26</td><td id='date26'>27</td><td id='date27'>28</td><td id='date28'>29</td></tr><tr><td id='date29'>30</td><td id='date30'>31</td><td >&nbsp;</td><td>&nbsp;</td><td >&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></td></tr></table>  
+
+<table class="calendar" cellspacing=0><tr><th>January</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr><tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr><tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr><tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></td></tr></table>
+
+
+<table class="calendar" cellspacing=0><tr><th>February</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr><tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr><tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></td></tr></table>
+
+
+<table class="calendar" cellspacing=0><tr><th>March</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td></tr><tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr><tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr><tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr><tr><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></td></tr></table>
+
+
+<table class="calendar" cellspacing=0><tr><th>April</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td>Sa</td></tr><tr><td>&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr><tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr><tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr><tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr><tr><td>28</td><td>29</td><td>30</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></td></tr></table>
+
+    </div>
+    <span id="copy">
+      &copy; 2010
+      <a href="http://www.cloudmade.com/">CloudMade</a>,
+      <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors,
+      <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a>.
+    </span>
+
+  <script type="text/javascript">
       
       var sampleData2 = (function () {
         var sampleData2 = null;
@@ -121,18 +161,28 @@
       
       refreshData(dayIndex++);
 
+      //set up click actions
+      for (i=0; i<31; i++) {
+        $('#date' + i).click(selectDate);
+        $('#date' + i).addClass('clickable');
+      }
+
   function startAnimation() {
     myVar=setInterval(function(){refreshData(dayIndex++)},500);
   }
 
   function refreshData(i) {
-      if (jsonData) 
+      if (jsonData) {
         map.remove(jsonData)
+        unhighlightDate(i-1);
+      }
       jsonData = po.geoJson()
         .features(sampleData2[i]['features'])
         .on("load", load)
         .clip(false);
       map.add(jsonData);
+
+      $('#date' + i).addClass('selected');
 
       updateCaption(sampleData2[i]['date']);
 
@@ -179,73 +229,18 @@
           .clip(false)
           .reshow();
     }
-/*
-    var g = e.tile.element;
-    while (g.lastChild) g.removeChild(g.lastChild);
 
-    for (var i in e.features) {
-      var feature = e.features[i].data;
-      var point = g.appendChild(po.svg("circle"));
-      point.setAttribute("cx", feature.geometry.coordinates[1]);
-      point.setAttribute("cy", feature.geometry.coordinates[0]);
-      point.setAttribute("r", 3);
-
-    } */
-  
-    /*
-    var cluster = e.tile.cluster || (e.tile.cluster = kmeans()
-        .iterations(16)
-        .size(64));
-
-    for (var i = 0; i < e.features.length; i++) {
-      cluster.add(e.features[i].data.geometry.coordinates);
+    function unhighlightDate(dateIndex) {
+      $('#date' + dateIndex).removeClass('selected');
     }
 
-    var tile = e.tile, g = tile.element;
-    while (g.lastChild) g.removeChild(g.lastChild);
-
-    var means = cluster.means();
-    means.sort(function(a, b) { return b.size - a.size; });
-    for (var i = 0; i < means.length; i++) {
-      var mean = means[i], point = g.appendChild(po.svg("circle"));
-      point.setAttribute("cx", mean.x);
-      point.setAttribute("cy", mean.y);
-      point.setAttribute("r", Math.pow(2, tile.zoom - 11) * Math.sqrt(mean.size));
-    } 
-  } */
+    function selectDate(){
+      unhighlightDate(dayIndex - 1);
+      elementId = this.id;
+      dayIndex = elementId.substring(4);
+      refreshData(dayIndex++);
+    }
 
     </script>
-    <div id="start" onclick="startAnimation();" class="clickable titleface">
-      START
-    </div>
-    <div id="stop" onclick="stopTimer();" class="clickable titleface">
-      STOP
-    </div>
-    
-    <span id="title" class="titleface">
-      
-    </span>
-
-    <div id="calendarDiv">
-      <table class="calendar" cellspacing=0><tr><th>December</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td class=cr>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td class=cr>1</td></tr><tr><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td class=cr>8</td></tr><tr><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td class=cr>15</td></tr><tr><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td class=cr>22</td></tr><tr><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td class=cr>29</td></tr><tr class=cb><td>30</td><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td class=cr>&nbsp;</td></tr></table></td></tr></table>
-
-<table class="calendar" cellspacing=0><tr><th>January</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td class=cr>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td class=cr>5</td></tr><tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td class=cr>12</td></tr><tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td class=cr>19</td></tr><tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td class=cr>26</td></tr><tr class=cb><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td>&nbsp;</td><td class=cr>&nbsp;</td></tr></table></td></tr></table>
-
-
-<table class="calendar" cellspacing=0><tr><th>February</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td class=cr>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td class=cr>2</td></tr><tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td class=cr>9</td></tr><tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td class=cr>16</td></tr><tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td class=cr>23</td></tr><tr class=cb><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>&nbsp;</td><td class=cr>&nbsp;</td></tr></table></td></tr></table>
-
-
-<table class="calendar" cellspacing=0><tr><th>March</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td class=cr>Sa</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1</td><td class=cr>2</td></tr><tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td class=cr>9</td></tr><tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td class=cr>16</td></tr><tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td class=cr>23</td></tr><tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td class=cr>30</td></tr><tr class=cb><td>31</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td class=cr>&nbsp;</td></tr></table></td></tr></table>
-
-
-<table class="calendar" cellspacing=0><tr><th>April</th></tr><tr><td><table class="smaller"><tr class=cl><td>Su</td><td>Mo</td><td>Tu</td><td>We</td><td>Th</td><td>Fr</td><td class=cr>Sa</td></tr><tr><td>&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td class=cr>6</td></tr><tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td class=cr>13</td></tr><tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td class=cr>20</td></tr><tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td class=cr>27</td></tr><tr class=cb><td>28</td><td>29</td><td>30</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td class=cr>&nbsp;</td></tr></table></td></tr></table>
-
-    </div>
-    <span id="copy">
-      &copy; 2010
-      <a href="http://www.cloudmade.com/">CloudMade</a>,
-      <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors,
-      <a href="http://creativecommons.org/licenses/by-sa/2.0/">CCBYSA</a>.
-    </span>
   </body>
 </html>
