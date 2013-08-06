@@ -1,0 +1,42 @@
+{
+    "query": {
+        "filtered": {
+            "query": {
+                "bool": {
+                    "must": [                       
+                        {
+                            "term": {
+                                "state": "WA"
+                            }
+                        },
+                        {
+                            "range": {
+                                "date": {
+                                    "lte": "2013-04-21"
+                                }
+                            }
+                        }
+                    ]                  
+                }
+            }
+        }
+    },
+    "facets" : {
+        "Powder" : {
+            "statistical" : {
+                "field" : "powder.rating"
+            }
+        }, 
+        "Bluebird" : {
+            "statistical" : {
+                "field" : "bluebird.rating"
+            }
+        }, 
+        "Freezing Level" : {
+            "statistical" : {
+                "field" : "freezing_level.rating"
+            }
+        }
+    },
+    "size": 0
+}
