@@ -192,7 +192,7 @@
 
       	<?php 
       		function outputDateOption($month, $day, $year) {
-      			echo "<option value='" . $year . "-" . $month . "-" . $day . "'>" . $month . "/" . $day . "/" . $year . "</option>";
+      			echo "<option value='" . $year . "-" . str_pad($month, 2, "0", STR_PAD_LEFT) . "-" . str_pad($day, 2, "0", STR_PAD_LEFT) . "'>" . $month . "/" . $day . "/" . $year . "</option>\n";
       		}
 
       		$month = 12;
