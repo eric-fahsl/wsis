@@ -121,18 +121,18 @@ color: yellow;
 
   <script type="text/javascript">
       
-      var sampleData2 = (function () {
-        var sampleData2 = null;
+      var allDatesData = (function () {
+        var allDatesData = null;
         $.ajax({
             'async': false,
             'global': false,
             'url': "allDatesData.json",
             'dataType': "json",
             'success': function (data) {
-                sampleData2 = data;
+                allDatesData = data;
             }
         });
-        return sampleData2;
+        return allDatesData;
     })(); 
       var dayIndex = 0;
 
@@ -160,7 +160,7 @@ color: yellow;
       refreshData(dayIndex++);
 
       //set up click actions
-      for (i=0; i<sampleData2.length; i++) {
+      for (i=0; i<allDatesData.length; i++) {
         $('#date' + i).click(selectDate);
         $('#date' + i).addClass('clickable');
       }
@@ -170,26 +170,19 @@ color: yellow;
   }
 
   function refreshData(i) {
-    if (i < sampleData2.length) {
+    if (i < allDatesData.length) {
       if (jsonData) {
         map.remove(jsonData)
         unhighlightDate(i-1);
       }
       jsonData = po.geoJson()
-        .features(sampleData2[i]['features'])
+        .features(allDatesData[i]['features'])
         .on("load", load)
         .clip(false);
       map.add(jsonData);
 
       $('#date' + i).addClass('selected');
 
-      //updateCaption(sampleData2[i]['date']);
-
-      /*if (jsonData) {
-        var t = setTimeout(hideLayer(jsonData), 500);
-      }
-      jsonData = newJsonData;
-      */
     } else {
       stopTimer();
     }
