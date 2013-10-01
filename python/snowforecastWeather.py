@@ -16,6 +16,9 @@ NIGHT_STRING = "ight"
 columnFields = {}
 FORECAST_LOCATION = "mid"
 
+SNOW_FORECAST_WIND_SYMBOL_PRE = "wind"
+SNOW_FORECAST_WIND_SYMBOL_POST = "metric.gif"
+
 def convertCmToIn(centimeters) :
 	return float(centimeters) * 0.393701
 
@@ -40,6 +43,12 @@ def getWeather(resort, db) :
 		row['summary'] = xmlHelper.getSnowForecastTag(FORECAST_LOCATION, "pphrase", p)
 		row['low_temp'] = xmlHelper.getSnowForecastTag(FORECAST_LOCATION, "min", p)
 		row['high_temp'] = xmlHelper.getSnowForecastTag(FORECAST_LOCATION, "max", p)
+		row['wind'] = xmlHelper.getSnowForecastTag(FORECAST_LOCATION, "pwind", p)
+		# Parse wind symbol data from something like windSW35metric.gif to SW
+		wsymbol = xmlHelper.getSnowForecastTag(FORECAST_LOCATION, "pwsymbol", p)
+		wsymbol = wsymbol.replace(SNOW_FORECAST_WIND_SYMBOL_PRE, "").replace(SNOW_FORECAST_WIND_SYMBOL_POST, "")
+		wsymbol = wsymbol.replace(row['wind'], "")
+		row['wind_dir'] = wsymbol
 		snow_forecast = xmlHelper.getSnowForecastTag(FORECAST_LOCATION, "psnow", p)
 		if snow_forecast == "-" :
 			snow_forecast = 0
