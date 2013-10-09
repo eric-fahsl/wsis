@@ -239,7 +239,6 @@ function queryES($searchUrl, $queryObject) {
 	    'Content-Length: ' . strlen($queryObject))                                                                       
 	);      
 	$esResult = curl_exec($ch);
-
 	$results = json_decode($esResult, true);
 
 	return $results;
