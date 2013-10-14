@@ -5,7 +5,11 @@ var app = app || {};
 // The DOM element for a recommendation item...
 app.ReccListView = Backbone.View.extend({
 
-    el: "#recommendations",
+    el: "#container",
+    recommendationsEl: "#recommendations",
+    facetEl: "#facets",
+
+    facets: {date: '2013-09-30'},
 
     // Cache the template function for a single item.
     template: _.template( $('#recc-template').html() ),
@@ -18,6 +22,8 @@ app.ReccListView = Backbone.View.extend({
         'click .destroy': 'clear',           // NEW
         'keypress .edit': 'updateOnEnter',
         'blur .edit': 'close' */
+        "click #regionFacets li" : 'regionFacetClick',
+        "click #stateFacets li" : 'stateFacetClick'
     },
 
     // The TodoView listens for changes to its model, re-rendering. Since there's
@@ -26,18 +32,26 @@ app.ReccListView = Backbone.View.extend({
     initialize: function() {
         //this.collection = new app.ReccList(reccs);
         this.collection = new app.ReccList();
+        this.facetCollectionRegion = new app.FacetList();
+        this.facetCollectionState = new app.FacetList();
         //this.collection.fetch({reset: true});
+
+        this.refreshData();
+    },
+
+    refreshData: function() {
+        this.collection.clearAll();
+        this.facetCollectionRegion.clearAll();
+        this.facetCollectionState.clearAll();
         var that = this;
         this.collection.fetch({
-            success: function () {
+            data: $.param(this.facets),
+            success: function (model) {
+                that.facetCollectionRegion = new app.FacetList(that.collection.facets.Region.terms);
+                that.facetCollectionState = new app.FacetList(that.collection.facets.State.terms);
                 that.render();
             }
         });
-        //this.collection = new app.Reccs();
-        //this.collection.fetch({reset: true});
-        //this.listenTo(this.model, 'change', this.render);
-        //this.listenTo(this.model, 'destroy', this.remove);        // NEW
-//        this.listenTo(this.model, 'visible', this.toggleVisible); // NEW
     },
 
 //    // Re-render the recommendations of the recc item.
@@ -51,6 +65,22 @@ app.ReccListView = Backbone.View.extend({
         this.collection.each(function( item ) {
             this.renderRecc( item );
         }, this );
+
+
+        this.facetCollectionRegion.each(function (item) {
+            this.renderFacet(item, 'region');
+        }, this);
+        this.facetCollectionState.each(function (item) {
+            this.renderFacet(item, 'state');
+        }, this);
+//        that = this;
+//        $.each( this.collection.facets.Region.terms, function(i, v){
+//            that.renderFacet(v);
+//        });
+        var that = this;
+        $.each(this.facets, function(i, v) {
+             that.toggleFacet(v);
+        });
     },
 
     // render a book by creating a BookView and appending the
@@ -59,7 +89,37 @@ app.ReccListView = Backbone.View.extend({
         var reccView = new app.ReccView({
             model: item
         });
-        this.$el.append( reccView.render().el );
+        $(this.recommendationsEl).append( reccView.render().el );
+    },
+
+    renderFacet: function (facet, facetType) {
+        var facetView = new app.FacetView({
+            model: facet
+        });
+        $('#' + facetType + 'Facets').append(facetView.render().el);
+    },
+
+    regionFacetClick: function(e) {
+        this.facetClick(e, "region");
+    },
+    stateFacetClick: function(e) {
+        this.facetClick(e, "state");
+    },
+
+    facetClick: function(e, facetType) {
+        var text = e.target.id.split('-')[1];
+        if (this.facets[facetType] == text)
+            delete this.facets[facetType];
+        else
+            this.facets[facetType] = text;
+        this.refreshData();
+    },
+
+    toggleFacet: function(facetName) {
+        var facetid = "#F-" + facetName;
+        var xid = "#X-" + facetName;
+        $(facetid).addClass("selected");
+        $(xid).show();
     }
 
 });

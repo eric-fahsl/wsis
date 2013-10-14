@@ -211,11 +211,25 @@ function search($_GET) {
 		);
 	} else {
 		$queryArray = array (
-			"query" => buildQuery(), 
-			"sort" => buildSort()
+			"query" => buildQuery(),
+            "facets" => buildFacets(),
+            "sort" => buildSort()
 		);
+        if (isset($_GET['fields'])) {
+            $queryArray['fields'] = array('powder.rating', 'state_full', 'freezing_level.rating', 'resort',
+                'date', 'bluebird.rating', 'resort_name');
+        }
 	}
-
+/*
+    'resort_name' => $rec['resort_name'],
+            'powder_rating' => $rec['powder']['rating'],
+            '_id' => $rec['_id'],
+            'state_full' => $rec['state_full'],
+            'freezing_level_rating' => $rec['freezing_level']['rating'],
+            'resort' => $rec['resort'],
+            'bluebird_rating' => $rec['bluebird']['rating'],
+            'date' => $rec['date']
+    */
 	if (isset($_GET['size']) && is_numeric($pageSize = $_GET['size'])) {
 		if (intval($pageSize) > 30) {
 			$pageSize = 30;
@@ -295,7 +309,7 @@ function getResortsForState($state) {
 	);
 
 	$queryObject = json_encode($queryArray);
-	//print $queryObject;
+	print $queryObject;
 
 	return queryES("http://localhost:9200/resorts/_search", $queryObject);
 

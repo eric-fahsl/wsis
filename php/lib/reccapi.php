@@ -11,25 +11,33 @@ if (isset($_GET['date'])) {
 	$homeWidget = false;
 	$showDate = false;
 
-	if (isset($_GET['hw'])) {
-		$resultClass = "recresulthome";
-	}
+//    $reccResults = array();
+    //Iterate through all of the recommendation results and add to the reccResults array
+//    foreach ($results['hits']['hits'] as $rec) {
+//        $rec = $rec['_source'];
+//        $reccResults[] = array(
+//            'resort_name' => $rec['resort_name'],
+//            'powder_rating' => $rec['powder']['rating'],
+//            '_id' => $rec['_id'],
+//            'state_full' => $rec['state_full'],
+//            'freezing_level_rating' => $rec['freezing_level']['rating'],
+//            'resort' => $rec['resort'],
+//            'bluebird_rating' => $rec['bluebird']['rating'],
+//            'date' => $rec['date']
+//        );
+//    }
 
-	if ($results["hits"]["total"] == 0) {
-		echo "<h3>No results found, please modify your search and try again</h3>";
-	} else {
-		$date = new DateTime($_GET['date']);
-		$dateForRecDisplay = $date->format($dateFormat); 
-		//don't show this on the home page
-		if (!isset($_GET['date'])) {
-			echo "<h4>Recommendations For $dateForRecDisplay</h4>";
-		} else {
-			echo "<h5 onclick='clickFilter(\"date\", \"$dateForRec\", $i)'>$dateForRecDisplay</h5>";
-		}
-	}
-	foreach ($results["hits"]["hits"] as $rec) {
-	 	displayRecommendationWidget($rec['_source'], $resultClass, $showDate);
-	}
+
+    $jsonResults = array (
+        "results" => $results['hits']['hits'],
+        "facets" => $results['facets']
+    );
+
+    echo json_encode($jsonResults);
+//    echo json_encode($results["hits"]["hits"], true);
+	//foreach ($results["hits"]["hits"] as $rec) {
+	// 	displayRecommendationWidget($rec['_source'], $resultClass, $showDate);
+	//}
 
 
 } else {
@@ -41,9 +49,16 @@ if (isset($_GET['date'])) {
 	$startDate = date("Y-m-d");
 	if (isset($_GET['startDate'])) {
 		$startDate = strtotime($_GET['startDate']);
-	}
-	
-	$allResults = array();
+        $requestParams['date'] = $startDate;
+    }
+
+    $results = search($requestParams);
+
+    $allResults = array();
+    $allResults[] = $results['hits']['hits'];
+
+
+    /*
 	for ($i=0; $i<6; $i++) {
 
 		//$dateForRec = strtotime(strtotime($startDate), "+$i day");
@@ -60,7 +75,7 @@ if (isset($_GET['date'])) {
 		$allResults[] = $results['hits']['hits'][0];
 		//json_encode($results['hits'], true);
 
-		/*
+
 		if ($results["hits"]["total"] == 0 ) {
 			if ($displayedNoResults > 1) {
 				echo "<h3>No results found, please modify your search and try again</h3>";
@@ -82,9 +97,9 @@ if (isset($_GET['date'])) {
 
 		}
 		echo "<div style='clear:both'></div>"; 
-		*/
-	}
 
+	}
+    */
 	echo json_encode($allResults, true);
 	
 }

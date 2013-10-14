@@ -4,8 +4,12 @@ var app = app || {};
 
 app.ReccView = Backbone.View.extend({
     tagName: 'div',
-    className: 'span2',
+    className: 'reccView span2',
     template: _.template( $( '#recc-template' ).html() ),
+
+    initialize: function() {
+        this.listenTo(this.model, 'destroy', this.remove);
+    },
 
     render: function() {
         //this.el is what we defined in tagName. use $el to get access to jQuery html() function
@@ -13,4 +17,5 @@ app.ReccView = Backbone.View.extend({
 
         return this;
     }
+
 });
