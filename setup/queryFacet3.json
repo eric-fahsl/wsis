@@ -1,0 +1,99 @@
+{
+    "query": {
+        "filtered": {
+            "query": {
+                "bool": {
+                    "must": [],
+                    "must_not": [],
+                    "should": [
+
+                        {
+                            "range": {
+                                "date": {
+                                    "gte": "2013-10-10"
+                                }
+                            }
+                        }
+
+                    ],
+                    "minimum_number_should_match": 1
+                }
+            },
+            "filter": {
+                "geo_distance": {
+                    "distance": "200mi",
+                    "location": "46.3096738,-119.2755485"
+                }
+            }
+        }
+    },
+    "facets": {
+        "facet_result" : {
+
+        },
+
+        "date": {
+            "terms": {
+                "field": "date",
+                "order": "term"
+            }
+        },
+        "distance": {
+            "geo_distance": {
+                "location": "46.3096738,-119.2755485",
+                "ranges": [
+                    {
+                        "to": 100
+                    },
+                    {
+                        "from": 200
+                    }
+                ]
+            }
+        },
+        "region": {
+            "terms": {
+                "field": "region"
+            }
+        },
+        "state": {
+            "terms": {
+                "field": "state",
+                "order": "term",
+                "size": 20
+            }
+        }
+    },
+    "sort": [
+        {
+            "powder.rating": {
+                "order": "desc"
+            }
+        },
+        {
+            "bluebird.rating": {
+                "order": "desc"
+            }
+        },
+        {
+            "powder.snow_new": {
+                "order": "desc"
+            }
+        },
+        {
+            "powder.snow_forecast": {
+                "order": "desc"
+            }
+        }
+    ],
+    "fields": [
+        "powder.rating",
+        "state_full",
+        "freezing_level.rating",
+        "resort",
+        "date",
+        "bluebird.rating",
+        "resort_name"
+    ],
+    "size": "30"
+}

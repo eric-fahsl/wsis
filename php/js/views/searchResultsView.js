@@ -9,7 +9,9 @@ app.ReccListView = Backbone.View.extend({
     recommendationsEl: "#recommendations",
     facetEl: "#facets",
 
-    facets: {date: '2013-09-30'},
+    facets: { dateStart: "2013-10-19"},
+    resultsCollection: {},
+    facetCollection: {},
 
     // Cache the template function for a single item.
     template: _.template( $('#recc-template').html() ),
@@ -22,8 +24,10 @@ app.ReccListView = Backbone.View.extend({
         'click .destroy': 'clear',           // NEW
         'keypress .edit': 'updateOnEnter',
         'blur .edit': 'close' */
+        "click #dateFacets li" : 'dateFacetClick',
         "click #regionFacets li" : 'regionFacetClick',
-        "click #stateFacets li" : 'stateFacetClick'
+        "click #stateFacets li" : 'stateFacetClick',
+        "click #distanceFacets li" : 'distanceFacetClick'
     },
 
     // The TodoView listens for changes to its model, re-rendering. Since there's
@@ -32,47 +36,64 @@ app.ReccListView = Backbone.View.extend({
     initialize: function() {
         //this.collection = new app.ReccList(reccs);
         this.collection = new app.ReccList();
-        this.facetCollectionRegion = new app.FacetList();
-        this.facetCollectionState = new app.FacetList();
-        //this.collection.fetch({reset: true});
+
+        this.facetCollection['date'] = new app.FacetList();
+        this.facetCollection['region'] = new app.FacetList();
+        this.facetCollection['state'] = new app.FacetList();
+        this.facetCollectionDistance = new app.FacetList();
 
         this.refreshData();
     },
 
     refreshData: function() {
-        this.collection.clearAll();
-        this.facetCollectionRegion.clearAll();
-        this.facetCollectionState.clearAll();
+        //this.collection.clearAll();
+        $.each(this.facetCollection, function(i, v) {
+            v.clearAll();
+        });
+
         var that = this;
         this.collection.fetch({
             data: $.param(this.facets),
             success: function (model) {
-                that.facetCollectionRegion = new app.FacetList(that.collection.facets.Region.terms);
-                that.facetCollectionState = new app.FacetList(that.collection.facets.State.terms);
+                $.each(that.collection.results, function (i, v) {
+                    that.resultsCollection[i] = new app.ReccList(v);
+                });
+
+                $.each(that.facetCollection, function(i, v) {
+                    that.facetCollection[i] = new app.FacetList(that.collection.facets[i].terms);
+                });
+                if (that.collection.facets.distance) {
+                    that.facetCollection.distance = new app.FacetList(that.collection.facets.distance.ranges);
+                }
                 that.render();
             }
         });
     },
 
-//    // Re-render the recommendations of the recc item.
-//    render: function() {
-//        this.$el.html( this.template( this.model.toJSON() ) );
-//        return this;
-//    },
-
-    // render library by rendering each book in its collection
     render: function() {
-        this.collection.each(function( item ) {
-            this.renderRecc( item );
-        }, this );
+//        this.collection.each(function( item ) {
+//            this.renderRecc( item );
+//        }, this );
 
+        var that = this;
+        $.each(this.resultsCollection, function(i, v) {
+            v.each(function (item) {
+                that.renderRecc(item);
+            });
+        });
 
-        this.facetCollectionRegion.each(function (item) {
-            this.renderFacet(item, 'region');
-        }, this);
-        this.facetCollectionState.each(function (item) {
-            this.renderFacet(item, 'state');
-        }, this);
+        $.each(this.facetCollection, function(i, v) {
+            v.each(function (item) {
+                that.renderFacet(item, i);
+            });
+        });
+
+//        this.facetCollectionRegion.each(function (item) {
+//            this.renderFacet(item, 'region');
+//        }, this);
+//        this.facetCollectionState.each(function (item) {
+//            this.renderFacet(item, 'state');
+//        }, this);
 //        that = this;
 //        $.each( this.collection.facets.Region.terms, function(i, v){
 //            that.renderFacet(v);
@@ -93,21 +114,29 @@ app.ReccListView = Backbone.View.extend({
     },
 
     renderFacet: function (facet, facetType) {
-        var facetView = new app.FacetView({
-            model: facet
-        });
-        $('#' + facetType + 'Facets').append(facetView.render().el);
+        if (facetType != 'distance' || facet.attributes.total_count > 0){
+            var facetView = new app.FacetView({
+                model: facet
+            });
+            $('#' + facetType + 'Facets').append(facetView.render().el);
+        }
     },
 
+    dateFacetClick: function(e) {
+        this.facetClick(e, "date");
+    },
     regionFacetClick: function(e) {
         this.facetClick(e, "region");
     },
     stateFacetClick: function(e) {
         this.facetClick(e, "state");
     },
+    distanceFacetClick: function(e) {
+        this.facetClick(e, "distance");
+    },
 
     facetClick: function(e, facetType) {
-        var text = e.target.id.split('-')[1];
+        var text = e.target.id.split('_')[1];
         if (this.facets[facetType] == text)
             delete this.facets[facetType];
         else
@@ -116,8 +145,8 @@ app.ReccListView = Backbone.View.extend({
     },
 
     toggleFacet: function(facetName) {
-        var facetid = "#F-" + facetName;
-        var xid = "#X-" + facetName;
+        var facetid = "#F_" + facetName;
+        var xid = "#X_" + facetName;
         $(facetid).addClass("selected");
         $(xid).show();
     }
