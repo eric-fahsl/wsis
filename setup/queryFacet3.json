@@ -29,7 +29,11 @@
     },
     "facets": {
         "facet_result" : {
-
+            "terms": {
+                "fields" : ["date"],
+                "order": "term",
+                "size": 5
+            }
         },
 
         "date": {

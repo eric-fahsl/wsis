@@ -1,63 +1,55 @@
-<?php 
+<?php
 
-include('esSearchHelper.php');
+include('esApiSearchHelper.php');
 
-$resultClass = "span2 recresult";
-$dateFormat = "l, F j";
+$allResults = array();
 
-//check if showing a specific date, if so, no extra headers
-if (isset($_GET['date'])) {
-	$results = search($_GET);
-	$homeWidget = false;
-	$showDate = false;
-
-//    $reccResults = array();
-    //Iterate through all of the recommendation results and add to the reccResults array
-//    foreach ($results['hits']['hits'] as $rec) {
-//        $rec = $rec['_source'];
-//        $reccResults[] = array(
-//            'resort_name' => $rec['resort_name'],
-//            'powder_rating' => $rec['powder']['rating'],
-//            '_id' => $rec['_id'],
-//            'state_full' => $rec['state_full'],
-//            'freezing_level_rating' => $rec['freezing_level']['rating'],
-//            'resort' => $rec['resort'],
-//            'bluebird_rating' => $rec['bluebird']['rating'],
-//            'date' => $rec['date']
-//        );
-//    }
-
-
-    $jsonResults = array (
+function getResultsForDate($requestParams) {
+    $results = search($requestParams);
+    return array(
         "results" => $results['hits']['hits'],
         "facets" => $results['facets']
     );
+}
 
-    echo json_encode($jsonResults);
-//    echo json_encode($results["hits"]["hits"], true);
-	//foreach ($results["hits"]["hits"] as $rec) {
-	// 	displayRecommendationWidget($rec['_source'], $resultClass, $showDate);
-	//}
+//check if showing a specific date, if so, just do a single standard search
+if (isset($_GET['date'])) {
+    //echo json_encode(getResultsForDate($_GET) , true );
+    $requestParams['size'] = 30;
 
+    $results = getResultsForDate($_GET);
+//    $allResults = $results;
+    $allResults = array(
+        'results' => array($_GET['date'] => $results['results']),
+        'facets' => $results['facets']
+    );
 
 } else {
 
-	$displayedNoResults = 0;
-	$resultClass = "span2 recresultLanding";
-	$requestParams = $_GET;
-	$requestParams['size'] = 5;
-	$startDate = date("Y-m-d");
-	if (isset($_GET['startDate'])) {
-		$startDate = strtotime($_GET['startDate']);
-        $requestParams['date'] = $startDate;
+    $displayedNoResults = 0;
+    $requestParams = $_GET;
+    $requestParams['size'] = 0;
+    if (!isset($_GET['dateStart'])) {
+        //set to today's date
+        $requestParams['dateStart'] = date("Y-m-d");
     }
 
+    //Get the initial results for acquiring the available dates to search
     $results = search($requestParams);
+    //echo json_encode($results);
 
-    $allResults = array();
-    $allResults[] = $results['hits']['hits'];
-
-
+    $allResults = array(
+        'results' => array(),
+        'facets' => $results['facets']
+    );
+    //We now want 5 results per date
+    $requestParams['size'] = 5;
+    foreach ($results['facets']['date']['terms'] as $dateFacet) {
+        $reccDate = $dateFacet['term'];
+        $requestParams['date'] = $reccDate;
+        $results = getResultsForDate($requestParams);
+        $allResults['results'][$reccDate] = $results['results'];
+    }
     /*
 	for ($i=0; $i<6; $i++) {
 
@@ -100,9 +92,11 @@ if (isset($_GET['date'])) {
 
 	}
     */
-	echo json_encode($allResults, true);
-	
+    //echo json_encode($allResults, true);
+
 }
+
+echo json_encode($allResults, true);
 //echo $results["hits"]["hits"][0]['_id'];
 //print json_encode($decoded["hits"]);                                                                                                             
 ?>

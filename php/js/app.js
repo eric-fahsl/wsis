@@ -4,6 +4,6 @@ var app = app || {};
 
 $(function() {
 
-    new app.ReccListView();
+    app.SearchResults = new app.SearchResultsView();
 
 });

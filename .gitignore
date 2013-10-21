@@ -2,3 +2,6 @@ python/*.pyc
 *.pyc
 
 .DS_Store
+
+php/js_wright/*
+.idea/workspace.xml

@@ -24,6 +24,7 @@ body .row-fluid {
 #facets {
 	margin-left: 0px;
 	min-width:160px;
+    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.1) inset;
 }
 
 #facets .header {

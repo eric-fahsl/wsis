@@ -6,11 +6,15 @@
                     "must": [],
                     "must_not": [],
                     "should": [
+
                         {
-                            "term": {
-                                "date": "2013-09-30"
+                            "range": {
+                                "date": {
+                                    "gte": "2013-10-10"
+                                }
                             }
                         }
+
                     ],
                     "minimum_number_should_match": 1
                 }
@@ -24,6 +28,10 @@
         }
     },
     "facets": {
+        "facet_result" : {
+
+        },
+
         "date": {
             "terms": {
                 "field": "date",

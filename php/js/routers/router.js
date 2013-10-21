@@ -1,7 +1,28 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: efahsl
- * Date: 10/19/13
- * Time: 3:56 PM
- * To change this template use File | Settings | File Templates.
- */
+// js/routers/router.js
+
+var Workspace = Backbone.Router.extend({
+    routes:{
+        'search/:query': 'setFilter',
+        '*clear': 'clear'
+    },
+
+    setFilter: function( param ) {
+        // Set the current filter to be used
+        if (param) {
+            param = param.trim();
+        }
+
+        console.log(param);
+//        app.TodoFilter = param || '';
+//
+//        // Trigger a collection filter event, causing hiding/unhiding
+//        // of Todo view items
+//        app.Todos.trigger('filter');
+    },
+    clear: function () {
+        //app.SearchResults.testMethod();
+    }
+});
+
+app.ReccRouter = new Workspace();
+Backbone.history.start();

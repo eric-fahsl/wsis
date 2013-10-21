@@ -3,15 +3,16 @@
 var app = app || {};
 
 // The DOM element for a recommendation item...
-app.ReccListView = Backbone.View.extend({
+app.SearchResultsView = Backbone.View.extend({
 
     el: "#container",
-    recommendationsEl: "#recommendations",
+    recommendationsEl: "#searchResults",
     facetEl: "#facets",
 
-    facets: { dateStart: "2013-10-19"},
+    facets: {},
     resultsCollection: {},
     facetCollection: {},
+    dateHeaderCollection: {},
 
     // Cache the template function for a single item.
     template: _.template( $('#recc-template').html() ),
@@ -35,35 +36,61 @@ app.ReccListView = Backbone.View.extend({
     // app, we set a direct reference on the model for convenience.
     initialize: function() {
         //this.collection = new app.ReccList(reccs);
-        this.collection = new app.ReccList();
+        this.collection = new app.SearchResult();
+        this.dateHeaderCollection = new app.DateList();
+        var tempReccList = new app.ReccList();
+        this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList};
+        this.refreshData();
+    },
 
-        this.facetCollection['date'] = new app.FacetList();
-        this.facetCollection['region'] = new app.FacetList();
-        this.facetCollection['state'] = new app.FacetList();
-        this.facetCollectionDistance = new app.FacetList();
-
+    testMethod: function() {
+        this.facets = { dateStart: "2013-02-26"};
         this.refreshData();
     },
 
     refreshData: function() {
-        //this.collection.clearAll();
+        /*
+        //Delete the search results
+        this.dateHeaderCollection.clearAll();
+
+        $.each(this.resultsCollection, function(i, v){
+            v.clearAll();
+        });
+        //Delete the facets
         $.each(this.facetCollection, function(i, v) {
             v.clearAll();
         });
+        */
 
         var that = this;
         this.collection.fetch({
             data: $.param(this.facets),
             success: function (model) {
-                $.each(that.collection.results, function (i, v) {
+
+                //Delete the search results
+                that.dateHeaderCollection.clearAll();
+
+                $.each(that.resultsCollection, function(i, v){
+                    v.clearAll();
+                });
+                that.resultsCollection = {};
+                //Delete the facets
+                $.each(that.facetCollection, function(i, v) {
+                    v.clearAll();
+                });
+
+                that.dateHeaderCollection = new app.DateList();
+
+                $.each(model.results, function (i, v) {
+                    that.dateHeaderCollection.add(new app.DateModel({date: i}));
                     that.resultsCollection[i] = new app.ReccList(v);
                 });
 
                 $.each(that.facetCollection, function(i, v) {
-                    that.facetCollection[i] = new app.FacetList(that.collection.facets[i].terms);
+                    that.facetCollection[i] = new app.ReccList(model.facets[i].terms);
                 });
                 if (that.collection.facets.distance) {
-                    that.facetCollection.distance = new app.FacetList(that.collection.facets.distance.ranges);
+                    that.facetCollection.distance = new app.ReccList(model.facets.distance.ranges);
                 }
                 that.render();
             }
@@ -76,9 +103,20 @@ app.ReccListView = Backbone.View.extend({
 //        }, this );
 
         var that = this;
+//        this.dateHeaderCollection.each(function (item) {
+//            var reccHeaderView = new app.ReccHeaderView({
+//                model: item
+//            });
+//            $(that.recommendationsEl).append(reccHeaderView.render().el);
+//        });
+        var count = 0;
         $.each(this.resultsCollection, function(i, v) {
+            var reccHeaderView = new app.ReccHeaderView({
+                model: that.dateHeaderCollection.models[count++]
+            });
+            $(that.recommendationsEl).append(reccHeaderView.render().el);
             v.each(function (item) {
-                that.renderRecc(item);
+                that.renderRecc(item, i);
             });
         });
 
@@ -104,9 +142,7 @@ app.ReccListView = Backbone.View.extend({
         });
     },
 
-    // render a book by creating a BookView and appending the
-    // element it renders to the library's element
-    renderRecc: function( item ) {
+    renderRecc: function( item, date ) {
         var reccView = new app.ReccView({
             model: item
         });
@@ -118,6 +154,7 @@ app.ReccListView = Backbone.View.extend({
             var facetView = new app.FacetView({
                 model: facet
             });
+            facetView.setParentView(this);
             $('#' + facetType + 'Facets').append(facetView.render().el);
         }
     },
@@ -136,7 +173,7 @@ app.ReccListView = Backbone.View.extend({
     },
 
     facetClick: function(e, facetType) {
-        var text = e.target.id.split('_')[1];
+        var text = e.currentTarget.id.split('_')[1];
         if (this.facets[facetType] == text)
             delete this.facets[facetType];
         else
