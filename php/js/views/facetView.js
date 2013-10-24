@@ -3,10 +3,9 @@ var app = app || {};
 app.FacetView = Backbone.View.extend({
     tagName: 'li',
     template: _.template( $( '#facet-template' ).html() ),
-    parentView: {},
 
     events: {
-        //"click" : 'facetClick'
+        "click" : 'facetClick'
     },
 
     initialize: function() {
@@ -37,8 +36,8 @@ app.FacetView = Backbone.View.extend({
 
     facetClick : function(e) {
         console.log(e);
-        console.log(this.model.get("term"));
-        this.parentView.facetClick(e, "state");
+        window.location = this.model.get("url");
+
     },
 
     setParentView: function(parentView) {

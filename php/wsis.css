@@ -73,7 +73,7 @@ body .row-fluid {
  	padding-left: 20px;
  	padding-right: 5px;
  }
-#stateFacet li {
+#stateFacets li {
 	width: 50%;
 	float: left;
 	padding-left: 0px;
@@ -175,9 +175,6 @@ body .row-fluid {
 
  #search_sort {
  	width: 180px;
- }
- #searchResults {
- 	padding-left: 5px;
  }
  #searchResults h5 {
  	margin: 5px;

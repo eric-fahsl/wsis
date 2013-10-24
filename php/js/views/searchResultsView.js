@@ -9,10 +9,11 @@ app.SearchResultsView = Backbone.View.extend({
     recommendationsEl: "#searchResults",
     facetEl: "#facets",
 
-    facets: {},
+    facets: { date: "2013-10-25"},
     resultsCollection: {},
     facetCollection: {},
     dateHeaderCollection: {},
+    initialized: false,
 
     // Cache the template function for a single item.
     template: _.template( $('#recc-template').html() ),
@@ -25,30 +26,38 @@ app.SearchResultsView = Backbone.View.extend({
         'click .destroy': 'clear',           // NEW
         'keypress .edit': 'updateOnEnter',
         'blur .edit': 'close' */
-        "click #dateFacets li" : 'dateFacetClick',
-        "click #regionFacets li" : 'regionFacetClick',
-        "click #stateFacets li" : 'stateFacetClick',
-        "click #distanceFacets li" : 'distanceFacetClick'
+//        "click #dateFacets li" : 'dateFacetClick',
+//        "click #regionFacets li" : 'regionFacetClick',
+//        "click #stateFacets li" : 'stateFacetClick',
+//        "click #distanceFacets li" : 'distanceFacetClick'
     },
 
     // The TodoView listens for changes to its model, re-rendering. Since there's
     // a one-to-one correspondence between a **Todo** and a **TodoView** in this
     // app, we set a direct reference on the model for convenience.
-    initialize: function() {
+    init: function() {
         //this.collection = new app.ReccList(reccs);
         this.collection = new app.SearchResult();
         this.dateHeaderCollection = new app.DateList();
         var tempReccList = new app.ReccList();
         this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList};
-        this.refreshData();
+//        this.refreshData();
     },
 
     testMethod: function() {
-        this.facets = { dateStart: "2013-02-26"};
+        this.facets = {};
         this.refreshData();
     },
 
-    refreshData: function() {
+    refreshData: function(facets) {
+        if (!this.initialized) {
+            this.init();
+            this.initialized = true;
+        }
+        //if facets are passed in from router, override current facets
+        if (facets)
+            this.facets = facets;
+
         /*
         //Delete the search results
         this.dateHeaderCollection.clearAll();
@@ -87,10 +96,12 @@ app.SearchResultsView = Backbone.View.extend({
                 });
 
                 $.each(that.facetCollection, function(i, v) {
-                    that.facetCollection[i] = new app.ReccList(model.facets[i].terms);
+                    that.facetCollection[i] = new app.FacetList(model.facets[i].terms,
+                        {facets: that.facets, facetType: i} );
                 });
                 if (that.collection.facets.distance) {
-                    that.facetCollection.distance = new app.ReccList(model.facets.distance.ranges);
+                    that.facetCollection.distance = new app.FacetList(model.facets.distance.ranges,
+                        {facets: that.facets, facetType: "distance"} );
                 }
                 that.render();
             }
@@ -164,6 +175,7 @@ app.SearchResultsView = Backbone.View.extend({
     },
     regionFacetClick: function(e) {
         this.facetClick(e, "region");
+        //window.location= "#search/region=PacificNW";
     },
     stateFacetClick: function(e) {
         this.facetClick(e, "state");

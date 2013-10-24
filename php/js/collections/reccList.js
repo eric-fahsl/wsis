@@ -6,7 +6,6 @@ app.ReccList = Backbone.Collection.extend({
 
     // Reference to this collection's model.
     model: app.Recc,
-    // Store the search facets
 
     clearAll: function() {
 //        _.each(this.models, function(model){ model.destroy(); });

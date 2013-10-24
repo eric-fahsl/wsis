@@ -4,6 +4,16 @@ app.FacetList = Backbone.Collection.extend({
 
     // Reference to this collection's model.
     model: app.Facet,
+    facetType: "",
+    facets: {},
+    // Store the search facets
+
+    initialize: function(models, options) {
+        if (options) {
+            this.facets = options.facets;
+            this.facetType = options.facetType;
+        }
+    },
 
     clearAll: function() {
         //_.each(this.models, function(model){ model.destroy(); });

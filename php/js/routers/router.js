@@ -1,18 +1,29 @@
 // js/routers/router.js
+//var app = app || {};
 
 var Workspace = Backbone.Router.extend({
     routes:{
-        'search/:query': 'setFilter',
-        '*clear': 'clear'
+        'search/:query': 'searchQuery',
+        '': 'searchQuery'
+//        'clear': 'clear'
+
     },
 
-    setFilter: function( param ) {
-        // Set the current filter to be used
+    searchQuery: function( param ) {
+        var facets = {};
+
         if (param) {
             param = param.trim();
+
+            var params = param.split("&");
+
+            for (var i in params) {
+                var values = params[i].split("=");
+                facets[values[0]] = values[1];
+            }
         }
 
-        console.log(param);
+        app.SearchResults.refreshData(facets);
 //        app.TodoFilter = param || '';
 //
 //        // Trigger a collection filter event, causing hiding/unhiding
@@ -20,9 +31,9 @@ var Workspace = Backbone.Router.extend({
 //        app.Todos.trigger('filter');
     },
     clear: function () {
-        //app.SearchResults.testMethod();
+        app.SearchResults.testMethod();
     }
 });
 
-app.ReccRouter = new Workspace();
-Backbone.history.start();
+//app.ReccRouter = new Workspace();
+//Backbone.history.start();

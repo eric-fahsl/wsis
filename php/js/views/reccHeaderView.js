@@ -4,7 +4,7 @@ var app = app || {};
 
 app.ReccHeaderView = Backbone.View.extend({
     tagName: "span",
-    className: "span11",
+    //className: "span11",
     template: _.template( $( '#recc-date-template' ).html() ),
 
     initialize: function() {
