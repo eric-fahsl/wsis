@@ -142,7 +142,7 @@
 	<div class="header">
 		<h3>State</h3>
 	</div>
-	<ol id="stateFacet">
+	<ol id="stateFacets">
 	<?php
 		$i = 0;
 		 foreach ($facets['State']['terms'] as $facet) {
