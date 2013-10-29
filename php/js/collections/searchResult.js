@@ -8,8 +8,15 @@ app.SearchResult = Backbone.Collection.extend({
     facets: {},
     results: {},
 
-    url: 'http://localhost/lib/reccapi.php?size=30&coords=46.3096738,-119.2755485&fields=t',
+    //url: '/lib/reccapi.php?size=30&coords=46.3096738,-119.2755485&fields=t',
+    url: '/lib/reccapi.php?fields=t',
 //    url: '/lib/sampleResponse.json',
+    initialize: function() {
+        if ($.cookie("coords")) {
+            this.url += "&coords=" + $.cookie("coords");
+        }
+    },
+
     parse: function(response) {
         //console.log(response);
         this.facets = response.facets;

@@ -1,8 +1,8 @@
 var app = app || {};
 
-app.FacetView = Backbone.View.extend({
-    tagName: 'li',
-    template: _.template( $( '#facet-template' ).html() ),
+app.SortView = Backbone.View.extend({
+    tagName: 'option',
+    template: _.template( $( '#facet-sort' ).html() ),
 
     events: {
         "click" : 'facetClick'

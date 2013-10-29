@@ -4,9 +4,8 @@
 var Workspace = Backbone.Router.extend({
     routes:{
         'search/:query': 'searchQuery',
-        '': 'searchQuery'
-//        'clear': 'clear'
-
+        '': 'searchQuery',
+        'search/': 'searchQuery'
     },
 
     searchQuery: function( param ) {
@@ -24,16 +23,8 @@ var Workspace = Backbone.Router.extend({
         }
 
         app.SearchResults.refreshData(facets);
-//        app.TodoFilter = param || '';
-//
-//        // Trigger a collection filter event, causing hiding/unhiding
-//        // of Todo view items
-//        app.Todos.trigger('filter');
     },
     clear: function () {
         app.SearchResults.testMethod();
     }
 });
-
-//app.ReccRouter = new Workspace();
-//Backbone.history.start();

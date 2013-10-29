@@ -5,31 +5,25 @@ var app = app || {};
 // The DOM element for a recommendation item...
 app.SearchResultsView = Backbone.View.extend({
 
-    el: "#container",
+    el: "#searchContainer",
     recommendationsEl: "#searchResults",
     facetEl: "#facets",
 
-    facets: { date: "2013-10-25"},
+    facets: {},
     resultsCollection: {},
     facetCollection: {},
     dateHeaderCollection: {},
+    sortOptionsCollection: {},
     initialized: false,
+    mobileFacetsShown: false,
+    distanceFacetHeaderId: "#distanceHeader",
 
     // Cache the template function for a single item.
     template: _.template( $('#recc-template').html() ),
 
     // The DOM events specific to an item.
     events: {
-        /*
-        'click .toggle': 'togglecompleted', // NEW
-        'dblclick label': 'edit',
-        'click .destroy': 'clear',           // NEW
-        'keypress .edit': 'updateOnEnter',
-        'blur .edit': 'close' */
-//        "click #dateFacets li" : 'dateFacetClick',
-//        "click #regionFacets li" : 'regionFacetClick',
-//        "click #stateFacets li" : 'stateFacetClick',
-//        "click #distanceFacets li" : 'distanceFacetClick'
+        'click #toggleFilters': 'toggleFilters'
     },
 
     // The TodoView listens for changes to its model, re-rendering. Since there's
@@ -41,7 +35,6 @@ app.SearchResultsView = Backbone.View.extend({
         this.dateHeaderCollection = new app.DateList();
         var tempReccList = new app.ReccList();
         this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList};
-//        this.refreshData();
     },
 
     testMethod: function() {
@@ -58,18 +51,6 @@ app.SearchResultsView = Backbone.View.extend({
         if (facets)
             this.facets = facets;
 
-        /*
-        //Delete the search results
-        this.dateHeaderCollection.clearAll();
-
-        $.each(this.resultsCollection, function(i, v){
-            v.clearAll();
-        });
-        //Delete the facets
-        $.each(this.facetCollection, function(i, v) {
-            v.clearAll();
-        });
-        */
 
         var that = this;
         this.collection.fetch({
@@ -91,7 +72,7 @@ app.SearchResultsView = Backbone.View.extend({
                 that.dateHeaderCollection = new app.DateList();
 
                 $.each(model.results, function (i, v) {
-                    that.dateHeaderCollection.add(new app.DateModel({date: i}));
+                    that.dateHeaderCollection.add(new app.DateModel({date: i}, that.facets));
                     that.resultsCollection[i] = new app.ReccList(v);
                 });
 
@@ -102,6 +83,8 @@ app.SearchResultsView = Backbone.View.extend({
                 if (that.collection.facets.distance) {
                     that.facetCollection.distance = new app.FacetList(model.facets.distance.ranges,
                         {facets: that.facets, facetType: "distance"} );
+                } else {
+                    $(that.distanceFacetHeaderId).hide();
                 }
                 that.render();
             }
@@ -137,20 +120,12 @@ app.SearchResultsView = Backbone.View.extend({
             });
         });
 
-//        this.facetCollectionRegion.each(function (item) {
-//            this.renderFacet(item, 'region');
-//        }, this);
-//        this.facetCollectionState.each(function (item) {
-//            this.renderFacet(item, 'state');
-//        }, this);
-//        that = this;
-//        $.each( this.collection.facets.Region.terms, function(i, v){
-//            that.renderFacet(v);
-//        });
         var that = this;
         $.each(this.facets, function(i, v) {
              that.toggleFacet(v);
         });
+
+        this.hideFacets();
     },
 
     renderRecc: function( item, date ) {
@@ -198,6 +173,23 @@ app.SearchResultsView = Backbone.View.extend({
         var xid = "#X_" + facetName;
         $(facetid).addClass("selected");
         $(xid).show();
+    },
+
+    toggleFilters: function() {
+        if (!this.mobileFacetsShown)
+            this.showFacets();
+        else
+            this.hideFacets();
+    },
+
+    hideFacets: function() {
+        $(this.facetEl).addClass("hidden-phone");
+        this.mobileFacetsShown = false;
+    },
+    showFacets: function() {
+        $(this.facetEl).removeClass("hidden-phone");
+        this.mobileFacetsShown = true;
     }
+
 
 });

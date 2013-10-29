@@ -185,49 +185,6 @@
           </select>
       </div>
 
-      <!-- REMOVE THIS ONCE SEASON STARTS -->
-      <select style="float:right; margin-top:3px;" name="select" 
-      	onChange="window.location = 'http://whereshouldiski.com/recommendations?date=' + this.options[this.selectedIndex].value"> 
-      	<option>--Change Selected Date--</option>
-
-      	<?php 
-      		function outputDateOption($month, $day, $year) {
-      			echo "<option value='" . $year . "-" . str_pad($month, 2, "0", STR_PAD_LEFT) . "-" . str_pad($day, 2, "0", STR_PAD_LEFT) . "'>" . $month . "/" . $day . "/" . $year . "</option>\n";
-      		}
-
-      		$month = 12;
-      		$year = 2012;
-      		for ($day = 1; $day <= 31; $day++) {
-      			outputDateOption($month, $day, $year);
-      		}
-      		$month = 1;
-      		$year = 2013;
-      		for ($day = 1; $day <= 31; $day++) {
-      			outputDateOption($month, $day, $year);
-      		}
-      		$month = 2;
-      		for ($day = 1; $day <= 28; $day++) {
-      			outputDateOption($month, $day, $year);
-      		}
-      		$month = 3;
-      		for ($day = 1; $day <= 31; $day++) {
-      			outputDateOption($month, $day, $year);
-      		}
-      		$month = 4;
-      		for ($day = 1; $day <= 21; $day++) {
-      			outputDateOption($month, $day, $year);
-      		}
-
-      	?>
-      	<option value="2012-11-01">11/1/2012</option> 
-      	<option value="2012-11-02">11/2/2012</option> 
-      	<option value="2012-1-03">11/3/2012</option> 
-      	
-
-      </select> 
-	    
-
-	  <!-- END REMOVE THIS ONCE SEASON STARTS -->
      </div>
      <div id="searchResults">
 

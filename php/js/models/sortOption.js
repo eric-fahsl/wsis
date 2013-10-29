@@ -1,15 +1,10 @@
 var app = app || {};
 
-app.Facet = Backbone.Model.extend({
-
-    days: ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    urlBase: "#search/",
-    facetType: "",
+app.SortOption = App.Facet.extend({
 
     initialize: function(attributes, options) {
-//        if (attributes) {
-//            console.log("a: " + attributes);
-//        }
+        this.model = attributes;
+
         var facets = {};
         if (options) {
             facets = options.collection.facets;

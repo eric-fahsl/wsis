@@ -51,34 +51,7 @@ function buildQuery() {
 	}
 
 	$shouldTerms = array();
-    /*
-	if (isset($_GET["date"])) {
-		$searchDates = explode(",", $_GET["date"]);
-		foreach ($searchDates as $searchDate) {
-			array_push($shouldTerms, createTerm("date", $searchDate));
-		}
-	} */
 
-    /* TODO - remove these? */
-    /*
-	$mustNotTerms = array();
-	createExcludeTerm($mustNotTerms, "regionx", "region");
-	createExcludeTerm($mustNotTerms, "powderx", "powder.rating");
-	createExcludeTerm($mustNotTerms, "bluebirdx", "bluebird.rating");
-	createExcludeTerm($mustNotTerms, "statex", "state"); */
-	/*
-	if (isset($_GET["regionx"])) {
-		$regions = explode(",", $_GET["regionx"]);
-		foreach ($regions as $region) {
-			array_push($mustNotTerms, createTerm("region", $region));
-		}	
-	}
-	if (isset($_GET["regionx"])) {
-		$regions = explode(",", $_GET["regionx"]);
-		foreach ($regions as $region) {
-			array_push($mustNotTerms, createTerm("region", $region));
-		}	
-	}*/
 
 	$query = array(
 			"bool" => array(
@@ -188,30 +161,7 @@ function buildFacets() {
 			)
 		),
 
-        "distance" => array(
-            "geo_distance" => array(
-                "location" => "46.3096738,-119.2755485",
-                "unit" => "mi",
-                "ranges" => array(
-                    array("to" => 100),
-                    array("from"=>100, "to" => 200),
-                    array("from"=>200, "to" => 400)
-                )
-            ),
-
-        ),
-
-
-
-//
-
-//        "ranges" : [
-//                    { "to" : 10 },
-//                    { "from" : 10, "to" : 20 },
-//                    { "from" : 20, "to" : 100 },
-//                    { "from" : 100 }
-//                ]
-		"region" => array(
+        "region" => array(
 			"terms" => array(
 				"field" => "region"
 			)
@@ -223,7 +173,21 @@ function buildFacets() {
 				"size" => 20
 			)
 		)
-	);
+    );
+
+    if (isset($_GET['coords']))
+        $facets["distance"] = array(
+            "geo_distance" => array(
+                "location" => $_GET['coords'],
+                "unit" => "mi",
+                "ranges" => array(
+                    array("to" => 100),
+                    array("from"=>100, "to" => 200),
+                    array("from"=>200, "to" => 400)
+                )
+            )
+        );
+
 	return $facets;
 }
 
