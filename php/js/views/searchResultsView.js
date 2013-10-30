@@ -8,12 +8,13 @@ app.SearchResultsView = Backbone.View.extend({
     el: "#searchContainer",
     recommendationsEl: "#searchResults",
     facetEl: "#facets",
+    sortEl: "#search_sort",
 
     facets: {},
     resultsCollection: {},
     facetCollection: {},
     dateHeaderCollection: {},
-    sortOptionsCollection: {},
+    sortOptions: {},
     initialized: false,
     mobileFacetsShown: false,
     distanceFacetHeaderId: "#distanceHeader",
@@ -23,7 +24,8 @@ app.SearchResultsView = Backbone.View.extend({
 
     // The DOM events specific to an item.
     events: {
-        'click #toggleFilters': 'toggleFilters'
+        'click #toggleFilters': 'toggleFilters',
+        'change #search_sort': 'sortClick'
     },
 
     // The TodoView listens for changes to its model, re-rendering. Since there's
@@ -35,6 +37,8 @@ app.SearchResultsView = Backbone.View.extend({
         this.dateHeaderCollection = new app.DateList();
         var tempReccList = new app.ReccList();
         this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList};
+        this.sortOptions = {"powder":"Powder", "bluebird":"Bluebird", "fl":"Freezing Level"};
+        this.sortModels = {};
     },
 
     testMethod: function() {
@@ -68,6 +72,11 @@ app.SearchResultsView = Backbone.View.extend({
                 $.each(that.facetCollection, function(i, v) {
                     v.clearAll();
                 });
+                //Delete the sort options
+                $.each(that.sortModels, function(i, v) {
+                    v.destroy();
+                });
+                that.sortModels = {};
 
                 that.dateHeaderCollection = new app.DateList();
 
@@ -83,27 +92,31 @@ app.SearchResultsView = Backbone.View.extend({
                 if (that.collection.facets.distance) {
                     that.facetCollection.distance = new app.FacetList(model.facets.distance.ranges,
                         {facets: that.facets, facetType: "distance"} );
+                    that.sortOptions.distance = "Distance";
                 } else {
                     $(that.distanceFacetHeaderId).hide();
                 }
+                $.each(that.sortOptions, function (i, v){
+                    that.sortModels[i] = new app.SortOption({sort:i, displayValue: v}, that.facets);
+                });
+
                 that.render();
             }
         });
     },
 
     render: function() {
-//        this.collection.each(function( item ) {
-//            this.renderRecc( item );
-//        }, this );
+
 
         var that = this;
-//        this.dateHeaderCollection.each(function (item) {
-//            var reccHeaderView = new app.ReccHeaderView({
-//                model: item
-//            });
-//            $(that.recommendationsEl).append(reccHeaderView.render().el);
-//        });
         var count = 0;
+        //Create the sort options
+        $.each(this.sortModels, function(i,v) {
+            var sortView = new app.SortView({model: v});
+            $(that.sortEl).append(sortView.render().el);
+        });
+
+        //Create recommendation Views
         $.each(this.resultsCollection, function(i, v) {
             var reccHeaderView = new app.ReccHeaderView({
                 model: that.dateHeaderCollection.models[count++]
@@ -114,17 +127,17 @@ app.SearchResultsView = Backbone.View.extend({
             });
         });
 
+        //Create Facet Views
         $.each(this.facetCollection, function(i, v) {
             v.each(function (item) {
                 that.renderFacet(item, i);
             });
         });
 
-        var that = this;
+        //Toggle the displayed facets
         $.each(this.facets, function(i, v) {
              that.toggleFacet(v);
         });
-
         this.hideFacets();
     },
 
@@ -166,6 +179,10 @@ app.SearchResultsView = Backbone.View.extend({
         else
             this.facets[facetType] = text;
         this.refreshData();
+    },
+
+    sortClick: function(e) {
+      console.log(e);
     },
 
     toggleFacet: function(facetName) {

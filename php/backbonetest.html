@@ -61,13 +61,17 @@
         <h6>Bluebird:</h6>
         <div class="suns" style="width: <%=fields['bluebird.rating'] * 30 %>px" title="Rating: <%=fields['bluebird.rating']%> / 5"></div>
         <h6>Freezing Level:</h6>
-        <div class="mtnContainer"><div class="mtnShading" style="background-position-y: -15px;" title="Freezing Level: 5249"></div></div></div>
+        <div class="mtnContainer"><div class="mtnShading" style="background-position-y: <%= fields['freezing_level.offset']%>px" ></div></div></div>
 </script>
 
 <script type="text/template" id="facet-template">
     <span><a href="<%=url%>"><%=displayValue%></a>
     <div class="x" id="X_<%=term%>">X</div>
     </span>
+</script>
+
+<script type="text/template" id="facet-sort">
+<%= displayValue %>
 </script>
 
 <section id="searchContainer">
@@ -123,12 +127,14 @@
 <script src="js/models/recc.js"></script>
 <script src="js/models/facet.js"></script>
 <script src="js/models/dateModel.js"></script>
+<script src="js/models/sortOption.js"></script>
 <script src="js/collections/reccList.js"></script>
 <script src="js/collections/facetList.js"></script>
 <script src="js/collections/dateList.js"></script>
 <script src="js/collections/searchResult.js"></script>
 <script src="js/views/facetView.js"></script>
 <script src="js/views/reccView.js"></script>
+<script src="js/views/sortView.js"></script>
 <script src="js/views/reccHeaderView.js"></script>
 <script src="js/views/searchResultsView.js"></script>
 <script src="js/app.js"></script>

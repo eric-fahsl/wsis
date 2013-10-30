@@ -5,7 +5,7 @@ app.SortView = Backbone.View.extend({
     template: _.template( $( '#facet-sort' ).html() ),
 
     events: {
-        "click" : 'facetClick'
+        "click": "sortChange"
     },
 
     initialize: function() {
@@ -13,13 +13,13 @@ app.SortView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.attr('id', 'F_' + this.model.get("term")).html( this.template( this.model.toJSON() ));
+        this.$el.html( this.template( this.model.toJSON() ));
         return this;
     },
 
-    facetClick : function(e) {
+    sortChange : function(e) {
+        console.log(e);
         window.location = this.model.get("url");
-
     },
 
     setParentView: function(parentView) {

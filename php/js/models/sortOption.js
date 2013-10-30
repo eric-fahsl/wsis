@@ -1,36 +1,21 @@
 var app = app || {};
 
-app.SortOption = App.Facet.extend({
+app.SortOption = app.Facet.extend({
+
+    selected: "",
 
     initialize: function(attributes, options) {
-        this.model = attributes;
 
         var facets = {};
         if (options) {
-            facets = options.collection.facets;
-            this.facetType = options.collection.facetType;
+            facets = options;
+            if (facets.sort && facets.sort == attributes.i)
+                selected = "selected";
         }
-        var termValue = "";
-        if (this.attributes.term) {
-            termValue = this.attributes.term;
-            this.set({displayValue: termValue});
-            if (termValue.substring(0,3) == '201') {
-                var date = new Date(termValue);
-                var displayValue = this.days[date.getUTCDay()] + ' ' + (date.getUTCMonth() + 1) + '/' +
-                    date.getUTCDate() + '/' + date.getUTCFullYear().toString().substring(2);
-                this.set({displayValue: displayValue });
-            }
-        }
-
-        //For Distance Facets
-        if (this.attributes.to) {
-            var distance = this.attributes.to;
-            this.set({term: distance});
-            this.set({displayValue: "Under " + distance + " Miles"});
-        }
+        this.attributes = attributes;
 
         //Set the destination URL
-        this.set({url: this.convertFacetsToString(facets, this.facetType, this.attributes.term)});
+        this.set({url: this.convertFacetsToString(facets, "sort", this.attributes.sort)});
     },
 
     convertFacetsToString: function(facets, key, value) {
@@ -48,4 +33,5 @@ app.SortOption = App.Facet.extend({
             url = url.substr(0, url.length-1);
         return url;
     }
+
 });
