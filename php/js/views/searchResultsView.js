@@ -24,8 +24,8 @@ app.SearchResultsView = Backbone.View.extend({
 
     // The DOM events specific to an item.
     events: {
-        'click #toggleFilters': 'toggleFilters',
-        'change #search_sort': 'sortClick'
+        'click #toggleFilters': 'toggleFilters'
+        //'change #search_sort': 'sortClick'
     },
 
     // The TodoView listens for changes to its model, re-rendering. Since there's
@@ -39,6 +39,10 @@ app.SearchResultsView = Backbone.View.extend({
         this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList};
         this.sortOptions = {"powder":"Powder", "bluebird":"Bluebird", "fl":"Freezing Level"};
         this.sortModels = {};
+        var that = this;
+        $(this.sortEl).change(function() {
+            window.location = $(that.sortEl + " option:selected")[0].value;
+        });
     },
 
     testMethod: function() {

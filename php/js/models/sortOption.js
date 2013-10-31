@@ -2,15 +2,14 @@ var app = app || {};
 
 app.SortOption = app.Facet.extend({
 
-    selected: "",
-
     initialize: function(attributes, options) {
 
+        attributes.selected = false;
         var facets = {};
         if (options) {
             facets = options;
-            if (facets.sort && facets.sort == attributes.i)
-                selected = "selected";
+            if (facets.sort && facets.sort == attributes.sort)
+                attributes.selected = true;
         }
         this.attributes = attributes;
 
@@ -22,7 +21,8 @@ app.SortOption = app.Facet.extend({
         var url = this.urlBase;
         var showFacet = true;
         for (var k in facets) {
-            if (facets[k] != value)
+            if (k == key) {} //keep the facet, but do not use existing value
+            else if (facets[k] != value)
                 url += k + "=" + facets[k] + "&";
             else
                 showFacet = false;

@@ -10,10 +10,14 @@ app.SortView = Backbone.View.extend({
 
     initialize: function() {
         this.listenTo(this.model, 'destroy', this.remove);
+//        this.template = _.template('<option value="<%= url%>"><%= displayValue %></option>');
     },
 
     render: function() {
-        this.$el.html( this.template( this.model.toJSON() ));
+//        if (this.model.selected) {
+//            this.$el.attr('selected', '');
+//        }
+        this.$el.attr('selected', this.model.get('selected')).attr('value', this.model.get('url')).html( this.template( this.model.toJSON() ));
         return this;
     },
 
