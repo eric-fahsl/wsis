@@ -1,7 +1,7 @@
 
 <script type="text/template" id="recc-date-template">
     <div style="clear:both;"></div>
-    <h5><a href="<%=url%>"><%=prettyDate%></a></h5>
+    <h5><a href="recommendations<%=url%>"><%=prettyDate%></a></h5>
 
 </script>
 
@@ -20,7 +20,7 @@
 </script>
 
 <script type="text/template" id="facet-template">
-    <span><a href="<%=url%>"><%=displayValue%></a>
+    <span><a href="recommendations<%=url%>"><%=displayValue%></a>
     <div class="x" id="X_<%=term%>">X</div>
     </span>
 </script>
