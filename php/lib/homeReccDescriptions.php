@@ -51,4 +51,21 @@
 		</div>
 	</div>
 </div>
+
+ <script src="js/jquery.cookie.min.js"></script>
+ <script type="text/javascript">
+ function errorHandler() {}
+ function success_handler(position) {
+    var coords = position.coords.latitude + "," + position.coords.longitude;
+    $.cookie("coords", coords, { expires: 1 });
+ }
+
+ $(function() {
+    if (! $.cookie("coords")) {
+    if(navigator.geolocation) {
+        var geolocation = navigator.geolocation;
+        geolocation.getCurrentPosition(success_handler, errorHandler);
+    }
+ }
+ </script>
     
