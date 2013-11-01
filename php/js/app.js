@@ -2,13 +2,13 @@
 
 var app = app || {};
 
-function errorHandler() {}
+function errorHandler() { init(); }
 
 function success_handler(position) {
     var coords = position.coords.latitude + "," + position.coords.longitude;
     $.cookie("coords", coords, { expires: 1 });
+    location.reload();
 }
-
 
 $(function() {
     if (! $.cookie("coords")) {
