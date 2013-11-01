@@ -92,7 +92,6 @@ body .row-fluid {
  }
 
 #searchResults .recresultLanding {
- 	//height: 90px;
  	margin-left: 10px;
  	float: left;
  	min-width:150px;
@@ -180,6 +179,9 @@ body .row-fluid {
  	margin: 5px;
  	cursor: pointer;
  	color: #01527A;
+ }
+ #searchResults h5 a {
+     color: #01527A;
  }
 
  #forecastHomeWidget {

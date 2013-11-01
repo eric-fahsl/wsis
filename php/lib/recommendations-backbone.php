@@ -53,7 +53,7 @@
 <section id="recommendations">
 <section id="results">
     <div id="resultsHeader">
-        <p id="number_results">Hint: use filters <span class="hidden-phone">on the left </span>to narrow your results<br/>
+        <p id="number_results">Click any resort name for full recommendation details.<br/>
             Learn about our <a target="new" href="/about">rating system</a>.</p>
 
 
