@@ -36,7 +36,7 @@
 		</div>
 		
 		<div class="module mod_4 last span3">
-			<a href="<?= $recSearchLink ?>?sort=distance">
+			<a href="<?= $recSearchLink ?>sort=distance">
 				<img src="../images/map-pin-md.png" class="centerImage" alt="Distance"/>
 				<h4>Distance</h4>
 			</a>
