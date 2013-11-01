@@ -1,4 +1,4 @@
- <?php $recSearchLink = "recommendations";
+ <?php $recSearchLink = "recommendations#search/";
  	//$recSearchLink = "recTester.php";
  ?>
  <div id="grid-bottom" >
