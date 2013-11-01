@@ -15,23 +15,23 @@
 		</div>
 
 		<div class="module mod_2 span3">
-			<a href="<?= $recSearchLink ?>?sort=bluebird">
+			<a href="<?= $recSearchLink ?>sort=bluebird">
 				<img src="../images/sun-hi.png" class="centerImage" alt="Bluebird"/>
 				<h4>Bluebird</h4>
 			</a>
 			<p>How nice of a day is it going to be?  Is it worth it to bring the camera (or the sunscreen?)</p>
 			<div class="bottomValueProp">
-				<a href="<?= $recSearchLink ?>?sort=bluebird">See top forecasted bluebird ratings</a>
+				<a href="<?= $recSearchLink ?>sort=bluebird">See top forecasted bluebird ratings</a>
 			</div>
 		</div>
 		<div class="module mod_3 span3">
-			<a href="<?= $recSearchLink ?>?sort=fl">
+			<a href="<?= $recSearchLink ?>sort=fl">
 				<img src="../images/mountains-iconlarge.png" class="centerImage" alt="Freezing Level"/>
 				<h4>Freezing Level</h4>
 			</a>
 			<p>Am I going to get rained on? What is the snow quality going to be like?</p>
 			<div class="bottomValueProp">
-				<a href="<?= $recSearchLink ?>?sort=fl">See top rated resorts by freezing level</a>
+				<a href="<?= $recSearchLink ?>sort=fl">See top rated resorts by freezing level</a>
 			</div>
 		</div>
 		
