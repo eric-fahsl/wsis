@@ -1,6 +1,3 @@
-// js/routers/router.js
-//var app = app || {};
-
 var Workspace = Backbone.Router.extend({
     routes:{
         'search/:query': 'searchQuery',
