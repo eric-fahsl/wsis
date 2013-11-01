@@ -46,7 +46,7 @@
 			</span>
 			</p>
 			<div class="bottomValueProp">
-				<a href="<?= $recSearchLink ?>?sort=distance">See resorts closest to me</a>
+				<a href="<?= $recSearchLink ?>sort=distance">See resorts closest to me</a>
 			</div>
 		</div>
 	</div>
