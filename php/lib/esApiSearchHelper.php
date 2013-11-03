@@ -27,6 +27,19 @@ function buildQuery() {
 			) 
 		);
 	}
+
+    if (isset($_GET['powder'])) {
+        array_push($mustTerms,
+            array(
+                "range" => array(
+                    "powder.rating" => array(
+                        "gte" => $_GET['powder']
+                    )
+                )
+            )
+        );
+    }
+
 	if (isset($_GET['dateMin'])) {
 		array_push($mustTerms, 
 			array(
@@ -172,7 +185,17 @@ function buildFacets() {
 				"order" => "term",
 				"size" => 20
 			)
-		)
+		),
+        "powder" => array(
+            "range" => array(
+                "field" => "powder.rating",
+                "ranges" => array(
+                    array("from" => 4),
+                    array("from" => 3, "to" => 4),
+                    array("from" => 2, "to" => 3)
+                )
+            )
+        )
     );
 
     if (isset($_GET['coords']))

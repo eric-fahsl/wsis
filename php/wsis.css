@@ -360,3 +360,9 @@ body .row-fluid {
     padding-top: 3px;
     font-style:oblique;
 }
+#powderFacets a {
+    font-size: 0.8em;
+}
+#powderFacets .x {
+    padding-top:13px;
+}

@@ -46,9 +46,8 @@
 </script>
 
 <script type="text/template" id="facet-template">
-    <span><a href="<%=url%>"><%=displayValue%></a>
     <div class="x" id="X_<%=term%>">X</div>
-    </span>
+    <a href="<%=url%>"><%=displayValue%></a>
 </script>
 
 <script type="text/template" id="facet-sort">
@@ -75,6 +74,11 @@
     </div>
     <ol id="stateFacets"></ol>
     <div style="clear:both;"></div>
+    <div class="header">
+        <h3>Powder Rating</h3>
+    </div>
+    <ol id="powderFacets"></ol>
+
 </section>
 <section id="recommendations">
 <section id="results">
@@ -104,12 +108,23 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/lib/underscore-min.js"></script>
 <script src="js/lib/backbone-min.js"></script>
-<script src="js/models/models.min.js"></script>
-<script src="js/collections/collections.min.js"></script>
-<script src="js/views/views.min.js"></script>
+<script src="js/models/recc.js"></script>
+<script src="js/models/facet.js"></script>
+<script src="js/models/dateModel.js"></script>
+<script src="js/models/sortOption.js"></script>
+<script src="js/collections/reccList.js"></script>
+<script src="js/collections/facetList.js"></script>
+<script src="js/collections/dateList.js"></script>
+<script src="js/collections/searchResult.js"></script>
+<script src="js/views/facetView.js"></script>
+<script src="js/views/reccView.js"></script>
+<script src="js/views/sortView.js"></script>
+<script src="js/views/reccHeaderView.js"></script>
+<script src="js/views/searchResultsView.js"></script>
 <script src="js/app.js"></script>
 <script src="js/routers/router.js"></script>
 <script src="js/jquery.cookie.min.js"></script>
+
 
 </body>
 </html>

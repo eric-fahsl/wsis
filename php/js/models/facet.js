@@ -28,10 +28,15 @@ app.Facet = Backbone.Model.extend({
         }
 
         //For Distance Facets
-        if (this.attributes.to) {
+        if (this.facetType == 'distance') {
             var distance = this.attributes.to;
             this.set({term: distance});
             this.set({displayValue: "Under " + distance + " Miles"});
+        } else if (this.facetType == 'powder') {
+            var rating = this.attributes.from;
+            this.set({term: rating});
+//            <div class="flakes" style="width: 120px" title="Rating: 4 / 5"></div>
+            this.set({displayValue: "At least <div class='flakes' style='width: " + (30 * rating) + "px;'></div>"});
         }
 
         //Set the destination URL

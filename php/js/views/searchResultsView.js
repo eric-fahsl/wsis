@@ -36,7 +36,7 @@ app.SearchResultsView = Backbone.View.extend({
         this.collection = new app.SearchResult();
         this.dateHeaderCollection = new app.DateList();
         var tempReccList = new app.ReccList();
-        this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList};
+        this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList, powder:tempReccList};
         this.sortOptions = {"powder":"Powder", "bluebird":"Bluebird", "fl":"Freezing Level"};
         this.sortModels = {};
         var that = this;
@@ -90,7 +90,10 @@ app.SearchResultsView = Backbone.View.extend({
                 });
 
                 $.each(that.facetCollection, function(i, v) {
-                    that.facetCollection[i] = new app.FacetList(model.facets[i].terms,
+                    var models = model.facets[i];
+                    if (models.terms) models = models.terms;
+                    else if (models.ranges) models = models.ranges;
+                    that.facetCollection[i] = new app.FacetList(models,
                         {facets: that.facets, facetType: i} );
                 });
                 if (that.collection.facets.distance) {
@@ -153,7 +156,7 @@ app.SearchResultsView = Backbone.View.extend({
     },
 
     renderFacet: function (facet, facetType) {
-        if (facetType != 'distance' || facet.attributes.total_count > 0){
+        if (!(facetType == 'powder' || facetType=='distance') || facet.attributes.total_count > 0){
             var facetView = new app.FacetView({
                 model: facet
             });
