@@ -1,7 +1,6 @@
-
 <script type="text/template" id="recc-date-template">
     <div style="clear:both;"></div>
-    <h5><a href="recommendations<%=url%>"><%=prettyDate%></a></h5>
+    <h5><a href="<%=url%>"><%=prettyDate%></a></h5>
 
 </script>
 
@@ -20,60 +19,64 @@
 </script>
 
 <script type="text/template" id="facet-template">
-    <span><a href="recommendations<%=url%>"><%=displayValue%></a>
     <div class="x" id="X_<%=term%>">X</div>
-    </span>
+    <a href="<%=url%>"><%=displayValue%></a>
 </script>
 
 <script type="text/template" id="facet-sort">
-<%= displayValue %>
+    <%= displayValue %>
 </script>
 
 <section id="searchContainer">
-<button class="button visible-phone" id="toggleFilters">Filter</button>
-<section id="facets" class="hidden-phone span2">
-    <div class="header">
-        <h3>Date</h3>
-    </div>
-    <ol id="dateFacets"></ol>
-    <div class="header" id="distanceHeader">
-        <h3>Distance</h3>
-    </div>
-    <ol id="distanceFacets"></ol>
-    <div class="header">
-        <h3>Region</h3>
-    </div>
-    <ol id="regionFacets"></ol>
-    <div class="header">
-        <h3>State</h3>
-    </div>
-    <ol id="stateFacets"></ol>
-    <div style="clear:both;"></div>
-</section>
-<section id="recommendations">
-<section id="results">
-    <div id="resultsHeader">
-        <p id="number_results">Click any resort name for full recommendation details.<br/>
-            Learn about our <a target="new" href="/about">rating system</a>.</p>
-
-
-        <div id="sort">
-
-            <label for="sort">Sort By: </label>
-            <select id="search_sort" name="sort">
-
-            </select>
+    <button class="button visible-phone" id="toggleFilters">Filter</button>
+    <section id="facets" class="hidden-phone span2">
+        <div class="header">
+            <h3>Date</h3>
         </div>
-
-        </p>
-    </div>
-    <section id="searchResults">
+        <ol id="dateFacets"></ol>
+        <div class="header" id="distanceHeader">
+            <h3>Distance</h3>
+        </div>
+        <ol id="distanceFacets"></ol>
+        <div class="header">
+            <h3>Powder Rating</h3>
+        </div>
+        <ol id="powderFacets"></ol>
+        <div class="header">
+            <h3>Region</h3>
+        </div>
+        <ol id="regionFacets"></ol>
+        <div class="header">
+            <h3>State</h3>
+        </div>
+        <ol id="stateFacets"></ol>
+        <div style="clear:both;"></div>
 
     </section>
+    <section id="recommendations">
+        <section id="results">
+            <div id="resultsHeader">
+                <p id="number_results">Hint: use filters <span class="hidden-phone">on the left </span>to narrow your results<br/>
+                    Learn about our <a target="new" href="/about">rating system</a>.</p>
 
 
-</section>
-</section>
+                <div id="sort">
+
+                    <label for="sort">Sort By: </label>
+                    <select id="search_sort" name="sort">
+
+                    </select>
+                </div>
+
+                </p>
+            </div>
+            <section id="searchResults">
+
+            </section>
+
+
+        </section>
+    </section>
 </section>
 
 <script src="/js/lib/underscore-min.js"></script>
