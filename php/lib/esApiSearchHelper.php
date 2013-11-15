@@ -230,7 +230,7 @@ function search($_GET) {
 		);
         if (isset($_GET['fields'])) {
             $queryArray['fields'] = array('powder.rating', 'state_full', 'freezing_level.rating', 'resort',
-                'date', 'bluebird.rating', 'resort_name');
+                'date', 'bluebird.rating', 'resort_name', 'snow_quality.rating');
         }
 	}
 /*

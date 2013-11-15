@@ -1,0 +1,48 @@
+{
+     "query": {
+        "filtered": {
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "state": "WA"
+                            }
+                        },
+                        {
+                            "range": {
+                                "date": {
+                                    "gte": "2013-11-14"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+
+    "facets" : {
+        "Powder" : {
+            "statistical" : {
+                "field" : "powder.rating"
+            }
+        }, 
+        "Bluebird" : {
+            "statistical" : {
+                "field" : "bluebird.rating"
+            }
+        }, 
+        "Freezing Level" : {
+            "statistical" : {
+                "field" : "freezing_level.rating"
+            }
+        }, 
+        "Snow Quality" : {
+            "statistical" : {
+                "field" : "snow_quality.rating"
+            }
+        }
+    },
+    "size": 0
+}

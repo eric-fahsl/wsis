@@ -89,8 +89,8 @@ def getWeatherSummaryForDate(date, resort, db) :
 
 	return results
 
-def getAverageFreezingLevelForResort(startDate, endDate, resort, db, dayFilter=False) :
-	queryString = "select avg(freezing_level) from " + TABLE_NAME 
+def getAverageValueForResort(column, startDate, endDate, resort, db, dayFilter=False) :
+	queryString = "select avg(" + column + ") from " + TABLE_NAME 
 	queryString += " WHERE date >= '" + str(startDate)
 	queryString += "' AND date < '" + str(endDate) 
 	queryString += "' AND resort = " + str(resort)
@@ -101,5 +101,15 @@ def getAverageFreezingLevelForResort(startDate, endDate, resort, db, dayFilter=F
 	r = db.store_result()
 	results = r.fetch_row(0)
 
-	avg_level = results[0][0]
-	return float(avg_level)
+	avg_value = results[0][0]
+	return float(avg_value)
+
+def getAverageFreezingLevelForResort(startDate, endDate, resort, db, dayFilter=False) :
+	return getAverageValueForResort('freezing_level', startDate, endDate, resort, db, dayFilter)
+
+def getAverageWindForResort(startDate, endDate, resort, db, dayFilter=False) :
+	return getAverageValueForResort('wind', startDate, endDate, resort, db, dayFilter)
+
+def getAverageTemperatureForResort(startDate, endDate, resort, db, dayFilter=False) :
+	return getAverageValueForResort('(high_temp + low_temp)/2', startDate, endDate, resort, db, dayFilter)
+

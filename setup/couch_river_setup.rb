@@ -44,6 +44,7 @@ puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore
 
 puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore_conflicts=true' -d '{ "powder" : { "properties" : { "powder" : { "properties": { "rating" : { "type": "float"}}}}}}' 2>/dev/null`
 puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore_conflicts=true' -d '{ "bluebird" : { "properties" : { "bluebird" : { "properties": { "rating" : { "type": "float"}}}}}}' 2>/dev/null`
+#puts `curl -XPUT 'http://localhost:9200/#{ind_name}/#{type_name}/_mapping?ignore_conflicts=true' -d '{ "snow_quality" : { "properties" : { "snow_quality" : { "properties": { "rating" : { "type": "float"}}}}}}' 2>/dev/null`
 
 # Configure river
 puts "Configuring river"

@@ -159,6 +159,10 @@ body .row-fluid {
  	height:27px;
  	background: url("../images/snowflake5.png");
  }
+ .thumbs {
+ 	height:26px;
+ 	background: url("../images/thumb5.png");
+ }
  .suns {
  	height:30px;
  	background: url("../images/bluebird5.png");
@@ -352,7 +356,7 @@ body .row-fluid {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
     margin-left:5px;
     min-width:162px;
-    height:185px;
+    height:205px;
 }
 .reccView h6 {
     font-size: 0.6em;
