@@ -32,8 +32,9 @@ POWDER_QUALITY_WIND_FACTOR = 0.35
 POWDER_QUALITY_FREEZING_LEVEL_FACTOR = 0.2
 POWDER_QUALITY_NEW_SNOW_FACTOR = 0.2
 POWDER_QUALITY_MIN_SNOW_LAST_72 = 4
-POWDER_QUALITY_DAY_BEFORE_FACTOR = .666666666666667
-POWDER_QUALITY_2_DAYS_BEFORE_FACTOR = .3333333333333
+POWDER_QUALITY_DAY_BEFORE_FACTOR = .666666666666667 * .8
+POWDER_QUALITY_2_DAYS_BEFORE_FACTOR = .3333333333333 * .8
+POWDER_QUALITY_DAY_OF_FACTOR = .2
 
 #Bluebird summaries
 BLUEBIRD_SUMMARIES = {}
@@ -182,47 +183,9 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 	nextDay = dateOfRecommendation + datetime.timedelta(days=1)
 
 	try :
-		'''
-		###Get the amount of fresh snow for tomorrow
-		newSnowForTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
-		#check if domestic, if not, just use the totals from SnowForecast
-		newSnowForTomorrowNws = newSnowForTomorrowSf
-		if (resort['domestic'] == 'T') :
-			newSnowForTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(previousDay, dateOfRecommendation, resort['id'], db)
-		if (str(newSnowForTomorrowNws) == 'None') :
-			newSnowForTomorrowNws = 0
-
-		#Get the average of NWS and SF
-		newSnowForTomorrow = calcAverage(newSnowForTomorrowNws, newSnowForTomorrowSf)
-		'''
 		newSnowForTomorrow = retrieveTotalSnowForDateRange(previousDay, dateOfRecommendation, resort, db, False)
-
-		'''
-		###Get the projected snow for tomorrow
-		projectedSnowTomorrowSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-		#check if domestic, if not, just use the totals from SnowForecast
-		projectedSnowTomorrowNws = projectedSnowTomorrowSf
-		if (resort['domestic'] == 'T') :
-			projectedSnowTomorrowNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation, nextDay, resort['id'], db, True)
-		#Get the average of NWS and SF
-		projectedSnowTomorrow = calcAverage(projectedSnowTomorrowNws, projectedSnowTomorrowSf) 
-		'''
 		projectedSnowTomorrow = retrieveTotalSnowForDateRange(dateOfRecommendation, nextDay, resort, db, True)
-
 		#TODO - update this to read from actual resortMaster
-		'''
-		previousSnowFallSf = snowforecastWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
-		if (previousSnowFallSf == None) :
-			previousSnowFallSf = 0
-		previousSnowFallNws = previousSnowFallSf	
-		#check if domestic, if not just use the totals from SnowForecast
-		if (resort['domestic'] == 'T') :
-			previousSnowFallNws = nwsWeather.getTotalSnowfallForRangeForResort(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort['id'], db)
-			if previousSnowFallNws == None :
-				previousSnowFallNws = 0
-
-		previousSnowFall = calcAverage(previousSnowFallSf, previousSnowFallNws)
-		'''
 		previousSnowFall = retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation, resort, db, False)
 
 		resortDocName = resort['name'].lower().replace(' ','') + "_"
@@ -284,17 +247,18 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 			freezingLevelData, dateOfRecommendation, nextDay, resort, db)
 		
 		snowQuality['2DaysPrior'] = calculateDaySnowQualityRating( \
-			retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=4), dateOfRecommendation  - datetime.timedelta(days=1), resort, db, False), \
+			retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=4), dateOfRecommendation - datetime.timedelta(days=1), resort, db, False), \
 			retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=2), previousDay, resort, db, False), \
 			freezingLevelData, dateOfRecommendation, nextDay, resort, db)
 
-		'''
-		snowQuality['3DaysPrior'] = calculateDaySnowQualityRating( \
-			retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=5), dateOfRecommendation  - datetime.timedelta(days=2), resort, db, False), \
-			retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=3), dateOfRecommendation - datetime.timedelta(days=2), resort, db, False), \
+		snowQuality['dayOf'] = calculateDaySnowQualityRating( \
+			retrieveTotalSnowForDateRange(dateOfRecommendation - datetime.timedelta(days=2), dateOfRecommendation + datetime.timedelta(days=1), resort, db, True), \
+			retrieveTotalSnowForDateRange(dateOfRecommendation, dateOfRecommendation + datetime.timedelta(days=1), resort, db, True), \
 			freezingLevelData, dateOfRecommendation, nextDay, resort, db)
-		'''
-		snowQualityRating = snowQuality['prior24'] * POWDER_QUALITY_DAY_BEFORE_FACTOR + snowQuality['2DaysPrior'] * POWDER_QUALITY_2_DAYS_BEFORE_FACTOR		
+		
+		snowQualityRating = snowQuality['prior24'] * POWDER_QUALITY_DAY_BEFORE_FACTOR + \
+			snowQuality['2DaysPrior'] * POWDER_QUALITY_2_DAYS_BEFORE_FACTOR	+ \
+			snowQuality['dayOf'] * POWDER_QUALITY_DAY_OF_FACTOR
 		snowQuality['rating'] = formatRating(snowQualityRating)
 
 		reccomendationDocument['snow_quality'] = snowQuality
