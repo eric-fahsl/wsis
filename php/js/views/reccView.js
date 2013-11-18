@@ -4,7 +4,7 @@ var app = app || {};
 
 app.ReccView = Backbone.View.extend({
     tagName: 'div',
-    className: 'reccView span2',
+    className: 'reccView',
     template: _.template( $( '#recc-template' ).html() ),
 
     initialize: function() {

@@ -354,9 +354,10 @@ body .row-fluid {
 }
 .reccView {
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
-    margin-left:5px;
-    min-width:162px;
-    height:205px;
+    float:left;
+    margin:5px;
+    width:162px;
+    height:190px;
 }
 .reccView h6 {
     font-size: 0.6em;
@@ -369,4 +370,7 @@ body .row-fluid {
 }
 #powderFacets .x {
     padding-top:13px;
+}
+#searchContainer {
+    min-width:350px;
 }
