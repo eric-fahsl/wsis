@@ -25,10 +25,11 @@
 </head>
 <body>
 
+<!-- START COPYING BELOW THIS LINE -->
+
 <script type="text/template" id="recc-date-template">
     <div style="clear:both;"></div>
     <h5><a href="<%=url%>"><%=prettyDate%></a></h5>
-
 </script>
 
 
@@ -39,10 +40,10 @@
         <span><%=fields.state_full%></span><br>
         <h6>Powder:</h6>
         <div class="flakes" style="width: <%=fields['powder.rating'] * 30 %>px" title="Rating: <%=fields['powder.rating']%> / 5"></div>
+        <h6>Snow Quality (BETA):</h6>
+        <div class="thumbs" style="width: <%=fields['snow_quality.rating'] * 30 %>px" title="Rating: <%=fields['snow_quality.rating']%> / 5"></div>
         <h6>Bluebird:</h6>
         <div class="suns" style="width: <%=fields['bluebird.rating'] * 30 %>px" title="Rating: <%=fields['bluebird.rating']%> / 5"></div>
-        <h6>Snow Quality:</h6>
-        <div class="thumbs" style="width: <%=fields['snow_quality.rating'] * 30 %>px" title="Rating: <%=fields['snow_quality.rating']%> / 5"></div>
         <h6>Freezing Level:</h6>
         <div class="mtnContainer"><div class="mtnShading" style="background-position-y: <%= fields['freezing_level.offset']%>px" ></div></div>
     </div>
@@ -84,6 +85,7 @@
 
 </section>
 <section id="recommendations">
+    <img src="/images/loading.gif" id="loadingImage"/>
 <section id="results">
     <div id="resultsHeader">
         <p id="number_results">Click on any resort name for full details.<br/>
@@ -108,6 +110,11 @@
 </section>
 </section>
 </section>
+
+
+
+<!-- STOP COPYING ABOVE THIS LINE -->
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="js/lib/underscore-min.js"></script>
 <script src="js/lib/backbone-min.js"></script>

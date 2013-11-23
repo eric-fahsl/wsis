@@ -1,30 +1,33 @@
+
 <script type="text/template" id="recc-date-template">
     <div style="clear:both;"></div>
-    <h5><a href="/recommendations<%=url%>"><%=prettyDate%></a></h5>
-
+    <h5><a href="<%=url%>"><%=prettyDate%></a></h5>
 </script>
 
 
 <script type="text/template" id="recc-template">
-    <div class="span2 recresultLanding">
+    <div class="recresultLanding">
         <div class="recheader">
             <a href="resorts?resort=<%=fields.resort%>&amp;date=<%=fields.date%>"><%=fields.resort_name%></a></div>
         <span><%=fields.state_full%></span><br>
         <h6>Powder:</h6>
         <div class="flakes" style="width: <%=fields['powder.rating'] * 30 %>px" title="Rating: <%=fields['powder.rating']%> / 5"></div>
+        <h6>Snow Quality (BETA):</h6>
+        <div class="thumbs" style="width: <%=fields['snow_quality.rating'] * 30 %>px" title="Rating: <%=fields['snow_quality.rating']%> / 5"></div>
         <h6>Bluebird:</h6>
         <div class="suns" style="width: <%=fields['bluebird.rating'] * 30 %>px" title="Rating: <%=fields['bluebird.rating']%> / 5"></div>
         <h6>Freezing Level:</h6>
-        <div class="mtnContainer"><div class="mtnShading" style="background-position-y: <%= fields['freezing_level.offset']%>px" ></div></div></div>
+        <div class="mtnContainer"><div class="mtnShading" style="background-position-y: <%= fields['freezing_level.offset']%>px" ></div></div>
+    </div>
 </script>
 
 <script type="text/template" id="facet-template">
     <div class="x" id="X_<%=term%>">X</div>
-    <a href="/recommendations<%=url%>"><%=displayValue%></a>
+    <a href="<%=url%>"><%=displayValue%></a>
 </script>
 
 <script type="text/template" id="facet-sort">
-    <%= displayValue %>
+<%= displayValue %>
 </script>
 
 <section id="searchContainer">
@@ -54,13 +57,12 @@
 
     </section>
     <section id="recommendations">
+        <img src="/images/loading.gif" id="loadingImage"/>
         <section id="results">
             <div id="resultsHeader">
-                <p id="number_results">Hint: use filters <span class="hidden-phone">on the left </span>to narrow your results<br/>
+                <p id="number_results">Click on any resort name for full details.<br/>
                     Learn about our <a target="new" href="/about">rating system</a>.</p>
-
-
-                <div id="sort">
+                 <div id="sort">
 
                     <label for="sort">Sort By: </label>
                     <select id="search_sort" name="sort">
@@ -78,6 +80,7 @@
         </section>
     </section>
 </section>
+
 
 <script src="/js/lib/underscore-min.js"></script>
 <script src="/js/lib/backbone-min.js"></script>

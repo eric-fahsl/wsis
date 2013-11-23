@@ -154,7 +154,9 @@ function buildSort() {
 			addSortTerm($sort, "bluebird.rating", "desc");
 		} elseif (strcasecmp($_GET['sort'], 'fl') == 0) {
 			addSortTerm($sort, "freezing_level.rating", "desc");
-		}	
+		} elseif (strcasecmp($_GET['sort'], 'quality') == 0) {
+            addSortTerm($sort, "snow_quality.rating", "desc");
+        }
 	}
 
 	addSortTerm($sort, "powder.rating", "desc");

@@ -21,7 +21,7 @@
 <body>
 <?php 
 
-include("lib/recommendations.php"); 
+include("lib/recommendations-backbone.php");
 //include ("lib/esSearchHelper.php");
 //print json_encode(getResortsForState("Utah"));
 ?>

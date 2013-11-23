@@ -37,12 +37,13 @@ app.SearchResultsView = Backbone.View.extend({
         this.dateHeaderCollection = new app.DateList();
         var tempReccList = new app.ReccList();
         this.facetCollection = {date:tempReccList, region:tempReccList, state:tempReccList, powder:tempReccList};
-        this.sortOptions = {"powder":"Powder", "bluebird":"Bluebird", "fl":"Freezing Level"};
+        this.sortOptions = {"powder":"Powder", "quality":"Snow Quality (BETA)","bluebird":"Bluebird", "fl":"Freezing Level"};
         this.sortModels = {};
         var that = this;
         $(this.sortEl).change(function() {
             window.location = $(that.sortEl + " option:selected")[0].value;
         });
+        $("#loadingImage").hide();
     },
 
     testMethod: function() {
