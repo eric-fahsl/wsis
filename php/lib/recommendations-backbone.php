@@ -23,7 +23,7 @@
 
 <script type="text/template" id="facet-template">
     <div class="x" id="X_<%=term%>">X</div>
-    <a href="<%=url%>"><%=displayValue%></a>
+    <a href="/recommendations<%=url%>"><%=displayValue%></a>
 </script>
 
 <script type="text/template" id="facet-sort">
