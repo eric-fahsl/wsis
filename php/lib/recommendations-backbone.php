@@ -1,7 +1,7 @@
 
 <script type="text/template" id="recc-date-template">
     <div style="clear:both;"></div>
-    <h5><a href="recommendations<%=url%>"><%=prettyDate%></a></h5>
+    <h5><a href="<%=url%>"><%=prettyDate%></a></h5>
 </script>
 
 
