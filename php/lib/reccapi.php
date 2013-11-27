@@ -12,8 +12,18 @@ function getResultsForDate($requestParams) {
     );
 }
 
+if (isset($_GET['resort'])) {
+    $dtime = new DateTime('NOW');
+    $displayDate = $dtime->format('Y-m-d');
+    $url = 'http://localhost:9200/recommendations/recommendations/' . $_GET['resort'] . '_' . $displayDate;
+    //print $url;
+    $ch = curl_init($url);
+    $esResult = curl_exec($ch);
+    return json_decode($esResult, true);
+
+}
 //check if showing a specific date, if so, just do a single standard search
-if (isset($_GET['date'])) {
+elseif (isset($_GET['date'])) {
     //echo json_encode(getResultsForDate($_GET) , true );
     $_GET['size'] = 30;
 
