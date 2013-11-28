@@ -39,6 +39,9 @@ if (isset($_GET['resort'])) {
 	  $dt = new DateTime($date);
 	  $dateFormatted = $dt->format('l, F j, Y');
 
+      $previousDate = date('Y-m-d', strtotime($date . ' - 1 days'));
+      $nextDate = date('Y-m-d', strtotime($date . ' + 1 days'));
+
 	  $state = $parsedJson->{'state'};
 	  $latitude = $parsedJson->{'latitude'};
 	  $longitude = $parsedJson->{'longitude'};
@@ -66,6 +69,8 @@ if (isset($_GET['resort'])) {
 	
 	<h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
 	<div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
+    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
+    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
 
 	<table cellpadding="3" id="resortDetailRatings">
 	<tr>
@@ -73,7 +78,12 @@ if (isset($_GET['resort'])) {
 		<td><h6><?= $powderRating ?></h6></td>
 		<td><?php printSnowFlakes($powderRating, True); ?></td>
 	</tr>
-	<tr>
+    <tr>
+        <td><h4>Snow Quality</h4></td>
+        <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>
+        <td><?php printThumbs($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
+    </tr>
+    <tr>
 		<td><h4>Bluebird</h4></td>
 		<td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>
 		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
@@ -159,27 +169,7 @@ if (isset($_GET['resort'])) {
 	    var plot1 = $.jqplot('ratingsChart', "/lib/resortDataSearch.php?resort=<?= $resort ?>&dateStart=<?= $chartStart ?>&dateMax=<?= $chartEnd ?>&size=30", { 
 	        //title: 'Ratings for <?= $resortName ?>', 
 	        dataRenderer: ajaxDataRenderer,
-		    series: [		        		        
-		        {
-		        	yaxis: 'y2axis',
-		        	color: '#a9a9a9',
-		        	shadow: false,
-		        	label: 'Top Elevation',
-		        	showMarker: false
-		        },
-		        {
-		        	yaxis: 'y2axis',
-		        	color: '#a9a9a9',
-		        	shadow: false,
-		        	label: 'Bottom Elevation',
-		        	showMarker: false
-		        },
-		        {
-		        	label: 'Freezing Level',
-		        	color: '#d092db',
-		        	yaxis: 'y2axis',		        	
-		        	markerOptions: { style: 'x'}
-		        },
+		    series: [
 		        {
 		            label: 'Bluebird',
 		            color: '#dbb346',
@@ -192,7 +182,13 @@ if (isset($_GET['resort'])) {
 		            lineWidth: 4,
 		            color: '#18c2e1'
 		            
-		        },	      
+		        },
+                {
+		        	label: 'Snow Quality',
+		        	color: '#d092db',
+		        	yaxis: 'y2axis',
+		        	markerOptions: { style: 'x'}
+		        },
 		        
 	        ], 
 	        axes: { 
@@ -210,15 +206,18 @@ if (isset($_GET['resort'])) {
 	            	label: 'Rating',
 	            	labelRenderer: $.jqplot.CanvasAxisLabelRenderer
 
-	           	},
+	           	}
+                ,
 	           	y2axis: {
-	           		label: 'Freezing Level',
+	           		label: 'Rating',
 	           		labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                    min: 0, max: 5,
 	           		labelOptions: { angle: 90 }
 	           	}
 	        }, 
 	        highlighter: {
 		        show: true,
+
 		        sizeAdjust: 7.5
 		    },
 	        legend: { show: true } 

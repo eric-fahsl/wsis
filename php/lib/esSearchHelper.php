@@ -322,6 +322,16 @@ function printSuns($count, $large = False) {
     echo "<div class='$class' style='width: ". $width . "px' title='Rating: $count / 5'></div>";
 }
 
+function printThumbs($count, $large = False) {
+    $width = $count * 30;
+    $class = "thumbs";
+    if ($large) {
+        $class = "thumbs-large";
+        $width = $count * 60;
+    }
+    echo "<div class='$class' style='width: ". $width . "px' title='Rating: $count / 5'></div>";
+}
+
 function printFreezingLevel($rating, $freezing_level, $large = False) {
     $offset = -24 + (24/4) * ($rating-1);
     $largeClass = "";
@@ -352,6 +362,7 @@ function displayRecommendationWidget($rec, $resultClass, $showDate) {
     ?>
     <?php
     printSnowFlakes($rec['powder']['rating']);
+    printThumbs($rec['snow_quality']['rating']);
     printSuns($rec['bluebird']['rating']);
     printFreezingLevel($rec['freezing_level']['rating'], $rec['freezing_level']['freezing_level_avg']);
 

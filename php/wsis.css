@@ -177,6 +177,11 @@ body .row-fluid {
  	height:60px;
  	background: url("../images/sun-med-5.png");
  }
+.thumbs-large {
+    height:60px;
+    background: url("../images/thumbs-med-5.png");
+}
+
 
  #search_sort {
  	width: 180px;
