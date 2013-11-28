@@ -14,6 +14,17 @@
 			</div>
 		</div>
 
+        <div class="module mod_3 span3">
+            <a href="<?= $recSearchLink ?>sort=quality">
+                <img src="../images/star-hi.png" class="centerImage" alt="Snow Quality"/>
+                <h4>Snow Quality</h4>
+            </a>
+            <p>How soft is the snow going to be? Should I expect blower pow or faceshots?</p>
+            <div class="bottomValueProp">
+                <a href="<?= $recSearchLink ?>sort=quality">See top rated resorts by snow quality</a>
+            </div>
+        </div>
+
 		<div class="module mod_2 span3">
 			<a href="<?= $recSearchLink ?>sort=bluebird">
 				<img src="../images/sun-hi.png" class="centerImage" alt="Bluebird"/>
@@ -22,16 +33,6 @@
 			<p>How nice of a day is it going to be?  Is it worth it to bring the camera (or the sunscreen?)</p>
 			<div class="bottomValueProp">
 				<a href="<?= $recSearchLink ?>sort=bluebird">See top forecasted bluebird ratings</a>
-			</div>
-		</div>
-		<div class="module mod_3 span3">
-			<a href="<?= $recSearchLink ?>sort=fl">
-				<img src="../images/mountains-iconlarge.png" class="centerImage" alt="Freezing Level"/>
-				<h4>Freezing Level</h4>
-			</a>
-			<p>Am I going to get rained on? What is the snow quality going to be like?</p>
-			<div class="bottomValueProp">
-				<a href="<?= $recSearchLink ?>sort=fl">See top rated resorts by freezing level</a>
 			</div>
 		</div>
 		
