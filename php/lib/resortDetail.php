@@ -81,7 +81,7 @@ if (isset($_GET['resort'])) {
     <tr>
         <td><h4>Snow Quality</h4></td>
         <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>
-        <td><?php printThumbs($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
+        <td><?php printStars($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
     </tr>
     <tr>
 		<td><h4>Bluebird</h4></td>

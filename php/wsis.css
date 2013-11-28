@@ -165,6 +165,10 @@ body .row-fluid {
  	height:26px;
  	background: url("../images/thumb5.png");
  }
+.stars {
+    height:26px;
+    background: url("../images/star5.png");
+}
  .suns {
  	height:30px;
  	background: url("../images/bluebird5.png");
@@ -180,6 +184,10 @@ body .row-fluid {
 .thumbs-large {
     height:60px;
     background: url("../images/thumbs-med-5.png");
+}
+.stars-large {
+    height:57px;
+    background: url("../images/stars-med-5.png");
 }
 
 
