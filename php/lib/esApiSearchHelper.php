@@ -160,9 +160,10 @@ function buildSort() {
     }
 
     addSortTerm($sort, "powder.rating", "desc");
+    addSortTerm($sort, "snow_quality.rating", "desc");
     addSortTerm($sort, "bluebird.rating", "desc");
     addSortTerm($sort, "powder.snow_new", "desc");
-    addSortTerm($sort, "powder.snow_forecast", "desc");
+    //addSortTerm($sort, "powder.snow_forecast", "desc");
 
     return $sort;
 }

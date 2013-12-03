@@ -218,7 +218,9 @@ body .row-fluid {
  #powderRecTab {
  	margin-left: 15px;
  }
-
+.nomarginbottom {
+    margin-bottom: 0px;
+}
  #seeAllHome {
  	font-style: italic;
  	padding-bottom: 7px;
@@ -392,6 +394,16 @@ body .row-fluid {
 #loadingImage {
     padding: 30px;
 }
+#rdp_sidebar {
+    font-size:0.9em;
+}
+#rdp_sidebar table {
+    font-size: 0.9em;
+}
+#rdp_sidebar td {
+    padding: 2px;
+}
+
 @media (max-width: 390px) {
     body {
         padding-left:5px;

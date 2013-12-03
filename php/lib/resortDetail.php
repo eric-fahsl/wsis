@@ -19,7 +19,12 @@ include("esSearchHelper.php");
 
 if (isset($_GET['resort'])) {
   $resort = $_GET['resort'];
-  $date = $_GET['date'];
+  if (isset($_GET['date'])) {
+    $date = $_GET['date'];
+  } else {
+    $dtime = new DateTime('NOW');
+    $date = $dtime->format('Y-m-d');
+  }
 
   //$documentPath = "http://localhost:9200/recommendations/recommendations/whitepass_2012-11-20";
   $documentPath = "http://localhost:9200/recommendations/recommendations/" . $resort . "_" . $date;
@@ -38,6 +43,7 @@ if (isset($_GET['resort'])) {
 	  $date = $parsedJson->{'date'}; 
 	  $dt = new DateTime($date);
 	  $dateFormatted = $dt->format('l, F j, Y');
+      $dateFormatMonthDay = $dt->format(' F j');
 
       $previousDate = date('Y-m-d', strtotime($date . ' - 1 days'));
       $nextDate = date('Y-m-d', strtotime($date . ' + 1 days'));
@@ -58,215 +64,218 @@ if (isset($_GET['resort'])) {
 	  //$snowForecast = $parsedJson->{''};
 
 	  echo "<h2>$resortName, $state</h2>";
-	  echo "<p><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
+	  echo "<p class='nomarginbottom'><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
-	<style>
-		body {
-			min-width:400px;
-		}
-	</style>
 	<link class="include" rel="stylesheet" type="text/css" href="/js/jquery.jqplot.min.css" />
-	
-	<h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
-	<div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
-    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
-    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
+	<section class="span9">
+        <h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
+        <div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
+        <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
+        <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
 
-	<table cellpadding="3" id="resortDetailRatings">
-	<tr>
-		<td><h4>Powder</h4></td>
-		<td><h6><?= $powderRating ?></h6></td>
-		<td><?php printSnowFlakes($powderRating, True); ?></td>
-	</tr>
-    <tr>
-        <td><h4>Snow Quality</h4></td>
-        <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>
-        <td><?php printStars($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
-    </tr>
-    <tr>
-		<td><h4>Bluebird</h4></td>
-		<td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>
-		<td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
-	</tr>
-	<tr>
-		<td><h5>Freezing <br/> Level</h5></td>
-		<td><h6><?php 
-			echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'}; 
-			if ($isDomestic) {
-				echo " ft";
-			} else {
-				echo " m";
-			}
-		?></h6></td>
-		<td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>
-	</tr>
-	</table>
-	
-	<?php 
-		$last24 = ""; $newSnow = ""; $last72 = "";
-		if ($isDomestic) {
-			$last24 = $parsedJson->{'powder'}->{'snow_new'} . "&rdquo;";
-			$newSnow = $parsedJson->{'powder'}->{'snow_forecast'} . "&rdquo;";
-			$last72 = $parsedJson->{'powder'}->{'snow_prev'} . "&rdquo;";
-		} else {
-			$last24 = convertInToCm($parsedJson->{'powder'}->{'snow_new'}) . "cm";
-			 $newSnow = convertInToCm($parsedJson->{'powder'}->{'snow_forecast'}) . "cm";
-			 $last72 = convertInToCm($parsedJson->{'powder'}->{'snow_prev'}) . "cm";
-		}
-	?>
+        <table cellpadding="3" id="resortDetailRatings">
+        <tr>
+            <td><h4>Powder</h4></td>
+            <td><h6><?= $powderRating ?></h6></td>
+            <td><?php printSnowFlakes($powderRating, True); ?></td>
+        </tr>
+        <tr>
+            <td><h4>Snow Quality</h4></td>
+            <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>
+            <td><?php printStars($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
+        </tr>
+        <tr>
+            <td><h4>Bluebird</h4></td>
+            <td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>
+            <td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
+        </tr>
+        <tr>
+            <td><h5>Freezing <br/> Level</h5></td>
+            <td><h6><?php
+                echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'};
+                if ($isDomestic) {
+                    echo " ft";
+                } else {
+                    echo " m";
+                }
+            ?></h6></td>
+            <td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>
+        </tr>
+        </table>
 
-	<h4>Snowfall Projections</h4>
-    <ul class="precipitationPotential">
-      <li>
-        <p class="measure"><?= $last24 ?></p>
-        <p class="measureLabel">Last 24hrs</p>
-      </li>
-      <li>
-        <p class="measure"><?= $last72 ?></p>
-        <p class="measureLabel">Last 72 hrs</p>
-      </li>
-      <li>
-        <p class="measure"><?= $newSnow ?></p>
-        <p class="measureLabel">New Daytime</p>
-      </li>
-    </ul>
-    <div class="smallItalic divider">Projections for mid-mountain elevation</div>
-
-	<?php 
-		if ($isDomestic) {
-			echo "<div style='clear:both;'></div><i>NOAA Weather Summary</i>: " . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
-		}
-	?>
-	<div style="clear:both;">
-
-	<?php
-		//calculate start/ending date of chart
-		$chartStart = date('Y-m-d', strtotime($date . ' - 7 days'));
-		$chartEnd = date('Y-m-d', strtotime($date . ' + 7 days'));
-	?>
-
-	<h4>Additional Dates</h4>
-	<div class="ital">Click any rating point to load recommendation details for that date.</div>
-	
-	<div id="ratingsChart" class="span11"></div>
-
-	<script type="text/javascript">
-	$(document).ready(function(){
-	   
-	var ajaxDataRenderer = function(url, plot, options) {
-	    var ret = null;
-	    $.ajax({
-	      async: false,
-	      url: url,
-	      dataType:"json",
-	      success: function(data) {
-	        ret = data;
-	      }
-	    });
-	    return ret;
-	  };
-
-	    var plot1 = $.jqplot('ratingsChart', "/lib/resortDataSearch.php?resort=<?= $resort ?>&dateStart=<?= $chartStart ?>&dateMax=<?= $chartEnd ?>&size=30", { 
-	        //title: 'Ratings for <?= $resortName ?>', 
-	        dataRenderer: ajaxDataRenderer,
-		    series: [
-		        {
-		            label: 'Bluebird',
-		            color: '#dbb346',
-		            lineWidth: 4,
-		            markerOptions: { size: 12 }
-		        },
-		        { 
-		            label: 'Powder',
-		            markerOptions:{ size: 12, style:'diamond'},
-		            lineWidth: 4,
-		            color: '#18c2e1'
-		            
-		        },
-                {
-		        	label: 'Snow Quality',
-		        	color: '#d092db',
-		        	yaxis: 'y2axis',
-		        	markerOptions: { style: 'x'}
-		        },
-		        
-	        ], 
-	        axes: { 
-	            xaxis: { 
-	                renderer:$.jqplot.DateAxisRenderer,
-	                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-	                tickOptions: {
-	                  angle: -40,
-	                  formatString:'%a, %b %#d'
-
-	                }
-	            },
-	            yaxis: {
-	            	min: 0, max: 5,
-	            	label: 'Rating',
-	            	labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-
-	           	}
-                ,
-	           	y2axis: {
-	           		label: 'Rating',
-	           		labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                    min: 0, max: 5,
-	           		labelOptions: { angle: 90 }
-	           	}
-	        }, 
-	        highlighter: {
-		        show: true,
-
-		        sizeAdjust: 7.5
-		    },
-	        legend: { show: true } 
-	    });
-
-	    
-	    $('#ratingsChart').bind('jqplotDataClick', 
-            function (ev, seriesIndex, pointIndex, data) {
-                //$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-                var d = new Date(data[0]);
-                var month = d.getMonth() + 1;
-                if (month < 10) month = "0" + month;
-                var day = d.getDate();
-                if (day < 10) day = "0" + day;
-                var ratingDate = d.getFullYear() + "-" + month + "-" + day;
-                var url = "resorts?resort=<?= $resort ?>&date=" + ratingDate;
-                window.location.href = url;
+        <?php
+            $last24 = ""; $newSnow = ""; $last72 = "";
+            if ($isDomestic) {
+                $last24 = $parsedJson->{'powder'}->{'snow_new'} . "&rdquo;";
+                $newSnow = $parsedJson->{'powder'}->{'snow_forecast'} . "&rdquo;";
+                $last72 = $parsedJson->{'powder'}->{'snow_prev'} . "&rdquo;";
+            } else {
+                $last24 = convertInToCm($parsedJson->{'powder'}->{'snow_new'}) . "cm";
+                 $newSnow = convertInToCm($parsedJson->{'powder'}->{'snow_forecast'}) . "cm";
+                 $last72 = convertInToCm($parsedJson->{'powder'}->{'snow_prev'}) . "cm";
             }
-        );
-	});
-	</script>
-	<div class="divider"></div>
+        ?>
 
-	<h4>Recommendations based on the following</h4>
-	<?php 
-		if ($isDomestic) {
-			echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" . 
-				$resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
-		}
-		echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" . 
-			"$resortName Snow-Forecast.com Weather <img src='../images/snowforecast-logo.jpg'/></a>";
-	?>
+        <h4>Snowfall Projections for <?= $dateFormatMonthDay ?></h4>
+        <div class="smallItalic divider">Mid-mountain elevations</div>
+        <ul class="precipitationPotential">
+          <li>
+            <p class="measure"><?= $last24 ?></p>
+            <p class="measureLabel">Last 24hrs</p>
+          </li>
+          <li>
+            <p class="measure"><?= $last72 ?></p>
+            <p class="measureLabel">Last 72 hrs</p>
+          </li>
+          <li>
+            <p class="measure"><?= $newSnow ?></p>
+            <p class="measureLabel">New Daytime</p>
+          </li>
+        </ul>
 
-<div class="divider"></div>
+        <?php
+            if ($isDomestic) {
+                echo "<div style='clear:both;'></div><i>NOAA Weather Summary</i>: " . $parsedJson->{'bluebird'}->{'weather_summary'} . "<br/>";
+            }
+        ?>
+        <div style="clear:both;">
 
-<h4>Mountain Stats</h4>
-	<table>
-	<?php 
-		$unitStr = " (m, approx)";
-		if ($isDomestic) {
-			$unitStr = " (ft, approx)";
-		}
-		createTableRow("Base Elevation" . $unitStr, $resortInfo->{'base_elevation'});
-		createTableRow("Summit Elevation" . $unitStr, $resortInfo->{'summit_elevation'});
-		createTableRow("Latitude", $resortInfo->{'latitude'});
-		createTableRow("Longitude", $resortInfo->{'longitude'});
-	?>
+        <?php
+            //calculate start/ending date of chart
+            $chartStart = date('Y-m-d', strtotime($date . ' - 5 days'));
+            $chartEnd = date('Y-m-d', strtotime($date . ' + 5 days'));
+        ?>
 
-	</table>
+        <h4>Rating Trends for <?= $resortName?></h4>
+        <div class="ital">Click any rating point to load recommendation details for that date.</div>
+
+        <div id="ratingsChart" style="width:100%;"></div>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+
+        var ajaxDataRenderer = function(url, plot, options) {
+            var ret = null;
+            $.ajax({
+              async: false,
+              url: url,
+              dataType:"json",
+              success: function(data) {
+                ret = data;
+              }
+            });
+            return ret;
+          };
+
+            var plot1 = $.jqplot('ratingsChart', "/lib/resortDataSearch.php?resort=<?= $resort ?>&dateStart=<?= $chartStart ?>&dateMax=<?= $chartEnd ?>&size=30", {
+                //title: 'Ratings for <?= $resortName ?>',
+                dataRenderer: ajaxDataRenderer,
+                series: [
+                    {
+                        label: 'Bluebird',
+                        color: '#dbb346',
+                        lineWidth: 4,
+                        markerOptions: { size: 12 }
+                    },
+                    {
+                        label: 'Powder',
+                        markerOptions:{ size: 12, style:'diamond'},
+                        lineWidth: 4,
+                        color: '#18c2e1'
+
+                    },
+                    {
+                        label: 'Snow Quality',
+                        color: '#d092db',
+                        yaxis: 'y2axis',
+                        markerOptions: { style: 'x'}
+                    },
+
+                ],
+                axes: {
+                    xaxis: {
+                        renderer:$.jqplot.DateAxisRenderer,
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                          angle: -40,
+                          formatString:'%a, %b %#d'
+
+                        }
+                    },
+                    yaxis: {
+                        min: 0, max: 5,
+                        label: 'Rating',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+
+                    }
+                    ,
+                    y2axis: {
+                        label: 'Rating',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        min: 0, max: 5,
+                        labelOptions: { angle: 90 }
+                    }
+                },
+                highlighter: {
+                    show: true,
+
+                    sizeAdjust: 7.5
+                },
+                legend: { show: true }
+            });
+
+
+            $('#ratingsChart').bind('jqplotDataClick',
+                function (ev, seriesIndex, pointIndex, data) {
+                    //$('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+                    var d = new Date(data[0]);
+                    var month = d.getMonth() + 1;
+                    if (month < 10) month = "0" + month;
+                    var day = d.getDate();
+                    if (day < 10) day = "0" + day;
+                    var ratingDate = d.getFullYear() + "-" + month + "-" + day;
+                    var url = "resorts?resort=<?= $resort ?>&date=" + ratingDate;
+                    window.location.href = url;
+                }
+            );
+        });
+        </script>
+        <div class="divider"></div>
+
+
+
+    <div class="divider"></div>
+
+
+    </section>
+
+    <section class="span3" id="rdp_sidebar">
+        <h4>Mountain Stats</h4>
+        <table>
+            <?php
+            $unitStr = " (m, approx)";
+            if ($isDomestic) {
+                $unitStr = " (ft, approx)";
+            }
+            createTableRow("Summit Elevation<br/>" . $unitStr, $resortInfo->{'summit_elevation'});
+            createTableRow("Base Elevation<br/>" . $unitStr, $resortInfo->{'base_elevation'});
+            createTableRow("Latitude", $resortInfo->{'latitude'});
+            createTableRow("Longitude", $resortInfo->{'longitude'});
+            ?>
+
+        </table>
+
+        <h4>Data Sources</h4>
+        <?php
+        if ($isDomestic) {
+            echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
+                $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
+        }
+        echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" .
+            "$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg'/></a>";
+        ?>
+    </section>
+
 
 <div class='divider'></div>
 
@@ -276,7 +285,7 @@ if (isset($_GET['resort'])) {
 		$requestAttributes = array ( 
 			"date" => $date,
 			"coords" => $resortInfo->{'latitude'} . "," . $resortInfo->{'longitude'},
-			"size" => 6,
+			"size" => 7,
 			"sort" => "distance"
 		);
 		$results = search($requestAttributes);
