@@ -396,9 +396,7 @@ body .row-fluid {
 }
 #rdp_sidebar {
     font-size:0.9em;
-}
-#rdp_sidebar table {
-    font-size: 0.9em;
+    margin-left:0px;
 }
 #rdp_sidebar td {
     padding: 2px;

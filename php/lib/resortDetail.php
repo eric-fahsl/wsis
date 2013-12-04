@@ -68,7 +68,7 @@ if (isset($_GET['resort'])) {
 	?>
 	<link class="include" rel="stylesheet" type="text/css" href="/js/jquery.jqplot.min.css" />
 	<section class="span9">
-        <h3 class="minPhoneWidth">Recommendations for <?=$dateFormatted ?></h3>
+        <h3 class="minPhoneWidth">Ratings for <?=$dateFormatted ?></h3>
         <div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
         <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
         <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
@@ -102,7 +102,7 @@ if (isset($_GET['resort'])) {
             <td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>
         </tr>
         </table>
-
+        <span class="ital">Learn about our <a target="new" href="/about">rating system</a>.</span>
         <?php
             $last24 = ""; $newSnow = ""; $last72 = "";
             if ($isDomestic) {
@@ -147,7 +147,7 @@ if (isset($_GET['resort'])) {
         ?>
 
         <h4>Rating Trends for <?= $resortName?></h4>
-        <div class="ital">Click any rating point to load recommendation details for that date.</div>
+        <div class="ital">Click any rating point to load rating details for that date.</div>
 
         <div id="ratingsChart" style="width:100%;"></div>
 
@@ -355,7 +355,7 @@ if (isset($_GET['resort'])) {
 			 	$resort = $resort["_source"];
 
 			 	$resortInfo = "<h6>" . $resort["name"] . ", " . $resort["state"] . "</h6>"; 
-			 	$resortInfo .= "<a href=\"resorts?resort=$resortid&date=$today\">Current Ratings</a>";
+			 	$resortInfo .= "<a href=\"resorts?resort=$resortid\">Current Ratings</a>";
 			 	
 			 	echo "$('#map_canvas').gmap('addMarker', {'position': '" . $resort["latitude"] . "," . $resort["longitude"] . "'})";
 			 	echo ".click(function() { ";
@@ -370,7 +370,7 @@ if (isset($_GET['resort'])) {
 		
 	</script>
 	<?php
-	/*
+
 	$states = getStates();
 	//echo json_encode(getStates());
 	$i = 1;
@@ -382,7 +382,7 @@ if (isset($_GET['resort'])) {
 		 $today = date("Y-m-d");
 		 foreach($resorts["hits"]["hits"] as $resort) {
 		 	$resortid = $resort["_id"];
-		 	echo "<a href='resorts?resort=$resortid&date=$today'>" . $resort["fields"]["name"] . "</a><br/>\n";
+		 	echo "<a href='resorts?resort=$resortid'>" . $resort["_source"]["name"] . "</a><br/>\n";
 		 }
 		 echo "</div>";
 		 if ($i % 6 == 0) {
@@ -392,7 +392,7 @@ if (isset($_GET['resort'])) {
  	}
  	
  	echo "</div>";
- 	*/
+
 }
 
 //}
