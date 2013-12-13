@@ -401,6 +401,11 @@ body .row-fluid {
 #rdp_sidebar td {
     padding: 2px;
 }
+.liftie-widget iframe {
+    width:100%;
+    border: 0;
+    overflow:none;
+}
 
 @media (max-width: 390px) {
     body {

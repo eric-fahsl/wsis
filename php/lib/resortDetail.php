@@ -61,6 +61,8 @@ if (isset($_GET['resort'])) {
 	  if (strcmp("F", $resortInfo->{'domestic'}) == 0) {
 	  	$isDomestic = False;
 	  }
+
+      $liftieId = $resortInfo->{'liftie_id'};
 	  //$snowForecast = $parsedJson->{''};
 
 	  echo "<h2>$resortName, $state</h2>";
@@ -250,6 +252,11 @@ if (isset($_GET['resort'])) {
     </section>
 
     <section class="span3" id="rdp_sidebar">
+        <?php if ($liftieId != null) { ?>
+            <h4>Live Lift Status</h4>
+            <div id="liftie" class="liftie-widget" data-resort="<?= $liftieId ?>" data-style="naked"/>
+        <?php } ?>
+
         <h4>Mountain Stats</h4>
         <table>
             <?php
@@ -266,6 +273,7 @@ if (isset($_GET['resort'])) {
         </table>
 
         <h4>Data Sources</h4>
+
         <?php
         if ($isDomestic) {
             echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
@@ -285,7 +293,7 @@ if (isset($_GET['resort'])) {
 		$requestAttributes = array ( 
 			"date" => $date,
 			"coords" => $resortInfo->{'latitude'} . "," . $resortInfo->{'longitude'},
-			"size" => 7,
+			"size" => 6,
 			"sort" => "distance"
 		);
 		$results = search($requestAttributes);
@@ -310,7 +318,7 @@ if (isset($_GET['resort'])) {
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
     <script class="include" type="text/javascript" src="/js/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
     <script type="text/javascript" src="/js/plugins/jqplot.highlighter.min.js"></script>
-  
+    <script src="http://liftie.info/scripts/liftie-embed.min.js" defer> </script>
 
 <?php
 	}
