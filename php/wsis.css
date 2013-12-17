@@ -360,6 +360,9 @@ body .row-fluid {
 .midPhoneWidth {
 	min-width: 450px;
 }
+.smallRightPad {
+    padding-right: 5px;
+}
 #ratingsChart {
 	height: 330px;
 	margin-top:10px;
@@ -411,5 +414,6 @@ body .row-fluid {
     body {
         padding-left:5px;
         padding-right:5px;
+        zoom: 0.9;
     }
 }

@@ -69,7 +69,7 @@ if (isset($_GET['resort'])) {
 	  echo "<p class='nomarginbottom'><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>";
 	?>
 	<link class="include" rel="stylesheet" type="text/css" href="/js/jquery.jqplot.min.css" />
-	<section class="span9">
+	<section class="span9 smallRightPad">
         <h3 class="minPhoneWidth">Ratings for <?=$dateFormatted ?></h3>
         <div class="smallItalic">Generated on <?= $recommendationCreateDate ?> PST</div>
         <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
