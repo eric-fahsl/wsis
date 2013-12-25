@@ -4,6 +4,7 @@ import datetime
 import time
 import _mysql
 import nwsWeather
+import opensnowWeather 
 import resortMaster
 import os
 import uuid
@@ -172,10 +173,14 @@ def retrieveTotalSnowForDateRange(startDate, endDate, resort, db, dayFilter) :
 	snowFallNws = snowFallSf	
 	#check if domestic, if not just use the totals from SnowForecast
 	if (resort['domestic'] == 'T') :
-		snowFallNws = nwsWeather.getTotalSnowfallForRangeForResort(startDate, endDate, resort['id'], db, dayFilter)
+		if len(resort['opensnow_id']) > 0 :			
+			snowFallNws = opensnowWeather.getTotalSnowfallForRangeForResort(startDate, endDate, resort['id'], db, dayFilter)
+		else : 
+			#grab from nws instead of open snow
+			snowFallNws = nwsWeather.getTotalSnowfallForRangeForResort(startDate, endDate, resort['id'], db, dayFilter)
 		if snowFallNws == None :
 			snowFallNws = 0
-
+		
 	return calcAverage(snowFallSf, snowFallNws)
 
 def calculateRecommendation(dateOfRecommendation, resort, db) :
@@ -217,7 +222,12 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 		#Check if domestic, if not, do not pull from NWS
 		nwsBluebirdRating = calcAverage(sfBluebirdAM, sfBluebirdPM)
 		if (resort['domestic'] == 'T') :
-			weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
+			try :
+				weatherRecord = opensnowWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
+			except IndexError :
+				print "Open Snow weather index out of range, using NWS instead"
+				weatherRecord = nwsWeather.getWeatherSummaryForDate(dateOfRecommendation, resort['id'], db)
+
 			bluebirdData['weather_summary'] = weatherRecord[1]
 			nwsBluebirdRating = calcBluebird(weatherRecord[0])
 		

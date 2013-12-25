@@ -7,6 +7,7 @@ import nwsWeather
 import resortMaster
 import createRecommendations
 import snowforecastWeather
+import opensnowWeather
 
 QUERY_DATA_SOURCES = True;
 #Only use this linefor debugging
@@ -25,6 +26,9 @@ if QUERY_DATA_SOURCES :
 		snowforecastWeather.getWeather(resort, db)
 		if (resort['domestic'] == 'T') :
 			nwsWeather.getWeather(resort, db)
+			# opensnowWeather.getWeather(resort, db)
+		if ('' != resort['opensnow_id'].replace(' ','')) :
+			opensnowWeather.getWeather(resort, db)
 
 createRecommendations.create(db)
 
