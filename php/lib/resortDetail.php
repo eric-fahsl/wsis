@@ -279,8 +279,10 @@ if (isset($_GET['resort'])) {
             echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
                 $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
         }
-        echo "<a target='new' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" .
-            "$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg'/></a>";
+        echo "<a target='new1' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" .
+            "$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>";
+
+        echo "<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>";    
         ?>
     </section>
 

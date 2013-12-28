@@ -221,6 +221,9 @@ body .row-fluid {
 .nomarginbottom {
     margin-bottom: 0px;
 }
+.smallmarginbottom {
+	margin-bottom: 5px;
+}
  #seeAllHome {
  	font-style: italic;
  	padding-bottom: 7px;
