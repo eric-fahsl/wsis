@@ -1,0 +1,22 @@
+<p>A list of our most-frequently asked questions.</p>
+<h3>What is this?</h3>
+<p>Where Should I Ski is a website that helps skiers and snowboarders decide when and where to spend their day(s) skiing based on ever-changing weather conditions and forecasts. We use multiple weather forecast sites to provide ratings between one and five for powder, bluebird, and snow quality conditions (coming soon!) by resort by date.</p>
+<h3>How is this different than those other websites that give me the snow reports of different resorts?</h3>
+<p>Snow reports are great if you are curious to see where it is snowing or if you are deciding in the morning if and where to go ski, but many times a simple snow report may not be that useful for decision making when travel is involved.  Where Should I Ski's biggest value is helping to plan several days out.  If today is Wednesday and you are trying to decide which day(s) to ski this weekend and where to go - Wednesday morning's snow report is not all that useful to help decide.  Use our site to determine if you should drive a further distance to get better conditions or if nothing in your area looks appealing, maybe it's best to use your time off the mountain for the day.</p>
+<p>That said - we believe snow reports ARE great things to have, and there are great sites (OnTheSnow, AllSnow, PowderEnvy, etc) that report on them.  We do not plan on replacing the need for snow reports (or these sites), but see ourselves as an additional tool for the informed skier or rider.</p>
+<h3>Why bother with a rating system, why not just use inches of snow?</h3>
+<p>Inches of new snow is a great metric and is indeed the primary driver to our powder rating.  However, we believe a true powder day is a factor of new snow (last 24 hours) plus projected snowfall during the day plus how much snowfall the past three days.  Consider these two scenarios, what sounds like a better powder day?</p>
+<ol>
+<li>6 inches new snow (past 24 hours), 1 inch projected during the day, 0 inches past 72 hours</li>
+<li>4 inches new snow (past 24 hours), 8 inches projected during the day, 20 inches past 72 hours</li>
+</ol>
+<p>If you were only concerned with new snowfall, you might choose the first scenario. With our algorithm, scenario 1 would be a 2.25 and scenario 2 would be a 3.0 (out of 5 max).  As an FYI, if the combined score of all three factors comes to over ten inches of snow, it's a five-star day.</p>
+<h3>Why bother with a bluebird rating? I only care about new snow!</h3>
+<p>If we had it our way, every day would be a powder day. But, since we don't, and it isn't - will it at least be a nice day out? Where Should I Ski is based in Washington State, where we don't see the sun all that often and so this is kind of a big deal!  </p>
+<h3>Are you getting paid by resorts to favor them?</h3>
+<p>Ha, yeah right!</p>
+<p>No, all resorts are treated independently and the ratings are 100% unbiased and completely data-driven and it will stay that way. On every resort detail page there is a link to the data sources used to provide the recommendation, namely the National Weather Service and snow-forecast.com.  There is a difference for resorts in the United States vs International in that there is no National Weather Service available so only snow-forecast.com us used for international resorts.</p>
+<h3>Who created this?</h3>
+<p>See the <a href="/about">About</a> page</p>
+<h3>I have some feedback, who can I give it to?</h3>
+<p>See the <a href="/feedback">Feedback</a> page</p> 

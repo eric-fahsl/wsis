@@ -1,0 +1,49 @@
+<p>A number of people have asked us how we come up with one - five rating for powder days. First let’s dive into why a rating is even desirable, isn’t it always the more new snow the better?  Generally, yes.  However, I believe that one must also consider new snow projected to fall during the day plus snow over the past three days.  Consider the two scenarios:</p>
+<ul>
+<li>6 inches fresh snow, no new snow prior, no new snow projected</li>
+<li>4 inches fresh snow, 20 inches of snow the prior two days, plus another 8 inches during the day</li>
+</ul>
+<p>A bit of an exaggerated scenario, but most people would prefer scenario two.  So let’s consider how the three elements can be weighted to come up with an appropriate rating.  After thoughtful review and collaboration with friends and skiers, the model below was chosen:</p>
+<p><img src="/images/powder-weightings.png" border="0" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p>This is actually the second iteration of the model on the site since launch.  It used to be 60-20-20 (fresh snow at 60%), but after several days of field-testing (ie skiing), it was decided to place more weight on the recent snowfall.</p>
+<p><span style="line-height: 1.3em;">So now that we have our three factors and a weighting system, we can come up with a single weighted snowfall amount for a given resort on a given day.  Now, how do we assign a rating to it?  First let’s determine the scale.  Many sites use a star rating (Yelp/Apple Store/etc) of one to five.  One star would mean no new snow, five stars would be an epic powder day, one not to be missed!  </span></p>
+<p>So let’s consider what kind of (weighted) conditions make up each of these bounds:</p>
+<ul>
+<li>One star: 0 inches </li>
+<li>Five stars: 10+ inches</li>
+</ul>
+<p>Some may say that 10 inches is not enough snow to be considered a five-star day.  Stevens Pass in WA had a 30+ inch day earlier this season in December, so why 10?  Well, remember that it is weighted inches, meaning that the average of fresh, previous, and new snow must be 10 inches – so a simplistic way to think about it is to consider a resort having 40 inches of new snow in 4 days.  Since this usually doesn’t happen, often a resort will need around 14+ inches of fresh snow or a significant amount of previous or new snow to reach five stars.  To me (and most of my friends) a 14 inch day is usually amazing, maybe not as epic as a 20 inch day but remember this rating is to help skiers make a decision and we would likely have about as great of a day at either resort.</p>
+<p>So the limits have been determined, how to decide what goes in between?  A simple linear approach was chosen.  After setting up a number of test scenarios the linear model actually seemed to make sense for ratings, so it has remained.</p>
+<p>To the trained mathematician/statistician the methods above may appear simplistic and I would agree.  Ideally I would have numerous data points with perhaps skier-provided ratings of the powder quality and set up a linear regression algorithm.  Given that this is the first season of existence, this data is not yet available, so the simple approach will continue to be used for now.  Plus, I have found in many experiences – simple doesn’t mean bad.</p> 
+<!-- DISQUS comments block -->
+<div class="jwDisqusForm">
+	
+			<div id="disqus_thread"></div>
+			<script type="text/javascript">
+				//<![CDATA[
+				var disqus_shortname = 'whereshouldiski';
+				var disqus_url = 'http://whereshouldiski.com/blog/8-powder-rating-algorithm';
+				var disqus_identifier = '14b39853a6_id8';
+				var disqus_developer = '0';
+				var disqus_config = function(){
+					this.language = '';
+				};
+				(function() {
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
+				//]]>
+			</script>
+			<noscript>
+				<a href="http://whereshouldiski.disqus.com/?url=ref">View the discussion thread.</a>
+			</noscript>
+				<div id="jwDisqusFormFooter">
+		<a target="_blank" href="http://disqus.com" class="dsq-brlink">
+			blog comments powered by <span class="logo-disqus">DISQUS</span>
+		</a>
+		<a id="jwDisqusBackToTop" href="http://whereshouldiski.com/blog/8-powder-rating-algorithm#startOfPage">
+			back to top		</a>
+		<div class="clr"></div>
+	</div>
+</div>
