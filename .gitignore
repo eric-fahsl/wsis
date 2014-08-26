@@ -31,3 +31,9 @@ php/images/snowflake5-125.png
 php/.DS_Store
 
 .DS_Store
+
+spa/node_modules
+
+spa/app/bower_components
+
+spa/.sass-cache
