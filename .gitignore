@@ -37,3 +37,4 @@ spa/node_modules
 spa/app/bower_components
 
 spa/.sass-cache
+spa/dist
