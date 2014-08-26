@@ -60,7 +60,7 @@ def getWeather(resort, db) :
 					#print queryString
 					db.query(queryString)
 
-	except simplejson.decoder.JSONDecodeError :
+	except :
 		print "*****************************************"
 		print "OPENSNOW FORECAST FAILED " + str(datetime.datetime.now())
 		print url

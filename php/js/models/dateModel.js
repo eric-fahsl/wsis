@@ -11,7 +11,7 @@ app.DateModel = Backbone.Model.extend({
             facets = options;
         }
 
-        var date = new Date(this.get("date"));
+        var date = new Date(this.get("date").split("-").join("/"));
 
         var prettyDate = this.days[date.getUTCDay()] + ', ' + this.months[date.getUTCMonth()] + ' '
             + date.getUTCDate();

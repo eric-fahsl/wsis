@@ -20,7 +20,7 @@ app.Facet = Backbone.Model.extend({
             termValue = this.attributes.term;
             this.set({displayValue: termValue});
             if (termValue.substring(0,3) == '201') {
-                var date = new Date(termValue);
+                var date = new Date(termValue.split("-").join("/"));
                 var displayValue = this.days[date.getUTCDay()] + ' ' + (date.getUTCMonth() + 1) + '/' +
                     date.getUTCDate() + '/' + date.getUTCFullYear().toString().substring(2);
                 this.set({displayValue: displayValue });
