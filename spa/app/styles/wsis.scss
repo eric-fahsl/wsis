@@ -25,6 +25,7 @@ body .row-fluid {
 #facets {
 	margin-left: 0px;
 	min-width:160px;
+	padding-left: 0px;
     box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.1) inset;
 }
 
@@ -32,19 +33,20 @@ body .row-fluid {
  	font-size: 13px;
 	padding-left: 9px;
 	margin: 0;
-	background-image: url('images/greyHeader.png');
+	background-image: url('/images/greyHeader.png');
 	border-top: 3px solid black;
 	height: auto;
 	overflow: auto;
  }
 
  #facets .selected {
- 	background-image: url('images/greenHeader.png');
+ 	background-image: url('/images/greenHeader.png');
  }
 
  #facets ol {
  	list-style: none;
 	margin: 0;
+	padding-left: 0px;
  }
 
  #facets li {

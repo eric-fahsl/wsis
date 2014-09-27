@@ -18,9 +18,9 @@ require.config({
 });
 
 require([
-    'backbone', 'views/searchResultsView'
-], function (Backbone, SearchResultsView) {
-    Backbone.history.start();
-    var searchResults = new SearchResultsView();
-    
+    'backbone', 'views/searchResultsView', 'routers/router'
+], function (Backbone, SearchResultsView, Router) {
+    // var searchResults = new SearchResultsView();
+    var reccRouter = new Router();
+    Backbone.history.start();    
 });

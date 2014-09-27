@@ -1,20 +1,27 @@
-// js/collections/reccs.js
+/*global define*/
 
-var app = app || {};
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates',
+    'models/recc'
 
-app.ReccList = Backbone.Collection.extend({
+], function ($, _, Backbone, JST, Recc) {
+    'use strict';
 
-    // Reference to this collection's model.
-    model: app.Recc,
+    var ReccList = Backbone.Collection.extend({
 
-    clearAll: function() {
-//        _.each(this.models, function(model){ model.destroy(); });
-        while (this.models.length) {
-            this.models[0].destroy();
-        }
-    }
+	    // Reference to this collection's model.
+	    model: Recc,
 
+	    clearAll: function() {
+	//        _.each(this.models, function(model){ model.destroy(); });
+	        while (this.models.length) {
+	            this.models[0].destroy();
+	        }
+	    }
+
+	});
+	return ReccList;
 });
-
-// Create our global collection of **Todos**.
-//app.Reccs = new ReccList();

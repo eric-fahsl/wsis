@@ -1,27 +1,49 @@
-var Workspace = Backbone.Router.extend({
-    routes:{
-        'search/:query': 'searchQuery',
-        '': 'searchQuery',
-        'search/': 'searchQuery'
-    },
+/*global define*/
 
-    searchQuery: function( param ) {
-        var facets = {};
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates',
+    'views/searchResultsView'
 
-        if (param) {
-            param = param.trim();
+], function ($, _, Backbone, JST, SearchResults) {
+    'use strict';
 
-            var params = param.split("&");
+    var Workspace = Backbone.Router.extend({
 
-            for (var i in params) {
-                var values = params[i].split("=");
-                facets[values[0]] = values[1];
+        init: function() {
+            this.searchResultsView = new SearchResults();
+        },
+
+        routes:{
+            'search/:query': 'searchQuery',
+            '': 'searchQuery',
+            'search/': 'searchQuery'
+        },
+
+        searchQuery: function( param ) {
+            var facets = {};
+
+            if (param) {
+                param = param.trim();
+
+                var params = param.split("&");
+
+                for (var i in params) {
+                    var values = params[i].split("=");
+                    facets[values[0]] = values[1];
+                }
             }
+            if (!this.searchResultsView) {
+                this.searchResultsView = new SearchResults();
+            }
+            this.searchResultsView.refreshData(facets);
+        },
+        clear: function () {
+            alert('in clear!');
+            this.searchResultsView.testMethod();
         }
-
-        app.SearchResults.refreshData(facets);
-    },
-    clear: function () {
-        app.SearchResults.testMethod();
-    }
+    });
+    return Workspace;
 });

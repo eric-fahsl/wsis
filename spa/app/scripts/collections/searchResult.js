@@ -1,36 +1,46 @@
-var app = app || {};
+/*global define*/
 
-app.SearchResult = Backbone.Collection.extend({
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates',
+    'models/recc',
+    'lib/jquery-cookie-1.4.1'
 
-    // Reference to this collection's model. Only a placeholder for two sub-models
-    model: app.Recc,
-    // Store the search facets and results
-    facets: {},
-    results: {},
+], function ($, _, Backbone, JST, Recc) {
+    'use strict';
 
-    url: '/lib/reccapi.php?fields=t',
-    initialize: function() {
-        if ($.cookie("coords")) {
-            this.url += "&coords=" + $.cookie("coords");
+    var SearchResult = Backbone.Collection.extend({
+
+        // Reference to this collection's model. Only a placeholder for two sub-models
+        model: Recc,
+        // Store the search facets and results
+        facets: {},
+        results: {},
+
+        url: 'http://whereshouldiski.com/lib/reccapi.php?fields=t',
+        initialize: function() {
+            if ($.cookie("coords")) {
+                this.url += "&coords=" + $.cookie("coords");
+            }
+        },
+
+        parse: function(response) {
+            //console.log(response);
+            this.facets = response.facets;
+            this.results = response.results;
+            //return response;
+            return {};
+        },
+
+        clearAll: function() {
+    //        _.each(this.models, function(model){ model.destroy(); });
+            while (this.models.length) {
+                this.models[0].destroy();
+            }
         }
-    },
 
-    parse: function(response) {
-        //console.log(response);
-        this.facets = response.facets;
-        this.results = response.results;
-        //return response;
-        return {};
-    },
-
-    clearAll: function() {
-//        _.each(this.models, function(model){ model.destroy(); });
-        while (this.models.length) {
-            this.models[0].destroy();
-        }
-    }
-
+    });
+    return SearchResult;
 });
-
-// Create our global collection of **Todos**.
-//app.Reccs = new ReccList();

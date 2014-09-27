@@ -45,7 +45,7 @@
 
         <script type="text/template" id="facet-template">
             <div class="x" id="X_<%=term%>">X</div>
-            <a href="/recommendations<%=url%>"><%=displayValue%></a>
+            <a href="/<%=url%>"><%=displayValue%></a>
         </script>
 
         <script type="text/template" id="facet-sort">
@@ -53,8 +53,8 @@
         </script>
 
         <section id="searchContainer">
-            <button class="button visible-phone" id="toggleFilters">Filter</button>
-            <section id="facets" class="hidden-phone span2">
+            <button class="button visible-xs" id="toggleFilters">Filter</button>
+            <section id="facets" class="col-sm-2 hidden-xs">
                 <div class="header">
                     <h3>Date</h3>
                 </div>

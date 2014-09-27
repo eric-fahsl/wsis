@@ -1,28 +1,39 @@
-var app = app || {};
+/*global define*/
 
-app.FacetView = Backbone.View.extend({
-    tagName: 'li',
-    template: _.template( $( '#facet-template' ).html() ),
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates'
 
-    events: {
-        "click" : 'facetClick'
-    },
+], function ($, _, Backbone, JST) {
+    'use strict';
 
-    initialize: function() {
-        this.listenTo(this.model, 'destroy', this.remove);
-    },
+    var FacetView = Backbone.View.extend({
+        tagName: 'li',
+        template: _.template( $( '#facet-template' ).html() ),
 
-    render: function() {
-        this.$el.attr('id', 'F_' + this.model.get("term")).html( this.template( this.model.toJSON() ));
-        return this;
-    },
+        events: {
+            "click" : 'facetClick'
+        },
 
-    facetClick : function(e) {
-        window.location = this.model.get("url");
+        initialize: function() {
+            this.listenTo(this.model, 'destroy', this.remove);
+        },
 
-    },
+        render: function() {
+            this.$el.attr('id', 'F_' + this.model.get("term")).html( this.template( this.model.toJSON() ));
+            return this;
+        },
 
-    setParentView: function(parentView) {
-        this.parentView = parentView;
-    }
+        facetClick : function(e) {
+            window.location = this.model.get("url");
+
+        },
+
+        setParentView: function(parentView) {
+            this.parentView = parentView;
+        }
+    });
+    return FacetView;
 });

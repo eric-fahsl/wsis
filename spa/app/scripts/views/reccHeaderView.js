@@ -1,21 +1,30 @@
-// site/js/views/book.js
+/*global define*/
 
-var app = app || {};
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates'
 
-app.ReccHeaderView = Backbone.View.extend({
-    tagName: "span",
-    //className: "span11",
-    template: _.template( $( '#recc-date-template' ).html() ),
+], function ($, _, Backbone, JST) {
+    'use strict';
 
-    initialize: function() {
-        this.listenTo(this.model, 'destroy', this.remove);
-    },
+    var ReccHeaderView = Backbone.View.extend({
+        tagName: "span",
+        //className: "span11",
+        template: _.template( $( '#recc-date-template' ).html() ),
 
-    render: function() {
-        //this.el is what we defined in tagName. use $el to get access to jQuery html() function
-        this.$el.html( this.template( this.model.toJSON() ) );
+        initialize: function() {
+            this.listenTo(this.model, 'destroy', this.remove);
+        },
 
-        return this;
-    }
+        render: function() {
+            //this.el is what we defined in tagName. use $el to get access to jQuery html() function
+            this.$el.html( this.template( this.model.toJSON() ) );
 
+            return this;
+        }
+
+    });
+    return ReccHeaderView;
 });

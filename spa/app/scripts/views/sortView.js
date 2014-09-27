@@ -1,32 +1,40 @@
-var app = app || {};
+/*global define*/
 
-app.SortView = Backbone.View.extend({
-    tagName: 'option',
-    template: _.template( $( '#facet-sort' ).html() ),
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'templates'
+],
+    function ($, _, Backbone, JST) {
+        'use strict';
 
-    events: {
-        "click": "sortChange"
-    },
+        var SortView = Backbone.View.extend({
+            tagName: 'option',
+            template: _.template($('#facet-sort').html()),
 
-    initialize: function() {
-        this.listenTo(this.model, 'destroy', this.remove);
-//        this.template = _.template('<option value="<%= url%>"><%= displayValue %></option>');
-    },
+            events: {
+                'click': 'sortChange'
+            },
 
-    render: function() {
-//        if (this.model.selected) {
-//            this.$el.attr('selected', '');
-//        }
-        this.$el.attr('selected', this.model.get('selected')).attr('value', this.model.get('url')).html( this.template( this.model.toJSON() ));
-        return this;
-    },
+            initialize: function () {
+                this.listenTo(this.model, 'destroy', this.remove);
+            },
 
-    sortChange : function(e) {
-        console.log(e);
-        window.location = this.model.get("url");
-    },
+            render: function () {
+                this.$el.attr('selected', this.model.get('selected')).attr('value', this.model.get('url'))
+                    .html(this.template(this.model.toJSON()));
+                return this;
+            },
 
-    setParentView: function(parentView) {
-        this.parentView = parentView;
-    }
-});
+            sortChange : function (e) {
+                console.log(e);
+                window.location = this.model.get('url');
+            },
+
+            setParentView: function (parentView) {
+                this.parentView = parentView;
+            }
+        });
+        return SortView;
+    });

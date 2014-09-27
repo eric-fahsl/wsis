@@ -33,32 +33,34 @@ body .row-fluid {
 #facets {
   margin-left: 0px;
   min-width: 160px;
+  padding-left: 0px;
   box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.1) inset;
 }
 
-/* line 31, ../../app/styles/wsis.scss */
+/* line 32, ../../app/styles/wsis.scss */
 #facets .header {
   font-size: 13px;
   padding-left: 9px;
   margin: 0;
-  background-image: url("images/greyHeader.png");
+  background-image: url("/images/greyHeader.png");
   border-top: 3px solid black;
   height: auto;
   overflow: auto;
 }
 
-/* line 41, ../../app/styles/wsis.scss */
+/* line 42, ../../app/styles/wsis.scss */
 #facets .selected {
-  background-image: url("images/greenHeader.png");
+  background-image: url("/images/greenHeader.png");
 }
 
-/* line 45, ../../app/styles/wsis.scss */
+/* line 46, ../../app/styles/wsis.scss */
 #facets ol {
   list-style: none;
   margin: 0;
+  padding-left: 0px;
 }
 
-/* line 50, ../../app/styles/wsis.scss */
+/* line 52, ../../app/styles/wsis.scss */
 #facets li {
   display: block;
   padding: 9px;
@@ -69,17 +71,17 @@ body .row-fluid {
   cursor: pointer;
 }
 
-/* line 61, ../../app/styles/wsis.scss */
+/* line 63, ../../app/styles/wsis.scss */
 #facets li:hover {
   background-color: lightgrey;
 }
 
-/* line 65, ../../app/styles/wsis.scss */
+/* line 67, ../../app/styles/wsis.scss */
 .fullWidth {
   width: 100%;
 }
 
-/* line 69, ../../app/styles/wsis.scss */
+/* line 71, ../../app/styles/wsis.scss */
 #facets .x {
   color: red;
   display: none;
@@ -89,7 +91,7 @@ body .row-fluid {
   padding-right: 5px;
 }
 
-/* line 77, ../../app/styles/wsis.scss */
+/* line 79, ../../app/styles/wsis.scss */
 #stateFacets li {
   width: 50%;
   float: left;
@@ -98,12 +100,12 @@ body .row-fluid {
   text-align: center;
 }
 
-/* line 84, ../../app/styles/wsis.scss */
+/* line 86, ../../app/styles/wsis.scss */
 #results {
   overflow: hidden;
 }
 
-/* line 88, ../../app/styles/wsis.scss */
+/* line 90, ../../app/styles/wsis.scss */
 #searchResults .recresult {
   height: 137px;
   margin-left: 10px;
@@ -111,12 +113,12 @@ body .row-fluid {
   min-width: 150px;
 }
 
-/* line 95, ../../app/styles/wsis.scss */
+/* line 97, ../../app/styles/wsis.scss */
 #searchResults .recresultLanding {
   margin-left: 10px;
 }
 
-/* line 98, ../../app/styles/wsis.scss */
+/* line 100, ../../app/styles/wsis.scss */
 .recheader {
   font-weight: bold;
   text-overflow: ellipsis;
@@ -124,44 +126,44 @@ body .row-fluid {
   white-space: nowrap;
 }
 
-/* line 104, ../../app/styles/wsis.scss */
+/* line 106, ../../app/styles/wsis.scss */
 #searchResults .span2 span {
   font-size: 0.85em;
 }
 
-/* line 108, ../../app/styles/wsis.scss */
+/* line 110, ../../app/styles/wsis.scss */
 .span2 .slightSmall {
   font-size: 0.85em;
 }
 
-/* line 112, ../../app/styles/wsis.scss */
+/* line 114, ../../app/styles/wsis.scss */
 .smallItalic {
   font-size: 0.9em;
   font-style: italic;
   margin-top: -5px;
 }
 
-/* line 118, ../../app/styles/wsis.scss */
+/* line 120, ../../app/styles/wsis.scss */
 #stateListing .stateDisplay {
   margin-left: 10px;
 }
 
-/* line 122, ../../app/styles/wsis.scss */
+/* line 124, ../../app/styles/wsis.scss */
 #results .recresult h6 {
   height: 25px;
 }
 
-/* line 126, ../../app/styles/wsis.scss */
+/* line 128, ../../app/styles/wsis.scss */
 .divider {
   clear: both;
 }
 
-/* line 130, ../../app/styles/wsis.scss */
+/* line 132, ../../app/styles/wsis.scss */
 .recresulthome {
   padding-bottom: 10px;
 }
 
-/* line 134, ../../app/styles/wsis.scss */
+/* line 136, ../../app/styles/wsis.scss */
 #resultsHeader {
   font-size: 13px;
   border-top: 3px solid #D6D6D6;
@@ -171,7 +173,7 @@ body .row-fluid {
   margin-left: 12px;
 }
 
-/* line 143, ../../app/styles/wsis.scss */
+/* line 145, ../../app/styles/wsis.scss */
 #number_results {
   display: inline;
   float: left;
@@ -181,7 +183,7 @@ body .row-fluid {
   font-style: italic;
 }
 
-/* line 152, ../../app/styles/wsis.scss */
+/* line 154, ../../app/styles/wsis.scss */
 #resultsHeader #sort {
   padding-top: 3px;
   float: right;
@@ -190,117 +192,117 @@ body .row-fluid {
   margin-right: 12px;
 }
 
-/* line 160, ../../app/styles/wsis.scss */
+/* line 162, ../../app/styles/wsis.scss */
 .flakes {
   height: 27px;
   background: url("../images/snowflake5.png");
 }
 
-/* line 164, ../../app/styles/wsis.scss */
+/* line 166, ../../app/styles/wsis.scss */
 .thumbs {
   height: 26px;
   background: url("../images/thumb5.png");
 }
 
-/* line 168, ../../app/styles/wsis.scss */
+/* line 170, ../../app/styles/wsis.scss */
 .stars {
   height: 26px;
   background: url("../images/star5.png");
 }
 
-/* line 172, ../../app/styles/wsis.scss */
+/* line 174, ../../app/styles/wsis.scss */
 .suns {
   height: 30px;
   background: url("../images/bluebird5.png");
 }
 
-/* line 176, ../../app/styles/wsis.scss */
+/* line 178, ../../app/styles/wsis.scss */
 .flakes-large {
   height: 54px;
   background: url("../images/snowflake-med-5.png");
 }
 
-/* line 180, ../../app/styles/wsis.scss */
+/* line 182, ../../app/styles/wsis.scss */
 .suns-large {
   height: 60px;
   background: url("../images/sun-med-5.png");
 }
 
-/* line 184, ../../app/styles/wsis.scss */
+/* line 186, ../../app/styles/wsis.scss */
 .thumbs-large {
   height: 60px;
   background: url("../images/thumbs-med-5.png");
 }
 
-/* line 188, ../../app/styles/wsis.scss */
+/* line 190, ../../app/styles/wsis.scss */
 .stars-large {
   height: 57px;
   background: url("../images/stars-med-5.png");
 }
 
-/* line 194, ../../app/styles/wsis.scss */
+/* line 196, ../../app/styles/wsis.scss */
 #search_sort {
   width: 180px;
 }
 
-/* line 197, ../../app/styles/wsis.scss */
+/* line 199, ../../app/styles/wsis.scss */
 #searchResults h5 {
   margin: 5px;
   cursor: pointer;
   color: #01527A;
 }
 
-/* line 202, ../../app/styles/wsis.scss */
+/* line 204, ../../app/styles/wsis.scss */
 #searchResults h5 a {
   color: #01527A;
 }
 
-/* line 206, ../../app/styles/wsis.scss */
+/* line 208, ../../app/styles/wsis.scss */
 #forecastHomeWidget {
   font-size: 1.2em;
   font-style: italic;
   border-bottom: 1px solid #5f5f5f;
 }
 
-/* line 212, ../../app/styles/wsis.scss */
+/* line 214, ../../app/styles/wsis.scss */
 #forecastHomeWidget .active a {
   background: none;
   border: 1px solid #5f5f5f;
   border-bottom: none;
 }
 
-/* line 218, ../../app/styles/wsis.scss */
+/* line 220, ../../app/styles/wsis.scss */
 #powderRecTab {
   margin-left: 15px;
 }
 
-/* line 221, ../../app/styles/wsis.scss */
+/* line 223, ../../app/styles/wsis.scss */
 .nomarginbottom {
   margin-bottom: 0px;
 }
 
-/* line 224, ../../app/styles/wsis.scss */
+/* line 226, ../../app/styles/wsis.scss */
 .smallmarginbottom {
   margin-bottom: 5px;
 }
 
-/* line 227, ../../app/styles/wsis.scss */
+/* line 229, ../../app/styles/wsis.scss */
 #seeAllHome {
   font-style: italic;
   padding-bottom: 7px;
 }
 
-/* line 232, ../../app/styles/wsis.scss */
+/* line 234, ../../app/styles/wsis.scss */
 #distanceSection {
   display: none;
 }
 
-/* line 235, ../../app/styles/wsis.scss */
+/* line 237, ../../app/styles/wsis.scss */
 #distanceSort {
   display: none;
 }
 
-/* line 239, ../../app/styles/wsis.scss */
+/* line 241, ../../app/styles/wsis.scss */
 .button {
   padding: 5px 15px;
   display: inline;
@@ -316,13 +318,13 @@ body .row-fluid {
   margin-top: 8px;
 }
 
-/* line 254, ../../app/styles/wsis.scss */
+/* line 256, ../../app/styles/wsis.scss */
 #socialPlugins {
   text-align: center;
   padding-top: 20px;
 }
 
-/* line 259, ../../app/styles/wsis.scss */
+/* line 261, ../../app/styles/wsis.scss */
 .stateSummary {
   float: left;
   height: 420px;
@@ -330,7 +332,7 @@ body .row-fluid {
   padding: 15px;
 }
 
-/* line 266, ../../app/styles/wsis.scss */
+/* line 268, ../../app/styles/wsis.scss */
 .mtnContainer {
   width: 50px;
   height: 24px;
@@ -338,14 +340,14 @@ body .row-fluid {
   border: 1px solid grey;
 }
 
-/* line 273, ../../app/styles/wsis.scss */
+/* line 275, ../../app/styles/wsis.scss */
 .mtnShading {
   width: 50px;
   height: 24px;
   background: url("/images/shading-icon.png");
 }
 
-/* line 278, ../../app/styles/wsis.scss */
+/* line 280, ../../app/styles/wsis.scss */
 .mtnContainer-large {
   width: 53px;
   height: 30px;
@@ -353,37 +355,37 @@ body .row-fluid {
   border: 1px solid grey;
 }
 
-/* line 285, ../../app/styles/wsis.scss */
+/* line 287, ../../app/styles/wsis.scss */
 .mtnShading-large {
   width: 53px;
   height: 30px;
   background: url("/images/shading-53px.png");
 }
 
-/* line 290, ../../app/styles/wsis.scss */
+/* line 292, ../../app/styles/wsis.scss */
 #recValueProps p {
   height: 53px;
 }
 
-/* line 293, ../../app/styles/wsis.scss */
+/* line 295, ../../app/styles/wsis.scss */
 .centerImage {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* line 298, ../../app/styles/wsis.scss */
+/* line 300, ../../app/styles/wsis.scss */
 .footnote {
   font-style: italic;
   font-size: 0.8em;
 }
 
-/* line 302, ../../app/styles/wsis.scss */
+/* line 304, ../../app/styles/wsis.scss */
 .ital {
   font-style: italic;
 }
 
-/* line 305, ../../app/styles/wsis.scss */
+/* line 307, ../../app/styles/wsis.scss */
 .bottomValueProp {
   padding: 6px;
   text-align: right;
@@ -391,18 +393,18 @@ body .row-fluid {
   font-size: 0.85em;
 }
 
-/* line 311, ../../app/styles/wsis.scss */
+/* line 313, ../../app/styles/wsis.scss */
 #resortDetailRatings td {
   text-align: center;
   padding-left: 8px;
 }
 
-/* line 315, ../../app/styles/wsis.scss */
+/* line 317, ../../app/styles/wsis.scss */
 .hidden {
   display: none;
 }
 
-/* line 318, ../../app/styles/wsis.scss */
+/* line 320, ../../app/styles/wsis.scss */
 #legend {
   border: 1px solid grey;
   padding: 5px;
@@ -415,28 +417,28 @@ body .row-fluid {
   height: 47px;
 }
 
-/* line 332, ../../app/styles/wsis.scss */
+/* line 334, ../../app/styles/wsis.scss */
 #legend .title {
   font-size: 1.1em;
   font-weight: bold;
 }
 
-/* line 336, ../../app/styles/wsis.scss */
+/* line 338, ../../app/styles/wsis.scss */
 #map_canvas {
   height: 450px;
 }
 
-/* line 339, ../../app/styles/wsis.scss */
+/* line 341, ../../app/styles/wsis.scss */
 #stateListing {
   padding-top: 10px;
 }
 
-/* line 342, ../../app/styles/wsis.scss */
+/* line 344, ../../app/styles/wsis.scss */
 .precipitationPotential {
   margin: 0 0 10px 5px;
 }
 
-/* line 345, ../../app/styles/wsis.scss */
+/* line 347, ../../app/styles/wsis.scss */
 .precipitationPotential li {
   float: left;
   list-style: none;
@@ -448,42 +450,42 @@ body .row-fluid {
   text-align: center;
 }
 
-/* line 355, ../../app/styles/wsis.scss */
+/* line 357, ../../app/styles/wsis.scss */
 .precipitationPotential .measure {
   font-weight: bold;
   font-size: 1.2em;
   margin: 5px 0 2px;
 }
 
-/* line 360, ../../app/styles/wsis.scss */
+/* line 362, ../../app/styles/wsis.scss */
 .precipitationPotential .measureLabel {
   font-size: 0.8em;
 }
 
-/* line 363, ../../app/styles/wsis.scss */
+/* line 365, ../../app/styles/wsis.scss */
 .midPhoneWidth {
   min-width: 450px;
 }
 
-/* line 366, ../../app/styles/wsis.scss */
+/* line 368, ../../app/styles/wsis.scss */
 .smallRightPad {
   padding-right: 5px;
 }
 
-/* line 369, ../../app/styles/wsis.scss */
+/* line 371, ../../app/styles/wsis.scss */
 #ratingsChart {
   height: 330px;
   margin-top: 10px;
 }
 
-/* line 373, ../../app/styles/wsis.scss */
+/* line 375, ../../app/styles/wsis.scss */
 .page-header {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-/* line 378, ../../app/styles/wsis.scss */
+/* line 380, ../../app/styles/wsis.scss */
 .reccView {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.15);
   float: left;
@@ -492,7 +494,7 @@ body .row-fluid {
   height: 205px;
 }
 
-/* line 385, ../../app/styles/wsis.scss */
+/* line 387, ../../app/styles/wsis.scss */
 .reccView h6 {
   font-size: 0.6em;
   margin: 0px;
@@ -500,38 +502,38 @@ body .row-fluid {
   font-style: oblique;
 }
 
-/* line 391, ../../app/styles/wsis.scss */
+/* line 393, ../../app/styles/wsis.scss */
 #powderFacets a {
   font-size: 0.8em;
 }
 
-/* line 394, ../../app/styles/wsis.scss */
+/* line 396, ../../app/styles/wsis.scss */
 #powderFacets .x {
   padding-top: 13px;
 }
 
-/* line 397, ../../app/styles/wsis.scss */
+/* line 399, ../../app/styles/wsis.scss */
 #searchContainer {
   min-width: 350px;
 }
 
-/* line 400, ../../app/styles/wsis.scss */
+/* line 402, ../../app/styles/wsis.scss */
 #loadingImage {
   padding: 30px;
 }
 
-/* line 403, ../../app/styles/wsis.scss */
+/* line 405, ../../app/styles/wsis.scss */
 #rdp_sidebar {
   font-size: 0.9em;
   margin-left: 0px;
 }
 
-/* line 407, ../../app/styles/wsis.scss */
+/* line 409, ../../app/styles/wsis.scss */
 #rdp_sidebar td {
   padding: 2px;
 }
 
-/* line 410, ../../app/styles/wsis.scss */
+/* line 412, ../../app/styles/wsis.scss */
 .liftie-widget iframe {
   width: 100%;
   border: 0;
@@ -539,7 +541,7 @@ body .row-fluid {
 }
 
 @media (max-width: 390px) {
-  /* line 417, ../../app/styles/wsis.scss */
+  /* line 419, ../../app/styles/wsis.scss */
   body {
     padding-left: 5px;
     padding-right: 5px;

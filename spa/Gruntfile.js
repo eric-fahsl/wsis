@@ -301,6 +301,7 @@ module.exports = function (grunt) {
         }
 
         grunt.task.run([
+            'jshint',
             'clean:server',
             'createDefaultTemplate',
             'jst',
@@ -332,6 +333,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build', [
+        'jshint',
         'clean:dist',
         'createDefaultTemplate',
         'jst',
