@@ -2,7 +2,7 @@
 'use strict';
 
 require.config({
-    baseUrl:'./scripts',
+    baseUrl: './scripts',
     shim: {
         bootstrap: {
             deps: ['jquery'],
@@ -18,9 +18,9 @@ require.config({
 });
 
 require([
-    'backbone', 'views/searchResultsView', 'routers/router'
+    'backbone', 'views/searchResultsView', 'routers/router', 'bootstrap'
 ], function (Backbone, SearchResultsView, Router) {
     // var searchResults = new SearchResultsView();
     var reccRouter = new Router();
-    Backbone.history.start();    
+    Backbone.history.start();
 });

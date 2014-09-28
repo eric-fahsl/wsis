@@ -12,26 +12,26 @@ define([
 
     var Workspace = Backbone.Router.extend({
 
-        init: function() {
+        init: function () {
             this.searchResultsView = new SearchResults();
         },
 
-        routes:{
+        routes: {
             'search/:query': 'searchQuery',
             '': 'searchQuery',
             'search/': 'searchQuery'
         },
 
-        searchQuery: function( param ) {
+        searchQuery: function (param) {
             var facets = {};
 
             if (param) {
                 param = param.trim();
 
-                var params = param.split("&");
+                var params = param.split('&');
 
                 for (var i in params) {
-                    var values = params[i].split("=");
+                    var values = params[i].split('=');
                     facets[values[0]] = values[1];
                 }
             }
@@ -39,10 +39,6 @@ define([
                 this.searchResultsView = new SearchResults();
             }
             this.searchResultsView.refreshData(facets);
-        },
-        clear: function () {
-            alert('in clear!');
-            this.searchResultsView.testMethod();
         }
     });
     return Workspace;

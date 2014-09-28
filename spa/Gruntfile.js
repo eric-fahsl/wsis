@@ -323,7 +323,7 @@ module.exports = function (grunt) {
                 'mocha',
             ];
 
-        if(!isConnected) {
+        if (!isConnected) {
             return grunt.task.run(testTasks);
         } else {
             // already connected so not going to connect again, remove the connect:test task

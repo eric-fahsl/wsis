@@ -6,7 +6,7 @@ define([
     'backbone',
     'templates',
     'models/recc',
-    'lib/jquery-cookie-1.4.1'
+    'vendor/jquery.cookie'
 
 ], function ($, _, Backbone, JST, Recc) {
     'use strict';
@@ -20,13 +20,13 @@ define([
         results: {},
 
         url: 'http://whereshouldiski.com/lib/reccapi.php?fields=t',
-        initialize: function() {
-            if ($.cookie("coords")) {
-                this.url += "&coords=" + $.cookie("coords");
+        initialize: function () {
+            if ($.cookie('coords')) {
+                this.url += '&coords=' + $.cookie('coords');
             }
         },
 
-        parse: function(response) {
+        parse: function (response) {
             //console.log(response);
             this.facets = response.facets;
             this.results = response.results;
@@ -34,7 +34,7 @@ define([
             return {};
         },
 
-        clearAll: function() {
+        clearAll: function () {
     //        _.each(this.models, function(model){ model.destroy(); });
             while (this.models.length) {
                 this.models[0].destroy();

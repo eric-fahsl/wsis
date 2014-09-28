@@ -11,27 +11,27 @@ define([
 
     var FacetView = Backbone.View.extend({
         tagName: 'li',
-        template: _.template( $( '#facet-template' ).html() ),
+        template: _.template($('#facet-template').html()),
 
         events: {
-            "click" : 'facetClick'
+            'click' : 'facetClick'
         },
 
-        initialize: function() {
+        initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);
         },
 
-        render: function() {
-            this.$el.attr('id', 'F_' + this.model.get("term")).html( this.template( this.model.toJSON() ));
+        render: function () {
+            this.$el.attr('id', 'F_' + this.model.get('term')).html(this.template(this.model.toJSON()));
             return this;
         },
 
-        facetClick : function(e) {
-            window.location = this.model.get("url");
+        facetClick : function (e) {
+            window.location = this.model.get('url');
 
         },
 
-        setParentView: function(parentView) {
+        setParentView: function (parentView) {
             this.parentView = parentView;
         }
     });
