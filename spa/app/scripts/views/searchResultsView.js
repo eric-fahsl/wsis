@@ -163,6 +163,7 @@ define([
                 that.toggleFacet(v);
             });
             this.hideFacets();
+            $(this.el).show();
         },
 
         renderRecc: function (item, date) {

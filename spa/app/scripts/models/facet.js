@@ -4,14 +4,14 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
+    'templates',
+    'lib/wsisConstants'
 
-], function ($, _, Backbone, JST) {
+], function ($, _, Backbone, JST, wsisConstants) {
     'use strict';
 
     var Facet = Backbone.Model.extend({
 
-        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         urlBase: '#search/',
         facetType: '',
 
@@ -30,7 +30,7 @@ define([
                 this.set({displayValue: termValue});
                 if (termValue.substring(0, 3) === '201') {
                     var date = new Date(termValue.split('-').join('/'));
-                    var displayValue = this.days[date.getUTCDay()] + ' ' + (date.getUTCMonth() + 1) + '/' +
+                    var displayValue = wsisConstants.days[date.getUTCDay()] + ' ' + (date.getUTCMonth() + 1) + '/' +
                         date.getUTCDate() + '/' + date.getUTCFullYear().toString().substring(2);
                     this.set({displayValue: displayValue });
                 }
@@ -56,7 +56,7 @@ define([
             var url = this.urlBase;
             var showFacet = true;
             for (var k in facets) {
-                if (facets[k] !== value)
+                if (facets[k] !== String(value))
                     url += k + '=' + facets[k] + '&';
                 else
                     showFacet = false;

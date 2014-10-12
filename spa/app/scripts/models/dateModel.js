@@ -4,16 +4,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
+    'templates',
+    'lib/wsisConstants'
 
-], function ($, _, Backbone, JST) {
+], function ($, _, Backbone, JST, wsisConstants) {
     'use strict';
 
     var DateModel = Backbone.Model.extend({
         urlBase: '#search/',
-        months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-
+        
         initialize: function (attributes, options) {
             var facets = {};
             if (options) {
@@ -22,7 +21,7 @@ define([
 
             var date = new Date(this.get('date').split('-').join('/'));
 
-            var prettyDate = this.days[date.getUTCDay()] + ', ' + this.months[date.getUTCMonth()] + ' ' + date.getUTCDate();
+            var prettyDate = wsisConstants.days[date.getUTCDay()] + ', ' + wsisConstants.months[date.getUTCMonth()] + ' ' + date.getUTCDate();
             this.set({prettyDate: prettyDate});
 
             //Set the destination URL

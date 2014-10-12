@@ -20,6 +20,7 @@
     "$": false,
     "navigator": false,
     "facets": false,
-    "window": false
+    "window": false,
+    "define": false
   }
 }

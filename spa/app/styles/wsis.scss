@@ -241,7 +241,7 @@ body .row-fluid {
  .button {
 		padding: 5px 15px;
 		display: inline;
-		background: #777 url('images/button.png') repeat-x bottom;
+		background: #777 url('/images/button.png') repeat-x bottom;
 		border: none;
 		color: #fff;
 		cursor: pointer;
@@ -421,4 +421,9 @@ body .row-fluid {
         padding-right:5px;
         zoom: 0.9;
     }
+}
+
+.footer-wsis {
+	text-align: center;
+	border-top: 1px solid #e5e5e5;
 }

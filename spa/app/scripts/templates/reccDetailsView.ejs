@@ -1,0 +1,40 @@
+<h2><%= resort_name %>, <%= state %></h2>
+<p class='nomarginbottom'><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>
+
+<section class="smallRightPad">
+    <h3 class="minPhoneWidth">Ratings for <%= date %></h3>
+    <div class="smallItalic">Generated on <%= createdOn %> PST</div>
+    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
+    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
+
+    <table cellpadding="3" id="resortDetailRatings">
+    <tr>
+        <td><h4>Powder</h4></td>
+        <td><h6><?= $powderRating ?></h6></td>
+        <td><?php printSnowFlakes($powderRating, True); ?></td>
+    </tr>
+    <tr>
+        <td><h4>Snow Quality</h4></td>
+        <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>
+        <td><?php printStars($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
+    </tr>
+    <tr>
+        <td><h4>Bluebird</h4></td>
+        <td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>
+        <td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
+    </tr>
+    <tr>
+        <td><h5>Freezing <br/> Level</h5></td>
+        <td><h6><?php
+            echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'};
+            if ($isDomestic) {
+                echo " ft";
+            } else {
+                echo " m";
+            }
+        ?></h6></td>
+        <td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>
+    </tr>
+    </table>
+
+</section>
