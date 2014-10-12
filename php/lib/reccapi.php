@@ -12,9 +12,12 @@ function getResultsForDate($requestParams) {
     );
 }
 
-if (isset($_GET['resort'])) {
+if (isset($_GET['resort'])) {    
     $dtime = new DateTime('NOW');
     $displayDate = $dtime->format('Y-m-d');
+    if (isset($_GET['date'])) {
+        $displayDate = $_GET['date'];
+    }
     $url = 'http://localhost:9200/recommendations/recommendations/' . $_GET['resort'] . '_' . $displayDate;
     //print $url;
     $ch = curl_init($url);

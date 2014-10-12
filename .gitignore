@@ -35,6 +35,6 @@ php/.DS_Store
 spa/node_modules
 
 spa/app/bower_components
-
+spa/.tmp
 spa/.sass-cache
 spa/dist
