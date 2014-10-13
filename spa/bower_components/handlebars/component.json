@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "handlebars.js",
   "scripts": [
-    "handlebars.js"
+    "handlebars.js",
+    "handlebars.runtime.js"
   ]
 }

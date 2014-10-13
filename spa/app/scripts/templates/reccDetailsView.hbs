@@ -1,9 +1,9 @@
-<h2><%= resort_name %>, <%= state %></h2>
+<h2>{{resort_name}}, {{ state }}</h2>
 <p class='nomarginbottom'><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>
 
 <section class="smallRightPad">
-    <h3 class="minPhoneWidth">Ratings for <%= date %></h3>
-    <div class="smallItalic">Generated on <%= createdOn %> PST</div>
+    <h3 class="minPhoneWidth">Ratings for {{{ dateFormat date }}}</h3>
+    <div class="smallItalic">Generated on {{ createdOn }} PST</div>
     <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
     <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
 

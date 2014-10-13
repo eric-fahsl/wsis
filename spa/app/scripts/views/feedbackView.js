@@ -11,7 +11,7 @@ define([
 
     var FeedbackView = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/feedback.ejs'],
+        template: JST['app/scripts/templates/feedback.hbs'],
         el: '#nonSearchContainer',
 
         // tagName: 'div',

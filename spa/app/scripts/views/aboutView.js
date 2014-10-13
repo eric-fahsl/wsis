@@ -11,7 +11,7 @@ define([
 
     var AboutView = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/about.ejs'],
+        template: JST['app/scripts/templates/about.hbs'],
         el: '#nonSearchContent',
 
         // tagName: 'div',

@@ -553,3 +553,8 @@ body .row-fluid {
   text-align: center;
   border-top: 1px solid #e5e5e5;
 }
+
+/* line 431, ../../app/styles/wsis.scss */
+#searchContainer {
+  display: none;
+}

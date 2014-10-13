@@ -8166,6 +8166,11 @@ body .row-fluid {
   border-top: 1px solid #e5e5e5;
 }
 
+/* line 431, ../../app/styles/wsis.scss */
+#searchContainer {
+  display: none;
+}
+
 /* line 6, ../../app/styles/main.scss */
 .browsehappy {
   margin: 0.2em 0;
