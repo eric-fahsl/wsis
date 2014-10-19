@@ -5,11 +5,15 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'models/reccDetailModel'
+    'models/reccDetailModel',
+    'views/rightSidebarDetailView',
+    'lib/wsisConstants'
 
-], function ($, _, Backbone, JST, Recommendation) {
+], function ($, _, Backbone, JST, Recommendation, RightSidebarView, wsisConstants) {
     'use strict';
     var ReccDetailsView = Backbone.View.extend({
+
+
 
         template: JST['app/scripts/templates/reccDetailsView.hbs'],
 
@@ -25,11 +29,17 @@ define([
             this.listenTo(this.model, 'change', this.render);
             // this.model = new Recommendation();
             // this.model = {'new' : 'eric' };
-            this.model.fetch();
+            // this.model.fetch();
         },
+
+        retrieveResortData: function (name, date) {
+            this.model.urlRoot = wsisConstants.searchApiBase + 'resort=' + name + '&date=' + date;
+            this.model.fetch();
+        },  
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON({})));
+            var rightSidebarView = new RightSidebarView();
         }
 
     });

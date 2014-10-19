@@ -7,10 +7,11 @@ define(
 		{
 			months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-			urlBase: '#search/',
+			localUrlBase: '#search/',
+			searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
 
 			convertFacetsToString: function (facets, key, value) {
-	            var url = this.urlBase;
+	            var url = this.localUrlBase;
 	            var showFacet = true;
 	            for (var k in facets) {
 	                if (facets[k] !== String(value))

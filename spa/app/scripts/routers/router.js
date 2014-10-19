@@ -14,6 +14,8 @@ define([
 
     var Workspace = Backbone.Router.extend({
 
+        reccDetailsView: new RecommendationView(),
+
         init: function () {
             // this.searchResultsView = new SearchResults();
         },
@@ -30,7 +32,7 @@ define([
             'search/': 'searchQuery',
             'about': 'aboutPage',
             'feedback': 'feedbackPage',
-            'recommendations': 'recomendationsPage'
+            'resort/:name/:date': 'recomendationsPage'
         },
 
         searchQuery: function (param) {
@@ -67,10 +69,8 @@ define([
             this.hideSearchPage();
         },
 
-        recomendationsPage: function () {
-            var reccView = new RecommendationView({
-                el: this.sections.nonSearchPage
-            });
+        recomendationsPage: function (name, date) {
+            this.reccDetailsView.retrieveResortData(name, date);
             this.hideSearchPage();
 
         },

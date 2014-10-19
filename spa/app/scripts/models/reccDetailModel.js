@@ -11,15 +11,14 @@ define([
 
     var ReccDetailModel = Backbone.Model.extend({
 
-        urlRoot: 'http://whereshouldiski.com/lib/reccapi.php?resort=stevenspass&date=2014-10-20',
+        // urlRoot: 'http://whereshouldiski.com/lib/reccapi.php?resort=stevenspass&date=2014-10-20',
 
         initialize: function () {
-            // this.fetch();
         },
 
         defaults: {
         },
-
+        
         validate: function (attrs, options) {
         },
 

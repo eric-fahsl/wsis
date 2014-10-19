@@ -39,39 +39,4 @@
     </table>
 
 </section>
-
-
-<section class="col-md-3" id="rdp_sidebar">
-        <?php if ($liftieId != null) { ?>
-            <h4>Live Lift Status</h4>
-            <div id="liftie" class="liftie-widget" data-resort="<?= $liftieId ?>" data-style="naked"/>
-        <?php } ?>
-
-        <h4>Mountain Stats</h4>
-        <table>
-            <?php
-            $unitStr = " (m, approx)";
-            if ($isDomestic) {
-                $unitStr = " (ft, approx)";
-            }
-            createTableRow("Summit Elevation<br/>" . $unitStr, $resortInfo->{'summit_elevation'});
-            createTableRow("Base Elevation<br/>" . $unitStr, $resortInfo->{'base_elevation'});
-            createTableRow("Latitude", $resortInfo->{'latitude'});
-            createTableRow("Longitude", $resortInfo->{'longitude'});
-            ?>
-
-        </table>
-
-        <h4>Data Sources</h4>
-
-        <?php
-        if ($isDomestic) {
-            echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
-                $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
-        }
-        echo "<a target='new1' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" .
-            "$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>";
-
-        echo "<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>";    
-        ?>
-    </section>
+<section class="col-md-3" id="rdp_sidebar"></section>

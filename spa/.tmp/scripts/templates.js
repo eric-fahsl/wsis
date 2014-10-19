@@ -77,9 +77,9 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  buffer += "<div class=\"recresultLanding\">\n    <div class=\"recheader\">\n        <a href=\"resorts?resort="
+  buffer += "<div class=\"recresultLanding\">\n    <div class=\"recheader\">\n        <a href=\"#/resort/"
     + escapeExpression(((stack1 = ((stack1 = depth0.fields),stack1 == null || stack1 === false ? stack1 : stack1.resort)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "&amp;date="
+    + "/"
     + escapeExpression(((stack1 = ((stack1 = depth0.fields),stack1 == null || stack1 === false ? stack1 : stack1.date)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\">"
     + escapeExpression(((stack1 = ((stack1 = depth0.fields),stack1 == null || stack1 === false ? stack1 : stack1.resort_name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -185,8 +185,17 @@ function program3(depth0,data) {
   buffer += escapeExpression(((stack1 = helpers.calculateFreezingLevelOffset || depth0.calculateFreezingLevelOffset),stack1 ? stack1.call(depth0, ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options) : helperMissing.call(depth0, "calculateFreezingLevelOffset", ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options)))
     + "px;' title='Freezing Level: "
     + escapeExpression(((stack1 = ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n</section>\n\n\n<section class=\"col-md-3\" id=\"rdp_sidebar\">\n        <?php if ($liftieId != null) { ?>\n            <h4>Live Lift Status</h4>\n            <div id=\"liftie\" class=\"liftie-widget\" data-resort=\"<?= $liftieId ?>\" data-style=\"naked\"/>\n        <?php } ?>\n\n        <h4>Mountain Stats</h4>\n        <table>\n            <?php\n            $unitStr = \" (m, approx)\";\n            if ($isDomestic) {\n                $unitStr = \" (ft, approx)\";\n            }\n            createTableRow(\"Summit Elevation<br/>\" . $unitStr, $resortInfo->{'summit_elevation'});\n            createTableRow(\"Base Elevation<br/>\" . $unitStr, $resortInfo->{'base_elevation'});\n            createTableRow(\"Latitude\", $resortInfo->{'latitude'});\n            createTableRow(\"Longitude\", $resortInfo->{'longitude'});\n            ?>\n\n        </table>\n\n        <h4>Data Sources</h4>\n\n        <?php\n        if ($isDomestic) {\n            echo \"<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=\" .\n                $resortInfo->{'latitude'} . \"&lon=\" . $resortInfo->{'longitude'} . \"'>$resortName NOAA Forecast</a><br/>\\n\";\n        }\n        echo \"<a target='new1' href='http://www.snow-forecast.com/resorts/\" . $resortInfo->{'snowforecast_id'} . \"/6day/mid'/>\" .\n            \"$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>\";\n\n        echo \"<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>\";    \n        ?>\n    </section>";
+    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n</section>\n<section class=\"col-md-3\" id=\"rdp_sidebar\"></section>";
   return buffer;
+  });
+
+this["JST"]["app/scripts/templates/right-sidebar-detail.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "\n<?php if ($liftieId != null) { ?>\n    <h4>Live Lift Status</h4>\n    <div id=\"liftie\" class=\"liftie-widget\" data-resort=\"<?= $liftieId ?>\" data-style=\"naked\"/>\n<?php } ?>\n\n<h4>Mountain Stats</h4>\n<table>\n    <?php\n    $unitStr = \" (m, approx)\";\n    if ($isDomestic) {\n        $unitStr = \" (ft, approx)\";\n    }\n    createTableRow(\"Summit Elevation<br/>\" . $unitStr, $resortInfo->{'summit_elevation'});\n    createTableRow(\"Base Elevation<br/>\" . $unitStr, $resortInfo->{'base_elevation'});\n    createTableRow(\"Latitude\", $resortInfo->{'latitude'});\n    createTableRow(\"Longitude\", $resortInfo->{'longitude'});\n    ?>\n\n</table>\n\n<h4>Data Sources</h4>\n\n<?php\nif ($isDomestic) {\n    echo \"<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=\" .\n        $resortInfo->{'latitude'} . \"&lon=\" . $resortInfo->{'longitude'} . \"'>$resortName NOAA Forecast</a><br/>\\n\";\n}\necho \"<a target='new1' href='http://www.snow-forecast.com/resorts/\" . $resortInfo->{'snowforecast_id'} . \"/6day/mid'/>\" .\n    \"$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>\";\n\necho \"<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>\";    \n?>";
   });
 
 return this["JST"];
