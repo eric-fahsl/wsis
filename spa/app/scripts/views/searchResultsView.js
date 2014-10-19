@@ -36,7 +36,8 @@ define([
         distanceFacetHeaderId: '#distanceHeader',
 
         // Cache the template function for a single item.
-        template: _.template($('#recc-template').html()),
+        // template: _.template($('#recc-template').html()),
+        template: JST['app/scripts/templates/recc-template.hbs'],
 
         // The DOM events specific to an item.
         events: {

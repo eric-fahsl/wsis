@@ -1,0 +1,14 @@
+<div class="recresultLanding">
+    <div class="recheader">
+        <a href="resorts?resort={{fields.resort}}&amp;date={{fields.date}}">{{fields.resort_name}}</a>
+    </div>
+    <span>{{fields.state_full}}</span><br>
+    <h6>Powder:</h6>
+    <div class="flakes" style="width: {{calculateRatingWidth fields.[powder.rating]}}px" title="Rating: {{fields.[powder.rating]}} / 5"></div>
+    <h6>Snow Quality (BETA):</h6>
+    <div class="stars" style="width: {{calculateRatingWidth fields.[snow_quality.rating]}}px" title="Rating: {{fields.[snow_quality.rating]}} / 5"></div>
+    <h6>Bluebird:</h6>
+    <div class="suns" style="width: {{calculateRatingWidth fields.[bluebird.rating]}}px" title="Rating: {{fields.[bluebird.rating]}} / 5"></div>
+    <h6>Freezing Level:</h6>
+    <div class="mtnContainer"><div class="mtnShading" style="background-position-y: {{ fields.[freezing_level.offset]}}px" ></div></div>
+</div>

@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    livereload: grunt.option('livereloadport') || LIVERELOAD_PORT
+                    livereload: LIVERELOAD_PORT
                 },
                 files: [
                     '<%= yeoman.app %>/*.html',
@@ -58,13 +58,17 @@ module.exports = function (grunt) {
             test: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
                 tasks: ['test:true']
+            },
+            less: {
+                files: '<%= yeoman.app %>/styles/{,*/}*.less',
+                tasks: ['less']
             }
         },
         connect: {
             options: {
-                port: grunt.option('port') || SERVER_PORT,
+                port: SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: '0.0.0.0'
             },
             livereload: {
                 options: {
@@ -79,10 +83,20 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    port: 9001,
                     middleware: function (connect) {
                         return [
                             lrSnippet,
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'test'),
+                            mountFolder(connect, yeomanConfig.app)
+                        ];
+                    }
+                }
+            },
+            testInBrowser: {
+                options: {
+                    middleware: function (connect) {
+                        return [
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'test'),
                             mountFolder(connect, yeomanConfig.app)
@@ -103,9 +117,6 @@ module.exports = function (grunt) {
         open: {
             server: {
                 path: 'http://localhost:<%= connect.options.port %>'
-            },
-            test: {
-                path: 'http://localhost:<%= connect.test.options.port %>'
             }
         },
         clean: {
@@ -119,15 +130,14 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js',
+                '<%= yeoman.app %>/scripts/**/*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                'test/spec/**/*.js'
             ]
         },
         mocha: {
             all: {
                 options: {
-                    run: true,
                     urls: ['http://localhost:<%= connect.test.options.port %>/index.html']
                 }
             }
@@ -157,9 +167,9 @@ module.exports = function (grunt) {
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
-                        'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
-                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
+                        'jquery': '../../app/bower_components/jquery/dist/jquery',
+                        'underscore': '../../app/bower_components/underscore/underscore',
+                        'backbone': '../../app/bower_components/backbone/backbone'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -168,7 +178,8 @@ module.exports = function (grunt) {
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
                     useStrict: true,
-                    wrap: true
+                    wrap: true,
+                    wrapShim: true
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
@@ -237,9 +248,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'images/{,*/}*.{webp,gif}',
+                        'images/{,*/}*.{png,jpg,jpeg,gif,webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
                     ]
                 }]
             }
@@ -268,9 +278,19 @@ module.exports = function (grunt) {
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                         '/styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
                     ]
                 }
+            }
+        },
+        less: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/styles',
+                    src: ['{,*/}*.less', '!{,*/}_*.less'], // "!" is used to exclude partials
+                    dest: '.tmp/styles/',
+                    ext: '.css'
+                }]
             }
         }
     });
@@ -281,7 +301,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('server', function (target) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve' + (target ? ':' + target : '')]);
+        grunt.task.run(['serve:' + target]);
     });
 
     grunt.registerTask('serve', function (target) {
@@ -292,21 +312,23 @@ module.exports = function (grunt) {
         if (target === 'test') {
             return grunt.task.run([
                 'clean:server',
+                'less',
+                'compass:server',
                 'createDefaultTemplate',
                 'handlebars',
-                'compass:server',
                 'connect:test',
                 'open:test',
-                'watch'
+                'watch:livereload'
             ]);
         }
 
         grunt.task.run([
             'jshint',
             'clean:server',
+            'less',
+            'compass:server',
             'createDefaultTemplate',
             'handlebars',
-            'compass:server',
             'connect:livereload',
             'open:server',
             'watch'
@@ -316,14 +338,17 @@ module.exports = function (grunt) {
     grunt.registerTask('test', function (isConnected) {
         isConnected = Boolean(isConnected);
         var testTasks = [
+                'jshint',
                 'clean:server',
+                'less',
+                'compass',
                 'createDefaultTemplate',
                 'handlebars',
-                'compass',
                 'connect:test',
                 'mocha',
+                'watch:test'
             ];
-
+            
         if (!isConnected) {
             return grunt.task.run(testTasks);
         } else {
@@ -336,9 +361,10 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'jshint',
         'clean:dist',
+        'less',
+        'compass:dist',
         'createDefaultTemplate',
         'handlebars',
-        'compass:dist',
         'useminPrepare',
         'requirejs',
         // 'imagemin',
@@ -347,7 +373,7 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'copy',
-        'rev',
+        // 'rev',
         'usemin'
     ]);
 
@@ -355,5 +381,14 @@ module.exports = function (grunt) {
         'jshint',
         'test',
         'build'
+    ]);
+
+    grunt.registerTask('test:browser', [
+        'clean:server',
+        'createDefaultTemplate',
+        'handlebars',
+        'connect:testInBrowser',
+        'open',
+        'watch'
     ]);
 };

@@ -11,7 +11,8 @@ define([
 
     var FacetView = Backbone.View.extend({
         tagName: 'li',
-        template: _.template($('#facet-template').html()),
+        // template: _.template($('#facet-template').html()),
+        template: JST['app/scripts/templates/facet-template.hbs'],
 
         events: {
             'click' : 'facetClick'

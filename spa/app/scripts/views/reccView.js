@@ -12,7 +12,8 @@ define([
     var ReccView = Backbone.View.extend({
         tagName: 'div',
         className: 'reccView',
-        template: _.template($('#recc-template').html()),
+        // template: _.template($('#recc-template').html()),
+        template: JST['app/scripts/templates/recc-template.hbs'],
 
         initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);

@@ -12,7 +12,9 @@ define([
     var ReccHeaderView = Backbone.View.extend({
         tagName: 'span',
         //className: 'span11',
-        template: _.template($('#recc-date-template').html()),
+        // template: _.template($('#recc-date-template').html()),
+        template: JST['app/scripts/templates/recc-date-template.hbs'],
+
 
         initialize: function () {
             this.listenTo(this.model, 'destroy', this.remove);

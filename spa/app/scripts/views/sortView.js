@@ -11,7 +11,8 @@ define([
 
         var SortView = Backbone.View.extend({
             tagName: 'option',
-            template: _.template($('#facet-sort').html()),
+            // template: _.template($('#facet-sort').html()),
+            template: JST['app/scripts/templates/facet-sort.hbs'],
 
             events: {
                 'click': 'sortChange'

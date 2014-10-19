@@ -9,14 +9,13 @@ define([
     'views/aboutView',
     'views/feedbackView',
     'views/reccDetailsView'
-
 ], function ($, _, Backbone, JST, SearchResults, AboutView, FeedbackView, RecommendationView) {
     'use strict';
 
     var Workspace = Backbone.Router.extend({
 
         init: function () {
-            this.searchResultsView = new SearchResults();
+            // this.searchResultsView = new SearchResults();
         },
 
         sections: {
@@ -52,7 +51,6 @@ define([
             }
             this.searchResultsView.refreshData(facets);
             this.showSearchPage();
-            console.log('in searchQuery');
         },
 
         aboutPage: function () {

@@ -12,7 +12,7 @@ define([
 
     var Facet = Backbone.Model.extend({
 
-        urlBase: '#search/',
+        // urlBase: '#search/',
         facetType: '',
 
         initialize: function (attributes, options) {
@@ -49,24 +49,9 @@ define([
             }
 
             //Set the destination URL
-            this.set({url: this.convertFacetsToString(facets, this.facetType, this.attributes.term)});
-        },
-
-        convertFacetsToString: function (facets, key, value) {
-            var url = this.urlBase;
-            var showFacet = true;
-            for (var k in facets) {
-                if (facets[k] !== String(value))
-                    url += k + '=' + facets[k] + '&';
-                else
-                    showFacet = false;
-            }
-            if (showFacet)
-                url += key + '=' + value;
-            if (url[url.length - 1] === '&')
-                url = url.substr(0, url.length - 1);
-            return url;
+            this.set({url: wsisConstants.convertFacetsToString(facets, this.facetType, this.attributes.term)});
         }
+
     });
     return Facet;
 });
