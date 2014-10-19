@@ -23,8 +23,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["JST"]["app/scripts/templates/reccDetailsView.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
+function program1(depth0,data) {
+  
+  
+  return "\n                 ft\n            ";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "\n                 m\n            ";
+  }
 
   buffer += "<h2>";
   if (stack1 = helpers.resort_name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
@@ -34,15 +45,61 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.state) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.state; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</h2>\n<p class='nomarginbottom'><a target='new' href='\" . $resortInfo->{'resort_website'} . \"'>\" . $resortInfo->{'resort_website'} . \"</a></p>\n\n<section class=\"smallRightPad\">\n    <h3 class=\"minPhoneWidth\">Ratings for ";
+    + "</h2>\n<p class='nomarginbottom'><a target='new' href='\"";
+  if (stack1 = helpers.resort_website) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.resort_website; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"'>";
+  if (stack1 = helpers.resort_website) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.resort_website; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</a></p>\n\n<section class=\"smallRightPad col-md-9\">\n    <h3 class=\"minPhoneWidth\">Ratings for ";
   options = {hash:{},data:data};
-  stack2 = ((stack1 = helpers.dateFormat || depth0.dateFormat),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "dateFormat", depth0.date, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "</h3>\n    <div class=\"smallItalic\">Generated on ";
+  buffer += escapeExpression(((stack1 = helpers.dateFormat || depth0.dateFormat),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "dateFormat", depth0.date, options)))
+    + "</h3>\n    <div class=\"smallItalic\">Generated on ";
   if (stack2 = helpers.createdOn) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.createdOn; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + " PST</div>\n    <span class=\"ital\"><a href=\"/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>\">Previous Day</a></span> |\n    <span class=\"ital\"><a href=\"/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>\">Next Day</a></span>\n\n    <table cellpadding=\"3\" id=\"resortDetailRatings\">\n    <tr>\n        <td><h4>Powder</h4></td>\n        <td><h6><?= $powderRating ?></h6></td>\n        <td><?php printSnowFlakes($powderRating, True); ?></td>\n    </tr>\n    <tr>\n        <td><h4>Snow Quality</h4></td>\n        <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>\n        <td><?php printStars($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>\n    </tr>\n    <tr>\n        <td><h4>Bluebird</h4></td>\n        <td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>\n        <td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>\n    </tr>\n    <tr>\n        <td><h5>Freezing <br/> Level</h5></td>\n        <td><h6><?php\n            echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'};\n            if ($isDomestic) {\n                echo \" ft\";\n            } else {\n                echo \" m\";\n            }\n        ?></h6></td>\n        <td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>\n    </tr>\n    </table>\n\n</section>";
+    + " PST</div>\n    <span class=\"ital\"><a href=\"/resorts?resort=";
+  if (stack2 = helpers.resort) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.resort; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "&date=";
+  if (stack2 = helpers.previousDate) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.previousDate; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">Previous Day</a></span> |\n    <span class=\"ital\"><a href=\"/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>\">Next Day</a></span>\n\n    <table cellpadding=\"3\" id=\"resortDetailRatings\">\n    <tr>\n        <td><h4>Powder</h4></td>\n        <td><h6>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.rating)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h6></td>\n        <td><div class=\"flakes-large\" style=\"width: ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.calculateRatingWidth || depth0.calculateRatingWidth),stack1 ? stack1.call(depth0, ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.rating), "large", options) : helperMissing.call(depth0, "calculateRatingWidth", ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.rating), "large", options)))
+    + "px\" title=\"Rating: "
+    + escapeExpression(((stack1 = ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.rating)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/ 5\"></div>\n    </tr>\n    <tr>\n        <td><h4>Snow Quality</h4></td>\n        <td><h6>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.snow_quality),stack1 == null || stack1 === false ? stack1 : stack1.rating)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h6></td>\n        <td><div class=\"stars-large\" style=\"width: ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.calculateRatingWidth || depth0.calculateRatingWidth),stack1 ? stack1.call(depth0, ((stack1 = depth0.snow_quality),stack1 == null || stack1 === false ? stack1 : stack1.rating), "large", options) : helperMissing.call(depth0, "calculateRatingWidth", ((stack1 = depth0.snow_quality),stack1 == null || stack1 === false ? stack1 : stack1.rating), "large", options)))
+    + "px\" title=\"Rating: "
+    + escapeExpression(((stack1 = ((stack1 = depth0.snow_quality),stack1 == null || stack1 === false ? stack1 : stack1.rating)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/ 5\"></td>\n    </tr>\n    <tr>\n        <td><h4>Bluebird</h4></td>\n        <td><h6>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.bluebird),stack1 == null || stack1 === false ? stack1 : stack1.rating)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h6></td>\n        <td><div class=\"suns-large\" style=\"width: ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.calculateRatingWidth || depth0.calculateRatingWidth),stack1 ? stack1.call(depth0, ((stack1 = depth0.bluebird),stack1 == null || stack1 === false ? stack1 : stack1.rating), "large", options) : helperMissing.call(depth0, "calculateRatingWidth", ((stack1 = depth0.bluebird),stack1 == null || stack1 === false ? stack1 : stack1.rating), "large", options)))
+    + "px\" title=\"Rating: "
+    + escapeExpression(((stack1 = ((stack1 = depth0.bluebird),stack1 == null || stack1 === false ? stack1 : stack1.rating)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "/ 5\"></td>\n    </tr>\n    <tr>\n        <td><h5>Freezing <br/> Level</h5></td>\n        <td><h6>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n            ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n        </h6></td>\n        <td>\n            <div class='mtnContainer-large'><div class='mtnShading-large' style='background-position-y:  ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.calculateFreezingLevelOffset || depth0.calculateFreezingLevelOffset),stack1 ? stack1.call(depth0, ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options) : helperMissing.call(depth0, "calculateFreezingLevelOffset", ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options)))
+    + "px;' title='Freezing Level: "
+    + escapeExpression(((stack1 = ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n</section>\n\n\n<section class=\"col-md-3\" id=\"rdp_sidebar\">\n        <?php if ($liftieId != null) { ?>\n            <h4>Live Lift Status</h4>\n            <div id=\"liftie\" class=\"liftie-widget\" data-resort=\"<?= $liftieId ?>\" data-style=\"naked\"/>\n        <?php } ?>\n\n        <h4>Mountain Stats</h4>\n        <table>\n            <?php\n            $unitStr = \" (m, approx)\";\n            if ($isDomestic) {\n                $unitStr = \" (ft, approx)\";\n            }\n            createTableRow(\"Summit Elevation<br/>\" . $unitStr, $resortInfo->{'summit_elevation'});\n            createTableRow(\"Base Elevation<br/>\" . $unitStr, $resortInfo->{'base_elevation'});\n            createTableRow(\"Latitude\", $resortInfo->{'latitude'});\n            createTableRow(\"Longitude\", $resortInfo->{'longitude'});\n            ?>\n\n        </table>\n\n        <h4>Data Sources</h4>\n\n        <?php\n        if ($isDomestic) {\n            echo \"<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=\" .\n                $resortInfo->{'latitude'} . \"&lon=\" . $resortInfo->{'longitude'} . \"'>$resortName NOAA Forecast</a><br/>\\n\";\n        }\n        echo \"<a target='new1' href='http://www.snow-forecast.com/resorts/\" . $resortInfo->{'snowforecast_id'} . \"/6day/mid'/>\" .\n            \"$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>\";\n\n        echo \"<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>\";    \n        ?>\n    </section>";
   return buffer;
   });
 

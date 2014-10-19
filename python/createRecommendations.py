@@ -113,6 +113,7 @@ def createRecommendationDocument(resort, recDate ) :
 	location['lat'] = float(resort['latitude'])
 	location['lon'] = float(resort['longitude'])
 	rec['location'] = location
+	rec['resort_website'] = resort['resort_website']
 
 	rec['createdOn'] = str(datetime.datetime.now())
 	rec['date'] = recDate

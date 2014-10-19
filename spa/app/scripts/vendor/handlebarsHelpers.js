@@ -3,8 +3,13 @@
 define(['handlebars'],
     function (Handlebars) {
 
+        var pixelWidthSmall = 30;
+        var pixelWidthWide = 60;
+        var offsetIndexSmall = 24;
+        var offsetIndexLarge = 30;
         //define Handlebars helper functions
 
+        /*
         //OVERWRITE HANDLEBARS IF
         Handlebars.registerHelper('if', function(conditional, options) {
             if (Handlebars.Utils.isFunction(conditional)) { conditional = conditional.call(this); }
@@ -17,17 +22,38 @@ define(['handlebars'],
             } else {
                 return options.fn(this);
             }
+        });*/
+
+        Handlebars.registerHelper('dateFormat', function(text){            
+            var time = text;
+            time = time.split(' ')[0];
+            time = time.split('-')[1] + '/' + time.split('-')[2] + '/' + time.split('-')[0];
+            return time;
+            
         });
-        Handlebars.registerHelper('dateFormat', function(text){
-            if(text && (text.indexOf('--') < 0)){
-                var time = text;
-                time = time.split(' ')[0];
-                time = time.split('-')[1] + '/' + time.split('-')[2] + '/' + time.split('-')[0];
-                return time;
-            }else{
-                return ' -- ';
-            }
+
+        Handlebars.registerHelper('americanDateFormat', function(text){
+            return text;
         });
         
+        Handlebars.registerHelper('calculateRatingWidth', function (ratingText, size) {
+            var width = parseInt(ratingText);
+            if (size && size === 'large') 
+                width *= pixelWidthWide;
+            else 
+                width *= pixelWidthSmall;
+            return width;
+        });
+
+        Handlebars.registerHelper('calculateFreezingLevelOffset', function(rating, freezingLevel, size){
+            var offsetIndex = offsetIndexSmall;
+            if (size && size === 'large') 
+                offsetIndex = offsetIndexLarge;
+
+            var offset = -offsetIndex + (offsetIndex/4) * (parseInt(rating)-1);
+            return offset;
+        });
+
     }
+        
 );

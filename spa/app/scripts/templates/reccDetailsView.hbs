@@ -1,40 +1,77 @@
 <h2>{{resort_name}}, {{ state }}</h2>
-<p class='nomarginbottom'><a target='new' href='" . $resortInfo->{'resort_website'} . "'>" . $resortInfo->{'resort_website'} . "</a></p>
+<p class='nomarginbottom'><a target='new' href='"{{resort_website}}"'>{{resort_website}}</a></p>
 
-<section class="smallRightPad">
-    <h3 class="minPhoneWidth">Ratings for {{{ dateFormat date }}}</h3>
+<section class="smallRightPad col-md-9">
+    <h3 class="minPhoneWidth">Ratings for {{ dateFormat date }}</h3>
     <div class="smallItalic">Generated on {{ createdOn }} PST</div>
-    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $previousDate ?>">Previous Day</a></span> |
+    <span class="ital"><a href="/resorts?resort={{resort}}&date={{previousDate}}">Previous Day</a></span> |
     <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
 
     <table cellpadding="3" id="resortDetailRatings">
     <tr>
         <td><h4>Powder</h4></td>
-        <td><h6><?= $powderRating ?></h6></td>
-        <td><?php printSnowFlakes($powderRating, True); ?></td>
+        <td><h6>{{powder.rating}}</h6></td>
+        <td><div class="flakes-large" style="width: {{calculateRatingWidth powder.rating 'large'}}px" title="Rating: {{powder.rating}}/ 5"></div>
     </tr>
     <tr>
         <td><h4>Snow Quality</h4></td>
-        <td><h6><?php echo $parsedJson->{'snow_quality'}->{'rating'}; ?></h6></td>
-        <td><?php printStars($parsedJson->{'snow_quality'}->{'rating'}, True); ?></td>
+        <td><h6>{{snow_quality.rating}}</h6></td>
+        <td><div class="stars-large" style="width: {{calculateRatingWidth snow_quality.rating 'large'}}px" title="Rating: {{snow_quality.rating}}/ 5"></td>
     </tr>
     <tr>
         <td><h4>Bluebird</h4></td>
-        <td><h6><?php echo $parsedJson->{'bluebird'}->{'rating'}; ?></h6></td>
-        <td><?php printSuns($parsedJson->{'bluebird'}->{'rating'}, True); ?></td>
+        <td><h6>{{bluebird.rating}}</h6></td>
+        <td><div class="suns-large" style="width: {{calculateRatingWidth bluebird.rating 'large'}}px" title="Rating: {{bluebird.rating}}/ 5"></td>
     </tr>
     <tr>
         <td><h5>Freezing <br/> Level</h5></td>
-        <td><h6><?php
-            echo $parsedJson->{'freezing_level'}->{'freezing_level_avg'};
-            if ($isDomestic) {
-                echo " ft";
-            } else {
-                echo " m";
-            }
-        ?></h6></td>
-        <td><?php printFreezingLevel($parsedJson->{'freezing_level'}->{'rating'}, $parsedJson->{'freezing_level'}->{'freezing_level_avg'}, True); ?></td>
+        <td><h6>{{freezing_level.freezing_level_avg}}
+            {{#if freezing_level.freezing_level_avg}}
+                 ft
+            {{else}}
+                 m
+            {{/if}}
+        </h6></td>
+        <td>
+            <div class='mtnContainer-large'><div class='mtnShading-large' style='background-position-y:  {{calculateFreezingLevelOffset freezing_level.rating freezing_level.freezing_level_avg 'large'}}px;' title='Freezing Level: {{freezing_level.freezing_level_avg}}'></div></div>
+        </td>
     </tr>
     </table>
 
 </section>
+
+
+<section class="col-md-3" id="rdp_sidebar">
+        <?php if ($liftieId != null) { ?>
+            <h4>Live Lift Status</h4>
+            <div id="liftie" class="liftie-widget" data-resort="<?= $liftieId ?>" data-style="naked"/>
+        <?php } ?>
+
+        <h4>Mountain Stats</h4>
+        <table>
+            <?php
+            $unitStr = " (m, approx)";
+            if ($isDomestic) {
+                $unitStr = " (ft, approx)";
+            }
+            createTableRow("Summit Elevation<br/>" . $unitStr, $resortInfo->{'summit_elevation'});
+            createTableRow("Base Elevation<br/>" . $unitStr, $resortInfo->{'base_elevation'});
+            createTableRow("Latitude", $resortInfo->{'latitude'});
+            createTableRow("Longitude", $resortInfo->{'longitude'});
+            ?>
+
+        </table>
+
+        <h4>Data Sources</h4>
+
+        <?php
+        if ($isDomestic) {
+            echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
+                $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
+        }
+        echo "<a target='new1' href='http://www.snow-forecast.com/resorts/" . $resortInfo->{'snowforecast_id'} . "/6day/mid'/>" .
+            "$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>";
+
+        echo "<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>";    
+        ?>
+    </section>
