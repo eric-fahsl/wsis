@@ -12,6 +12,11 @@ function getResultsForDate($requestParams) {
     );
 }
 
+if (isset($_GET['resortData'])) {
+    $results = getResortDetails($_GET['resortData']);
+    return $results['_source'];
+}
+
 if (isset($_GET['resort'])) {    
     $dtime = new DateTime('NOW');
     $displayDate = $dtime->format('Y-m-d');

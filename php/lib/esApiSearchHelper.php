@@ -331,6 +331,10 @@ function getResortsForState($state) {
 
 }
 
+function getResortDetails($resort) {
+    return queryES("http://localhost:9200/resorts/resorts/${resort}", array());
+}
+
 function printSnowFlakes($count, $large = False) {
     $width = $count * 30;
     $class = "flakes";

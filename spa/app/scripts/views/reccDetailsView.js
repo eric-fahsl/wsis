@@ -35,7 +35,7 @@ define([
         retrieveResortData: function (name, date) {
             this.model.urlRoot = wsisConstants.searchApiBase + 'resort=' + name + '&date=' + date;
             this.model.fetch();
-        },  
+        },
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON({})));
