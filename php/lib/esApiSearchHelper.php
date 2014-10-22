@@ -325,14 +325,16 @@ function getResortsForState($state) {
     );
 
     $queryObject = json_encode($queryArray);
-    print $queryObject;
+    // print $queryObject;
 
     return queryES("http://localhost:9200/resorts/_search", $queryObject);
 
 }
 
 function getResortDetails($resort) {
-    return queryES("http://localhost:9200/resorts/resorts/${resort}", array());
+    $resortDetailsPath = "http://localhost:9200/resorts/resorts/${resort}";
+    $json_string = file_get_contents($resortDetailsPath);
+    return json_decode($json_string);
 }
 
 function printSnowFlakes($count, $large = False) {
