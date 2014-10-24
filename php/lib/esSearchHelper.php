@@ -201,7 +201,7 @@ function buildFacets() {
     return $facets;
 }
 
-function search($_GET) {
+function search() {
     $queryArray = array();
     if (isset($_GET['facet'])) {
         $queryArray = array (

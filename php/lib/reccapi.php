@@ -42,6 +42,11 @@ elseif (isset($_GET['date'])) {
         'facets' => $results['facets']
     );
 
+} 
+elseif (isset($_GET['allResortData'])) {
+    include('allResortDetails-cached.php');
+    return getCachedResortData();
+    
 } else {
 
     $displayedNoResults = 0;
