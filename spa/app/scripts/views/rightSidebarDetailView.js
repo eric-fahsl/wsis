@@ -4,33 +4,44 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'templates'
-
-], function ($, _, Backbone, JST) {
+    'templates',
+    'models/reccDetailModel',
+    'lib/wsisConstants'
+], function ($, _, Backbone, JST, ReccModel, wsisConstants) {
     'use strict';
 
     var RightSidebarDetailView = Backbone.View.extend({
 
         template: JST['app/scripts/templates/right-sidebar-detail.hbs'],
         el: '#rdp_sidebar',
+        model: new ReccModel(),
 
-        // tagName: 'div',
+        // tagName: 'section',
 
         // id: '',
 
-        // className: '',
+        // className: 'col-md-3',
 
         events: {},
 
         initialize: function () {
-            // this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'destroy', this.remove);
+            // this.retrieveResortData();
             // console.log('initialize');
-            this.render();
+            // this.render();
+        },
+
+        retrieveResortData: function (resortName) {
+            this.model.urlRoot = wsisConstants.searchApiBase + 'resortData=' + resortName.split('/')[0];
+            this.model.retrieve();
         },
 
         render: function () {
-            console.log('in render');
-            this.$el.html(this.template());
+            // this.$el.html(this.template());
+            // this.$el.html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model.toJSON()));
+            return this;
         }
 
     });

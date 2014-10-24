@@ -54,6 +54,14 @@ define(['handlebars'],
             return offset;
         });
 
+        Handlebars.registerHelper('feetOrMeters', function(text){
+            if (text === 'T' || text === 't') {
+                return "ft";
+            } else {
+                return "m";
+            }
+        })
+
     }
         
 );

@@ -70,7 +70,8 @@ define([
         },
 
         recomendationsPage: function (name, date) {
-            this.reccDetailsView.retrieveResortData(name, date);
+            this.reccDetailsView.retrieveReccData(name, date);
+            $('#resortdetailPage').show();
             this.hideSearchPage();
 
         },
