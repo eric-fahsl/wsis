@@ -217,9 +217,9 @@ function buildFacets() {
     return $facets;
 }
 
-function search($GET) {
+function search($_GET) {
     $queryArray = array();
-    if (isset($GET['facet'])) {
+    if (isset($_GET['facet'])) {
         $queryArray = array (
             "query" => buildQuery(),
             "facets" => buildFacets(),
@@ -231,12 +231,12 @@ function search($GET) {
             "facets" => buildFacets(),
             "sort" => buildSort()
         );
-        if (isset($GET['fields'])) {
+        if (isset($_GET['fields'])) {
             $queryArray['fields'] = array('powder.rating', 'state_full', 'freezing_level.rating', 'resort',
                 'date', 'bluebird.rating', 'resort_name', 'snow_quality.rating');
         }
     }
-   if (isset($GET['size']) && is_numeric($pageSize = $GET['size'])) {
+   if (isset($_GET['size']) && is_numeric($pageSize = $_GET['size'])) {
         if (intval($pageSize) > 30) {
             $pageSize = 30;
         }
