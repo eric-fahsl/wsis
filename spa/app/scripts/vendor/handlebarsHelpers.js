@@ -37,7 +37,7 @@ define(['handlebars'],
         });
         
         Handlebars.registerHelper('calculateRatingWidth', function (ratingText, size) {
-            var width = parseInt(ratingText);
+            var width = parseFloat(ratingText);
             if (size && size === 'large') 
                 width *= pixelWidthWide;
             else 
@@ -45,22 +45,31 @@ define(['handlebars'],
             return width;
         });
 
-        Handlebars.registerHelper('calculateFreezingLevelOffset', function(rating, freezingLevel, size){
+        Handlebars.registerHelper('calculateFreezingLevelOffset', function (rating, freezingLevel, size){
             var offsetIndex = offsetIndexSmall;
             if (size && size === 'large') 
                 offsetIndex = offsetIndexLarge;
 
-            var offset = -offsetIndex + (offsetIndex/4) * (parseInt(rating)-1);
+            var offset = -offsetIndex + (offsetIndex/4) * (parseFloat(rating)-1);
             return offset;
         });
 
-        Handlebars.registerHelper('feetOrMeters', function(text){
+        Handlebars.registerHelper('feetOrMeters', function (text){
             if (text === 'T' || text === 't') {
                 return "ft";
             } else {
                 return "m";
             }
-        })
+        });
+
+        Handlebars.registerHelper('displayPrecipAmount', function (inches, isDomestic) {
+            if (isDomestic) {
+                return inches + '"';
+            } else {
+                var cm = parseFloat(inches) * 2.54;
+                return cm.toFixed(1) + 'cm';
+            }
+        });
 
     }
         

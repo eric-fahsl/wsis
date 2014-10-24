@@ -13,14 +13,14 @@ define([
     var RightSidebarDetailView = Backbone.View.extend({
 
         template: JST['app/scripts/templates/right-sidebar-detail.hbs'],
-        el: '#rdp_sidebar',
+        // el: '#rdp_sidebar',
         model: new ReccModel(),
 
-        // tagName: 'section',
+        tagName: 'section',
 
         // id: '',
 
-        // className: 'col-md-3',
+        className: 'col-md-3',
 
         events: {},
 

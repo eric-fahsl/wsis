@@ -15,7 +15,7 @@ define([
 
         template: JST['app/scripts/templates/reccDetailsView.hbs'],
 
-        el: '#rdp_main',
+        el: '#nonSearchContainer',
         model: new Recommendation(),
         rightSidebarView: new RightSidebarView(),
 
@@ -46,7 +46,7 @@ define([
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
-            // this.$el.append(this.rightSidebarView.render().el);
+            this.$el.append(this.rightSidebarView.render().el);
         }
 
     });

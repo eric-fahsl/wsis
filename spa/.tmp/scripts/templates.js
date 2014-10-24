@@ -123,6 +123,15 @@ function program3(depth0,data) {
   return "\n                 m\n            ";
   }
 
+function program5(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n            <div style='clear:both;'></div>\n            <i>NOAA Weather Summary</i>: "
+    + escapeExpression(((stack1 = ((stack1 = depth0.bluebird),stack1 == null || stack1 === false ? stack1 : stack1.weather_summary)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n            <br/>\n        ";
+  return buffer;
+  }
+
   buffer += "<h2>";
   if (stack1 = helpers.resort_name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.resort_name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
@@ -185,7 +194,22 @@ function program3(depth0,data) {
   buffer += escapeExpression(((stack1 = helpers.calculateFreezingLevelOffset || depth0.calculateFreezingLevelOffset),stack1 ? stack1.call(depth0, ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options) : helperMissing.call(depth0, "calculateFreezingLevelOffset", ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options)))
     + "px;' title='Freezing Level: "
     + escapeExpression(((stack1 = ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n</section>\n\n";
+    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n    <h4>Snowfall Projections for ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.dateFormat || depth0.dateFormat),stack1 ? stack1.call(depth0, depth0.date, options) : helperMissing.call(depth0, "dateFormat", depth0.date, options)))
+    + "</h4>\n        <div class=\"smallItalic divider\">Mid-mountain elevations</div>\n        <ul class=\"precipitationPotential\">\n          <li>\n            <p class=\"measure\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.displayPrecipAmount || depth0.displayPrecipAmount),stack1 ? stack1.call(depth0, ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.snow_new), depth0.isDomestic, options) : helperMissing.call(depth0, "displayPrecipAmount", ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.snow_new), depth0.isDomestic, options)))
+    + "</p>\n            <p class=\"measureLabel\">Last 24hrs</p>\n          </li>\n          <li>\n            <p class=\"measure\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.displayPrecipAmount || depth0.displayPrecipAmount),stack1 ? stack1.call(depth0, ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.snow_prev), depth0.isDomestic, options) : helperMissing.call(depth0, "displayPrecipAmount", ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.snow_prev), depth0.isDomestic, options)))
+    + "</p>\n            <p class=\"measureLabel\">Last 72 hrs</p>\n          </li>\n          <li>\n            <p class=\"measure\">";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.displayPrecipAmount || depth0.displayPrecipAmount),stack1 ? stack1.call(depth0, ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.snow_forecast), depth0.isDomestic, options) : helperMissing.call(depth0, "displayPrecipAmount", ((stack1 = depth0.powder),stack1 == null || stack1 === false ? stack1 : stack1.snow_forecast), depth0.isDomestic, options)))
+    + "</p>\n            <p class=\"measureLabel\">New Daytime</p>\n          </li>\n        </ul>\n\n        ";
+  stack2 = helpers['if'].call(depth0, depth0.isDomestic, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n\n        <div style=\"clear:both;\">\n\n</section>\n\n";
   return buffer;
   });
 
