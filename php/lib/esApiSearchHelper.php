@@ -322,11 +322,12 @@ function getResortsForState($state) {
 }
 
 function getResortDetails($resort) {
-    $resort = explode("/", $resort)[0];
+    $resort = explode("/", $resort);
+    $resort = $resort[0];
     $url = "http://localhost:9200/resorts/resorts/" . $resort;
     $ch = curl_init($url);
     $esResult = curl_exec($ch);
-    return json_decode($esResult, true)["_source"];
+    return json_decode($esResult, true);
 }
 
 
