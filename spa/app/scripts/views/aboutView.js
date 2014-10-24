@@ -11,7 +11,8 @@ define([
 
     var AboutView = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/about.hbs'],
+        // template: JST['app/scripts/templates/about.hbs'],
+        template: 'scripts/templates/about.html',
         el: '#nonSearchContent',
 
         // tagName: 'div',
@@ -29,8 +30,13 @@ define([
         },
 
         render: function () {
-            console.log('in render');
-            this.$el.html(this.template());
+            // console.log('in render');
+            // this.$el.html(this.template());
+            // this.$el.html(this.template);
+            var that = this;
+            $.get(this.template, function (data) {
+                that.$el.html(data);
+            });
         }
 
     });

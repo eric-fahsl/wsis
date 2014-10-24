@@ -11,7 +11,8 @@ define([
 
     var FeedbackView = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/feedback.hbs'],
+        // template: JST['app/scripts/templates/feedback.hbs'],
+        template: '/scripts/templates/feedback.html',
         el: '#nonSearchContainer',
 
         // tagName: 'div',
@@ -29,7 +30,11 @@ define([
         },
 
         render: function () {
-            this.$el.html(this.template());
+            // this.$el.html(this.template());
+            var that = this;
+            $.get(this.template, function (data) {
+                that.$el.html(data);
+            });
         }
 
     });
