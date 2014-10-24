@@ -109,6 +109,10 @@ def createRecommendationDocument(resort, recDate ) :
 	rec['state'] = resort['state']
 	rec['state_full'] = resort['state_full']
 	rec['region'] = resort['region']
+	if resort['domestic'] == 'T' :
+		rec['isDomestic'] = True
+	else :
+		rec['isDomestic'] = False
 	location = {}
 	location['lat'] = float(resort['latitude'])
 	location['lon'] = float(resort['longitude'])
