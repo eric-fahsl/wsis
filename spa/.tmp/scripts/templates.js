@@ -185,17 +185,61 @@ function program3(depth0,data) {
   buffer += escapeExpression(((stack1 = helpers.calculateFreezingLevelOffset || depth0.calculateFreezingLevelOffset),stack1 ? stack1.call(depth0, ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options) : helperMissing.call(depth0, "calculateFreezingLevelOffset", ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.rating), ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg), "large", options)))
     + "px;' title='Freezing Level: "
     + escapeExpression(((stack1 = ((stack1 = depth0.freezing_level),stack1 == null || stack1 === false ? stack1 : stack1.freezing_level_avg)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n</section>\n<section class=\"col-md-3\" id=\"rdp_sidebar\"></section>";
+    + "'></div></div>\n        </td>\n    </tr>\n    </table>\n\n</section>\n\n";
   return buffer;
   });
 
 this["JST"]["app/scripts/templates/right-sidebar-detail.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
   
+  var buffer = "", stack1;
+  buffer += "\n    <h4>Live Lift Status</h4>\n    <div id=\"liftie\" class=\"liftie-widget\" data-resort=\"";
+  if (stack1 = helpers.liftieId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.liftieId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\" data-style=\"naked\"/>\n";
+  return buffer;
+  }
 
-
-  return "\n<?php if ($liftieId != null) { ?>\n    <h4>Live Lift Status</h4>\n    <div id=\"liftie\" class=\"liftie-widget\" data-resort=\"<?= $liftieId ?>\" data-style=\"naked\"/>\n<?php } ?>\n\n<h4>Mountain Stats</h4>\n<table>\n    <?php\n    $unitStr = \" (m, approx)\";\n    if ($isDomestic) {\n        $unitStr = \" (ft, approx)\";\n    }\n    createTableRow(\"Summit Elevation<br/>\" . $unitStr, $resortInfo->{'summit_elevation'});\n    createTableRow(\"Base Elevation<br/>\" . $unitStr, $resortInfo->{'base_elevation'});\n    createTableRow(\"Latitude\", $resortInfo->{'latitude'});\n    createTableRow(\"Longitude\", $resortInfo->{'longitude'});\n    ?>\n\n</table>\n\n<h4>Data Sources</h4>\n\n<?php\nif ($isDomestic) {\n    echo \"<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=\" .\n        $resortInfo->{'latitude'} . \"&lon=\" . $resortInfo->{'longitude'} . \"'>$resortName NOAA Forecast</a><br/>\\n\";\n}\necho \"<a target='new1' href='http://www.snow-forecast.com/resorts/\" . $resortInfo->{'snowforecast_id'} . \"/6day/mid'/>\" .\n    \"$resortName Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>\";\n\necho \"<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>\";    \n?>";
+  buffer += "\n";
+  stack1 = helpers['if'].call(depth0, depth0.liftieId, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n<h4>Mountain Stats</h4>\n<table>\n<tbody>\n<tr><td>Summit Elevation<br> (";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.feetOrMeters || depth0.feetOrMeters),stack1 ? stack1.call(depth0, depth0.domestic, options) : helperMissing.call(depth0, "feetOrMeters", depth0.domestic, options)))
+    + " approx)</td><td>";
+  if (stack2 = helpers.summit_elevation) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.summit_elevation; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</td></tr>\n<tr><td>Base Elevation<br> (";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.feetOrMeters || depth0.feetOrMeters),stack1 ? stack1.call(depth0, depth0.domestic, options) : helperMissing.call(depth0, "feetOrMeters", depth0.domestic, options)))
+    + ", approx)</td><td>";
+  if (stack2 = helpers.base_elevation) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.base_elevation; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</td></tr>\n<tr><td>Latitude</td><td>";
+  if (stack2 = helpers.latitude) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.latitude; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</td></tr>\n<tr><td>Longitude</td><td>";
+  if (stack2 = helpers.longitude) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.longitude; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</td></tr>\n</tbody></table>\n\n\n<h4>Data Sources</h4>\n\n<!--\nif ($isDomestic) {\n    echo \"<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=\" .\n        $resortInfo->{'latitude'} . \"&lon=\" . $resortInfo->{'longitude'} . \"'>$resortName NOAA Forecast</a><br/>\\n\";\n} -->\n<a target='new1' href='http://www.snow-forecast.com/resorts/";
+  if (stack2 = helpers.snowforecast_id) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.snowforecast_id; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/6day/mid'>";
+  if (stack2 = helpers.name) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.name; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + " Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>\n\n<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>";
+  return buffer;
   });
 
 return this["JST"];

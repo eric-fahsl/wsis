@@ -18,6 +18,11 @@ define([
 
         defaults: {
         },
+
+        retrieve: function () {
+            console.log(this.urlRoot);
+            this.fetch();
+        },
         
         validate: function (attrs, options) {
         },

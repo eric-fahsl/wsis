@@ -217,9 +217,9 @@ function buildFacets() {
     return $facets;
 }
 
-function search($_GET) {
+function search($GET) {
     $queryArray = array();
-    if (isset($_GET['facet'])) {
+    if (isset($GET['facet'])) {
         $queryArray = array (
             "query" => buildQuery(),
             "facets" => buildFacets(),
@@ -231,22 +231,12 @@ function search($_GET) {
             "facets" => buildFacets(),
             "sort" => buildSort()
         );
-        if (isset($_GET['fields'])) {
+        if (isset($GET['fields'])) {
             $queryArray['fields'] = array('powder.rating', 'state_full', 'freezing_level.rating', 'resort',
                 'date', 'bluebird.rating', 'resort_name', 'snow_quality.rating');
         }
     }
-    /*
-        'resort_name' => $rec['resort_name'],
-                'powder_rating' => $rec['powder']['rating'],
-                '_id' => $rec['_id'],
-                'state_full' => $rec['state_full'],
-                'freezing_level_rating' => $rec['freezing_level']['rating'],
-                'resort' => $rec['resort'],
-                'bluebird_rating' => $rec['bluebird']['rating'],
-                'date' => $rec['date']
-        */
-    if (isset($_GET['size']) && is_numeric($pageSize = $_GET['size'])) {
+   if (isset($GET['size']) && is_numeric($pageSize = $GET['size'])) {
         if (intval($pageSize) > 30) {
             $pageSize = 30;
         }
@@ -332,65 +322,13 @@ function getResortsForState($state) {
 }
 
 function getResortDetails($resort) {
-    $resortDetailsPath = "http://localhost:9200/resorts/resorts/${resort}";
-    $json_string = file_get_contents($resortDetailsPath);
-    return json_decode($json_string);
+    $resort = explode("/", $resort)[0];
+    $url = "http://localhost:9200/resorts/resorts/" . $resort;
+    $ch = curl_init($url);
+    $esResult = curl_exec($ch);
+    return json_decode($esResult, true)["_source"];
 }
 
-function printSnowFlakes($count, $large = False) {
-    $width = $count * 30;
-    $class = "flakes";
-    if ($large) {
-        $class = "flakes-large";
-        $width = $count * 60;
-    }
-    echo "<div class='$class' style='width: ". $width . "px' title='Rating: $count / 5'></div>";
-}
 
-function printSuns($count, $large = False) {
-    $width = $count * 30;
-    $class = "suns";
-    if ($large) {
-        $class = "suns-large";
-        $width = $count * 60;
-    }
-    echo "<div class='$class' style='width: ". $width . "px' title='Rating: $count / 5'></div>";
-}
-
-function printFreezingLevel($rating, $freezing_level, $large = False) {
-    $offset = -24 + (24/4) * ($rating-1);
-    $largeClass = "";
-    if ($large) {
-        $largeClass = "-large";
-        $offset = -30 + (30/4) * ($rating-1);
-    }
-    echo "<div class='mtnContainer$largeClass'><div class='mtnShading$largeClass' style='background-position-y: " . $offset . "px;' title='Freezing Level: $freezing_level'></div></div>";
-}
-
-function displayRecommendationWidget($rec, $resultClass, $showDate) {
-    ?>
-<div class="<?= $resultClass ?>">
-    <?php
-    if ($showDate) {
-        $dtime = new DateTime($rec['date']);
-        $displayDate = $dtime->format('l, M j');
-        //echo $dtime->format('l, M j') . "<br/>";
-        ?>
-        <a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?= $displayDate ?></a>
-    <?php
-    } else {
-        ?>
-        <div class="recheader"><a href="resorts?resort=<?=$rec['resort'] ?>&date=<?=$rec['date'] ?>"><?=$rec['resort_name'] ?></a></div>
-        <span><?=$rec['state_full'] ?></span><br/>
-    <?php
-    }
-    ?>
-    <?php
-    printSnowFlakes($rec['powder']['rating']);
-    printSuns($rec['bluebird']['rating']);
-    printFreezingLevel($rec['freezing_level']['rating'], $rec['freezing_level']['freezing_level_avg']);
-
-    echo "</div>";
-}
 
 ?>

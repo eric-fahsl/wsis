@@ -31,7 +31,7 @@ php/images/snowflake5-125.png
 php/.DS_Store
 
 .DS_Store
-
+spa/.tmp/*
 spa/node_modules
 
 spa/app/bower_components
