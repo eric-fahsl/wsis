@@ -19,7 +19,8 @@ define([
                 facets = options;
             }
 
-            var date = new Date(this.get('date').split('-').join('/'));
+            // var date = new Date(this.get('date').split('-').join('/'));
+            var date = wsisConstants.convertStringToDate(this.get('date'));
 
             var prettyDate = wsisConstants.days[date.getUTCDay()] + ', ' + wsisConstants.months[date.getUTCMonth()] + ' ' + date.getUTCDate();
             this.set({prettyDate: prettyDate});

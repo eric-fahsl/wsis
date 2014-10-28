@@ -13,13 +13,22 @@ foreach ($states["facets"]["State"]["terms"] as $state) {
     $stateResorts = array();
     $resorts = getResortsForState($stateName);
     foreach($resorts["hits"]["hits"] as $resort) {
-    	array_push($stateResorts, $resort["_source"]["name"]);
+    	$resortDetail = array(
+    		"id" => $resort["_id"],
+    		"name" => $resort["_source"]["name"]
+    	);
+    	array_push($stateResorts, $resortDetail);
     }
-    $resortsOutput[$stateName] = $stateResorts;
+    //$resortsOutput[$stateName] = $stateResorts;
+    // $stateResorts['state'] = $stateName;
+    array_push($resortsOutput, array(
+    	"state" => $stateName,
+    	"resorts" => $stateResorts)
+    );
 	 
 }
 	
-echo json_encode($resortsOutput);
+echo json_encode(array("resorts" => $resortsOutput));
 
 
 //}

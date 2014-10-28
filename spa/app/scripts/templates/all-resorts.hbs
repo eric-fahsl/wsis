@@ -1,0 +1,11 @@
+
+{{#each resorts}}
+<div class="col-md-2 stateDisplay"><h3>{{this.state}}</h3>
+{{#each this.resorts}}
+<a href="#/resort/{{this.id}}">{{this.name}}</a><br>
+{{/each}}
+
+</div>
+{{{printDivider @index}}}
+
+{{/each}}

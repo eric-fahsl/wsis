@@ -4,8 +4,8 @@
 <section class="smallRightPad col-md-9">
     <h3 class="minPhoneWidth">Ratings for {{ dateFormat date }}</h3>
     <div class="smallItalic">Generated on {{ createdOn }} PST</div>
-    <span class="ital"><a href="/resorts?resort={{resort}}&date={{previousDate}}">Previous Day</a></span> |
-    <span class="ital"><a href="/resorts?resort=<?= $resort ?>&date=<?= $nextDate ?>">Next Day</a></span>
+    <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date -1}}">Previous Day</a></span> |
+    <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date 1}}">Next Day</a></span>
 
     <table cellpadding="3" id="resortDetailRatings">
     <tr>

@@ -43,11 +43,6 @@ elseif (isset($_GET['date'])) {
     );
 
 } 
-elseif (isset($_GET['allResortData'])) {
-    include('allResortDetails-cached.php');
-    return getCachedResortData();
-    
-} else {
 
     $displayedNoResults = 0;
     $requestParams = $_GET;
