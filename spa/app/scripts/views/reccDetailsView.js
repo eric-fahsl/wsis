@@ -54,6 +54,9 @@ define([
             this.nearbyResortsView.retrieveNearbyResorts(this.model.get('date'), this.model.get('resortData').latitude, this.model.get('resortData').longitude);
             // this.$el.append(this.nearbyResortsView.render().el);
             // this.nearbyResortsView.render();
+            
+            //scroll to the top to reset the view
+            window.scrollTo(1, 1);
         }
 
     });

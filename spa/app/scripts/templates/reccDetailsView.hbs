@@ -37,7 +37,7 @@
     <h4>Snowfall Projections for {{ dateFormat date }}</h4>
         <div class="smallItalic divider">Mid-mountain elevations</div>
         <ul class="precipitationPotential">
-          <li>
+          <li class="firstLiDetail">
             <p class="measure">{{displayPrecipAmount powder.snow_new isDomestic}}</p>
             <p class="measureLabel">Last 24hrs</p>
           </li>
@@ -52,12 +52,12 @@
         </ul>
 
         {{#if isDomestic}}
-            <div style='clear:both;'></div>
+            <div class="clearDivider"></div>
             <i>NOAA Weather Summary</i>: {{bluebird.weather_summary}}
             <br/>
         {{/if}}
 
-        <div style="clear:both;">
+        <div class="clearDivider"></div>
 
 </section>
 

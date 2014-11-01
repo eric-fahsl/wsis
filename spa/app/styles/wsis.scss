@@ -342,7 +342,7 @@ body .row-fluid {
 	padding-top: 10px;
 }
 .precipitationPotential {
-	margin: 0 0 10px 5px;
+	margin: 10px 0px 10px 0px;
 }
 .precipitationPotential li {
 	float:left;
@@ -418,12 +418,21 @@ body .row-fluid {
     border: 0;
     overflow:none;
 }
+.firstLiDetail {
+	margin-left: -43px;
+}
 
 @media (max-width: 390px) {
     body {
-        padding-left:5px;
+        /*padding-left:5px; */
         padding-right:5px;
         zoom: 0.9;
+    }
+    .container {
+    	padding-left: 5px;
+    }
+    .reccView {
+    	margin: 5px 2px 5px 1px;
     }
 }
 
@@ -435,4 +444,9 @@ body .row-fluid {
 
 #searchContainer {
 	display:none;
+}
+
+.clearDivider {
+	clear:both;
+	height:15px;
 }
