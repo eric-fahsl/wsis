@@ -2,7 +2,7 @@
 <p class='nomarginbottom'><a target='new' href='"{{resort_website}}"'>{{resort_website}}</a></p>
 
 <section class="smallRightPad col-md-9">
-    <h3 class="minPhoneWidth">Ratings for {{ dateFormat date }}</h3>
+    <h3 class="minPhoneWidth">Ratings for {{ americanDateFormat date }}</h3>
     <div class="smallItalic">Generated on {{ createdOn }} PST</div>
     <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date -1}}">Previous Day</a></span> |
     <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date 1}}">Next Day</a></span>
@@ -69,7 +69,7 @@
 {{/if}}
 
 <h4>Mountain Stats</h4>
-<table>
+<table id="mountainStatsTable">
 <tbody>
 <tr><td>Summit Elevation<br> ({{feetOrMeters resortData.domestic}} approx)</td><td>{{resortData.summit_elevation}}</td></tr>
 <tr><td>Base Elevation<br> ({{feetOrMeters resortData.domestic}}, approx)</td><td>{{resortData.base_elevation}}</td></tr>
@@ -80,11 +80,9 @@
 
 <h4>Data Sources</h4>
 
-<!--
-if ($isDomestic) {
-    echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
-        $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
-} -->
+{{#if resortData.isDomestic}}
+<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat={{resortData.latitude}}&lon={{resortData.longitude}}'>{{resort_name}} NOAA Forecast</a><br/>
+{{/if}}
 <a target='new1' href='http://www.snow-forecast.com/resorts/{{resortData.snowforecast_id}}/6day/mid'>{{resortData.name}} Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>
 
 <a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>
@@ -93,5 +91,5 @@ if ($isDomestic) {
 
 <div class='divider'></div>
 
-<h4>Nearby Resort Ratings for {{ dateFormat date }}</h4>
+<h4>Nearby Resort Ratings for {{ americanDateFormat date }}</h4>
 

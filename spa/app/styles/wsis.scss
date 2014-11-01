@@ -86,7 +86,7 @@ body .row-fluid {
  #results {
  	overflow:hidden;
  }
-
+/*
 #searchResults .recresult {
 	height: 137px;
  	margin-left: 10px;
@@ -96,7 +96,7 @@ body .row-fluid {
 
 #searchResults .recresultLanding {
  	margin-left: 10px;
- }
+ }*/
 .recheader {
 	font-weight: bold;
     text-overflow: ellipsis;
@@ -383,12 +383,16 @@ body .row-fluid {
     margin:5px;
     width:162px;
     height:205px;
+    padding: 5px;
 }
 .reccView h6 {
     font-size: 0.6em;
     margin: 0px;
     padding-top: 3px;
     font-style:oblique;
+}
+#mountainStatsTable td {
+	padding: 0px 10px 3px 5px;
 }
 #powderFacets a {
     font-size: 0.8em;

@@ -40,6 +40,7 @@ define([
         },
 
         searchQuery: function (param) {
+            console.log('router: searchQuery');
             var facets = {};
 
             if (param) {
@@ -57,36 +58,44 @@ define([
             }
             this.searchResultsView.refreshData(facets);
             this.showSearchPage();
+            this.selectMenuItem('recommendations');
         },
 
         aboutPage: function () {
+            console.log('router: aboutPage');
             var staticView = new AboutView({
                 el: this.sections.nonSearchPage
             });
             this.hideSearchPage();
+            this.selectMenuItem('about');
         },
 
         feedbackPage: function () {
+            console.log('router: feedbackPage');
             var staticView = new FeedbackView({
                 el: this.sections.nonSearchPage
             });
             this.hideSearchPage();
+            this.selectMenuItem('feedback');
         },
 
         recomendationsPage: function (name, date) {
+            console.log('router: recomendationsPage');
             var myDate = date;
             if (!myDate) {
                 myDate = wsisConstants.getTodaysDate();
             }
             this.reccDetailsView.retrieveReccData(name, myDate);
-            $('#resortdetailPage').show();
+            // $('#resortdetailPage').show();
             this.hideSearchPage();
-
+            this.selectMenuItem('resorts');
         },
 
         resortListingPage: function () {
+            console.log('router: resortListingPage');
             var resortListingView = new ResortListingView();
             this.hideSearchPage();
+            this.selectMenuItem('resorts');
         },
 
         showSearchPage: function () {
@@ -97,6 +106,15 @@ define([
         hideSearchPage: function () {
             $(this.sections.searchPage).hide();
             $(this.sections.nonSearchPage).show();
+        },
+
+        selectMenuItem: function (item) {
+            //deactivate all menu items first
+            $.each(wsisConstants.menuOptions, function (index, value) {
+                $('#' + value).removeClass('active');
+            });
+
+            $('#' + item).addClass('active');
         }
     });
     return Workspace;

@@ -34,9 +34,10 @@ define([
         },
 
         retrieveReccData: function (name, date) {
+            console.log('reccDetailsView: retrieveReccData');
             this.model.urlRoot = wsisConstants.searchApiBase + 'resort=' + name + '&date=' + date;
             this.model.fetch();
-
+            // this.render();
             // this.rightSidebarView.retrieveResortData(name);
 
         },
@@ -47,6 +48,7 @@ define([
         },
 
         render: function () {
+            console.log('reccDetailsView: render()');
             this.$el.html(this.template(this.model.toJSON()));
             // this.$el.append(this.rightSidebarView.render().el);
             this.nearbyResortsView.retrieveNearbyResorts(this.model.get('date'), this.model.get('resortData').latitude, this.model.get('resortData').longitude);

@@ -29,7 +29,7 @@ define(['handlebars', 'lib/wsisConstants'],
         });
 
         Handlebars.registerHelper('americanDateFormat', function(text){
-            return text;
+            return wsisConstants.convertDateObjToAmericanString(text);
         });
         
         Handlebars.registerHelper('addDaysToDate', function(date, daysToAdd){

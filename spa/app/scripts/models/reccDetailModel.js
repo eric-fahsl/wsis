@@ -18,17 +18,21 @@ define([
 
         defaults: {
         },
-
-        retrieve: function () {
-            console.log(this.urlRoot);
-            this.fetch();
-        },
         
         validate: function (attrs, options) {
         },
 
         parse: function (response, options) {
-            return response._source;
+            var parsedResponse = response._source;
+            if (parsedResponse.resortData && parsedResponse.resortData.domestic) {
+                var domesticValue = parsedResponse.resortData.domestic;
+                parsedResponse.resortData.isDomestic =
+                    ((domesticValue === 'T' || domesticValue === 't') ? true : false);
+            }
+            //assign random value to assert change
+            parsedResponse.random = Math.random();
+
+            return parsedResponse;
         }
     });
 

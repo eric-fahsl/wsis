@@ -69,11 +69,11 @@ elseif (isset($_GET['date'])) {
         'facets' => $results['facets']
     );
     //We now want 5 results per date
-    $requestParams['size'] = 5;
+    $_GET['size'] = 5;
     foreach ($results['facets']['date']['terms'] as $dateFacet) {
         $reccDate = $dateFacet['term'];
-        $requestParams['date'] = $reccDate;
-        $results = getResultsForDate($requestParams);
+        $_GET['date'] = $reccDate;
+        $results = getResultsForDate();
         $allResults['results'][$reccDate] = $results['results'];
     }
 

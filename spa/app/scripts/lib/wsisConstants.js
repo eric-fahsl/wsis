@@ -8,6 +8,7 @@ define(
 			months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 			localUrlBase: '#search/',
+			menuOptions: ['about', 'recommendations', 'resorts', 'feedback'],
 			// searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
 			searchApiBase: 'http://localhost/lib/reccapi.php?',
 
@@ -40,10 +41,15 @@ define(
 	        },
 
 	        convertDateToString: function (date) {
-				var time = date;
-				time = time.split(' ')[0];
-				time = time.split('-')[1] + '/' + time.split('-')[2] + '/' + time.split('-')[0];
-				return time;
+				var time = date.split('-');
+				// time = time.split(' ')[0];
+				return time[1] + '/' + time[2] + '/' + time[0];
+	        },
+
+	        convertDateObjToAmericanString: function (date) {
+				var time = date.split('-');
+				// time = time.split(' ')[0];
+				return this.months[parseInt(time[1]) - 1] + ' ' + time[2] + ', ' + time[0];
 	        },
 
 	        convertStringToDate: function (input) {
