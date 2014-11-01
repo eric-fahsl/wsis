@@ -184,6 +184,14 @@ module.exports = function (grunt) {
                 }
             }
         },
+        strip: {
+            main: {
+                src: '<%= yeoman.dist %>/scripts/**/*.js',
+                options: {
+                    inline: true
+                }
+            }
+        },
         useminPrepare: {
             html: '<%= yeoman.app %>/index.html',
             options: {
@@ -250,7 +258,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{png,jpg,jpeg,gif,webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'scripts/templates/*.html'
+                        'scripts/templates/*.html',
+                        'scripts/server/*.json'
                     ]
                 }]
             }
@@ -372,6 +381,7 @@ module.exports = function (grunt) {
         'htmlmin',
         'concat',
         'cssmin',
+        'strip',
         'uglify',
         'copy',
         // 'rev',
