@@ -8,7 +8,8 @@ define(
 			months: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 			localUrlBase: '#search/',
-			searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
+			// searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
+			searchApiBase: 'http://localhost/lib/reccapi.php?',
 
 			convertFacetsToString: function (facets, key, value) {
 	            var url = this.localUrlBase;
@@ -34,12 +35,12 @@ define(
 	        },
 
 			getTodaysDate: function () {
-				return this.convertDateObjToString(date);
+				return this.convertDateObjToString(new Date());
 				
 	        },
 
 	        convertDateToString: function (date) {
-	        	var time = date;
+				var time = date;
 				time = time.split(' ')[0];
 				time = time.split('-')[1] + '/' + time.split('-')[2] + '/' + time.split('-')[0];
 				return time;
@@ -50,8 +51,8 @@ define(
 	        },
 
 	        addDaysToDate: function (date, daysToAdd) {
-	        	date.setDate(date.getDate() + daysToAdd);
-	        	return this.convertDateObjToString(date);
+				date.setDate(date.getDate() + daysToAdd);
+				return this.convertDateObjToString(date);
 	        }
 			
 		};

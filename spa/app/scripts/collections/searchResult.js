@@ -6,9 +6,10 @@ define([
     'backbone',
     'templates',
     'models/recc',
-    'vendor/jquery.cookie'
+    'vendor/jquery.cookie',
+    'lib/wsisConstants'
 
-], function ($, _, Backbone, JST, Recc) {
+], function ($, _, Backbone, JST, Recc, jQueryCookie, wsisConstants) {
     'use strict';
 
     var SearchResult = Backbone.Collection.extend({
@@ -19,7 +20,7 @@ define([
         facets: {},
         results: {},
 
-        url: 'http://whereshouldiski.com/lib/reccapi.php?fields=t',
+        url: wsisConstants.searchApiBase + 'fields=t',
         initialize: function () {
             if ($.cookie('coords')) {
                 this.url += '&coords=' + $.cookie('coords');

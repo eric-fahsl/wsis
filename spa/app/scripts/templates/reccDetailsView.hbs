@@ -25,12 +25,8 @@
     </tr>
     <tr>
         <td><h5>Freezing <br/> Level</h5></td>
-        <td><h6>{{freezing_level.freezing_level_avg}}
-            {{#if freezing_level.freezing_level_avg}}
-                 ft
-            {{else}}
-                 m
-            {{/if}}
+        <td><h6>{{freezing_level.freezing_level_avg}} 
+            {{feetOrMeters resortData.domestic}}
         </h6></td>
         <td>
             <div class='mtnContainer-large'><div class='mtnShading-large' style='background-position-y:  {{calculateFreezingLevelOffset freezing_level.rating freezing_level.freezing_level_avg 'large'}}px;' title='Freezing Level: {{freezing_level.freezing_level_avg}}'></div></div>
@@ -64,4 +60,38 @@
         <div style="clear:both;">
 
 </section>
+
+<section class="col-md-3">
+
+{{#if resortData.liftieId}}
+    <h4>Live Lift Status</h4>
+    <div id="liftie" class="liftie-widget" data-resort="{{ resortData.liftieId }}" data-style="naked"/>
+{{/if}}
+
+<h4>Mountain Stats</h4>
+<table>
+<tbody>
+<tr><td>Summit Elevation<br> ({{feetOrMeters resortData.domestic}} approx)</td><td>{{resortData.summit_elevation}}</td></tr>
+<tr><td>Base Elevation<br> ({{feetOrMeters resortData.domestic}}, approx)</td><td>{{resortData.base_elevation}}</td></tr>
+<tr><td>Latitude</td><td>{{resortData.latitude}}</td></tr>
+<tr><td>Longitude</td><td>{{resortData.longitude}}</td></tr>
+</tbody></table>
+
+
+<h4>Data Sources</h4>
+
+<!--
+if ($isDomestic) {
+    echo "<a target='new' href='http://forecast.weather.gov/MapClick.php?unit=0&lg=english&FcstType=text&lat=" .
+        $resortInfo->{'latitude'} . "&lon=" . $resortInfo->{'longitude'} . "'>$resortName NOAA Forecast</a><br/>\n";
+} -->
+<a target='new1' href='http://www.snow-forecast.com/resorts/{{resortData.snowforecast_id}}/6day/mid'>{{resortData.name}} Snow-Forecast.com Weather <br/><img src='../images/snowforecast-logo.jpg' class='smallmarginbottom'/></a><br/>
+
+<a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>
+
+</section>
+
+<div class='divider'></div>
+
+<h4>Nearby Resort Ratings for {{ dateFormat date }}</h4>
 

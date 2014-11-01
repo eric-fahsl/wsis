@@ -325,9 +325,10 @@ function getResortDetails($resort) {
     $resort = explode("/", $resort);
     $resort = $resort[0];
     $url = "http://localhost:9200/resorts/resorts/" . $resort;
-    $ch = curl_init($url);
-    $esResult = curl_exec($ch);
-    return json_decode($esResult, true);
+    // $ch = curl_init($url);
+    // $esResult = curl_exec($ch);
+    // return json_decode($esResult, true);
+    return queryES($url, "");
 }
 
 

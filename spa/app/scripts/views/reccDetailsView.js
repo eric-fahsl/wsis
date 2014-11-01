@@ -6,10 +6,10 @@ define([
     'backbone',
     'templates',
     'models/reccDetailModel',
-    'views/rightSidebarDetailView',
+    'views/nearbyResortsView',
     'lib/wsisConstants'
 
-], function ($, _, Backbone, JST, Recommendation, RightSidebarView, wsisConstants) {
+], function ($, _, Backbone, JST, Recommendation, NearbyResortsView, wsisConstants) {
     'use strict';
     var ReccDetailsView = Backbone.View.extend({
 
@@ -17,7 +17,8 @@ define([
 
         el: '#nonSearchContainer',
         model: new Recommendation(),
-        rightSidebarView: new RightSidebarView(),
+        nearbyResortsView: new NearbyResortsView(),
+        // rightSidebarView: new RightSidebarView(),
 
         // className: '',
 
@@ -36,7 +37,8 @@ define([
             this.model.urlRoot = wsisConstants.searchApiBase + 'resort=' + name + '&date=' + date;
             this.model.fetch();
 
-            this.rightSidebarView.retrieveResortData(name);
+            // this.rightSidebarView.retrieveResortData(name);
+
         },
 
         overrideRemove: function () {
@@ -46,7 +48,10 @@ define([
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
-            this.$el.append(this.rightSidebarView.render().el);
+            // this.$el.append(this.rightSidebarView.render().el);
+            this.nearbyResortsView.retrieveNearbyResorts(this.model.get('date'), this.model.get('resortData').latitude, this.model.get('resortData').longitude);
+            // this.$el.append(this.nearbyResortsView.render().el);
+            // this.nearbyResortsView.render();
         }
 
     });
