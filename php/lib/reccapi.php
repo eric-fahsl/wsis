@@ -14,26 +14,35 @@ function getResultsForDate($requestParams) {
 
 if (isset($_GET['resortData'])) {
     $results = getResortDetails($_GET['resortData']);
-    return $results['_source'];
+    $allResults = $results['_source'];
 }
 
-if (isset($_GET['resort'])) {    
+elseif (isset($_GET['resort'])) {    
     $dtime = new DateTime('NOW');
     $displayDate = $dtime->format('Y-m-d');
     if (isset($_GET['date'])) {
         $displayDate = $_GET['date'];
     }
-    $url = 'http://localhost:9200/recommendations/recommendations/' . $_GET['resort'] . '_' . $displayDate;
-    //print $url;
-    $ch = curl_init($url);
-    $esResult = curl_exec($ch);
-    return json_decode($esResult, true);
+    $url = 'http://localhost:9200/recommendations/recommendations/' . $_GET['resort'] . '_' . $displayDate;    
+    $allResults = queryES($url, "");
+    // print $url;
+    // $ch = curl_init($url);
+    // $esResult = curl_exec($ch);
+    // $allResults = json_decode($esResult, true);
+
+    $resortData = getResortDetails($_GET['resort']);
+    $allResults['_source']['resortData'] = $resortData['_source'];
+
+    // return $results['_source'];
+    // return $resortData;
 
 }
 //check if showing a specific date, if so, just do a single standard search
 elseif (isset($_GET['date'])) {
     //echo json_encode(getResultsForDate($_GET) , true );
-    $_GET['size'] = 30;
+    if (!isset($_GET['size'])) {
+        $_GET['size'] = 30;
+    }
 
     $results = getResultsForDate($_GET);
 //    $allResults = $results;
@@ -42,19 +51,13 @@ elseif (isset($_GET['date'])) {
         'facets' => $results['facets']
     );
 
-} 
-elseif (isset($_GET['allResortData'])) {
-    include('allResortDetails-cached.php');
-    return getCachedResortData();
-    
 } else {
-
     $displayedNoResults = 0;
     $requestParams = $_GET;
     $requestParams['size'] = 0;
     if (!isset($_GET['dateStart'])) {
         //set to today's date
-        $requestParams['dateStart'] = date("Y-m-d");
+        $_GET['dateStart'] = date("Y-m-d");
     }
 
     //Get the initial results for acquiring the available dates to search
@@ -76,6 +79,7 @@ elseif (isset($_GET['allResortData'])) {
 
 }
 
+// var_dump($allResults);
 echo json_encode($allResults, true);
 //echo $results["hits"]["hits"][0]['_id'];
 //print json_encode($decoded["hits"]);                                                                                                             

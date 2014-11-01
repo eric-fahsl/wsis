@@ -1,7 +1,7 @@
 'use strict';
 
-define(['handlebars'],
-    function (Handlebars) {
+define(['handlebars', 'lib/wsisConstants'],
+    function (Handlebars, wsisConstants) {
 
         var pixelWidthSmall = 30;
         var pixelWidthWide = 60;
@@ -25,17 +25,20 @@ define(['handlebars'],
         });*/
 
         Handlebars.registerHelper('dateFormat', function(text){            
-            var time = text;
-            time = time.split(' ')[0];
-            time = time.split('-')[1] + '/' + time.split('-')[2] + '/' + time.split('-')[0];
-            return time;
-            
+            return wsisConstants.convertDateToString(text);            
         });
 
         Handlebars.registerHelper('americanDateFormat', function(text){
             return text;
         });
         
+        Handlebars.registerHelper('addDaysToDate', function(date, daysToAdd){
+            return wsisConstants.addDaysToDate(
+                wsisConstants.convertStringToDate(date), daysToAdd);
+            // date.setDate(date.getDate() + daysToAdd);
+            // return wsisConstants.convertDateToString(date);
+        });
+
         Handlebars.registerHelper('calculateRatingWidth', function (ratingText, size) {
             var width = parseFloat(ratingText);
             if (size && size === 'large') 
@@ -68,6 +71,14 @@ define(['handlebars'],
             } else {
                 var cm = parseFloat(inches) * 2.54;
                 return cm.toFixed(1) + 'cm';
+            }
+        });
+
+        Handlebars.registerHelper('printDivider', function (index) {
+            if( ((parseInt(index) + 1) % 6) === 0) {
+                return '<div class="divider"></div>';
+            } else {
+                return "";
             }
         });
 

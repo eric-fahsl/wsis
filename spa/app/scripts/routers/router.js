@@ -8,8 +8,10 @@ define([
     'views/searchResultsView',
     'views/aboutView',
     'views/feedbackView',
-    'views/reccDetailsView'
-], function ($, _, Backbone, JST, SearchResults, AboutView, FeedbackView, RecommendationView) {
+    'views/reccDetailsView',
+    'views/resortListingView',
+    'lib/wsisConstants'
+], function ($, _, Backbone, JST, SearchResults, AboutView, FeedbackView, RecommendationView, ResortListingView, wsisConstants) {
     'use strict';
 
     var Workspace = Backbone.Router.extend({
@@ -32,7 +34,9 @@ define([
             'search/': 'searchQuery',
             'about': 'aboutPage',
             'feedback': 'feedbackPage',
-            'resort/:name/:date': 'recomendationsPage'
+            'resorts': 'resortListingPage',
+            'resort/:name/:date': 'recomendationsPage',
+            'resort/:name': 'recomendationsPage'
         },
 
         searchQuery: function (param) {
@@ -70,10 +74,19 @@ define([
         },
 
         recomendationsPage: function (name, date) {
-            this.reccDetailsView.retrieveReccData(name, date);
+            var myDate = date;
+            if (!myDate) {
+                myDate = wsisConstants.getTodaysDate();
+            }
+            this.reccDetailsView.retrieveReccData(name, myDate);
             $('#resortdetailPage').show();
             this.hideSearchPage();
 
+        },
+
+        resortListingPage: function () {
+            var resortListingView = new ResortListingView();
+            this.hideSearchPage();
         },
 
         showSearchPage: function () {
