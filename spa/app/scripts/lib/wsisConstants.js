@@ -9,8 +9,8 @@ define(
 			days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 			localUrlBase: '#search/',
 			menuOptions: ['about', 'recommendations', 'resorts', 'feedback'],
-			// searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
-			searchApiBase: 'http://localhost/lib/reccapi.php?',
+			searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
+			// searchApiBase: 'http://localhost/lib/reccapi.php?',
 
 			convertFacetsToString: function (facets, key, value) {
 	            var url = this.localUrlBase;

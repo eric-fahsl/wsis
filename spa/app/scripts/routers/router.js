@@ -55,6 +55,7 @@ define([
             }
             if (!this.searchResultsView) {
                 this.searchResultsView = new SearchResults();
+                window.searchResultsView = this.searchResultsView;
             }
             this.searchResultsView.refreshData(facets);
             this.showSearchPage();

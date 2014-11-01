@@ -34,6 +34,7 @@ define([
         initialized: false,
         mobileFacetsShown: false,
         distanceFacetHeaderId: '#distanceHeader',
+        refreshedOnce: false,
 
         // Cache the template function for a single item.
         // template: _.template($('#recc-template').html()),
@@ -60,6 +61,7 @@ define([
             $(this.sortEl).change(function () {
                 window.location = $(that.sortEl + ' option:selected')[0].value;
             });
+            this.checkLocation();
             $('#loadingImage').hide();
         },
 
@@ -232,6 +234,38 @@ define([
         showFacets: function () {
             $(this.facetEl).removeClass('hidden-xs');
             this.mobileFacetsShown = true;
+        },
+
+        showDistanceFilters: function (coords, refreshResults) {
+            this.facets.coords = coords;
+            $('#distanceHeader').show();
+            $('#distanceSection').show();
+            $('#distanceSort').show();
+            if (refreshResults && !this.refreshedOnce) {
+                this.refreshData();
+                this.refreshedOnce = true;
+            }
+        },
+        errorHandler: function () {
+            console.log('Geolocation not enabled');
+        },
+
+        success_handler: function (position) {
+            var coords = position.coords.latitude + ',' + position.coords.longitude;
+            window.searchResultsView.showDistanceFilters(coords, false);
+            $.cookie('coords', coords, { expires: 1 });
+        },
+
+        checkLocation: function (facets) {
+            if ($.cookie('coords')) {
+                this.showDistanceFilters($.cookie('coords'), false);
+            } else {
+                if (navigator.geolocation) {
+                    // Geolocation supported. Do something here.
+                    var geolocation = navigator.geolocation;
+                    geolocation.getCurrentPosition(this.success_handler, this.errorHandler);
+                }
+            }
         }
 
 

@@ -11,7 +11,7 @@ define([
     'use strict';
     
     var sortOption = Facet.extend({
-
+        urlBase: '#search/',
         initialize: function (attributes, options) {
 
             attributes.selected = false;
