@@ -236,15 +236,16 @@ define([
             this.mobileFacetsShown = true;
         },
 
-        showDistanceFilters: function (coords, refreshResults) {
-            this.facets.coords = coords;
-            $('#distanceHeader').show();
-            $('#distanceSection').show();
-            $('#distanceSort').show();
+        showDistanceFilters: function (refreshResults) {
             if (refreshResults && !this.refreshedOnce) {
+                //reset the search result to consider location
+                this.collection = new SearchResult();
                 this.refreshData();
                 this.refreshedOnce = true;
             }
+            $('#distanceHeader').slideDown();
+            $('#distanceSection').slideDown();
+            $('#distanceSort').show();
         },
         errorHandler: function () {
             console.log('Geolocation not enabled');
@@ -252,13 +253,14 @@ define([
 
         success_handler: function (position) {
             var coords = position.coords.latitude + ',' + position.coords.longitude;
-            window.searchResultsView.showDistanceFilters(coords, false);
             $.cookie('coords', coords, { expires: 1 });
+            window.searchResultsView.showDistanceFilters(true);
+            
         },
 
         checkLocation: function (facets) {
             if ($.cookie('coords')) {
-                this.showDistanceFilters($.cookie('coords'), false);
+                this.showDistanceFilters(false);
             } else {
                 if (navigator.geolocation) {
                     // Geolocation supported. Do something here.

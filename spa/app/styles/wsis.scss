@@ -33,14 +33,14 @@ body .row-fluid {
  	font-size: 13px;
 	padding-left: 9px;
 	margin: 0;
-	background-image: url('/images/greyHeader.png');
+	background-image: url('../images/greyHeader.png');
 	border-top: 3px solid black;
 	height: auto;
 	overflow: auto;
  }
 
  #facets .selected {
- 	background-image: url('/images/greenHeader.png');
+ 	background-image: url('../images/greenHeader.png');
  }
 
  #facets ol {
@@ -241,7 +241,7 @@ body .row-fluid {
  .button {
 		padding: 5px 15px;
 		display: inline;
-		background: #777 url('/images/button.png') repeat-x bottom;
+		background: #777 url('../images/button.png') repeat-x bottom;
 		border: none;
 		color: #fff;
 		cursor: pointer;
@@ -268,25 +268,25 @@ body .row-fluid {
 .mtnContainer {
 	width: 50px; 
 	height: 24px; 
-	background: url('/images/mtns-icon.png'); 
+	background: url('../images/mtns-icon.png'); 
 	border: 1px solid grey;
 }
 
 .mtnShading {
 	width: 50px; height: 24px; 
-	background: url('/images/shading-icon.png'); 
+	background: url('../images/shading-icon.png'); 
 }
 
 .mtnContainer-large {
 	width: 53px; 
 	height: 30px; 
-	background: url('/images/mtns-30px.png'); 
+	background: url('../images/mtns-30px.png'); 
 	border: 1px solid grey;
 }
 
 .mtnShading-large {
 	width: 53px; height: 30px; 
-	background: url('/images/shading-53px.png'); 
+	background: url('../images/shading-53px.png'); 
 }
 
 #recValueProps p {
