@@ -7,9 +7,10 @@ define([
     'templates',
     'models/reccDetailModel',
     'views/nearbyResortsView',
-    'lib/wsisConstants'
+    'lib/wsisConstants',
+    'views/barChartView'
 
-], function ($, _, Backbone, JST, Recommendation, NearbyResortsView, wsisConstants) {
+], function ($, _, Backbone, JST, Recommendation, NearbyResortsView, wsisConstants, BarChartView) {
     'use strict';
     var ReccDetailsView = Backbone.View.extend({
 
@@ -57,6 +58,7 @@ define([
             
             //scroll to the top to reset the view
             window.scrollTo(1, 1);
+            var barChart = new BarChartView();
         }
 
     });

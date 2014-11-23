@@ -3,7 +3,7 @@
 
 <section class="smallRightPad col-md-9">
     <h3 class="minPhoneWidth">Ratings for {{ americanDateFormat date }}</h3>
-    <div class="smallItalic">Generated on {{ createdOn }} PST</div>
+    <div class="smallItalic">Generated on {{ removePostDecimal createdOn }} PST</div>
     <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date -1}}">Previous Day</a></span> |
     <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date 1}}">Next Day</a></span>
 
@@ -25,11 +25,11 @@
     </tr>
     <tr>
         <td><h5>Freezing <br/> Level</h5></td>
-        <td><h6>{{freezing_level.freezing_level_avg}} 
+        <td><h6>{{numberWithCommas freezing_level.freezing_level_avg}} 
             {{feetOrMeters resortData.domestic}}
         </h6></td>
         <td>
-            <div class='mtnContainer-large'><div class='mtnShading-large' style='background-position-y:  {{calculateFreezingLevelOffset freezing_level.rating freezing_level.freezing_level_avg 'large'}}px;' title='Freezing Level: {{freezing_level.freezing_level_avg}}'></div></div>
+            <div class='mtnContainer-large'><div class='mtnShading-large' style='background-position-y:  {{calculateFreezingLevelOffset freezing_level.rating freezing_level.freezing_level_avg 'large'}}px;' title='Freezing Level: {{numberWithCommas freezing_level.freezing_level_avg}}'></div></div>
         </td>
     </tr>
     </table>
@@ -71,8 +71,8 @@
 <h4>Mountain Stats</h4>
 <table id="mountainStatsTable">
 <tbody>
-<tr><td>Summit Elevation<br> ({{feetOrMeters resortData.domestic}} approx)</td><td>{{resortData.summit_elevation}}</td></tr>
-<tr><td>Base Elevation<br> ({{feetOrMeters resortData.domestic}}, approx)</td><td>{{resortData.base_elevation}}</td></tr>
+<tr><td>Summit Elevation<br> ({{feetOrMeters resortData.domestic}} approx)</td><td>{{numberWithCommas resortData.summit_elevation}}</td></tr>
+<tr><td>Base Elevation<br> ({{feetOrMeters resortData.domestic}}, approx)</td><td>{{numberWithCommas resortData.base_elevation}}</td></tr>
 <tr><td>Latitude</td><td>{{resortData.latitude}}</td></tr>
 <tr><td>Longitude</td><td>{{resortData.longitude}}</td></tr>
 </tbody></table>
@@ -88,6 +88,9 @@
 <a target='new2' href='http://opensnow.com'>OpenSnow.com<br/><img src='../images/opensnow_logo.png'/></a>
 
 </section>
+
+<div class='divider'></div>
+<div id='chartData'></div>
 
 <div class='divider'></div>
 

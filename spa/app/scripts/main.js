@@ -9,7 +9,8 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         handlebars: '../bower_components/handlebars/handlebars',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
-        handlebarsHelpers: 'vendor/handlebarsHelpers'
+        handlebarsHelpers: 'vendor/handlebarsHelpers',
+        d3: '../bower_components/d3/d3'
     },
 
     shim: {
@@ -31,6 +32,9 @@ require.config({
         },
         handlebarsHelpers: {
             deps: ['handlebars']
+        },
+        d3: {
+            exports: 'd3'
         }
     }
     

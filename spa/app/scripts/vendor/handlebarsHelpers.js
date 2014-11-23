@@ -82,6 +82,14 @@ define(['handlebars', 'lib/wsisConstants'],
             }
         });
 
+        Handlebars.registerHelper('removePostDecimal', function(text){
+            return text.split('.')[0];
+        });
+
+        Handlebars.registerHelper('numberWithCommas', function(text){
+            return text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        });
+        
     }
         
 );
