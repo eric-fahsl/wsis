@@ -15,6 +15,7 @@ define([
         // template: JST['app/scripts/templates/about.hbs'],
         template: 'scripts/templates/about.html',
         el: '#chartData',
+        // model: new ResortDetailGraphModel(),
 
         // tagName: 'div',
 
@@ -24,18 +25,25 @@ define([
 
         events: {},
 
-        initialize: function () {
-            // this.listenTo(this.model, 'change', this.render);
-            // console.log('initialize');
-            //this.render();
+        initialize: function (options) {
+            // this.listenTo(this.model, 'change', this.renderBarGraph);
             
-            var dataJson = this.getData();
-            
-            this.renderBarGraph(dataJson);
+            var resort = 'stevenspass';
+            var date = '2014-11-24';
+            var dateStart = '2014-11-22';
+
+            var that = this;
+            $.ajax({
+                url: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=7&sortDate=T&resort=' + resort + '&dateStart=' + dateStart,
+                success: function (data) {
+                    that.renderBarGraph(data);
+                }
+            });
             
         },
 
         renderBarGraph: function (data) {
+            console.log(data);
 
             var margin = {top: 20, right: 20, bottom: 30, left: 40};
             var width = $(this.el).width() - margin.left - margin.right;
@@ -102,7 +110,7 @@ define([
                 .enter().append('g')
                 .attr('class', 'g')
                 .attr('transform', function (d) { return 'translate(' + x0(d.Date) + ',0)'; })
-                .on('click', function (d) { 
+                .on('click', function (d) {
                     console.log(d.sysDate);
                 });
                 
@@ -135,15 +143,15 @@ define([
                 .attr('dy', '.35em')
                 .style('text-anchor', 'end')
                 .text(function (d) { return d; });
-        },
-
+        }
+/*
         getData: function () {
             var data = [
                 {
                     'Date': 'Dec 1',
-                    'Powder': '2.5',
-                    'Snow Quality': '3',
-                    'Bluebird': '1.5',
+                    'Powder': 2.5,
+                    'Snow Quality': 3,
+                    'Bluebird': 1.5,
                     'sysDate': '2014-12-01'
                 },
                 {
@@ -183,7 +191,83 @@ define([
                 }
             ];
             return data;
+        },
+
+        getData2: function() {
+            return [
+                {
+                    "Date": "Nov 23",
+                    "Powder": 4.25,
+                    "Snow Quality": 3.5,
+                    "Bluebird": 1.5,
+                    "sysDate": "2014-11-23"
+                },
+                {
+                    "Date": "Nov 24",
+                    "Powder": 4.25,
+                    "Snow Quality": 3,
+                    "Bluebird": 1.25,
+                    "sysDate": "2014-11-24"
+                },
+                {
+                    "Date": "Nov 22",
+                    "Powder": 4,
+                    "Snow Quality": 3.75,
+                    "Bluebird": 1.5,
+                    "sysDate": "2014-11-22"
+                },
+                {
+                    "Date": "Nov 25",
+                    "Powder": 3.5,
+                    "Snow Quality": 2.25,
+                    "Bluebird": 1,
+                    "sysDate": "2014-11-25"
+                },
+                {
+                    "Date": "Nov 28",
+                    "Powder": 3.25,
+                    "Snow Quality": 3.25,
+                    "Bluebird": 3,
+                    "sysDate": "2014-11-28"
+                },
+                {
+                    "Date": "Nov 21",
+                    "Powder": 2.25,
+                    "Snow Quality": 2,
+                    "Bluebird": 1,
+                    "sysDate": "2014-11-21"
+                },
+                {
+                    "Date": "Nov 26",
+                    "Powder": 2.25,
+                    "Snow Quality": 1.75,
+                    "Bluebird": 1,
+                    "sysDate": "2014-11-26"
+                },
+                {
+                    "Date": "Nov 27",
+                    "Powder": 1.75,
+                    "Snow Quality": 1.25,
+                    "Bluebird": 1,
+                    "sysDate": "2014-11-27"
+                },
+                {
+                    "Date": "Nov 20",
+                    "Powder": 1.25,
+                    "Snow Quality": 1,
+                    "Bluebird": 1.25,
+                    "sysDate": "2014-11-20"
+                },
+                {
+                    "Date": "Nov 19",
+                    "Powder": 1,
+                    "Snow Quality": 1,
+                    "Bluebird": 2.5,
+                    "sysDate": "2014-11-19"
+                }
+            ];
         }
+*/
 
     });
     return BarChartView;

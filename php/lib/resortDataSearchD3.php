@@ -17,6 +17,6 @@ include('esSearchHelper.php');
 		);
 		array_push($dataResults, $dateData);
 	}
-
+	header('Content-Type: application/json');
 	echo json_encode($dataResults, true);
 ?>
