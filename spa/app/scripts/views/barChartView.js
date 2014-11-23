@@ -52,7 +52,7 @@ define([
                 .range([height, 0]);
 
             var color = d3.scale.ordinal()
-                .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+                .range(['rgb(64, 140, 244)', 'rgb(60, 196, 213)', 'rgb(255, 184, 0)', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
 
             var xAxis = d3.svg.axis()
                 .scale(x0)
@@ -71,7 +71,7 @@ define([
 
 //    d3.csv('/scripts/data.csv', function(error, data) {
 //            var data = dataJson;
-            var ageNames = d3.keys(data[0]).filter(function (key) { return key !== 'Date'; });
+            var ageNames = d3.keys(data[0]).filter(function (key) { return (key !== 'Date' && key !== 'sysDate'); });
 
             data.forEach(function (d) {
                 d.ages = ageNames.map(function (name) { return {name: name, value: +d[name]}; });
@@ -79,7 +79,8 @@ define([
 
             x0.domain(data.map(function (d) { return d.Date; }));
             x1.domain(ageNames).rangeRoundBands([0, x0.rangeBand()]);
-            y.domain([0, d3.max(data, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+            // y.domain([0, d3.max(data, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+            y.domain([0, 5]);
 
             svg.append('g')
                 .attr('class', 'x axis')
@@ -94,17 +95,22 @@ define([
                 .attr('y', 6)
                 .attr('dy', '.71em')
                 .style('text-anchor', 'end')
-                .text('Population');
+                .text('Rating');
 
             var Date = svg.selectAll('.date')
                 .data(data)
                 .enter().append('g')
                 .attr('class', 'g')
-                .attr('transform', function (d) { return 'translate(' + x0(d.Date) + ',0)'; });
+                .attr('transform', function (d) { return 'translate(' + x0(d.Date) + ',0)'; })
+                .on('click', function (d) { 
+                    console.log(d.sysDate);
+                });
+                
 
             Date.selectAll('rect')
                 .data(function (d) { return d.ages; })
                 .enter().append('rect')
+                .attr('class', 'bar')
                 .attr('width', x1.rangeBand())
                 .attr('x', function (d) { return x1(d.name); })
                 .attr('y', function (d) { return y(d.value); })
@@ -134,41 +140,46 @@ define([
         getData: function () {
             var data = [
                 {
-                    'Date': 'CA',
-                    'Under5Years': '2704659',
-                    '5to13Years': '4499890',
-                    '14to17Years': '2159981'
+                    'Date': 'Dec 1',
+                    'Powder': '2.5',
+                    'Snow Quality': '3',
+                    'Bluebird': '1.5',
+                    'sysDate': '2014-12-01'
                 },
                 {
-                    'Date': 'TX',
-                    'Under5Years': '2027307',
-                    '5to13Years': '3277946',
-                    '14to17Years': '1420518',
-                    '18to24Years': '2454721'
+                    'Date': 'Dec 2',
+                    'Powder': '2.5',
+                    'Snow Quality': '3',
+                    'Bluebird': '1.5',
+                    'sysDate': '2014-12-02'
                 },
                 {
-                    'Date': 'NY',
-                    'Under5Years': '1208495',
-                    '5to13Years': '2141490',
-                    '14to17Years': '1058031'
+                    'Date': 'Dec 3',
+                    'Powder': '2.5',
+                    'Snow Quality': '3',
+                    'Bluebird': '1.5',
+                    'sysDate': '2014-12-03'
                 },
                 {
-                    'Date': 'FL',
-                    'Under5Years': '1140516',
-                    '5to13Years': '1938695',
-                    '14to17Years': '925060'
+                    'Date': 'Dec 4',
+                    'Powder': '2.5',
+                    'Snow Quality': '3',
+                    'Bluebird': '1.5',
+                    'sysDate': '2014-12-04'
                 },
                 {
-                    'Date': 'IL',
-                    'Under5Years': '894368',
-                    '5to13Years': '1558919',
-                    '14to17Years': '725973'
+                    'Date': 'Dec 5',
+                    'Powder': '2.5',
+                    'Snow Quality': '3',
+                    'Bluebird': '1.5',
+                    'sysDate': '2014-12-05'
                 },
                 {
-                    'Date': 'PA',
-                    'Under5Years': '737462',
-                    '5to13Years': '1345341',
-                    '14to17Years': '679201'
+                    'Date': 'Dec 6',
+                    'Powder': '2.5',
+                    'Snow Quality': '3',
+                    'Bluebird': '1.5',
+                    'sysDate': '2014-12-06'
                 }
             ];
             return data;
