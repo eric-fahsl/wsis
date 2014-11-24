@@ -5,9 +5,10 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'd3'
+    'd3',
+    'lib/wsisConstants'
 
-], function ($, _, Backbone, JST, d3) {
+], function ($, _, Backbone, JST, d3, wsisConstants) {
     'use strict';
 
     var BarChartView = Backbone.View.extend({
@@ -15,6 +16,8 @@ define([
         // template: JST['app/scripts/templates/about.hbs'],
         template: 'scripts/templates/about.html',
         el: '#chartData',
+
+        urlBase: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=8&sortDate=T',
         // model: new ResortDetailGraphModel(),
 
         // tagName: 'div',
@@ -28,13 +31,15 @@ define([
         initialize: function (options) {
             // this.listenTo(this.model, 'change', this.renderBarGraph);
             
-            var resort = 'stevenspass';
-            var date = '2014-11-24';
-            var dateStart = '2014-11-22';
+            this.resort = options.resort;
+            var date = wsisConstants.convertStringToDate(options.date);
+            date.setDate(date.getDate() - 2);
+            // var dateStart = '2014-11-22';
+            var dateStart = wsisConstants.convertDateObjToString(date);
 
             var that = this;
             $.ajax({
-                url: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=7&sortDate=T&resort=' + resort + '&dateStart=' + dateStart,
+                url: that.urlBase + '&resort=' + this.resort + '&dateStart=' + dateStart,
                 success: function (data) {
                     that.renderBarGraph(data);
                 }
@@ -105,13 +110,15 @@ define([
                 .style('text-anchor', 'end')
                 .text('Rating');
 
+            var that = this;
             var Date = svg.selectAll('.date')
                 .data(data)
                 .enter().append('g')
                 .attr('class', 'g')
                 .attr('transform', function (d) { return 'translate(' + x0(d.Date) + ',0)'; })
                 .on('click', function (d) {
-                    console.log(d.sysDate);
+                    var redirectUrl = '/#/resort/' + that.resort + '/' + d.sysDate;
+                    window.location.href = redirectUrl;
                 });
                 
 

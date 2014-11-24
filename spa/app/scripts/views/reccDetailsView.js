@@ -36,6 +36,8 @@ define([
 
         retrieveReccData: function (name, date) {
             console.log('reccDetailsView: retrieveReccData');
+            this.resortName = name;
+            this.date = date;
             this.model.urlRoot = wsisConstants.searchApiBase + 'resort=' + name + '&date=' + date;
             this.model.fetch();
             // this.render();
@@ -58,7 +60,7 @@ define([
             
             //scroll to the top to reset the view
             window.scrollTo(1, 1);
-            var barChart = new BarChartView();
+            var barChart = new BarChartView({resort: this.resortName, date: this.date});
         }
 
     });
