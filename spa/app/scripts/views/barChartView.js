@@ -17,7 +17,7 @@ define([
         template: 'scripts/templates/about.html',
         el: '#chartData',
 
-        urlBase: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=8&sortDate=T',
+        urlBase: wsisConstants.resortDataD3UrlBase,
         // model: new ResortDetailGraphModel(),
 
         // tagName: 'div',

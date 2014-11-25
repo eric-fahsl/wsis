@@ -10,6 +10,7 @@ define(
 			localUrlBase: '#search/',
 			menuOptions: ['about', 'recommendations', 'resorts', 'feedback'],
 			searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
+			resortDataD3UrlBase: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=8&sortDate=T',
 			// searchApiBase: 'http://localhost/lib/reccapi.php?',
 
 			convertFacetsToString: function (facets, key, value) {
