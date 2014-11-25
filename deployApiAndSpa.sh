@@ -3,7 +3,7 @@ sudo rm -r /var/www/*
 echo "DONE Deleting existing /var/www/ directory"
 
 echo "Copying PHP lib folder"
-sudo cp php/lib/* /var/www/lib
+sudo cp php/lib /var/www/
 echo "DONE Copying PHP lib folder"
 
 echo "Copying spa/dist folder to /var/www"
