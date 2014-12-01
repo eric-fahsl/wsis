@@ -111,7 +111,7 @@ define([
                 .text('Rating');
 
             var that = this;
-            var Date = svg.selectAll('.date')
+            var bars = svg.selectAll('.date')
                 .data(data)
                 .enter().append('g')
                 .attr('class', 'g')
@@ -122,7 +122,7 @@ define([
                 });
                 
 
-            Date.selectAll('rect')
+            bars.selectAll('rect')
                 .data(function (d) { return d.ages; })
                 .enter().append('rect')
                 .attr('class', 'bar')
@@ -131,6 +131,19 @@ define([
                 .attr('y', function (d) { return y(d.value); })
                 .attr('height', function (d) { return height - y(d.value); })
                 .style('fill', function (d) { return color(d.name); });
+
+            bars.selectAll('text')
+                .data(function (d) {
+                    return d.ages;
+                })
+                .enter().append('text')
+                .attr('x', function (d) { return x1(d.name) + 2; })
+                .attr('y', function (d) { return y(d.value) + 15; })
+                .attr('class', 'hidden-xs')
+                .text(function (d, i) {
+                    return d.value;
+                });
+
 
             var legend = svg.selectAll('.legend')
                 .data(ageNames.slice().reverse())

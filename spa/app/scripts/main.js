@@ -10,7 +10,8 @@ require.config({
         handlebars: '../bower_components/handlebars/handlebars',
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         handlebarsHelpers: 'vendor/handlebarsHelpers',
-        d3: '../bower_components/d3/d3'
+        d3: '../bower_components/d3/d3',
+        // d3Tip: 'vendor/d3-tip'
     },
 
     shim: {

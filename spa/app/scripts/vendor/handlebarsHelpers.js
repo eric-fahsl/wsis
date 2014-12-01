@@ -28,8 +28,8 @@ define(['handlebars', 'lib/wsisConstants'],
             return wsisConstants.convertDateToString(text);            
         });
 
-        Handlebars.registerHelper('americanDateFormat', function(text){
-            return wsisConstants.convertDateObjToAmericanString(text);
+        Handlebars.registerHelper('prettyDateFormat', function(text){
+            return wsisConstants.convertDateToPrettyString(text);
         });
         
         Handlebars.registerHelper('addDaysToDate', function(date, daysToAdd){

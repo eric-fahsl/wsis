@@ -19,11 +19,11 @@ define([
                 facets = options;
             }
 
-            // var date = new Date(this.get('date').split('-').join('/'));
-            var date = wsisConstants.convertStringToDate(this.get('date'));
+            // // var date = new Date(this.get('date').split('-').join('/'));
+            // var date = wsisConstants.convertStringToDate(this.get('date'));
 
-            var prettyDate = wsisConstants.days[date.getUTCDay()] + ', ' + wsisConstants.months[date.getUTCMonth()] + ' ' + date.getUTCDate();
-            this.set({prettyDate: prettyDate});
+            // var prettyDate = wsisConstants.days[date.getUTCDay()] + ', ' + wsisConstants.months[date.getUTCMonth()] + ' ' + date.getUTCDate();
+            this.set({prettyDate: wsisConstants.convertDateToPrettyString(this.get('date'))});
 
             //Set the destination URL
             this.set({url: this.convertFacetsToString(facets, 'date', this.get('date'))});

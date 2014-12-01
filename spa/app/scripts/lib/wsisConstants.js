@@ -10,7 +10,7 @@ define(
 			localUrlBase: '#search/',
 			menuOptions: ['about', 'recommendations', 'resorts', 'feedback'],
 			searchApiBase: 'http://whereshouldiski.com/lib/reccapi.php?',
-			resortDataD3UrlBase: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=8&sortDate=T',
+			resortDataD3UrlBase: 'http://whereshouldiski.com/lib/resortDataSearchD3.php?size=7&sortDate=T',
 			// searchApiBase: 'http://localhost/lib/reccapi.php?',
 
 			convertFacetsToString: function (facets, key, value) {
@@ -51,6 +51,11 @@ define(
 				var time = date.split('-');
 				// time = time.split(' ')[0];
 				return this.months[parseInt(time[1]) - 1] + ' ' + time[2] + ', ' + time[0];
+	        },
+
+	        convertDateToPrettyString: function (strDate) {
+				var date = this.convertStringToDate(strDate);
+				return this.days[date.getUTCDay()] + ', ' + this.months[date.getUTCMonth()] + ' ' + date.getUTCDate();
 	        },
 
 	        convertStringToDate: function (input) {

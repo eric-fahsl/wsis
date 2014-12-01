@@ -2,7 +2,7 @@
 <p class='nomarginbottom'><a target='new' href="{{resort_website}}"">{{resort_website}}</a></p>
 
 <section class="smallRightPad col-md-9">
-    <h3 class="minPhoneWidth">Ratings for {{ americanDateFormat date }}</h3>
+    <h3 class="minPhoneWidth">Ratings for {{ prettyDateFormat date }}</h3>
     <div class="smallItalic">Generated on {{ removePostDecimal createdOn }} PST</div>
     <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date -1}}">Previous Day</a></span> |
     <span class="ital"><a href="#/resort/{{resort}}/{{addDaysToDate date 1}}">Next Day</a></span>
@@ -96,5 +96,5 @@
 
 <div class='divider'></div>
 
-<h4>Nearby Resort Ratings for {{ americanDateFormat date }}</h4>
+<h4>Nearby Resort Ratings for {{ prettyDateFormat date }}</h4>
 
