@@ -424,18 +424,30 @@ body .row-fluid {
 .firstLiDetail {
 	margin-left: -43px;
 }
+#navbar-logo-img {
+	max-height:45px;
+}
+#mainContent {
+	margin-top:50px;
+}
 
 @media (max-width: 390px) {
     body {
         /*padding-left:5px; */
         padding-right:5px;
-        zoom: 0.9;
+        /*zoom: 0.9;*/
     }
     .container {
     	padding-left: 5px;
     }
     .reccView {
     	margin: 5px 2px 5px 1px;
+    	zoom:0.9;
+    }
+    #navbar-logo-img {
+    	max-width:250px;
+    	margin-left:10px;
+    	margin-top:5px;
     }
 }
 
