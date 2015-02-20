@@ -4,7 +4,7 @@ import _mysql
 import datetime
 import dbHelper
 
-opensnowWeatherUrl = "http://opensnow.com/api/getLocationData.php?apikey=where&type=json"
+opensnowWeatherUrl = "http://opensnow.com/api/public/1.0/locations/data?apikey=where&type=json"
 TABLE_NAME = "weather_data_opensnow"
 columnFields = {}
 
