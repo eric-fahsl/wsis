@@ -3,11 +3,18 @@ import simplejson
 import _mysql
 import datetime
 import dbHelper
+import sys,traceback
 
 opensnowWeatherUrl = "http://opensnow.com/api/public/1.0/locations/data?apikey=where&type=json"
 TABLE_NAME = "weather_data_opensnow"
 columnFields = {}
 
+#The different period names in open snow api
+pDataKeys = ['period1', 'period2', 'period3', 'period4', 'period5']
+
+#The two different periods we are grabbing forecasts for
+rDataKeys = ['day', 'night']
+				
 
 def parseSnowRange(inputText) :
 	snowTotals = inputText.split('-')
@@ -24,7 +31,7 @@ def getWeather(resort, db) :
 	
 	try :
 		response = simplejson.load(urllib2.urlopen(url) )
-		forecast = response['location']['forecast']
+		forecast = response['results']['location' + resort['opensnow_id']]['forecast']
 
 		#create the empty row object
 		row = {}
@@ -42,14 +49,11 @@ def getWeather(resort, db) :
 		#only insert if an entry doesnt already exist for this
 		if (count == 0) :
 
-			for forecastDate in forecast['period'] :				
-				row['date'] = forecastDate['date']
-				
-				#The two different periods we are grabbing forecasts for
-				rDataKeys = ['day', 'night']
+			for forecastDate in pDataKeys :				
+				row['date'] = forecast[forecastDate]['date']
 				
 				for timeOfDay in rDataKeys :
-					forecastDayPeriod = forecastDate[timeOfDay]
+					forecastDayPeriod = forecast[forecastDate][timeOfDay]
 					row['forecast_time'] = timeOfDay
 					row['summary'] = forecastDayPeriod['weather']
 					row['temp'] = forecastDayPeriod['temp']
@@ -64,6 +68,7 @@ def getWeather(resort, db) :
 		print "*****************************************"
 		print "OPENSNOW FORECAST FAILED " + str(datetime.datetime.now())
 		print url
+		traceback.print_exc(file=sys.stdout)
 		print "*****************************************"
 
 def defineColumnFields(db) :
