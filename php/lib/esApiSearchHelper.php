@@ -186,7 +186,7 @@ function buildFacets() {
             "terms" => array(
                 "field" => "state",
                 "order" => "term",
-                "size" => 20
+                "size" => 30
             )
         ),
         "powder" => array(

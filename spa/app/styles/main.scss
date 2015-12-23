@@ -18,6 +18,25 @@ body {
     */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Alegreya Sans SC', Georgia, Times, serif;
+    text-shadow: 1px 1px 1px #ccc;
+}
+p, div {
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+}
+.big-logo-text {
+    font-family: 'Permanent Marker', cursive, Georgia, Times, serif;
+    font-size: 1.6em; 
+    font-style: oblique;
+}
+.textwhite {
+    color: white;
+}
+.textlightblue {
+    color: lightblue;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
