@@ -1,6 +1,6 @@
 python/*.pyc
 *.pyc
-
+datalogs/*
 .DS_Store
 
 php/js_wright/*
