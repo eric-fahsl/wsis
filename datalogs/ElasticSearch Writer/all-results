@@ -1,6 +1,0 @@
-{
-    "fields": ["_id"],
-    "from": 0,
-    "size": 9999,
-    "query" : { "match_all": {} }
-}
