@@ -20,6 +20,7 @@ POWDER_STAR_RATING_CUTOFF = [ 2.0, 5.0, 7.5, 10.0 ]
 COUCH_DB_SERVER = "http://localhost:5984"
 COUCH_DB_NAME = "recommendations"
 COUCH_DB_URL = COUCH_DB_SERVER + "/" + COUCH_DB_NAME 
+ES_INDEX_URL = "http://localhost:9200/recommendations/recommendations"
 REC_POWDER = "Powder"
 RATING_DELTA_THRESHOLD = .81
 POWDER_FACTOR = 2.5
@@ -293,15 +294,18 @@ def calculateRecommendation(dateOfRecommendation, resort, db) :
 			reccomendationDocument['freezing_level']['trend'] = 0
 
 		#check if we need to override the existing record
+		'''
 		try :	
 			currentDocLocationResponse = simplejson.load(urllib2.urlopen(docUrl))
 			reccomendationDocument['_rev'] = str(currentDocLocationResponse['_rev'])
 		except urllib2.HTTPError:
 			print docId + " not found, will create a new record"
 		#print id
+		'''
 
-		curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
-		#print curlCommand
+		#curlCommand = "curl -X PUT " + COUCH_DB_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
+		curlCommand = "curl -X PUT " + ES_INDEX_URL + "/" + docId + " -H 'Content-Type: application/json' -d " + "'" + simplejson.dumps(reccomendationDocument) + "'"
+		print curlCommand
 		os.system(curlCommand)
 	except TypeError as error:
 		#if the database entry doesn't exist, skip record and move on

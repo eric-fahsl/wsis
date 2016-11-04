@@ -1,0 +1,39 @@
+{
+    "query": {
+        "filtered": {
+            "query": {
+                "bool": {
+                    "must": [{
+                        "range": {
+                            "date": {
+                                "gte": "2016-02-01"
+                            }
+                        }
+                    }],
+                    "should": [],
+                    "minimum_number_should_match": 1
+                }
+            },
+            "filter": []
+        }
+    },
+    
+    "sort": [{
+        "powder.rating": {
+            "order": "desc"
+        }
+    }, {
+        "snow_quality.rating": {
+            "order": "desc"
+        }
+    }, {
+        "bluebird.rating": {
+            "order": "desc"
+        }
+    }, {
+        "powder.snow_new": {
+            "order": "desc"
+        }
+    }],
+    "fields": ["powder.rating", "state_full", "freezing_level.rating", "resort", "date", "bluebird.rating", "resort_name", "snow_quality.rating"]
+}
