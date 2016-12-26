@@ -170,3 +170,4 @@ id,state,state_full,name,region,latitude,longitude,elevation,snowforecast_id,ope
 169,NZ,New Zealand,Coronet Peak,New Zealand,-44.9269,168.7361,,Coronet-Peak,,,http://www.nzski.com/mountain.jsp?site=coronetpeak,,1187,1649,T,,,,F
 170,AR,Argentina,Las Lenas,Argentina,-35.15,-70.0833,,Las-Lenas,,,http://www.skiportillo.com/,,2240,3430,T,,,,F
 171,CL,Chile,Portillo,Chile,-32.836,-70.129,,Portillo,,,https://www.laslenas.com/,,2548,3310,T,,,,F
+172,BC,British Columbia,Revelstoke,BritishColumbia,50.95,-118.16,,Revelstoke,,,http://www.revelstokemountainresort.com,,1680,7300,T,,,,F
