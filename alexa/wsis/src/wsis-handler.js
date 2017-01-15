@@ -30,6 +30,50 @@ function getTopResortsPerDateCallback(data) {
     console.log(topResults);
 }
 
+function multipleDateHandler(data, callback) {
+    var bestResults = getBestResultPerDate(data);
+    var bestResult = {
+        powder: 0,
+        bluebird: 0,
+        snow_quality: 0
+    }
+    for (var i in bestResults) {
+        var currentResult = bestResults[i];
+        //if the result is better than the current bestResult, use it.
+        if (currentResult.powder > bestResult.powder) {
+            bestResult = currentResult;
+            // return bestResult;
+        } else if (currentResult.powder === bestResult.powder && currentResult.snow_quality > bestResult.snow_quality) {
+            bestResult = currentResult;
+        } else if (currentResult.powder === bestResult.powder && currentResult.snow_quality === bestResult.snow_quality &&
+            currentResult.bluebird > bestResult.bluebird)
+            bestResult = currentResult;
+    }
+
+    callback(bestResult);
+}
+
+module.exports.getBestResultAcrossDatesAndState = function (startDateString, endDateString, state, callback) {
+    if (!state) {
+        retrieveData(BASE_URL + '?dateStart=' + startDateString + '&dateMax=' + endDateString, function (data) {
+            multipleDateHandler(data, callback);
+        });
+    } else {
+        retrieveData(BASE_URL + '?dateStart=' + startDateString + '&dateMax=' + endDateString + 
+            '&state=' + state, function (data) {
+            multipleDateHandler(data, callback);
+        });
+    }
+    
+    
+}
+
+module.exports.getBestResultAcrossDates = function (startDateString, endDateString, callback) {
+    retrieveData(BASE_URL + '?dateStart=' + startDateString + '&dateMax=' + endDateString, function (data) {
+        multipleDateHandler(data, callback);       
+    });
+}
+
 function getBestResultPerDate(responseObject) {
     var bestResults = [];
     // console.log(responseObject.results);
@@ -55,17 +99,17 @@ function extractAlexaFriendlyData(reccObject) {
     return result;
 }
 
-module.exports.getAllResorts = function() {
+module.exports.getAllResorts = function () {
     retrieveData(BASE_URL, printResponseData);
 }
 
-module.exports.getTopResortsForAllDates = function() {
+module.exports.getTopResortsForAllDates = function () {
     retrieveData(BASE_URL, getTopResortsPerDateCallback);
 }
 
-function getTopResortForDate (dateString, callback) {
-    
-    retrieveData(BASE_URL + '?date=' + dateString, function(data) {
+function getTopResortForDate(dateString, callback) {
+
+    retrieveData(BASE_URL + '?date=' + dateString, function (data) {
         // console.log('retrieveData', data);
         var bestResults = getBestResultPerDate(data);
         // var minimalData = extractAlexaFriendlyData(bestResults[0]);
@@ -74,13 +118,24 @@ function getTopResortForDate (dateString, callback) {
     });
 }
 
-function getStringDateFormat(date, daysOffset) {
+function getTopResortForDateAndState(dateString, state, callback) {
+
+    retrieveData(BASE_URL + '?date=' + dateString + '&state=' + state, function (data) {
+        // console.log('retrieveData', data);
+        var bestResults = getBestResultPerDate(data);
+        // var minimalData = extractAlexaFriendlyData(bestResults[0]);
+        // console.log(bestResults[0]);
+        callback(bestResults[0]);
+    });
+}
+
+module.exports.getStringDateFormat = function (date, daysOffset) {
     if (!daysOffset) {
         daysOffset = 0;
     }
     date.setDate(date.getDate() + daysOffset);
-    var response = date.getFullYear() + '-' + 
-        addLeadingZero(date.getMonth() + 1) + '-' + 
+    var response = date.getFullYear() + '-' +
+        addLeadingZero(date.getMonth() + 1) + '-' +
         addLeadingZero(date.getDate());
     return response;
 }
@@ -92,16 +147,24 @@ function addLeadingZero(input) {
     return input;
 }
 
-module.exports.getTopResortForDate = function(dateString, callback) {
+module.exports.getTopResortForDate = function (dateString, callback) {
     getTopResortForDate(dateString, callback);
 }
 
-module.exports.getTopResortForToday = function(callback) {
+module.exports.getTopResortForDateAndState = function (dateString, state, callback) {
+    if (!state) {
+        getTopResortForDate(dateString, callback);
+    } else {
+        getTopResortForDateAndState(dateString, state, callback);
+    }
+}
+
+module.exports.getTopResortForToday = function (callback) {
     var dateString = getStringDateFormat(new Date());
     getTopResortForDate(dateString, callback);
 }
 
-module.exports.getTopResortForTomorrow = function(callback) {
+module.exports.getTopResortForTomorrow = function (callback) {
     var dateString = getStringDateFormat(new Date(), 1);
     // console.log('dateString', dateString);
     getTopResortForDate(dateString, callback);

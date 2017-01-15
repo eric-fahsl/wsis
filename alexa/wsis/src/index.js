@@ -80,71 +80,33 @@ var AWS_SECRET_KEY = "Your AWS Secret Key";
  */
 var AWS_ASSOCIATES_TAG = "associates_tag";
 
-/**
- * Mapping of the browse node ID to the category for the Amazon catalog.
- */
-var BROWSE_NODE_MAP = {
-    Apparel: "1036592",
-    Appliances: "2619526011",
-    ArtsAndCrafts: "2617942011",
-    Automotive: "15690151",
-    Baby: "165797011",
-    Beauty: "11055981",
-    Books: "1000",
-    Classical: "301668",
-    Collectibles: "4991426011",
-    DVD: "2625374011",
-    DigitalMusic: "624868011",
-    Electronics: "493964",
-    GiftCards: "2864120011",
-    GourmetFood: "16310211",
-    Grocery: "16310211",
-    HealthPersonalCare: "3760931",
-    HomeGarden: "1063498",
-    Industrial: "16310161",
-    Jewelry: "2516784011",
-    KindleStore: "133141011",
-    Kitchen: "284507",
-    LawnAndGarden: "3238155011",
-    MP3Downloads: "624868011",
-    Magazines: "599872",
-    Miscellaneous: "10304191",
-    MobileApps: "2350150011",
-    Music: "301668",
-    MusicalInstruments: "11965861",
-    OfficeProducts: "1084128",
-    OutdoorLiving: "2972638011",
-    PCHardware: "541966",
-    PetSupplies: "2619534011",
-    Photo: "502394",
-    Shoes: "672124011",
-    Software: "409488",
-    SportingGoods: "3375301",
-    Tools: "468240",
-    Toys: "165795011",
-    UnboxVideo: "2858778011",
-    VHS: "2625374011",
-    Video: "404276",
-    VideoGames: "11846801",
-    Watches: "378516011",
-    Wireless: "2335753011",
-    WirelessAccessories: "13900851"
-};
+var STATE_MAPPING = {
+    'Alaska': 'AK',
+    'Arizona': 'AZ',
+    'British Columbia': 'BC',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Idaho': 'ID',
+    'Maine': 'ME',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Montana': 'MT',
+    'Nevada': 'NE',
+    'New Hampshire': 'NH',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'Oregon': 'OR',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Washington': 'WA',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY'
+}
 
 var RESORTS = {
     'Alpental': 'snoqualmie-alpental',
     'Mount Baker': 'mountbaker'
 }
-
-/**
- * A Mapping of alternative ways a user will say a category to how Amazon has defined the category
- */
-var SPOKEN_NAME_TO_CATEGORY = {
-    movies: "DVD",
-    movie: "DVD",
-    novels: "Books",
-    novel: "Books"
-};
 
 /**
  * The AlexaSkill prototype and helper functions
@@ -206,6 +168,14 @@ SavvyConsumer.prototype.intentHandlers = {
         getTopResorts(intent, session, response);
     },
 
+    "DialogIntent": function (intent, session, response) {
+        dialogIntent(intent, session, response);
+    },
+
+    "SupportedStatesIntent": function (intent, session, response) {
+        getTopResorts(intent, session, response);
+    },
+
     // "TopResortToday": function(intent, session, response) {
     //     getTopResortToday(intent, session, response);
     // },
@@ -248,28 +218,158 @@ function getWelcomeResponse(response) {
     response.ask(speechOutput, repromptOutput);
 }
 
-/**
- * Gets the top sellers from Amazon.com for the given category and responds to the user.
- */
-function getTopResorts(intent, session, response) {
+function generateResponseText(data) {
+    var speechText = 'I would ski at ' + data.resort_name + ' ' + data.state + ' on ' +
+        alexaDateUtil.getFormattedDate(new Date(dateString)) + '. ' +
+        'The powder rating is projected to be ' + data.powder + '!';
 
-    var dateSlot = intent.slots.Date;
-    console.log('dateSlot', dateSlot);
-    var dateString = dateSlot.value;
+    return speechText;
+}
 
-    wsisHandler.getTopResortForDate(dateString, function(data) {
-        var speechText = 'I would ski at ' + data.resort_name + ' ' + data.state + ' on ' +
-            alexaDateUtil.getFormattedDate(new Date(dateString)) + '. ' + 
-            'The powder rating is projected to be ' + data.powder + '!';
+function getFinalResponse(dateString, stateCode, response) {
+    wsisHandler.getTopResortForDateAndState(dateString, stateCode, function (data) {
+        var introText = '';
+        if (data.powder >= 3) {
+            introText = 'Looks like a powder day at ';
+        } else {
+            introText = 'Its not a powder day, but ';
+            if (data.bluebird >= 3.5) {
+                introText += 'the sun will be out at ';
+            } else {
+                introText += ' your best bet is '
+            }
+        }
+
+        var speechText = introText +
+            data.resort_name + ' ' + data.state + ' on ' +
+            alexaDateUtil.getFormattedDate(new Date(dateString)) + '. ' +
+            'The powder rating is projected to be ' + data.powder + ', ' +
+            ' snow quality of ' + data.snow_quality + ', and a bluebird rating of ' + data.bluebird + '.';
 
         var speechOutput = {
             speech: speechText,
             type: AlexaSkill.speechOutputType.PLAIN_TEXT
         };
 
-        response.tell(speechOutput);
+        response.tellWithCard(speechOutput, "Where Should I Ski", speechText);
     });
+}
 
+function getFinalResponseForRange(dateStringStart, dateStringEnd, stateCode, response) {
+    wsisHandler.getBestResultAcrossDatesAndState(dateStringStart, dateStringEnd, stateCode, function (data) {
+        var introText = '';
+        if (data.powder >= 3) {
+            introText = 'Looks like a powder day at ';
+        } else {
+            introText = 'Its not a powder day, but ';
+            if (data.bluebird >= 3.5) {
+                introText += 'the sun will be out at ';
+            } else {
+                introText += ' your best bet is '
+            }
+        }
+
+        var speechText = introText +
+            data.resort_name + ' ' + data.state + ' on ' +
+            alexaDateUtil.getFormattedDate(new Date(data.date)) + '. ' +
+            'The powder rating is projected to be ' + data.powder + ', ' +
+            ' snow quality of ' + data.snow_quality + ', and a bluebird rating of ' + data.bluebird + '.';
+
+        var speechOutput = {
+            speech: speechText,
+            type: AlexaSkill.speechOutputType.PLAIN_TEXT
+        };
+
+        response.tellWithCard(speechOutput, "Where Should I Ski", speechText);
+    });
+}
+
+/**
+ * Gets the top sellers from Amazon.com for the given category and responds to the user.
+ */
+function getTopResorts(intent, session, response) {
+
+    var dateSlot = intent.slots.Date;
+    var stateString = intent.slots.State.value;
+    var stateCode = '';
+    if (stateString) {
+        //set up stateCode from the reference data
+        stateCode = STATE_MAPPING[stateString];
+    } else if (session.attributes.state) {
+        //of if the state has already been set in the session
+        stateCode = session.attributes.state
+    }
+
+    console.log('dateSlot', dateSlot);
+    var dateString = dateSlot.value;
+    var eventDate = alexaDateUtil.getDateFromSlot(dateString);
+    console.log("Event Date:", eventDate);
+
+    var dateStringStart = wsisHandler.getStringDateFormat(new Date(eventDate.startDate));
+    var dateStringEnd = wsisHandler.getStringDateFormat(new Date(eventDate.endDate));
+    console.log("Formatted Date start", dateStringStart);
+    console.log("Formatted Date end", dateStringEnd);
+    
+
+    getFinalResponseForRange(dateStringStart, dateStringEnd, stateCode, response);
+
+}
+
+function dialogIntent(intent, session, response) {
+   /*
+    // Determine if this turn is for city, for date, or an error.
+    // We could be passed slots with values, no slots, slots with no value.
+    var citySlot = intent.slots.City;
+    var dateSlot = intent.slots.Date;
+    if (citySlot && citySlot.value) {
+        handleCityDialogRequest(intent, session, response);
+    } else if (dateSlot && dateSlot.value) {
+        handleDateDialogRequest(intent, session, response);
+    } else {
+        handleNoSlotDialogRequest(intent, session, response);
+    }
+    */
+
+    //Assumes we already have the state
+    var stateString = intent.slots.State.value;
+    var stateCode = '';
+    if (stateString) {
+        //set up stateCode from the reference data
+        stateCode = STATE_MAPPING[stateString];
+    }
+
+    var dateString = intent.slots.Date.value;
+    if (!dateString) {
+        session.attributes.state = stateCode;
+        //if no datestring, need to prompt for it
+        var speechOutput = "For which date would you like rating information for " + stateString + "?";
+        var repromptText = "For which date? You can say tomorrow, Thursday, et cetera.";
+
+        response.ask(speechOutput, repromptText);
+    } else {
+        getFinalResponse(dateString, stateCode, response);
+    }
+    
+}
+
+/**
+ * Handles the dialog step where the user has not provided a date
+ */
+function promptForDateRequest(intent, session, response) {
+
+
+
+    // if we don't have a city yet, go to city. If we have a city, we perform the final request
+    if (session.attributes.city) {
+        getFinalTideResponse(session.attributes.city, date, response);
+    } else {
+        // The user provided a date out of turn. Set date in session and prompt for city
+        session.attributes.date = date;
+        speechOutput = "For which city would you like tide information for " + date.displayDate + "?";
+        repromptText = "For which city?";
+
+        response.ask(speechOutput, repromptText);
+    }
 }
 
 /**
@@ -281,8 +381,8 @@ function getTopResortToday(intent, session, response) {
     console.log('dateSlot', dateSlot);
     var dateString = dateSlot.value;
 
-    wsisHandler.getTopResortForDate(dateSlot, function(data) {
-        var speechText = 'I would ski at ' + data.resort_name + ' ' + data.state + ' tomorrow. ' + 
+    wsisHandler.getTopResortForDate(dateSlot, function (data) {
+        var speechText = 'I would ski at ' + data.resort_name + ' ' + data.state + ' tomorrow. ' +
             'The powder rating is projected to be ' + data.powder + '!';
 
         var speechOutput = {
@@ -303,116 +403,6 @@ function getTopResortToday(intent, session, response) {
 
 }
 
-/**
- * Gets the next page of items based on information saved in the session.
- */
-function getNextPageOfItems(intent, session, response) {
-    var sessionAttributes = session.attributes,
-        current = sessionAttributes[KEY_CURRENT_INDEX],
-        speechText = "",
-        speechOutput,
-        repromptOutput;
-
-    if (current) {
-        // Iterate through the session attributes to create the next n results for the user.
-        for (var i = 0; i < PAGINATION_SIZE; i++) {
-            if (sessionAttributes[current]) {
-                var numberInList = current + 1;
-                if (current < MAX_ITEMS - 1) {
-                    speechText += "<say-as interpret-as=\"ordinal\">" + numberInList + "</say-as>. " +
-                        sessionAttributes[current] + ". ";
-                } else {
-                    speechText += "And the <say-as interpret-as=\"ordinal\">" + numberInList + "</say-as> top seller is. " +
-                        sessionAttributes[current] + ". Those were the 10 top sellers in Amazon's " +
-                        sessionAttributes[KEY_CURRENT_CATEGORY] + " department";
-                }
-                current = current + 1;
-            }
-        }
-
-        // Set the new index and end the session if the newIndex is greater than the MAX_ITEMS
-        sessionAttributes[KEY_CURRENT_INDEX] = current;
-
-        if (current < MAX_ITEMS) {
-            speechText += " Would you like to hear more?";
-
-            speechOutput = {
-                speech: '<speak>' + speechText + '</speak>',
-                type: AlexaSkill.speechOutputType.SSML
-            };
-            repromptOutput = {
-                speech: speechText,
-                type: AlexaSkill.speechOutputType.PLAIN_TEXT
-            };
-            response.ask(speechOutput, repromptOutput);
-        } else {
-            speechOutput = {
-                speech: '<speak>' + speechText + '</speak>',
-                type: AlexaSkill.speechOutputType.SSML
-            };
-            response.tell(speechOutput);
-        }
-    } else {
-        // The user attempted to get more results without ever uttering the category.
-        // Reprompt the user for the proper usage.
-        speechText = "Welcome to the Savvy Consumer. For which category do you want to hear the best sellers?.";
-        var repromptText = "<speak> Please choose a category by saying, " +
-            "books <break time=\"0.2s\" />" +
-            "fashion <break time=\"0.2s\" /> " +
-            "movie <break time=\"0.2s\" /> " +
-            "kitchen </speak>";
-        speechOutput = {
-            speech: speechText,
-            type: AlexaSkill.speechOutputType.PLAIN_TEXT
-        };
-        repromptOutput = {
-            speech: repromptText,
-            type: AlexaSkill.speechOutputType.SSML
-        };
-        response.ask(speechOutput, repromptOutput);
-    }
-}
-
-/**
- * Gets the lookup word based on the input category slot. The lookup word will be from the BROWSE_NODE_MAP and will
- * attempt to get an exact match. However, if no exact match exists then the function will check for a contains.
- * @param categorySlot the input category slot
- * @returns {string} the lookup word for the BROWSE_NODE_MAP
- */
-function getLookupWord(categorySlot) {
-    var lookupCategory;
-    if (categorySlot && categorySlot.value) {
-        // Lower case the incoming slot and remove spaces
-        var category = categorySlot.value.toLowerCase().replace(/ /g, '').replace(/\./g, '').replace(/three/g, '3');
-        var keys = Object.keys(BROWSE_NODE_MAP);
-
-        //Check for spoken names
-        lookupCategory = SPOKEN_NAME_TO_CATEGORY[category];
-
-        if (!lookupCategory) {
-            // Iterate through the keys in the BROWSE_NODE_MAP and look for a perfect match. The items in the
-            // BROWSE_NODE_MAP must be cased properly for the API call to get the top sellers.
-            keys.forEach(function (item) {
-                if (item.toLowerCase() === category) {
-                    lookupCategory = item;
-                    return;
-                }
-            });
-        }
-
-        if (!lookupCategory) {
-            // There was no perfect match, try to see if we can perform an indexOf.
-            // This will help if the user says DVDs and the actual category is DVD.
-            keys.forEach(function (item) {
-                if (item.toLowerCase().indexOf(category) > -1 || category.indexOf(item.toLowerCase()) > -1) {
-                    lookupCategory = item;
-                    return;
-                }
-            })
-        }
-    }
-    return lookupCategory;
-}
 
 /**
  * Instructs the user on how to interact with this skill.
@@ -436,6 +426,7 @@ function helpTheUser(intent, session, response) {
         type: AlexaSkill.speechOutputType.SSML
     };
     response.ask(speechOutput, repromptOutput);
+
 }
 
 // Create the handler that responds to the Alexa Request.

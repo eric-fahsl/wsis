@@ -1,6 +1,6 @@
 var wsisHandler = require('../wsis-handler');
 
-// wsisHander.getAllResorts();
+// wsisHandler.getAllResorts();
 // wsisHandler.getTopResortsForAllDates();
 
 // wsisHandler.getTopResortForDate('2016-12-18', function(data) {
@@ -20,6 +20,10 @@ var wsisHandler = require('../wsis-handler');
 //         console.log(speechOutput);
 // });
 
-wsisHandler.getTopResortForTomorrow(function(data) {
+// wsisHandler.getTopResortForTomorrow(function(data) {
+//     console.log(data);
+// });
+
+wsisHandler.getBestResultAcrossDatesAndState('2017-01-14','2017-01-17', null, function(data){ 
     console.log(data);
-});
+})

@@ -4,14 +4,24 @@
     "slots": [{
       "name": "Date",
       "type": "AMAZON.DATE"
+    },
+    {
+      "name": "State",
+      "type": "LIST_OF_STATES"
     }]
   }, {
-    "intent": "TopSellers",
+    "intent": "DialogIntent",
     "slots": [{
-      "name": "Category",
-      "type": "LIST_OF_CATEGORIES"
+      "name": "Date",
+      "type": "AMAZON.DATE"
+    },
+    {
+      "name": "State",
+      "type": "LIST_OF_STATES"
     }]
   }, {
+    "intent": "SupportedStatesIntent"
+  },{
     "intent": "HearMore"
   }, {
     "intent": "DontHearMore"

@@ -1,12 +1,19 @@
-TopResorts {Date}
+DialogIntent {State}
+DialogIntent get top resorts in {State}
 
-TopSellers get top sellers for {Category}
-TopSellers get best sellers for {Category}
-TopSellers get me {Category}
-TopSellers top {Category}
-TopSellers top products in {Category}
-TopSellers top sellers in {Category}
-TopSellers {Category}
+TopResorts {Date}
+TopResorts {State} {Date}
+TopResorts {State} {Date}
+TopResorts {Date} {State}
+TopResorts get top resorts {Date}
+TopResorts get top resorts in {State} for {Date}
+TopResorts get top resorts on {Date} for {State}
+
+SupportedStatesIntent what states
+SupportedStatesIntent what states are supported
+SupportedStatesIntent which states are supported
+SupportedStatesIntent which states
+SupportedStatesIntent which states do you know
 
 HearMore yes
 HearMore yep

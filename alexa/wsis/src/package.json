@@ -1,0 +1,9 @@
+{
+  "name": "alexa-whereshouldiski",
+  "version": "0.1.1",
+  "description": "Alexa skill for WhereShoudlISki.com",
+  "author": "Eric Fahsl",
+  "devDependencies": {
+    "request": "^2.79.0"
+  }
+}
