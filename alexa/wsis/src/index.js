@@ -173,7 +173,7 @@ SavvyConsumer.prototype.intentHandlers = {
     },
 
     "SupportedStatesIntent": function (intent, session, response) {
-        getTopResorts(intent, session, response);
+        getAvailableStates(intent, session, response);
     },
 
     // "TopResortToday": function(intent, session, response) {
@@ -315,20 +315,20 @@ function getTopResorts(intent, session, response) {
 
 }
 
-function dialogIntent(intent, session, response) {
-   /*
-    // Determine if this turn is for city, for date, or an error.
-    // We could be passed slots with values, no slots, slots with no value.
-    var citySlot = intent.slots.City;
-    var dateSlot = intent.slots.Date;
-    if (citySlot && citySlot.value) {
-        handleCityDialogRequest(intent, session, response);
-    } else if (dateSlot && dateSlot.value) {
-        handleDateDialogRequest(intent, session, response);
-    } else {
-        handleNoSlotDialogRequest(intent, session, response);
+function getAvailableStates(intent, session, response) {
+    var speechOutput = "I currently know the following states: ";
+    for (var stateTitle in STATE_MAPPING) {
+        speechOutput += stateTitle + ", ";
     }
-    */
+
+    speechOutput += " For which state would you like information for?";
+;
+    var repromptText = "You can also skip the state and just tell me which date you would like rating information for. ";
+
+    response.ask(speechOutput, repromptText);
+}
+
+function dialogIntent(intent, session, response) {
 
     //Assumes we already have the state
     var stateString = intent.slots.State.value;
@@ -343,7 +343,7 @@ function dialogIntent(intent, session, response) {
         session.attributes.state = stateCode;
         //if no datestring, need to prompt for it
         var speechOutput = "For which date would you like rating information for " + stateString + "?";
-        var repromptText = "For which date? You can say tomorrow, Thursday, et cetera.";
+        var repromptText = "For which date? You can say tomorrow, this weekend, next week, and more.";
 
         response.ask(speechOutput, repromptText);
     } else {

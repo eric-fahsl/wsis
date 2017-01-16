@@ -10,7 +10,6 @@ TopResorts get top resorts in {State} for {Date}
 TopResorts get top resorts on {Date} for {State}
 
 SupportedStatesIntent what states
-SupportedStatesIntent what states are supported
 SupportedStatesIntent which states are supported
 SupportedStatesIntent which states
 SupportedStatesIntent which states do you know
